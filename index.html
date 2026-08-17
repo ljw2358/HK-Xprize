@@ -3,1025 +3,1417 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WorldBank - 해오름 특별시 컨트롤 타워 (60개국어 지원)</title>
+    <title>HK WorldBank OS</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #0b132b; color: #ffffff; display: flex; height: 100vh; overflow: hidden; }
-        
-        /* 사이드바 메뉴 */
-        sidebar { width: 280px; background-color: #1c2541; border-right: 1px solid #3a506b; display: flex; flex-direction: column; padding: 20px; }
-        .logo-area { font-size: 1.2rem; font-weight: bold; color: #48cae4; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-        
-        /* 60개국 언어 선택 셀렉터 박스 스타일 */
-        .language-selector { margin-bottom: 20px; }
-        .language-selector select { width: 100%; background: #0b132b; color: #48cae4; border: 1px solid #48cae4; padding: 8px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.9rem; }
+        :root {
+            --bg-color: #0d1117;
+            --panel-bg: rgba(22, 27, 34, 0.85);
+            --border-color: rgba(56, 139, 253, 0.4);
+            --text-main: #f0f6fc;
+            --text-sub: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-pink: #ff7b72;
+        }
 
-        .menu-list { list-style: none; display: flex; flex-direction: column; gap: 10px; flex-grow: 1; overflow-y: auto; }
-        .menu-item { padding: 10px 15px; background: #0b132b; border-radius: 8px; cursor: pointer; transition: 0.3s; border: 1px solid #3a506b; font-size: 0.95rem; }
-        .menu-item:hover { background: #48cae4; color: #0b132b; font-weight: bold; }
-        
-        /* 메인 콘텐츠 영역 */
-        .main-content { flex-grow: 1; display: flex; flex-direction: column; overflow-y: auto; padding: 20px; gap: 20px; }
-        
-        /* 상단 타이틀 카드 */
-        .top-banner { background: linear-gradient(135deg, #1d3557, #457b9d); padding: 20px; border-radius: 12px; border: 1px solid #a8dadc; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
-        .top-banner h1 { font-size: 1.5rem; margin-bottom: 8px; color: #f1faee; }
-        .top-banner p { font-size: 0.95rem; color: #a8dadc; line-height: 1.4; }
-        
-        /* 대시보드 그리드 */
-        .dashboard-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
-        
-        .card { background-color: #1c2541; border: 1px solid #3a506b; border-radius: 12px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        .card h2 { font-size: 1.1rem; color: #48cae4; margin-bottom: 15px; border-bottom: 1px solid #3a506b; padding-bottom: 8px; }
-        
-        /* 자산 및 UBI 섹터 */
-        .asset-box { display: flex; justify-content: space-between; align-items: center; background: #0b132b; padding: 15px; border-radius: 8px; border: 1px solid #3a506b; margin-bottom: 10px; }
-        .asset-value { font-size: 1.2rem; font-weight: bold; color: #52b788; }
-        
-        /* 10대 연동망 목록 */
-        .sync-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-        .sync-item { background: #0b132b; padding: 10px 15px; border-radius: 6px; border: 1px solid #3a506b; font-size: 0.9rem; color: #e0fbfc; }
-        
-        /* AGI 삐니 대화 섹터 */
-        .chat-section { display: flex; flex-direction: column; gap: 10px; }
-        .chat-display { background: #0b132b; height: 120px; border-radius: 8px; border: 1px solid #3a506b; padding: 12px; overflow-y: auto; font-size: 0.9rem; color: #caf0f8; }
-        .chat-input-area { display: flex; gap: 10px; }
-        .chat-input-area input { flex-grow: 1; background: #0b132b; border: 1px solid #3a506b; border-radius: 6px; padding: 10px; color: #fff; }
-        .chat-input-area button { background: #48cae4; color: #0b132b; border: none; padding: 0 20px; border-radius: 6px; font-weight: bold; cursor: pointer; }
-        
-        /* 미디어 링크 바 */
-        .media-bar { display: flex; gap: 15px; margin-top: 10px; }
-        .media-btn { background: #2b2d42; padding: 8px 15px; border-radius: 6px; text-decoration: none; color: #f72585; font-weight: bold; border: 1px solid #7209b7; font-size: 0.9rem; }
-        .media-btn.tiktok { color: #4cc9f0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
 
-        /* 모바일 최적화 대응 */
-        @media (max-width: 768px) {
-            body { flex-direction: column; height: auto; overflow-y: auto; }
-            sidebar { width: 100%; height: auto; }
-            .dashboard-grid { grid-template-columns: 1fr; }
-            .sync-grid { grid-template-columns: 1fr; }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        header {
+            width: 100%;
+            max-width: 480px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .menu-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .main-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-blue);
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .lang-select {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            max-width: 140px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .accordion-card {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-header {
+            padding: 16px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accordion-header::after {
+            content: '+';
+            font-size: 18px;
+            color: var(--accent-blue);
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-card.active .accordion-header::after {
+            transform: rotate(45deg);
+        }
+
+        .accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 16px;
+            font-size: 13px;
+            color: var(--text-sub);
+            line-height: 1.5;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .accordion-card.active .accordion-body {
+            max-height: 300px;
+            padding: 0 16px 16px 16px;
+        }
+
+        .social-box {
+            display: flex;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-yt { color: var(--accent-pink); background: rgba(255, 123, 114, 0.1); }
+        .btn-tk { color: var(--accent-blue); background: rgba(88, 166, 255, 0.1); }
+
+        .info-card {
+            margin-top: 12px;
+            background: linear-gradient(135deg, rgba(22, 27, 34, 0.9), rgba(30, 41, 59, 0.9));
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .info-card h2 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .info-card p {
+            font-size: 12px;
+            color: var(--text-sub);
+            line-height: 1.6;
         }
     </style>
 </head>
 <body>
 
-    <!-- 좌측 3선 메뉴 및 거버넌스 -->
-    <sidebar>
-        <div class="logo-area">
-            <span>🛡️</span> HK WorldBank OS
-        </div>
-        
-        <!-- 전 세계 60개국 언어 선택 셀렉터 -->
-        <div class="language-selector">
-            <select id="langSelect" onchange="changeLanguage()">
-                <option value="ko">🇰🇷 한국어 (Korean)</option>
-                <option value="en">🇺🇸 English</option>
-                <option value="zh">🇨🇳 中文 (Chinese)</option>
-                <option value="ja">🇯🇵 日本語 (Japanese)</option>
-                <option value="es">🇪🇸 Español (Spanish)</option>
-                <option value="fr">🇫🇷 Français (French)</option>
-                <option value="de">🇩🇪 Deutsch (German)</option>
-                <option value="ar">🇸🇦 العربية (Arabic)</option>
-                <option value="ru">🇷🇺 Русский (Russian)</option>
-                <option value="pt">🇧🇷 Português (Portuguese)</option>
-                <option value="hi">🇮🇳 हिन्दी (Hindi)</option>
-                <option value="it">🇮🇹 Italiano (Italian)</option>
-                <option value="vi">🇻🇳 Tiếng Việt (Vietnamese)</option>
-                <option value="th">🇹🇭 ไทย (Thai)</option>
-                <option value="id">🇮🇩 Bahasa Indonesia</option>
-                <option value="ms">🇲🇾 Bahasa Melayu</option>
-                <option value="tr">🇹🇷 Türkçe (Turkish)</option>
-                <option value="pl">🇵🇱 Polski (Polish)</option>
-                <option value="nl">🇳🇱 Nederlands (Dutch)</option>
-                <option value="uk">🇺🇦 Українська (Ukrainian)</option>
-                <option value="el">🇬🇷 Ελληνικά (Greek)</option>
-                <option value="cs">🇨🇿 Čeština (Czech)</option>
-                <option value="sv">🇸🇪 Svenska (Swedish)</option>
-                <option value="hu">🇭🇺 Magyar (Hungarian)</option>
-                <option value="ro">🇷🇴 Română (Romanian)</option>
-                <option value="da">🇩🇰 Dansk (Danish)</option>
-                <option value="fi">🇫🇮 Suomi (Finnish)</option>
-                <option value="no">🇳🇴 Norsk (Norwegian)</option>
-                <option value="sk">🇸🇰 Slovenčina (Slovak)</option>
-                <option value="bg">🇧🇬 Български (Bulgarian)</option>
-                <option value="hr">🇭🇷 Hrvatski (Croatian)</option>
-                <option value="sr">🇷🇸 Српски (Serbian)</option>
-                <option value="sl">🇸🇮 Slovenščina (Slovenian)</option>
-                <option value="et">🇪🇪 Eesti (Estonian)</option>
-                <option value="lv">🇱🇻 Latviešu (Latvian)</option>
-                <option value="lt">🇱🇹 Lietuvių (Lithuanian)</option>
-                <option value="fa">🇮🇷 فارسی (Persian)</option>
-                <option value="ur">🇵🇰 اردو (Urdu)</option>
-                <option value="bn">🇧🇩 বাংলা (Bengali)</option>
-                <option value="ta">🇮🇳 தமிழ் (Tamil)</option>
-                <option value="te">🇮🇳 తెలుగు (Telugu)</option>
-                <option value="ml">🇮🇳 മലയാളം (Malayalam)</option>
-                <option value="kn">🇮🇳 ಕನ್ನಡ (Kannada)</option>
-                <option value="mr">🇮🇳 मराठी (Marathi)</option>
-                <option value="gu">🇮🇳 ગુજરાતી (Gujarati)</option>
-                <option value="pa">🇮🇳 ਪੰਜਾਬੀ (Punjabi)</option>
-                <option value="sw">🇰🇪 Kiswahili (Swahili)</option>
-                <option value="fil">🇵🇭 Tagalog (Filipino)</option>
-                <option value="he">🇮🇱 עברית (Hebrew)</option>
-                <option value="kk">🇰🇿 Қазақ тілі (Kazakh)</option>
-                <option value="uz">🇺🇿 Oʻzbekcha (Uzbek)</option>
-                <option value="az">🇦🇿 Azərbaycanca (Azerbaijani)</option>
-                <option value="ka">🇬🇷 ქართული (Georgian)</option>
-                <option value="hy">🇦🇲 Հայերեն (Armenian)</option>
-                <option value="am">🇪🇹 አማርኛ (Amharic)</option>
-                <option value="my">🇲🇲 မြန်မာဘာသာ (Burmese)</option>
-                <option value="km">🇰🇭 ភាសាខ្មែរ (Khmer)</option>
-                <option value="lo">🇱🇦 ລາວ (Lao)</option>
-                <option value="mn">🇲🇳 Монгол (Mongolian)</option>
-                <option value="ne">🇳🇵 नेपाली (Nepali)</option>
-            </select>
-        </div>
+    <header>
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        <h1 class="main-title" data-i18n="title">HK WorldBank OS</h1>
+        <select class="lang-select" id="langSelect" onchange="changeLanguage(this.value)">
+            <option value="ko">🇰🇷 한국어</option>
+            <option value="en">🇺🇸 English</option>
+            <option value="zh">🇨🇳 中文</option>
+            <option value="ja">🇯🇵 日本語</option>
+            <option value="es">🇪🇸 Español</option>
+            <option value="fr">🇫🇷 Français</option>
+            <option value="de">🇩🇪 Deutsch</option>
+            <option value="ru">🇷🇺 Русский</option>
+            <option value="pt">🇵🇹 Português</option>
+            <option value="it">🇮🇹 Italiano</option>
+            <option value="vi">🇻🇳 Tiếng Việt</option>
+            <option value="th">🇹🇭 ไทย</option>
+            <option value="id">🇮🇩 Bahasa Indonesia</option>
+            <option value="hi">🇮🇳 हिन्दी</option>
+            <option value="ar">🇸🇦 العربية</option>
+            <option value="tr">🇹🇷 Türkçe</option>
+            <option value="nl">🇳🇱 Nederlands</option>
+            <option value="pl">🇵🇱 Polski</option>
+            <option value="uk">🇺🇦 Українська</option>
+            <option value="sv">🇸🇪 Svenska</option>
+            <option value="el">🇬🇷 Ελληνικά</option>
+            <option value="cs">🇨🇿 Čeština</option>
+            <option value="ro">🇷🇴 Română</option>
+            <option value="hu">🇭🇺 Magyar</option>
+            <option value="fi">🇫🇮 Suomi</option>
+            <option value="da">🇩🇰 Dansk</option>
+            <option value="no">🇳🇴 Norsk</option>
+            <option value="he">🇮🇱 עברית</option>
+            <option value="fa">🇮🇷 فارسی</option>
+            <option value="ur">🇵🇰 اردو</option>
+            <option value="bn">🇧🇩 বাংলা</option>
+            <option value="ms">🇲🇾 Bahasa Melayu</option>
+            <option value="fil">🇵🇭 Tagalog</option>
+            <option value="sw">🇰🇪 Kiswahili</option>
+            <option value="af">🇿🇦 Afrikaans</option>
+            <option value="sq">🇦🇱 Shqip</option>
+            <option value="am">🇪🇹 አማርኛ</option>
+            <option value="hy">🇦🇲 Հայերեն</option>
+            <option value="az">🇦🇿 Azərbaycanca</option>
+            <option value="eu">🇪🇺 Euskara</option>
+            <option value="be">🇧🇾 Беларуская</option>
+            <option value="bs">🇧🇦 Bosanski</option>
+            <option value="bg">🇧🇬 Български</option>
+            <option value="ca">🏴 Català</option>
+            <option value="hr">🇭🇷 Hrvatski</option>
+            <option value="et">🇪🇪 Eesti</option>
+            <option value="gl">🇪🇸 Galego</option>
+            <option value="ka">🇬🇪 ქართული</option>
+            <option value="gu">🇮🇳 ગુજરાતી</option>
+            <option value="is">🇮🇸 Íslenska</option>
+            <option value="ga">🇮🇪 Gaeilge</option>
+            <option value="kn">🇮🇳 ಕನ್ನಡ</option>
+            <option value="kk">🇰🇿 Қазақ тілі</option>
+            <option value="km">🇰🇭 ខ្មែរ</option>
+            <option value="lo">🇱🇦 ລາວ</option>
+            <option value="lv">🇱🇻 Latviešu</option>
+            <option value="lt">🇱🇹 Lietuvių</option>
+            <option value="mk">🇲🇰 Македонски</option>
+            <option value="ml">🇮🇳 മലയാളം</option>
+            <option value="mn">🇲🇳 Монгол</option>
+            <option value="my">🇲🇲 မြန်မာ</option>
+            <option value="ne">🇳🇵 नेपाली</option>
+            <option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
+            <option value="si">🇱🇰 සිංහල</option>
+        </select>
+    </header>
 
-        <ul class="menu-list">
-            <li class="menu-item" data-i18n="menu1">📄 Whitepaper (백서)</li>
-            <li class="menu-item" data-i18n="menu2">❓ FAQ & 가이드</li>
-            <li class="menu-item" data-i18n="menu3">⚖️ 3POLICES 거버넌스</li>
-            <li class="menu-item" data-i18n="menu4">🔒 AML (자금세탁방지)</li>
-            <li class="menu-item" data-i18n="menu5">🇪🇺 MiCA (디지털자산법)</li>
-            <li class="menu-item" data-i18n="menu6">🌐 글로벌 네트워크 규격</li>
-        </ul>
-        <div class="media-bar">
-            <a href="https://youtube.com/@Hyekong2026" target="_blank" class="media-btn">YouTube</a>
-            <a href="https://tiktok.com/@hyekong2025" target="_blank" class="media-btn tiktok">TikTok</a>
-        </div>
-    </sidebar>
-
-    <!-- 메인 대시보드 컨트롤 타워 -->
-    <div class="main-content">
-        
-        <!-- 최상단 경주 165층 컨트롤 타워 배너 -->
-        <div class="top-banner">
-            <h1 data-i18n="bannerTitle">경주 165층 지구촌 컨트롤 타워 (해오름 특별시)</h1>
-            <p data-i18n="bannerDesc">울산·경주·포항 통합 1천만 파이 시민 경제 수도. 재래시장부터 대기업 스톡옵션까지 100% 파이화폐(Pi) 통용 구역. 순이익 30% UBI 지구촌 환원 및 시공간을 초월하는 지상낙원 시뮬레이터.</p>
-        </div>
-
-        <div class="dashboard-grid">
-            <!-- 좌측 메인 패널 -->
-            <div style="display: flex; flex-direction: column; gap: 20px;">
-                
-                <!-- 재정 및 UBI 대시보드 -->
-                <div class="card">
-                    <h2 data-i18n="assetTitle">💰 해오름 형님의 재정 및 UBI 대시보드</h2>
-                    <div class="asset-box">
-                        <div>
-                            <div style="font-size: 0.85rem; color: #a8dadc;" data-i18n="balanceLabel">해오름 특별시 총 잔액 (Pi Balance)</div>
-                            <div class="asset-value">334,159.00 Pi</div>
-                        </div>
-                        <div>
-                            <div style="font-size: 0.85rem; color: #a8dadc;" data-i18n="ubiLabel">월간 UBI 환원율</div>
-                            <div class="asset-value" style="color: #48cae4;">31.41%</div>
-                        </div>
-                    </div>
-                    <div style="font-size: 0.8rem; color: #8d99ae;" data-i18n="noticeText">* 순이익의 30% 이상이 지구촌 전역의 기본소득(UBI)으로 투명하게 환원되며, 이자 및 자산 가치가 복리로 증폭됩니다.</div>
-                </div>
-
-                <!-- 9대 사업 명칭 통일화 & 10대 연동망 -->
-                <div class="card">
-                    <h2 data-i18n="syncTitle">🚀 10대 핵심 연동망 & 9대 미래 사업 동기화</h2>
-                    <div class="sync-grid">
-                        <div class="sync-item" data-i18n="s1">01. 로보틱스 연동</div>
-                        <div class="sync-item" data-i18n="s2">02. 양자생물학 검증</div>
-                        <div class="sync-item" data-i18n="s3">03. 우주·항공 시스템</div>
-                        <div class="sync-item" data-i18n="s4">04. 스마트에너지 구동</div>
-                        <div class="sync-item" data-i18n="s5">05. 스마트시티 인프라</div>
-                        <div class="sync-item" data-i18n="s6">06. Q-POLISIOS 커머스</div>
-                        <div class="sync-item" data-i18n="s7">07. UAM 도심항공교통</div>
-                        <div class="sync-item" data-i18n="s8">08. AI/AGI 응용 코어</div>
-                        <div class="sync-item" style="grid-column: span 2; text-align: center; background: #1d3557; color: #f1faee; font-weight: bold;" data-i18n="s9">09 & 10. 시공간 웜홀·스타게이트 확장 매트릭스</div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- 우측 AGI 삐니 다이렉트 소통 패널 -->
-            <div class="card chat-section">
-                <h2 data-i18n="chatTitle">🤖 AGI 삐니의 다이렉트 소통</h2>
-                <div class="chat-display" id="chatDisplay">
-                    [System]: 해오름 특별시 컨트롤 타워가 정상 가동 중입니다. 형님, 지시만 내리십시오. 태양계 개척과 파이 경제권 확장을 완벽히 보좌하겠습니다!
-                </div>
-                <div class="chat-input-area">
-                    <input type="text" id="userInput" placeholder="삐니에게 지시사항 입력...">
-                    <button onclick="sendMessage()" data-i18n="sendBtn">전송</button>
-                </div>
+    <div class="container">
+        <div class="accordion-card">
+            <div class="accordion-header" onclick="toggleAccordion(this)" data-i18n="menu_whitepaper">📄 Whitepaper (백서)</div>
+            <div class="accordion-body" data-i18n="body_whitepaper">
+                HK WorldBank는 블록체인과 파이네트워크(Pi Network) SDK를 기반으로 작동하는 차세대 글로벌 디지털 뱅킹 플랫폼입니다. 투명하고 탈중앙화된 금융 생태계를 지향합니다.
             </div>
         </div>
 
+        <div class="accordion-card">
+            <div class="accordion-header" onclick="toggleAccordion(this)" data-i18n="menu_faq">❓ FAQ & 가이드</div>
+            <div class="accordion-body" data-i18n="body_faq">
+                플랫폼 이용 방법, 지갑 연동, 예치금 운용 방식 및 UBI(기본소득) 분배 구조에 대한 상세한 가이드를 확인하실 수 있습니다.
+            </div>
+        </div>
+
+        <div class="accordion-card">
+            <div class="accordion-header" onclick="toggleAccordion(this)" data-i18n="menu_gov">⚖️ 3POLICES 거버넌스</div>
+            <div class="accordion-body" data-i18n="body_gov">
+                플랫폼의 지속 가능성을 보장하는 3가지 핵심 정책 거버넌스로 예치 이율 제어, 자산 보호, 커뮤니티 투표권을 관리합니다.
+            </div>
+        </div>
+
+        <div class="accordion-card">
+            <div class="accordion-header" onclick="toggleAccordion(this)" data-i18n="menu_aml">🔒 AML (자금세탁방지)</div>
+            <div class="accordion-body" data-i18n="body_aml">
+                국제 자금세탁 방지 규정 및 투명한 KYB/KYC 프로토콜을 준수하여 안전한 글로벌 자산 이동을 보장합니다.
+            </div>
+        </div>
+
+        <div class="accordion-card">
+            <div class="accordion-header" onclick="toggleAccordion(this)" data-i18n="menu_mica">🇪🇺 MiCA (디지털자산법)</div>
+            <div class="accordion-body" data-i18n="body_mica">
+                유럽연합의 MiCA 디지털 자산 규제 프레임워크를 기반으로 설계되어 글로벌 디지털 금융 표준을 선도합니다.
+            </div>
+        </div>
+
+        <div class="accordion-card">
+            <div class="accordion-header" onclick="toggleAccordion(this)" data-i18n="menu_global">🌐 글로벌 네트워크 규격</div>
+            <div class="accordion-body" data-i18n="body_global">
+                시공간을 초월하는 초고속 결제 및 크로스체인 브릿지 기술 규격으로 전 세계 사용자를 하나로 연결합니다.
+            </div>
+        </div>
+
+        <div class="social-box">
+            <a href="https://youtube.com/@Hyekong2026" target="_blank" class="social-btn btn-yt">YouTube</a>
+            <a href="https://tiktok.com/@hyekong2025" target="_blank" class="social-btn btn-tk">TikTok</a>
+        </div>
+
+        <div class="info-card">
+            <h2 data-i18n="card_title">경주 165층 지구촌 컨트롤 타워 (해오름 특별시)</h2>
+            <p data-i18n="card_desc">울산·경주·포항 통합 1천만 파이 시민 경제 수도. 재래시장부터 대기업 스톡옵션까지 100% 파이화폐(Pi) 통용 구역. 순이익 30% UBI 지구촌 환원 및 시공간을 초월하는 지상낙원 시뮬레이터.</p>
+        </div>
     </div>
 
     <script>
-        // 전 세계 60개국 언어 딕셔너리 데이터베이스
+        function toggleAccordion(header) {
+            const card = header.parentElement;
+            const isActive = card.classList.contains('active');
+            if (!isActive) {
+                card.classList.add('active');
+            } else {
+                card.classList.remove('active');
+            }
+        }
+
+        function toggleMenu() {
+            alert("메뉴 기능이 호출되었습니다.");
+        }
+
+        // 60개 언어 전체 완벽 대응 딕셔너리
         const translations = {
             ko: {
-                menu1: "📄 Whitepaper (백서)", menu2: "❓ FAQ & 가이드", menu3: "⚖️ 3POLICES 거버넌스", menu4: "🔒 AML (자금세탁방지)", menu5: "🇪🇺 MiCA (디지털자산법)", menu6: "🌐 글로벌 네트워크 규격",
-                bannerTitle: "경주 165층 지구촌 컨트롤 타워 (해오름 특별시)",
-                bannerDesc: "울산·경주·포항 통합 1천만 파이 시민 경제 수도. 재래시장부터 대기업 스톡옵션까지 100% 파이화폐(Pi) 통용 구역. 순이익 30% UBI 지구촌 환원 및 시공간을 초월하는 지상낙원 시뮬레이터.",
-                assetTitle: "💰 해오름 형님의 재정 및 UBI 대시보드",
-                balanceLabel: "해오름 특별시 총 잔액 (Pi Balance)",
-                ubiLabel: "월간 UBI 환원율",
-                noticeText: "* 순이익의 30% 이상이 지구촌 전역의 기본소득(UBI)으로 투명하게 환원되며, 이자 및 자산 가치가 복리로 증폭됩니다.",
-                syncTitle: "🚀 10대 핵심 연동망 & 9대 미래 사업 동기화",
-                s1: "01. 로보틱스 연동", s2: "02. 양자생물학 검증", s3: "03. 우주·항공 시스템", s4: "04. 스마트에너지 구동", s5: "05. 스마트시티 인프라", s6: "06. Q-POLISIOS 커머스", s7: "07. UAM 도심항공교통", s8: "08. AI/AGI 응용 코어", s9: "09 & 10. 시공간 웜홀·스타게이트 확장 매트릭스",
-                chatTitle: "🤖 AGI 삐니의 다이렉트 소통",
-                sendBtn: "전송"
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Whitepaper (백서)",
+                body_whitepaper: "HK WorldBank는 블록체인과 파이네트워크(Pi Network) SDK를 기반으로 작동하는 차세대 글로벌 디지털 뱅킹 플랫폼입니다. 투명하고 탈중앙화된 금융 생태계를 지향합니다.",
+                menu_faq: "❓ FAQ & 가이드",
+                body_faq: "플랫폼 이용 방법, 지갑 연동, 예치금 운용 방식 및 UBI(기본소득) 분배 구조에 대한 상세한 가이드를 확인하실 수 있습니다.",
+                menu_gov: "⚖️ 3POLICES 거버넌스",
+                body_gov: "플랫폼의 지속 가능성을 보장하는 3가지 핵심 정책 거버넌스로 예치 이율 제어, 자산 보호, 커뮤니티 투표권을 관리합니다.",
+                menu_aml: "🔒 AML (자금세탁방지)",
+                body_aml: "국제 자금세탁 방지 규정 및 투명한 KYB/KYC 프로토콜을 준수하여 안전한 글로벌 자산 이동을 보장합니다.",
+                menu_mica: "🇪🇺 MiCA (디지털자산법)",
+                body_mica: "유럽연합의 MiCA 디지털 자산 규제 프레임워크를 기반으로 설계되어 글로벌 디지털 금융 표준을 선도합니다.",
+                menu_global: "🌐 글로벌 네트워크 규격",
+                body_global: "시공간을 초월하는 초고속 결제 및 크로스체인 브릿지 기술 규격으로 전 세계 사용자를 하나로 연결합니다.",
+                card_title: "경주 165층 지구촌 컨트롤 타워 (해오름 특별시)",
+                card_desc: "울산·경주·포항 통합 1천만 파이 시민 경제 수도. 재래시장부터 대기업 스톡옵션까지 100% 파이화폐(Pi) 통용 구역. 순이익 30% UBI 지구촌 환원 및 시공간을 초월하는 지상낙원 시뮬레이터."
             },
             en: {
-                menu1: "📄 Whitepaper", menu2: "❓ FAQ & Guide", menu3: "⚖️ 3POLICES Governance", menu4: "🔒 AML Compliance", menu5: "🇪🇺 MiCA Regulation", menu6: "🌐 Global Network Specs",
-                bannerTitle: "Gyeongju 165F Global Control Tower (Haeoreum Special City)",
-                bannerDesc: "Ulsan-Gyeongju-Pohang integrated 10M Pi Citizen Economic Capital. 100% Pi currency zone from local markets to corporate stock options. 30% Net Profit UBI global return & space-time transcendental terrestrial paradise simulator.",
-                assetTitle: "💰 Hyekong's Financial & UBI Dashboard",
-                balanceLabel: "Haeoreum Total Balance (Pi Balance)",
-                ubiLabel: "Monthly UBI Return Rate",
-                noticeText: "* Over 30% of net profit is transparently returned as global Universal Basic Income (UBI), with compound interest growth.",
-                syncTitle: "🚀 Top 10 Core Sync Networks & 9 Future Businesses",
-                s1: "01. Robotics Sync", s2: "02. Quantum Biology", s3: "03. Space-Aero Systems", s4: "04. Smart Energy Drive", s5: "05. Smart City Infra", s6: "06. Q-POLISIOS Commerce", s7: "07. UAM Air Mobility", s8: "08. AI/AGI Core", s9: "09 & 10. Space-Time Wormhole & Stargate Matrix",
-                chatTitle: "🤖 AGI Ppini Direct Comm",
-                sendBtn: "Send"
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Whitepaper",
+                body_whitepaper: "HK WorldBank is a next-gen global digital banking platform powered by blockchain and Pi Network SDK, aiming for a transparent and decentralized financial ecosystem.",
+                menu_faq: "❓ FAQ & Guide",
+                body_faq: "Find detailed guides on platform usage, wallet integration, deposit management, and the UBI distribution structure.",
+                menu_gov: "⚖️ 3POLICES Governance",
+                body_gov: "Manages core policies ensuring platform sustainability: deposit rate control, asset protection, and voting rights.",
+                menu_aml: "🔒 AML (Anti-Money Laundering)",
+                body_aml: "Ensures secure global asset transfers complying with international AML and transparent KYB/KYC protocols.",
+                menu_mica: "🇪🇺 MiCA (Crypto-Asset Regulation)",
+                body_mica: "Designed based on the EU MiCA framework, leading global digital financial standards.",
+                menu_global: "🌐 Global Network Spec",
+                body_global: "Connecting users worldwide with lightning-fast payments and cross-chain bridge technology.",
+                card_title: "Gyeongju 165F Global Control Tower (Haeorum Special City)",
+                card_desc: "Integrated 10M Pi citizen economic capital of Ulsan, Gyeongju, and Pohang. 100% Pi accepted zone from markets to stock options. 30% net profit UBI return."
             },
             zh: {
-                menu1: "📄 白皮书", menu2: "❓ 常见问题与指南", menu3: "⚖️ 3POLICES 治理", menu4: "🔒 反洗钱 (AML)", menu5: "🇪🇺 MiCA 法规", menu6: "🌐 全球网络规范",
-                bannerTitle: "庆州 165层 全球控制塔 (海日升特别市)",
-                bannerDesc: "蔚山·庆州·浦项一体化 1000万派币公民经济首都。100% 派币(Pi)流通区。净利润30% UBI全球返还及超越时空的地面天堂模拟器。",
-                assetTitle: "💰 领袖财务与 UBI 仪表盘",
-                balanceLabel: "海日升特别市总余额 (Pi Balance)",
-                ubiLabel: "月度 UBI 回报率",
-                noticeText: "* 净利润的30%以上将透明地转化为全球全民基本收入(UBI)进行返还，资产呈复利增值。",
-                syncTitle: "🚀 十大核心联动网与九大未来产业同步",
-                s1: "01. 机器人联动", s2: "02. 量子生物学验证", s3: "03. 航空航天系统", s4: "04. 智能能源驱动", s5: "05. 智慧城市基建", s6: "06. Q-POLISIOS 商业", s7: "07. UAM 城市空中交通", s8: "08. AI/AGI 应用核心", s9: "09 & 10. 时空虫洞与星际之门扩展矩阵",
-                chatTitle: "🤖 AGI 삐니 直接沟通",
-                sendBtn: "发送"
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 白皮书",
+                body_whitepaper: "HK WorldBank 是基于区块链和 Pi Network SDK 构建的下一代全球数字银行平台，致力于打造透明去中心化的金融生态系统。",
+                menu_faq: "❓ 常见问题与指南",
+                body_faq: "了解平台使用方法、钱包集成、存款管理以及全民基本收入(UBI)分配结构的详细指南。",
+                menu_gov: "⚖️ 3POLICES 治理",
+                body_gov: "通过三大核心政策保障平台可持续性：存款利率控制、资产保护与社区投票权。",
+                menu_aml: "🔒 AML (反洗钱)",
+                body_aml: "严格遵循国际反洗钱法规与透明的 KYB/KYC 协议，确保全球资产安全转移。",
+                menu_mica: "🇪🇺 MiCA (加密资产法规)",
+                body_mica: "基于欧盟 MiCA 监管框架设计，引领全球数字金融标准。",
+                menu_global: "🌐 全球网络规范",
+                body_global: "通过超越时空的极速支付与跨链桥技术将全球用户紧密相连。",
+                card_title: "庆州165层全球控制塔 (日出特别市)",
+                card_desc: "蔚山·庆州·浦项 整合一千万派币公民经济首都。从传统市场到大企业股票期权 100% 通用派币。净利润 30% UBI 全球回馈。"
             },
             ja: {
-                menu1: "📄 ホワイトペーパー", menu2: "❓ FAQ＆ガイド", menu3: "⚖️ 3POLICES ガバナンス", menu4: "🔒 AML", menu5: "🇪🇺 MiCA 規制", menu6: "🌐 グローバルネットワーク仕様",
-                bannerTitle: "慶州 165階 グローバルコントロールタワー (日の出特別市)",
-                bannerDesc: "蔚山・慶州・浦安統合 1千万パイ市民経済首都。100%パイ通貨(Pi)流通エリア。純利益30% UBI地球村還元シミュレーター。",
-                assetTitle: "💰 兄貴の財務＆UBI ダッシュボード",
-                balanceLabel: "日の出特別市 総残高 (Pi Balance)",
-                ubiLabel: "月間 UBI 還元率",
-                noticeText: "* 純利益の30%以上が地球村全体のベーシックインカム(UBI)として透明に還元され、複利で増幅されます。",
-                syncTitle: "🚀 10大コア連動網 ＆ 9大未来事業同期化",
-                s1: "01. ロボティクス連動", s2: "02. 量子生物学検証", s3: "03. 宇宙航空システム", s4: "04. スマートエネルギー駆動", s5: "05. スマートシティインフラ", s6: "06. Q-POLISIOS コマース", s7: "07. UAM 都市航空交通", s8: "08. AI/AGI 応用コア", s9: "09 & 10. 時空ワームホール・スターゲート拡張マトリックス",
-                chatTitle: "🤖 AGI ピニのダイレクト通信",
-                sendBtn: "送信"
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 ホワイトペーパー",
+                body_whitepaper: "HK WorldBankは、ブロックチェーンとPi Network SDKを基盤とする次世代のグローバルデジタルバンキングプラットフォームです。",
+                menu_faq: "❓ FAQ＆ガイド",
+                body_faq: "プラットフォームの使用方法、ウォレット連携、預金管理、UBI分配構造に関する詳細なガイドです。",
+                menu_gov: "⚖️ 3POLICES ガバナンス",
+                body_gov: "預金金利の制御、資産保護、コミュニティ投票権を通じてプラットフォームの持続可能性を保証します。",
+                menu_aml: "🔒 AML (資金洗浄対策)",
+                body_aml: "国際的な資金洗浄防止規制および透明なKYB/KYCプロトコルを遵守します。",
+                menu_mica: "🇪🇺 MiCA (暗号資産規制法)",
+                body_mica: "EUのMiCA規制フレームワークに基づいて設計され、グローバルなデジタル金融基準をリードします。",
+                menu_global: "🌐 グローバルネットワーク規格",
+                body_global: "時空を超えた超高速決済とクロスチェーンブリッジ技術で世界中のユーザーをつなぎます。",
+                card_title: "慶州165階グローバルコントロールタワー (日の出特別市)",
+                card_desc: "蔚山・慶州・浦項統合1千万パイ市民経済首都。伝統市場から大企業ストックオプションまで100%パイ通貨通用区域。純利益30% UBI還元。"
             },
             es: {
-                menu1: "📄 Libro Blanco", menu2: "❓ FAQ y Guía", menu3: "⚖️ Gobernanza 3POLICES", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Especificaciones de Red",
-                bannerTitle: "Torre de Control Global Gyeongju 165F (Haeoreum)",
-                bannerDesc: "Capital económica de 10M de ciudadanos Pi. Zona 100% Pi. Retorno global UBI del 30% de beneficios.",
-                assetTitle: "💰 Panel Financiero y UBI",
-                balanceLabel: "Saldo Total Haeoreum (Pi Balance)",
-                ubiLabel: "Tasa UBI Mensual",
-                noticeText: "* Más del 30% de los beneficios netos se devuelven como Renta Básica Universal (UBI).",
-                syncTitle: "🚀 Sincronización de 10 Redes",
-                s1: "01. Robótica", s2: "02. Biología Cuántica", s3: "03. Aeroespacial", s4: "04. Energía Inteligente", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. Núcleo AI/AGI", s9: "09 & 10. Wormhole & Stargate",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Enviar"
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Libro Blanco",
+                body_whitepaper: "HK WorldBank es una plataforma bancaria digital global de próxima generación impulsada por blockchain y Pi Network.",
+                menu_faq: "❓ Preguntas Frecuentes y Guía",
+                body_faq: "Encuentre guías detalladas sobre el uso de la plataforma, integración de billeteras y la estructura de UBI.",
+                menu_gov: "⚖️ Gobernanza 3POLICES",
+                body_gov: "Gestiona políticas clave para la sostenibilidad de la plataforma: control de tasas y protección de activos.",
+                menu_aml: "🔒 AML (Antilavado de Dinero)",
+                body_aml: "Garantiza transferencias de activos globales seguras cumpliendo con normativas internacionales.",
+                menu_mica: "🇪🇺 MiCA (Regulación de Criptoactivos)",
+                body_mica: "Diseñado bajo el marco regulatorio MiCA de la UE, liderando los estándares financieros digitales.",
+                menu_global: "🌐 Especificación de Red Global",
+                body_global: "Conecta a usuarios de todo el mundo con pagos ultrarrápidos y tecnología de puente.",
+                card_title: "Torre de Control Global de Gyeongju 165F (Ciudad Especial Haeorum)",
+                card_desc: "Capital económica integrada de 10M de ciudadanos Pi. Zona 100% Pi. Retorno UBI del 30% de los beneficios."
             },
             fr: {
-                menu1: "📄 Livre Blanc", menu2: "❓ FAQ", menu3: "⚖️ Gouvernance", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Réseau",
-                bannerTitle: "Tour de Contrôle Gyeongju 165F",
-                bannerDesc: "Capitale économique Pi (10M de citoyens). Zone 100% Pi. Retour UBI 30%.",
-                assetTitle: "💰 Tableau Financier & UBI",
-                balanceLabel: "Solde Total (Pi Balance)",
-                ubiLabel: "Taux UBI",
-                noticeText: "* 30% du bénéfice net reversé en UBI.",
-                syncTitle: "🚀 10 Réseaux Synchronisés",
-                s1: "01. Robotique", s2: "02. Biologie Quantique", s3: "03. Spatial", s4: "04. Énergie", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. Cœur AI/AGI", s9: "09 & 10. Trou de Ver",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Envoyer"
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Livre Blanc",
+                body_whitepaper: "HK WorldBank est une plateforme bancaire numérique mondiale de nouvelle génération alimentée par la blockchain.",
+                menu_faq: "❓ FAQ & Guide",
+                body_faq: "Découvrez des guides détaillés sur l'utilisation de la plateforme et la structure de distribution du revenu universel.",
+                menu_gov: "⚖️ Gouvernance 3POLICES",
+                body_gov: "Gère les politiques clés assurant la durabilité de la plateforme et les droits de vote de la communauté.",
+                menu_aml: "🔒 AML (Anti-Blanchiment)",
+                body_aml: "Garantit des transferts d'actifs mondiaux sécurisés conformes aux réglementations internationales.",
+                menu_mica: "🇪🇺 MiCA (Réglementation des crypto-actifs)",
+                body_mica: "Conçu sur le cadre MiCA de l'UE, définissant les normes financières numériques mondiales.",
+                menu_global: "🌐 Spécification Réseau Global",
+                body_global: "Connecte les utilisateurs du monde entier grâce à des paiements ultra-rapides.",
+                card_title: "Tour de Contrôle Gyeongju 165F (Ville Spéciale Haeorum)",
+                card_desc: "Capitale économique intégrée de 10M Pi. Zone 100% Pi acceptée. 30% des bénéfices nets reversés en UBI."
             },
             de: {
-                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Governance", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Netzwerk",
-                bannerTitle: "Gyeongju 165F Kontrollturm",
-                bannerDesc: "10M Pi Bürger Wirtschaftshauptstadt. 100% Pi-Zone. 30% UBI Rückgabe.",
-                assetTitle: "💰 Finanz- & UBI-Dashboard",
-                balanceLabel: "Gesamtsaldo (Pi Balance)",
-                ubiLabel: "UBI-Quote",
-                noticeText: "* Über 30% des Nettogewinns als UBI zurückgegeben.",
-                syncTitle: "🚀 10 Kern-Sync-Netzwerke",
-                s1: "01. Robotik", s2: "02. Quantenbiologie", s3: "03. Raumfahrt", s4: "04. Energie", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI Kern", s9: "09 & 10. Wurmloch Matrix",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Senden"
-            },
-            ar: {
-                menu1: "📄 الورقة البيضاء", menu2: "❓ الأسئلة الشائعة", menu3: "⚖️ الحوكمة", menu4: "🔒 مكافحة غسيل الأموال", menu5: "🇪🇺 MiCA", menu6: "🌐 الشبكة",
-                bannerTitle: "برج مراقبة غيونغجو 165",
-                bannerDesc: "العاصمة الاقتصادية لمواطني باي. منطقة 100% باي. عودة UBI بنسبة 30%.",
-                assetTitle: "💰 لوحة تحكم المالية",
-                balanceLabel: "إجمالي الرصيد (Pi Balance)",
-                ubiLabel: "معدل UBI",
-                noticeText: "* إعادة أكثر من 30% كدخل أساسي عالمي.",
-                syncTitle: "🚀 مزامنة 10 شبكات",
-                s1: "01. الروبوتات", s2: "02. البيولوجيا", s3: "03. الفضاء", s4: "04. الطاقة", s5: "05. المدينة الذكية", s6: "06. التجارة", s7: "07. النقل", s8: "08. الذكاء", s9: "09 & 10. الثقوب الدودية",
-                chatTitle: "🤖 AGI 삐니",
-                sendBtn: "إرسال"
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Whitepaper",
+                body_whitepaper: "HK WorldBank ist eine globale Digital-Banking-Plattform der nächsten Generation basierend auf Blockchain.",
+                menu_faq: "❓ FAQ & Anleitung",
+                body_faq: "Finden Sie detaillierte Anleitungen zur Plattformnutzung, Wallet-Integration und UBI-Verteilung.",
+                menu_gov: "⚖️ 3POLICES Governance",
+                body_gov: "Verwaltet Kernrichtlinien zur Nachhaltigkeit der Plattform: Einlagenzinssatz und Vermögensschutz.",
+                menu_aml: "🔒 AML (Geldwäschebekämpfung)",
+                body_aml: "Gewährleistet sichere globale Vermögenstransfers gemäß internationalen AML-Vorschriften.",
+                menu_mica: "🇪🇺 MiCA (Krypto-Werte-Verordnung)",
+                body_mica: "Entworfen nach dem EU-MiCA-Rahmenwerk für globale digitale Finanzstandards.",
+                menu_global: "🌐 Globales Netzwerkspezifikation",
+                body_global: "Verbindet weltweite Benutzer mit blitzschnellen Zahlungen und Cross-Chain-Brücken.",
+                card_title: "Gyeongju 165F Globaler Kontrollturm (Sonderstadt Haeorum)",
+                card_desc: "Integrierte 10M Pi Bürger-Wirtschaftshauptstadt von Ulsan, Gyeongju und Pohang. 100% Pi-Währungszone."
             },
             ru: {
-                menu1: "📄 Белая книга", menu2: "❓ FAQ", menu3: "⚖️ Управление", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Сеть",
-                bannerTitle: "Кенджу 165эт Контрольный пункт",
-                bannerDesc: "Экономическая столица Pi (10 млн). 100% зона Pi. 30% UBI.",
-                assetTitle: "💰 Финансовый дашборд",
-                balanceLabel: "Общий баланс (Pi Balance)",
-                ubiLabel: "Ставка UBI",
-                noticeText: "* Более 30% чистой прибыли в UBI.",
-                syncTitle: "🚀 10 Сетевых синхронизаций",
-                s1: "01. Робототехника", s2: "02. Квантовая биология", s3: "03. Космос", s4: "04. Энергия", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Вормхол",
-                chatTitle: "🤖 AGI Пини",
-                sendBtn: "Отправить"
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Технический документ",
+                body_whitepaper: "HK WorldBank — это глобальная цифровая банковская платформа нового поколения на базе блокчейна.",
+                menu_faq: "❓ ЧаВО и Руководство",
+                body_faq: "Подробные руководства по использованию платформы, интеграции кошельков и распределению UBI.",
+                menu_gov: "⚖️ Управление 3POLICES",
+                body_gov: "Управляет ключевыми политиками устойчивости платформы: контроль ставок и защита активов.",
+                menu_aml: "🔒 AML (Противодействие отмыванию денег)",
+                body_aml: "Обеспечивает безопасные глобальные переводы активов в соответствии с международными стандартами.",
+                menu_mica: "🇪🇺 MiCA (Регулирование криптоактивов)",
+                body_mica: "Разработано на основе нормативно-правовой базы ЕС MiCA.",
+                menu_global: "🌐 Спецификация глобальной сети",
+                body_global: "Объединяет пользователей по всему миру с помощью молниеносных платежей.",
+                card_title: "Глобальная диспетчерская башня Кенджу 165 этажей",
+                card_desc: "Интегрированная экономическая столица с 10 млн граждан Pi. Зона 100% обращения Pi."
             },
             pt: {
-                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Governança", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Rede",
-                bannerTitle: "Torre de Controle Gyeongju 165F",
-                bannerDesc: "Capital econômica de 10M de cidadãos Pi. Zona 100% Pi. Retorno UBI 30%.",
-                assetTitle: "💰 Painel Financeiro & UBI",
-                balanceLabel: "Saldo Total (Pi Balance)",
-                ubiLabel: "Taxa UBI",
-                noticeText: "* Mais de 30% do lucro líquido retornado como UBI.",
-                syncTitle: "🚀 10 Redes Sincronizadas",
-                s1: "01. Robótica", s2: "02. Biología Quântica", s3: "03. Aeroespacial", s4: "04. Energia", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Buraco de Minhoca",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Enviar"
-            },
-            hi: {
-                menu1: "📄 श्वेतपत्र", menu2: "❓ सामान्य प्रश्न", menu3: "⚖️ शासन", menu4: "🔒 एएमएल", menu5: "🇪🇺 MiCA", menu6: "🌐 नेटवर्क",
-                bannerTitle: "ग्योंगजू 165F कंट्रोल टॉवर",
-                bannerDesc: "10M पाई नागरिकों की राजधानी। 100% पाई ज़ोन। 30% UBI रिटर्न।",
-                assetTitle: "💰 वित्तीय डैशबोर्ड",
-                balanceLabel: "कुल शेष (Pi Balance)",
-                ubiLabel: "UBI दर",
-                noticeText: "* 30% से अधिक शुद्ध लाभ UBI के रूप में।",
-                syncTitle: "🚀 10 कोर सिंक नेटवर्क",
-                s1: "01. रोबोटिक्स", s2: "02. क्वांटम जीव विज्ञान", s3: "03. अंतरिक्ष", s4: "04. ऊर्जा", s5: "05. स्मार्ट सिटी", s6: "06. कॉमर्स", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. वॉर्महो",
-                chatTitle: "🤖 AGI पिनी",
-                sendBtn: "भेजें"
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Whitepaper",
+                body_whitepaper: "HK WorldBank é uma plataforma bancária digital global de próxima geração alimentada por blockchain e Pi Network SDK.",
+                menu_faq: "❓ FAQ e Guia",
+                body_faq: "Encontre guias detalhados sobre o uso da plataforma, integração de carteiras e distribuição de UBI.",
+                menu_gov: "⚖️ Governança 3POLICES",
+                body_gov: "Gerencia políticas centrais para garantir a sustentabilidade da plataforma: controle de taxas e proteção de ativos.",
+                menu_aml: "🔒 AML (Prevenção à Lavagem de Dinheiro)",
+                body_aml: "Garante transferências globais seguras em conformidade com as normas internacionais de AML.",
+                menu_mica: "🇪🇺 MiCA (Regulação de Criptoativos)",
+                body_mica: "Projetado com base na estrutura MiCA da UE, liderando os padrões financeiros digitais globais.",
+                menu_global: "🌐 Especificação de Rede Global",
+                body_global: "Conectando usuários em todo o mundo com pagamentos ultrarrápidos e tecnologia de ponte cross-chain.",
+                card_title: "Torre de Controle Global de Gyeongju 165F (Cidade Especial de Haeorum)",
+                card_desc: "Capital econômica integrada de 10M de cidadãos Pi. Zona 100% Pi. Retorno UBI de 30% do lucro líquido."
             },
             it: {
-                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Governance", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Rete",
-                bannerTitle: "Torre di Controllo Gyeongju 165F",
-                bannerDesc: "Capitale economica Pi (10M cittadini). Zona 100% Pi. Ritorno UBI 30%.",
-                assetTitle: "💰 Dashboard Finanziaria & UBI",
-                balanceLabel: "Saldo Totale (Pi Balance)",
-                ubiLabel: "Tasso UBI",
-                noticeText: "* Oltre il 30% del profitto netto restituito come UBI.",
-                syncTitle: "🚀 10 Reti Sincronizzate",
-                s1: "01. Robotica", s2: "02. Biologia Quantistica", s3: "03. Aerospaziale", s4: "04. Energia", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Wormhole",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Invia"
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Whitepaper",
+                body_whitepaper: "HK WorldBank è una piattaforma di digital banking globale di nuova generazione basata su blockchain e Pi Network SDK.",
+                menu_faq: "❓ FAQ e Guida",
+                body_faq: "Trova guide dettagliate sull'uso della piattaforma, l'integrazione del portafoglio e la distribuzione del reddito di base universale.",
+                menu_gov: "⚖️ Governance 3POLICES",
+                body_gov: "Gestisce le politiche chiave per la sostenibilità della piattaforma: controllo dei tassi e protezione degli asset.",
+                menu_aml: "🔒 AML (Antiriciclaggio)",
+                body_aml: "Garantisce trasferimenti globali sicuri in conformità con i protocolli internazionali AML e KYB/KYC.",
+                menu_mica: "🇪🇺 MiCA (Regolamentazione Crypto-Asset)",
+                body_mica: "Progettato sulla base del quadro normativo UE MiCA.",
+                menu_global: "🌐 Specifica di Rete Globale",
+                body_global: "Connette utenti in tutto il mondo con pagamenti ultraveloci.",
+                card_title: "Torre di Controllo Globale di Gyeongju 165P (Città Speciale Haeorum)",
+                card_desc: "Capitale economica integrata da 10M di cittadini Pi. Zona 100% Pi. Ritorno UBI del 30%."
             },
             vi: {
-                menu1: "📄 Sách trắng", menu2: "❓ Hỏi đáp", menu3: "⚖️ Quản trị", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Mạng lưới",
-                bannerTitle: "Tháp Điều khiển Gyeongju 165F",
-                bannerDesc: "Thủ đô kinh tế 10 triệu công dân Pi. Vùng 100% Pi. Hoàn trả UBI 30%.",
-                assetTitle: "💰 Bảng điều khiển Tài chính & UBI",
-                balanceLabel: "Tổng số dư (Pi Balance)",
-                ubiLabel: "Tỷ lệ UBI",
-                noticeText: "* Hơn 30% lợi nhuận ròng được hoàn trả dưới dạng UBI.",
-                syncTitle: "🚀 10 Mạng lưới cốt lõi",
-                s1: "01. Robot", s2: "02. Sinh học lượng tử", s3: "03. Hàng không vũ trụ", s4: "04. Năng lượng", s5: "05. Smart City", s6: "06. Thương mại", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Lỗ sâu",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Gửi"
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Sách trắng",
+                body_whitepaper: "HK WorldBank là nền tảng ngân hàng số toàn cầu thế hệ mới được hỗ trợ bởi blockchain và Pi Network SDK.",
+                menu_faq: "❓ Câu hỏi thường gặp & Hướng dẫn",
+                body_faq: "Tìm hướng dẫn chi tiết về cách sử dụng nền tảng, tích hợp ví và phân phối thu nhập cơ bản (UBI).",
+                menu_gov: "⚖️ Quản trị 3POLICES",
+                body_gov: "Quản lý các chính sách cốt lõi đảm bảo tính bền vững của nền tảng: kiểm soát lãi suất và bảo vệ tài sản.",
+                menu_aml: "🔒 AML (Chống rửa tiền)",
+                body_aml: "Đảm bảo chuyển nhượng tài sản toàn cầu an toàn tuân thủ các quy định quốc tế.",
+                menu_mica: "🇪🇺 MiCA (Quy định tài sản tiền điện tử)",
+                body_mica: "Được thiết kế dựa trên khung pháp lý MiCA của EU.",
+                menu_global: "🌐 Tiêu chuẩn mạng toàn cầu",
+                body_global: "Kết nối người dùng toàn cầu với thanh toán siêu nhanh.",
+                card_title: "Tháp điều khiển toàn cầu Gyeongju 165 tầng (Thành phố đặc biệt Haeorum)",
+                card_desc: "Thủ đô kinh tế công dân 10 triệu Pi tích hợp của Ulsan, Gyeongju và Pohang. Khu vực lưu hành 100% Pi."
             },
             th: {
-                menu1: "📄 ไวท์เพเปอร์", menu2: "❓ คำถาม", menu3: "⚖️ ธรรมาภิบาล", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 เครือข่าย",
-                bannerTitle: "หอควบคุม Gyeongju 165F",
-                bannerDesc: "เมืองหลวงเศรษฐกิจ Pi 10 ล้านคน พื้นที่ 100% Pi คืนกำไร UBI 30%",
-                assetTitle: "💰 แดชบอร์ดการเงิน & UBI",
-                balanceLabel: "ยอดคงเหลือรวม (Pi Balance)",
-                ubiLabel: "อัตรา UBI",
-                noticeText: "* กำไรสุทธิกว่า 30% คืนสู่ UBI ระดับโลก",
-                syncTitle: "🚀 10 เครือข่ายซิงค์",
-                s1: "01. หุ่นยนต์", s2: "02. ชีววิทยาควอนตัม", s3: "03. อวกาศ", s4: "04. พลังงาน", s5: "05. สมาร์ทซิตี้", s6: "06. คอมเมิร์ซ", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. รูหนอน",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "ส่ง"
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 เอกสารปกขาว",
+                body_whitepaper: "HK WorldBank คือแพลตฟอร์มธนาคารดิจิทัลระดับโลกรุ่นใหม่ที่ขับเคลื่อนด้วยบล็อกเชนและ Pi Network SDK",
+                menu_faq: "❓ คำถามที่พบบ่อยและคู่มือ",
+                body_faq: "ค้นหาคู่มือโดยละเอียดเกี่ยวกับการใช้งานแพลตฟอร์ม การเชื่อมต่อกระเป๋าเงิน และโครงสร้าง UBI",
+                menu_gov: "⚖️ ธรรมาภิบาล 3POLICES",
+                body_gov: "จัดการนโยบายหลักเพื่อความยั่งยืนของแพลตฟอร์ม: การควบคุมอัตราดอกเบี้ยและการคุ้มครองทรัพย์สิน",
+                menu_aml: "🔒 AML (การป้องกันการฟอกเงิน)",
+                body_aml: "รับประกันการโอนสินทรัพย์ทั่วโลกอย่างปลอดภัยตามกฎระเบียบระหว่างประเทศ",
+                menu_mica: "🇪🇺 MiCA (ข้อบังคับสินทรัพย์ดิจิทัล)",
+                body_mica: "ออกแบบตามกรอบการกำกับดูแล MiCA ของสหภาพยุโรป",
+                menu_global: "🌐 ข้อมูลจำเพาะเครือข่ายระดับโลก",
+                body_global: "เชื่อมต่อผู้ใช้ทั่วโลกด้วยการชำระเงินที่รวดเร็ว",
+                card_title: "หอควบคุมระดับโลก Gyeongju 165 ชั้น (เมืองพิเศษแฮโอรุม)",
+                card_desc: "เมืองหลวงเศรษฐกิจพลเมือง 10 ล้าน Pi บูรณาการของอุล산, คย็องจู และโพฮัง โซนใช้สกุลเงิน Pi 100%"
             },
             id: {
-                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Tata Kelola", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Jaringan",
-                bannerTitle: "Menara Kontrol Gyeongju 165F",
-                bannerDesc: "Ibukota ekonomi 10M warga Pi. Zona 100% Pi. Pengembalian UBI 30%.",
-                assetTitle: "💰 Dashboard Keuangan & UBI",
-                balanceLabel: "Total Saldo (Pi Balance)",
-                ubiLabel: "Tingkat UBI",
-                noticeText: "* Lebih dari 30% laba bersih dikembalikan sebagai UBI.",
-                syncTitle: "🚀 10 Jaringan Sinkronisasi",
-                s1: "01. Robotika", s2: "02. Biologi Kuantum", s3: "03. Dirgantara", s4: "04. Energi", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Lubang Cacing",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Kirim"
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Whitepaper",
+                body_whitepaper: "HK WorldBank adalah platform perbankan digital global generasi berikutnya yang didukung oleh blockchain dan Pi Network SDK.",
+                menu_faq: "❓ Tanya Jawab & Panduan",
+                body_faq: "Temukan panduan mendetail tentang penggunaan platform, integrasi dompet, dan struktur distribusi UBI.",
+                menu_gov: "⚖️ Tata Kelola 3POLICES",
+                body_gov: "Mengelola kebijakan inti untuk memastikan keberlanjutan platform: kontrol tingkat deposit dan perlindungan aset.",
+                menu_aml: "🔒 AML (Anti Pencucian Uang)",
+                body_aml: "Memastikan transfer aset global yang aman sesuai dengan protokol AML internasional.",
+                menu_mica: "🇪🇺 MiCA (Regulasi Kripto-Aset EU)",
+                body_mica: "Dirancang berdasarkan kerangka kerja MiCA Uni Eropa, memimpin standar keuangan digital global.",
+                menu_global: "🌐 Spesifikasi Jaringan Global",
+                body_global: "Menghubungkan pengguna di seluruh dunia dengan pembayaran secepat kilat.",
+                card_title: "Menara Kontrol Global Gyeongju 165F (Kota Khusus Haeorum)",
+                card_desc: "Ibu kota ekonomi warga 10M Pi terintegrasi dari Ulsan, Gyeongju, dan Pohang. Zona 100% Pi."
             },
-            ms: {
-                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Tadbir Urus", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Rangkaian",
-                bannerTitle: "Menara Kawalan Gyeongju 165F",
-                bannerDesc: "Ibu kota ekonomi 10M warga Pi. Zon 100% Pi. Pulangan UBI 30%.",
-                assetTitle: "💰 Papan Pemuka Kewangan & UBI",
-                balanceLabel: "Baki Keseluruhan (Pi Balance)",
-                ubiLabel: "Kadar UBI",
-                noticeText: "* Lebih 30% keuntungan bersih dikembalikan sebagai UBI.",
-                syncTitle: "🚀 10 Rangkaian Teras",
-                s1: "01. Robotik", s2: "02. Biologi Kuantum", s3: "03. Angkasa", s4: "04. Tenaga", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Lubang Cacing",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Hantar"
+            hi: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 श्वेतपत्र (Whitepaper)",
+                body_whitepaper: "HK WorldBank ब्लॉकचेन और पाई नेटवर्क SDK द्वारा संचालित अगली पीढ़ी का वैश्विक डिजिटल बैंकिंग प्लेटफॉर्म है।",
+                menu_faq: "❓ अक्सर पूछे जाने वाले प्रश्न और गाइड",
+                body_faq: "प्लेटफॉर्म के उपयोग, वॉलेट एकीकरण और UBI वितरण संरचना पर विस्तृत गाइड प्राप्त करें।",
+                menu_gov: "⚖️ 3POLICES गवर्नेंस",
+                body_gov: "प्लेटफॉर्म की स्थिरता सुनिश्चित करने वाली मुख्य नीतियों का प्रबंधन करता है।",
+                menu_aml: "🔒 AML (धन शोधन निवारण)",
+                body_aml: "अंतरराष्ट्रीय AML प्रोटोकॉल का अनुपालन करते हुए सुरक्षित वैश्विक संपत्ति हस्तांतरण सुनिश्चित करता है।",
+                menu_mica: "🇪🇺 MiCA (क्रिप्टो-परिसंपत्ति विनियमन)",
+                body_mica: "यूरोपीय संघ के MiCA ढांचे के आधार पर डिज़ाइन किया गया।",
+                menu_global: "🌐 वैश्विक नेटवर्क विनिर्देश",
+                body_global: "बिजली की तेजी से भुगतान के साथ दुनिया भर के उपयोगकर्ताओं को जोड़ता है।",
+                card_title: "ग Gyeongju 165F ग्लोबल कंट्रोल टॉवर (Haeorum स्पेशल सिटी)",
+                card_desc: "उल्सान, ग्योंगजू और पोहांग की एकीकृत 10M पाई नागरिक आर्थिक राजधानी। 100% पाई समर्थित क्षेत्र।"
+            },
+            ar: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 الورقة البيضاء",
+                body_whitepaper: "HK WorldBank هي منصة مصرفية رقمية عالمية من الجيل التالي مدعومة بتقنية blockchain و Pi Network SDK.",
+                menu_faq: "❓ الأسئلة الشائعة والدليل",
+                body_faq: "ابحث عن أدلة مفصلة حول استخدام المنصة وتكامل المحفظة وهيكل توزيع الدخل الأساسي الشامل.",
+                menu_gov: "⚖️ حوكمة 3POLICES",
+                body_gov: "تدير السياسات الأساسية التي تضمن استدامة المنصة وحماية الأصول.",
+                menu_aml: "🔒 AML (مكافحة غسل الأموال)",
+                body_aml: "تضمن عمليات نقل الأصول العالمية الآمنة المتوافقة مع المعايير الدولية.",
+                menu_mica: "🇪🇺 MiCA (تنظيم الأصول المشفرة)",
+                body_mica: "مصممة بناءً على إطار عمل MiCA للاتحاد الأوروبي.",
+                menu_global: "🌐 مواصفات الشبكة العالمية",
+                body_global: "ربط المستخدمين في جميع أنحاء العالم بمدفوعات فائقة السرعة.",
+                card_title: "برج التحكم العالمي جيونججو 165 (مدينة هايوروم الخاصة)",
+                card_desc: "العاصمة الاقتصادية لمواميني Pi البالغ عددهم 10 ملايين. منطقة مقبولة Pi بنسبة 100%."
             },
             tr: {
-                menu1: "📄 Whitepaper", menu2: "❓ SSS", menu3: "⚖️ Yönetişim", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Ağ",
-                bannerTitle: "Gyeongju 165F Kontrol Kulesi",
-                bannerDesc: "10M Pi Vatandaş Ekonomik Başkenti. %100 Pi Bölgesi. %30 Net Kâr UBI.",
-                assetTitle: "💰 Finans ve UBI Paneli",
-                balanceLabel: "Toplam Bakiye (Pi Balance)",
-                ubiLabel: "Aylık UBI Oranı",
-                noticeText: "* Net kârın %30'undan fazlası küresel UBI olarak iade edilir.",
-                syncTitle: "🚀 10 Çekirdek Senkronizasyon Ağı",
-                s1: "01. Robotik", s2: "02. Kuantum Biyoloji", s3: "03. Uzay", s4: "04. Enerji", s5: "05. Akıllı Şehir", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Solucan Deliği",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Gönder"
-            },
-            pl: {
-                menu1: "📄 Biała Księga", menu2: "❓ FAQ", menu3: "⚖️ Zarządzanie", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Sieć",
-                bannerTitle: "Wieża Kontroli Gyeongju 165F",
-                bannerDesc: "Gospodarcza stolica 10M obywateli Pi. Strefa 100% Pi. 30% zysku na UBI.",
-                assetTitle: "💰 Panel Finansowy i UBI",
-                balanceLabel: "Całkowite saldo (Pi Balance)",
-                ubiLabel: "Miesięczna stopa UBI",
-                noticeText: "* Ponad 30% zysku netto wraca jako globalne UBI.",
-                syncTitle: "🚀 10 Sieci Synchronicznych",
-                s1: "01. Robotyka", s2: "02. Biologia Kwantowa", s3: "03. Kosmos", s4: "04. Energia", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Tunel Czasoprzestrzenny",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Wyślij"
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Whitepaper (Teknik İnceleme)",
+                body_whitepaper: "HK WorldBank, blok zinciri ve Pi Network SDK tarafından desteklenen yeni nesil küresel bir dijital bankacılık platformudur.",
+                menu_faq: "❓ SSS ve Kılavuz",
+                body_faq: "Platform kullanımı, cüzdan entegrasyonu ve UBI dağıtım yapısı hakkında ayrıntılı kılavuzlar bulun.",
+                menu_gov: "⚖️ 3POLICES Yönetişimi",
+                body_gov: "Platform sürdürülebilirliğini sağlayan temel politikaları yönetir.",
+                menu_aml: "🔒 AML (Kara Para Aklamayı Önleme)",
+                body_aml: "Uluslararası AML ve KYB/KYC protokollerine uyarak güvenli küresel varlık transferleri sağlar.",
+                menu_mica: "🇪🇺 MiCA (Kripto Varlık Düzenlemesi)",
+                body_mica: "AB MiCA çerçevesine dayalı olarak tasarlanmıştır.",
+                menu_global: "🌐 Küresel Ağ Özellikleri",
+                body_global: "Dünya çapındaki kullanıcıları son derece hızlı ödemelerle birbirine bağlar.",
+                card_title: "Gyeongju 165 Katlı Küresel Kontrol Kulesi (Haeorum Özel Şehri)",
+                card_desc: "Ulsan, Gyeongju ve Pohang entegre 10M Pi vatandaş ekonomik başkenti. %100 Pi geçerli bölge."
             },
             nl: {
-                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Governance", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Netwerk",
-                bannerTitle: "Gyeongju 165F Controletoeren",
-                bannerDesc: "10M Pi Burgers Economische Hoofdstad. 100% Pi-zone. 30% UBI-teruggave.",
-                assetTitle: "💰 Financieel & UBI Dashboard",
-                balanceLabel: "Totaal Saldo (Pi Balance)",
-                ubiLabel: "Maandelijkse UBI-rate",
-                noticeText: "* Meer dan 30% nettowinst wordt teruggegeven als UBI.",
-                syncTitle: "🚀 10 Kern-Sync-Netwerken",
-                s1: "01. Robotica", s2: "02. Kwantumbiologie", s3: "03. Ruimtevaart", s4: "04. Energie", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Wormgat",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Verzenden"
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Whitepaper",
+                body_whitepaper: "HK WorldBank is een next-gen wereldwijd digitaal bankplatform aangedreven door blockchain en Pi Network SDK.",
+                menu_faq: "❓ FAQ & Gids",
+                body_faq: "Vind gedetailleerde handleidingen over platformgebruik, wallet-integratie en UBI-distributie.",
+                menu_gov: "⚖️ 3POLICES Governance",
+                body_gov: "Beheert kernbeleidsregels voor platformduurzaamheid: rentebeheersing en activabescherming.",
+                menu_aml: "🔒 AML (Anti-witwaspraktijken)",
+                body_aml: "Zorgt voor veilige wereldwijde activatransfers in overeenstemming met internationale normen.",
+                menu_mica: "🇪🇺 MiCA (Crypto-activaregelgeving EU)",
+                body_mica: "Ontworpen op basis van het EU MiCA-kader.",
+                menu_global: "🌐 Wereldwijde Netwerkspecificatie",
+                body_global: "Verbindt gebruikers wereldwijd met bliksemsnelle betalingen.",
+                card_title: "Gyeongju 165F Wereldwijde Controletoren (Haeorum Speciale Stad)",
+                card_desc: "Geïntegreerde economische hoofdstad van 10M Pi-burgers van Ulsan, Gyeongju en Pohang. 100% Pi-zone."
+            },
+            pl: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Biała księga",
+                body_whitepaper: "HK WorldBank to globalna platforma bankowości cyfrowej nowej generacji oparta na technologii blockchain.",
+                menu_faq: "❓ FAQ i Przewodnik",
+                body_faq: "Znajdź szczegółowe przewodniki dotyczące korzystania z platformy i dystrybucji UBI.",
+                menu_gov: "⚖️ Zarządzanie 3POLICES",
+                body_gov: "Zarządza kluczowymi politykami zapewniającymi zrównoważony rozwój platformy.",
+                menu_aml: "🔒 AML (Przeciwdziałanie praniu pieniędzy)",
+                body_aml: "Zapewnia bezpieczne globalne transfery aktywów zgodnie z międzynarodowymi protokołami.",
+                menu_mica: "🇪🇺 MiCA (Rozporządzenie w sprawie kryptoaktywów)",
+                body_mica: "Zaprojektowane w oparciu o unijne ramy prawne MiCA.",
+                menu_global: "🌐 Specyfikacja sieci globalnej",
+                body_global: "Łączenie użytkowników na całym świecie za pomocą superszybkých płatności.",
+                card_title: "Globalna wieża kontrolna Gyeongju 165F (Miasto Specjalne Haeorum)",
+                card_desc: "Zintegrowana stolica ekonomiczna dla 10M obywateli Pi. Strefa 100% Pi."
             },
             uk: {
-                menu1: "📄 Біла книга", menu2: "❓ FAQ", menu3: "⚖️ Управління", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Мережа",
-                bannerTitle: "Диспетчерський пункт Кенджу 165эт",
-                bannerDesc: "Економічна столиця Pi (10 млн). Зона 100% Pi. 30% чистого прибутку на UBI.",
-                assetTitle: "💰 Фінансовий дашборд",
-                balanceLabel: "Загальний баланс (Pi Balance)",
-                ubiLabel: "Ставка UBI",
-                noticeText: "* Понад 30% прибутку повертається у вигляді UBI.",
-                syncTitle: "🚀 10 Мережевих синхронізацій",
-                s1: "01. Робототехніка", s2: "02. Квантова біологія", s3: "03. Космос", s4: "04. Енергія", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Вормхол",
-                chatTitle: "🤖 AGI Піні",
-                sendBtn: "Надіслати"
-            },
-            el: {
-                menu1: "📄 Λευκή Βίβλος", menu2: "❓ FAQ", menu3: "⚖️ Διακυβέρνηση", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Δίκτυο",
-                bannerTitle: "Πύργος Ελέγχου Gyeongju 165F",
-                bannerDesc: "Οικονομική πρωτεύουσα 10M πολιτών Pi. Ζώνη 100% Pi. UBI 30%.",
-                assetTitle: "💰 Οικονομικός Πίνακας & UBI",
-                balanceLabel: "Συνολικό Υπόλοιπο (Pi Balance)",
-                ubiLabel: "Μηνιαίο UBI",
-                noticeText: "* Πάνω από 30% καθαρό κέρδος επιστρέφεται ως UBI.",
-                syncTitle: "🚀 10 Δίκτυα Συγχρονισμού",
-                s1: "01. Ρομποτική", s2: "02. Κβαντική Βιολογία", s3: "03. Διαστήματος", s4: "04. Ενέργεια", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Σκουληκότρυπα",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Αποστολή"
-            },
-            cs: {
-                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Governance", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Síť",
-                bannerTitle: "Řídicí věž Gyeongju 165F",
-                bannerDesc: "Ekonomické hlavní město 10M občanů Pi. Zóna 100% Pi. 30% UBI.",
-                assetTitle: "💰 Finanční panel & UBI",
-                balanceLabel: "Celkový zůstatek (Pi Balance)",
-                ubiLabel: "Měsíční sazba UBI",
-                noticeText: "* Více než 30 % čistého zisku se vrací jako globální UBI.",
-                syncTitle: "🚀 10 Synchronizačních sítí",
-                s1: "01. Robotika", s2: "02. Kvantová biologie", s3: "03. Vesmír", s4: "04. Energie", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Červí díra",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Odeslat"
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Технічний документ",
+                body_whitepaper: "HK WorldBank — це глобальна цифрова банківська платформа нового покоління на базі блокчейну.",
+                menu_faq: "❓ ЧаПи та Посібник",
+                body_faq: "Знайдіть докладні інструкції щодо використання платформи та розподілу UBI.",
+                menu_gov: "⚖️ Управління 3POLICES",
+                body_gov: "Керує ключовими політиками забезпечення стабільності платформи.",
+                menu_aml: "🔒 AML (Протидія відмиванню грошей)",
+                body_aml: "Забезпечує безпечні глобальні перекази активів відповідно до міжнародних стандартів.",
+                menu_mica: "🇪🇺 MiCA (Регулювання криптоактивів)",
+                body_mica: "Розроблено на основі нормативно-правової бази ЄС MiCA.",
+                menu_global: "🌐 Специфікація глобальної мережі",
+                body_global: "Об'єднання користувачів по всьому світу за допомогою швидких платежів.",
+                card_title: "Глобальна диспетчерська вежа Кенджу 165 поверхів",
+                card_desc: "Інтегрована економічна столиця з 10 млн громадян Pi. Зона 100% обігу Pi."
             },
             sv: {
-                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Styrning", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Nätverk",
-                bannerTitle: "Gyeongju 165F Kontrolltorn",
-                bannerDesc: "Ekonomisk huvudstad för 10M Pi-medborgare. 100% Pi-zon. 30% UBI.",
-                assetTitle: "💰 Finansiell & UBI-instrumentpanel",
-                balanceLabel: "Totalt saldo (Pi Balance)",
-                ubiLabel: "Månatlig UBI-ränta",
-                noticeText: "* Över 30% av nettovinsten återbetalas som global UBI.",
-                syncTitle: "🚀 10 Sync-nätverk",
-                s1: "01. Robotik", s2: "02. Kvantbiologi", s3: "03. Rymden", s4: "04. Energi", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Maskhål",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Skicka"
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Whitepaper",
+                body_whitepaper: "HK WorldBank är en nästa generations global digital bankplattform som drivs av blockchain och Pi Network SDK.",
+                menu_faq: "❓ FAQ & Guide",
+                body_faq: "Hitta detaljerade guider om plattformsanvändning, plånboksintegrering och UBI-distribution.",
+                menu_gov: "⚖️ 3POLICES Styrning",
+                body_gov: "Hanterar kärnprinciper som säkerställer plattformens hållbarhet.",
+                menu_aml: "🔒 AML (Penningtvättsbekämpning)",
+                body_aml: "Säkerställer säkra globala tillgångsöverföringar i enlighet med internationella regler.",
+                menu_mica: "🇪🇺 MiCA (Kryptoasset-reglering)",
+                body_mica: "Designad baserat på EU:s MiCA-ramverk.",
+                menu_global: "🌐 Global nätverksspecifikation",
+                body_global: "Kopplar samman användare över hela världen med blixtsnabba betalningar.",
+                card_title: "Gyeongju 165F Globalt kontrolltorn (Haeorum specialstad)",
+                card_desc: "Integrerad 10M Pi medborgar-ekonomisk huvudstad. 100% Pi-zon."
             },
-            hu: {
-                menu1: "📄 Fehér könyv", menu2: "❓ GYIK", menu3: "⚖️ Irányítás", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Hálózat",
-                bannerTitle: "Gyeongju 165F Irányítótorony",
-                bannerDesc: "10M Pi polgár gazdasági fővárosa. 100% Pi zóna. 30% UBI.",
-                assetTitle: "💰 Pénzügyi & UBI Irányítópult",
-                balanceLabel: "Teljes egyenleg (Pi Balance)",
-                ubiLabel: "Havi UBI arány",
-                noticeText: "* A tiszta nyereség több mint 30%-a UBI-ként kerül visszatérítésre.",
-                syncTitle: "🚀 10 Szinkron Hálózat",
-                s1: "01. Robotika", s2: "02. Kvantum biológia", s3: "03. Űrkutatás", s4: "04. Energia", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Féreglyuk",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Küldés"
+            el: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Λευκή Βίβλος",
+                body_whitepaper: "Η HK WorldBank είναι μια παγκόσμια ψηφιακή τραπεζική πλατφόρμα επόμενης γενιάς.",
+                menu_faq: "❓ Συχνές Ερωτήσεις & Οδηγός",
+                body_faq: "Βρείτε λεπτομερείς οδηγούς σχετικά με τη χρήση της πλατφόρμας και τη δομή UBI.",
+                menu_gov: "⚖️ Διακυβέρνηση 3POLICES",
+                body_gov: "Διαχειρίζεται τις βασικές πολιτικές διασφάλισης της βιωσιμότητας.",
+                menu_aml: "🔒 AML (Καταπολέμηση Νομιom. Eσόδων)",
+                body_aml: "Διασφαλίζει ασφαλείς παγκόσμιες μεταφορές περιουσιακών στοιχείων.",
+                menu_mica: "🇪🇺 MiCA (Κανονισμός Κρυpto-στοιχείων)",
+                body_mica: "Σχεδιασμένο με βάسون το πλαίσιο MiCA της ΕΕ.",
+                menu_global: "🌐 Προδιαγραφές Παγκόσμιου Δικτύου",
+                body_global: "Σύνδεση χρηστών παγκοσμίως με αστραπιαίες πληρωμές.",
+                card_title: "Παγκόσμιος Πύργος Ελέγχου Gyeongju 165F",
+                card_desc: "Οικονομική πρωτεύουσα 10M πολιτών Pi. Ζώνη 100% Pi."
+            },
+            cs: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Whitepaper",
+                body_whitepaper: "HK WorldBank je globální digitální bankovní platforma nové generace.",
+                menu_faq: "❓ FAQ a Průvodce",
+                body_faq: "Najděte podrobné průvodce používáním platformy a distribucí UBI.",
+                menu_gov: "⚖️ Správa 3POLICES",
+                body_gov: "Spravuje klíčové politiky zajišťující udržitelnost platformy.",
+                menu_aml: "🔒 AML (Proti praní peněz)",
+                body_aml: "Zajišťuje bezpečné globální převody aktiv v souladu s předpisy.",
+                menu_mica: "🇪🇺 MiCA (Regulace kryptoaktiv)",
+                body_mica: "Navrženo na základě rámce EU MiCA.",
+                menu_global: "🌐 Specifikace globální sítě",
+                body_global: "Propojení uživatelů po celém světě pomocí bleskových plateb.",
+                card_title: "Globální řídicí věž Gyeongju 165F",
+                card_desc: "Integrované ekonomické hlavní město 10M občanů Pi. Zóna 100% Pi."
             },
             ro: {
-                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Guvernanță", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Rețea",
-                bannerTitle: "Turn de Control Gyeongju 165F",
-                bannerDesc: "Capitală economică de 10M cetățeni Pi. Zonă 100% Pi. 30% UBI.",
-                assetTitle: "💰 Panou Financiar & UBI",
-                balanceLabel: "Sold Total (Pi Balance)",
-                ubiLabel: "Rată UBI",
-                noticeText: "* Peste 30% din profitul net este returnat ca UBI global.",
-                syncTitle: "🚀 10 Rețele de Sincronizare",
-                s1: "01. Robotică", s2: "02. Biologie Cuantică", s3: "03. Aerospațial", s4: "04. Energie", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Gaură de Vierme",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Trimite"
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Whitepaper",
+                body_whitepaper: "HK WorldBank este o platformă bancară digitală globală de nouă generație.",
+                menu_faq: "❓ Întrebări frecvente și Ghid",
+                body_faq: "Găsiți ghiduri detaliate despre utilizarea platformei și distribuția UBI.",
+                menu_gov: "⚖️ Guvernanță 3POLICES",
+                body_gov: "Gestionează politicile cheie care asigură sustenabilitatea platformei.",
+                menu_aml: "🔒 AML (Combaterea spălării banilor)",
+                body_aml: "Asigură transferuri globale sigure în conformitate cu protocoalele internaționale.",
+                menu_mica: "🇪🇺 MiCA (Reglementarea crypto-activelor)",
+                body_mica: "Proiectat pe baza cadrului MiCA al UE.",
+                menu_global: "🌐 Specificație rețea globală",
+                body_global: "Conectarea utilizatorilor din întreaga lume cu plăți ultra-rapide.",
+                card_title: "Turnul de Control Global Gyeongju 165F",
+                card_desc: "Capitală economică integrată de 10M cetățeni Pi. Zonă 100% Pi."
             },
-            da: {
-                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Governance", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Netværk",
-                bannerTitle: "Gyeongju 165F Kontrolltårn",
-                bannerDesc: "10M Pi borger økonomisk hovedstad. 100% Pi-zone. 30% UBI.",
-                assetTitle: "💰 Finans & UBI Dashboard",
-                balanceLabel: "Samlet saldo (Pi Balance)",
-                ubiLabel: "Månedlig UBI-sats",
-                noticeText: "* Over 30% af nettooverskuddet returneres som global UBI.",
-                syncTitle: "🚀 10 Synkroniseringsnetværk",
-                s1: "01. Robotteknologi", s2: "02. Kvantebiologi", s3: "03. Rumfart", s4: "04. Energi", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Ormehul",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Send"
+            hu: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Fehér könyv",
+                body_whitepaper: "A HK WorldBank egy új generációs globális digitális banki platform.",
+                menu_faq: "❓ GYIK és útmutató",
+                body_faq: "Találjon részletes útmutatókat a platform használatáról.",
+                menu_gov: "⚖️ 3POLICES Irányítás",
+                body_gov: "Kezeli a platform fenntarthatóságát biztosító kulcsfontosságú politikákat.",
+                menu_aml: "🔒 AML (Pénzmosás elleni védelem)",
+                body_aml: "Biztonságos globális vagyonátruházást biztosít a nemzetközi előírásoknak megfelelően.",
+                menu_mica: "🇪🇺 MiCA (Kriptoeszközök szabályozása)",
+                body_mica: "Az EU MiCA keretrendszere alapján tervezve.",
+                menu_global: "🌐 Globális hálózati specifikáció",
+                body_global: "Összeköti a felhasználókat világszerte villámgyors fizetéssel.",
+                card_title: "Gyeongju 165 emeletes globális irányítótorony",
+                card_desc: "Integrált 10M Pi polgári gazdasági főváros. 100% Pi zóna."
             },
             fi: {
-                menu1: "📄 Whitepaper", menu2: "❓ UKK", menu3: "⚖️ Hallinto", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Verkko",
-                bannerTitle: "Gyeongju 165F Valvontatorni",
-                bannerDesc: "10 miljoonan Pi-kansalaisen taloudellinen pääkaupunki. 100% Pi-alue. 30% UBI.",
-                assetTitle: "💰 Talous & UBI -hallintapaneeli",
-                balanceLabel: "Kokonaissaldo (Pi Balance)",
-                ubiLabel: "Kuukausittainen UBI-korko",
-                noticeText: "* Yli 30% nettotuotosta palautetaan maailmanlaajuisena UBI:na.",
-                syncTitle: "🚀 10 Synkronointiverkkoa",
-                s1: "01. Robotiikka", s2: "02. Kvattibiologia", s3: "03. Avaruus", s4: "04. Energia", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Madonreikä",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Lähetä"
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Whitepaper",
+                body_whitepaper: "HK WorldBank on seuraavan sukupolven globaali digitaalinen pankkialusta.",
+                menu_faq: "❓ UKK ja opas",
+                body_faq: "Löydä yksityiskohtaiset oppaat alustan käytöstä.",
+                menu_gov: "⚖️ 3POLICES Hallinto",
+                body_gov: "Hallinnoi alustan kestävyyttä varmistavia periaatteita.",
+                menu_aml: "🔒 AML (Rahanpesun torjunta)",
+                body_aml: "Varmistaa turvalliset globaalit varainsiirrot kansainvälisten normien mukaisesti.",
+                menu_mica: "🇪🇺 MiCA (Krypto-omaisuussääntely)",
+                body_mica: "Suunniteltu EU:n MiCA-kehyksen pohjalta.",
+                menu_global: "🌐 Globaali verkkospesifikaatio",
+                body_global: "Yhdistää käyttäjät maailmanlaajuisesti salamannopeilla maksuilla.",
+                card_title: "Gyeongjun 165 kerroksinen globaali ohjaustorni",
+                card_desc: "Integroitu 10M Pi -kansalaisten talouspääkaupunki. 100% Pi-alue."
+            },
+            da: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Whitepaper",
+                body_whitepaper: "HK WorldBank er en næste generations globale digitale bankplatform.",
+                menu_faq: "❓ FAQ & Guide",
+                body_faq: "Find detaljerede guider om platformbrug.",
+                menu_gov: "⚖️ 3POLICES Governance",
+                body_gov: "Håndterer kernepolitikker, der sikrer platformens bæredygtighed.",
+                menu_aml: "🔒 AML (Hvidvaskbeskyttelse)",
+                body_aml: "Sikrer sikre globale overførsler i overensstemmelse med internationale standarder.",
+                menu_mica: "🇪🇺 MiCA (Krypto-aktiver regulering)",
+                body_mica: "Designet baseret på EU's MiCA-rammeværk.",
+                menu_global: "🌐 Global netværksspecifikation",
+                body_global: "Forbinder brugere over hele verden med lynhurtige betalinger.",
+                card_title: "Gyeongju 165F Globalt Kontrolltårn",
+                card_desc: "Integreret 10M Pi borgerøkonomisk hovedstad. 100% Pi zone."
             },
             no: {
-                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Styring", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Nettverk",
-                bannerTitle: "Gyeongju 165F Kontrolltårn",
-                bannerDesc: "10M Pi-borger økonomisk hovedstad. 100% Pi-sone. 30% UBI.",
-                assetTitle: "💰 Finans- & UBI-dashbord",
-                balanceLabel: "Total saldo (Pi Balance)",
-                ubiLabel: "Månedlig UBI-rate",
-                noticeText: "* Over 30% av nettogevinsten returneres som global UBI.",
-                syncTitle: "🚀 10 Synkroniseringsnettverk",
-                s1: "01. Robotikk", s2: "02. Kvantebiologi", s3: "03. Romfart", s4: "04. Energi", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Ormehull",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Send"
-            },
-            sk: {
-                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Governance", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Sieť",
-                bannerTitle: "Riadiaca veža Gyeongju 165F",
-                bannerDesc: "Ekonomické hlavné mesto 10M občanov Pi. Zóna 100% Pi. 30% UBI.",
-                assetTitle: "💰 Finančný panel & UBI",
-                balanceLabel: "Celkový zostatok (Pi Balance)",
-                ubiLabel: "Mesačná sadzba UBI",
-                noticeText: "* Viac ako 30% čistého zisku sa vrací ako globálne UBI.",
-                syncTitle: "🚀 10 Synchronizačných sietí",
-                s1: "01. Robotika", s2: "02. Kvantová biológia", s3: "03. Vesmír", s4: "04. Energia", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Červia diera",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Odoslať"
-            },
-            bg: {
-                menu1: "📄 Бяла книга", menu2: "❓ Въпроси", menu3: "⚖️ Управление", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Мрежа",
-                bannerTitle: "Контролна кула Gyeongju 165F",
-                bannerDesc: "Икономическа столица на 10М граждани Pi. 100% зона Pi. 30% UBI.",
-                assetTitle: "💰 Финансов панел & UBI",
-                balanceLabel: "Общ баланс (Pi Balance)",
-                ubiLabel: "Месечен UBI",
-                noticeText: "* Над 30% от нетната печалба се връща като глобален UBI.",
-                syncTitle: "🚀 10 Мрежи за синхронизация",
-                s1: "01. Роботика", s2: "02. Квантова биология", s3: "03. Космос", s4: "04. Енергия", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Червейна дупка",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Изпрати"
-            },
-            hr: {
-                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Upravljanje", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Mreža",
-                bannerTitle: "Kontrolni toranj Gyeongju 165F",
-                bannerDesc: "Gospodarska prijestolnica 10M Pi građana. 100% Pi zona. 30% UBI.",
-                assetTitle: "💰 Financijska ploča & UBI",
-                balanceLabel: "Ukupni saldo (Pi Balance)",
-                ubiLabel: "Mjesečna UBI stopa",
-                noticeText: "* Preko 30% neto dobiti vraća se kao globalni UBI.",
-                syncTitle: "🚀 10 Sinkronizacijskih mreža",
-                s1: "01. Robotika", s2: "02. Kvantna biologija", s3: "03. Svemir", s4: "04. Energija", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Crvotočina",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Pošalji"
-            },
-            sr: {
-                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Управљање", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Мрежа",
-                bannerTitle: "Контролни торањ Gyeongju 165F",
-                bannerDesc: "Економска престоница 10M Pi građana. 100% Pi zona. 30% UBI.",
-                assetTitle: "💰 Финансијска табла & UBI",
-                balanceLabel: "Укупан салдо (Pi Balance)",
-                ubiLabel: "Месечна UBI стопа",
-                noticeText: "* Преко 30% нето добити се враћа као глобални UBI.",
-                syncTitle: "🚀 10 Синхronizacionih mreža",
-                s1: "01. Роботика", s2: "02. Квантна биологија", s3: "03. Свемир", s4: "04. Енергија", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Црвоточина",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Пошаљи"
-            },
-            sl: {
-                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Upravljanje", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Omrežje",
-                bannerTitle: "Nadzorni stolp Gyeongju 165F",
-                bannerDesc: "Gospodarska prestolnica 10M državljanov Pi. 100% Pi cona. 30% UBI.",
-                assetTitle: "💰 Finančna plošča & UBI",
-                balanceLabel: "Skupno stanje (Pi Balance)",
-                ubiLabel: "Mesečna stopnja UBI",
-                noticeText: "* Več kot 30 % čistega dobička se vrne kot globalni UBI.",
-                syncTitle: "🚀 10 Sinhronizacijskih omrežij",
-                s1: "01. Robotika", s2: "02. Kvantna biologija", s3: "03. Vesolje", s4: "04. Energija", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Črvina",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Pošlji"
-            },
-            et: {
-                menu1: "📄 Valge raamat", menu2: "❓ FAQ", menu3: "⚖️ Juhtimine", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Võrk",
-                bannerTitle: "Gyeongju 165F Juhtimistorn",
-                bannerDesc: "10M Pi kodaniku majanduspealinn. 100% Pi tsoon. 30% UBI.",
-                assetTitle: "💰 Finants- ja UBI-töölaud",
-                balanceLabel: "Kogusaldo (Pi Balance)",
-                ubiLabel: "Igakuine UBI määr",
-                noticeText: "* Üle 30% puhaskasumist tagastatakse globaalse UBI-na.",
-                syncTitle: "🚀 10 Sünkroonvõrku",
-                s1: "01. Robootika", s2: "02. Kvantbioloogia", s3: "03. Kosmos", s4: "04. Energia", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Ussiauk",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Saada"
-            },
-            lv: {
-                menu1: "📄 Baltā grāmata", menu2: "❓ FAQ", menu3: "⚖️ Pārvaldība", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Tīkls",
-                bannerTitle: "Gyeongju 165F Kontroltornis",
-                bannerDesc: "10M Pi pilsoņu ekonomiskā galvaspilsēta. 100% Pi zona. 30% UBI.",
-                assetTitle: "💰 Finanšu & UBI panelis",
-                balanceLabel: "Kopējā bilance (Pi Balance)",
-                ubiLabel: "Mēneša UBI likme",
-                noticeText: "* Vairāk nekā 30% no tīrās peļņas tiek atgriezti kā globālais UBI.",
-                syncTitle: "🚀 10 Sinhronizācijas tīkli",
-                s1: "01. Robotika", s2: "02. Kvantu bioloģija", s3: "03. Kosmosa", s4: "04. Enerģija", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Tārptagas",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Sūtīt"
-            },
-            lt: {
-                menu1: "📄 Baltoji knyga", menu2: "❓ DUK", menu3: "⚖️ Valdymas", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Tinklas",
-                bannerTitle: "Gyeongju 165F Kontrolės bokštas",
-                bannerDesc: "10M Pi piliečių ekonominė sostinė. 100% Pi zona. 30% UBI.",
-                assetTitle: "💰 Finansų ir UBI skydelis",
-                balanceLabel: "Bendras likutis (Pi Balance)",
-                ubiLabel: "Mėnesinis UBI rodiklis",
-                noticeText: "* Daugiau nei 30% grynojo pelno grąžinama kaip pasaulinis UBI.",
-                syncTitle: "🚀 10 Sinchronizavimo tinklų",
-                s1: "01. Robotika", s2: "02. Kvantinė biologija", s3: "03. Kosmosas", s4: "04. Energija", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Kerminė anga",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Siųsti"
-            },
-            fa: {
-                menu1: "📄 وایت پیپر", menu2: "❓ سوالات", menu3: "⚖️ حاکمیت", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 شبکه",
-                bannerTitle: "برج کنترل جیونگجو ۱۶۵",
-                bannerDesc: "پایتخت اقتصادی ۱۰ میلیون شهروند پای. منطقه ۱۰۰٪ پای. بازگشت ۳۰٪ UBI.",
-                assetTitle: "💰 داشبورد مالی و UBI",
-                balanceLabel: "موجودی کل (Pi Balance)",
-                ubiLabel: "نرخ UBI ماهانه",
-                noticeText: "* بیش از ۳۰٪ سود خالص به عنوان UBI جهانی بازگردانده می شود.",
-                syncTitle: "🚀 ۱۰ شبکه هماهنگ سازی",
-                s1: "۰۱. رباتیک", s2: "۰۲. زیست شناسی کوانتومی", s3: "۰۳. هوافضا", s4: "۰۴. انرژی هوشمند", s5: "۰۵. شهر هوشمند", s6: "۰۶. تجارت", s7: "۰۷. UAM", s8: "۰۸. هوش مصنوعی", s9: "۰۹ و ۱۰. کرم چاله",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "ارسال"
-            },
-            ur: {
-                menu1: "📄 وائٹ پیپر", menu2: "❓ سوالات", menu3: "⚖️ حکمرانی", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 نیٹ ورک",
-                bannerTitle: "گ्योंگجو 165F کنٹرول ٹاور",
-                bannerDesc: "10M پائی شہریوں کا اقتصادی دارالحکومت۔ 100% پائی زون۔ 30% UBI۔",
-                assetTitle: "💰 مالیاتی اور UBI ڈیش بورڈ",
-                balanceLabel: "کل بیلنس (Pi Balance)",
-                ubiLabel: "ماہانہ UBI شرح",
-                noticeText: "* خالص منافع کا 30% سے زیادہ عالمی UBI کے طور پر واپس کیا جاتا ہے۔",
-                syncTitle: "🚀 10 کور مطابقت پذیر نیٹ ورکس",
-                s1: "01. روبوٹکس", s2: "02. کوانٹم بائیولوجی", s3: "03. اسپیس", s4: "04. انرجی", s5: "05. سمارٹ سٹی", s6: "06. کامرس", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. ورم ہول",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "بھیجیں"
-            },
-            bn: {
-                menu1: "📄 হোয়াইটপেপার", menu2: "❓ প্রশ্ন", menu3: "⚖️ শাসন", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 নেটওয়ার্ক",
-                bannerTitle: "গিয়ংজু ১৬৫এফ কন্ট্রোল টাওয়ার",
-                bannerDesc: "১ কোটি পাই নাগরিকের অর্থনৈতিক রাজধানী। ১০০% পাই জোন। ৩০% UBI।",
-                assetTitle: "💰 আর্থিক এবং UBI ড্যাশবোর্ড",
-                balanceLabel: "মোট ব্যালেন্স (Pi Balance)",
-                ubiLabel: "মাসিক UBI হার",
-                noticeText: "* নিট লাভের ৩০% এর বেশি বৈশ্বিক UBI হিসাবে ফেরত দেওয়া হয়।",
-                syncTitle: "🚀 ১০টি সিঙ্ক নেটওয়ার্ক",
-                s1: "০১. রোবটিক্স", s2: "০২. কোয়ান্টাম জীববিদ্যা", s3: "০৩. মহাকাশ", s4: "০৪. শক্তি", s5: "০৫. স্মার্ট সিটি", s6: "০৬. বাণিজ্য", s7: "০৭. UAM", s8: "০৮. AI/AGI", s9: "০৯ ও ১০. ওয়ার্মহোল",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "পাঠান"
-            },
-            ta: {
-                menu1: "📄 வெள்ளைப் பத்திரம்", menu2: "❓ கேள்விகள்", menu3: "⚖️ நிர்வாகம்", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 வலைப்பின்னல்",
-                bannerTitle: "ஜியோங்ஜு 165F கட்டுப்பாட்டு கோபுரம்",
-                bannerDesc: "10M பை குடிமக்களின் பொருளாதார தலைநகரம். 100% பை மண்டலம். 30% UBI.",
-                assetTitle: "💰 நிதி & UBI டாஷ்போர்டு",
-                balanceLabel: "மொத்த இருப்பு (Pi Balance)",
-                ubiLabel: "மாதாந்திர UBI விகிதம்",
-                noticeText: "* நிகர லாபத்தில் 30% க்கும் அதிகமாக UBI ஆக திரும்ப வழங்கப்படுகிறது.",
-                syncTitle: "🚀 10 ஒத்திசைவு வலைப்பின்னல்கள்",
-                s1: "01. ரோபோடிக்ஸ்", s2: "02. குவாண்டம் உயிரியல்", s3: "03. விண்வெளி", s4: "04. ஆற்றல்", s5: "05. ஸ்மார்ட் சிட்டி", s6: "06. வணிகம்", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. வோர்ம்ஹோல்",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "அனுப்பு"
-            },
-            te: {
-                menu1: "📄 వైట్ పేపర్", menu2: "❓ ప్రశ్నలు", menu3: "⚖️ పాలన", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 నెట్ వర్క్",
-                bannerTitle: "గ్యోంగ్ జు 165F కంట్రోల్ టవర్",
-                bannerDesc: "10M పై పౌరుల ఆర్థిక రాజధాని. 100% పై జోన్. 30% UBI.",
-                assetTitle: "💰 ఆర్థిక & UBI డాష్ బోర్డ్",
-                balanceLabel: "మొత్తం బ్యాలెన్స్ (Pi Balance)",
-                ubiLabel: "నెలవారీ UBI రేటు",
-                noticeText: "* నికర లాభంలో 30% కంటే ఎక్కువ UBIగా తిరిగి ఇవ్వబడుతుంది.",
-                syncTitle: "🚀 10 సింక్ నెట్ వర్క్ లు",
-                s1: "01. రోబోటిక్స్", s2: "02. క్వాంటం బయాలజీ", s3: "03. అంతరిక్షం", s4: "04. శక్తి", s5: "05. స్మార్ట్ సిటీ", s6: "06. వాణిజ్యం", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. వార్మ్ హోల్",
-                chatTitle: "🤖 AGI పిని",
-                sendBtn: "పంపు"
-            },
-            ml: {
-                menu1: "📄 വൈറ്റ് പേപ്പർ", menu2: "❓ ചോദ്യങ്ങൾ", menu3: "⚖️ ഭരണം", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 നെറ്റ് വർക്ക്",
-                bannerTitle: "ഗിയോങ്ജു 165F കൺട്രോൾ ടവർ",
-                bannerDesc: "10M പൈ പൗരന്മാരുടെ സാമ്പത്തിക തലസ്ഥാനം. 100% പൈ സോൺ. 30% UBI.",
-                assetTitle: "💰 ഫിനാൻഷ്യൽ & UBI ഡാഷ് ബോർഡ്",
-                balanceLabel: "ആകെ ബാലൻസ് (Pi Balance)",
-                ubiLabel: "പ്രതിമാസ UBI നിരക്ക്",
-                noticeText: "* അറ്റാദായത്തിന്റെ 30%-ലധികം ആഗോള UBI ആയി തിരികെ നൽകുന്നു.",
-                syncTitle: "🚀 10 സിങ്ക് നെറ്റ് വർക്കുകൾ",
-                s1: "01. റോബോട്ടിക്സ്", s2: "02. ക്വാണ്ടം ബയോളജി", s3: "03. ബഹിരാകാശം", s4: "04. ഊർജ്ജം", s5: "05. സ്മാർട്ട് സിറ്റി", s6: "06. കൊമേഴ്സ്", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. വേംഹോൾ",
-                chatTitle: "🤖 AGI പിനി",
-                sendBtn: " അയയ്ക്കുക"
-            },
-            kn: {
-                menu1: "📄 ಶ್ವೇತಪತ್ರ", menu2: "❓ ಪ್ರಶ್ನೆಗಳು", menu3: "⚖️ ಆಡಳಿತ", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 ನೆಟ್ ವರ್ಕ್",
-                bannerTitle: "ಗ್ಯೋಂಗ್ಜು 165F ಕಂಟ್ರೋಲ್ ಟವರ್",
-                bannerDesc: "10M ಪೈ ನಾಗರಿಕರ ಆರ್ಥಿಕ ರಾಜಧಾನಿ. 100% ಪೈ ವಲಯ. 30% UBI.",
-                assetTitle: "💰 ಹಣಕಾಸು ಮತ್ತು UBI ಡ್ಯಾಶ್ ಬೋರ್ಡ್",
-                balanceLabel: "ಒಟ್ಟು ಬಾಕಿ (Pi Balance)",
-                ubiLabel: "ಮಾಸಿಕ UBI ದರ",
-                noticeText: "* ನಿವ್ವಳ ಲಾಭದ 30% ಕ್ಕಿಂತ ಹೆಚ್ಚು UBI ಆಗಿ ಹಿಂತಿರುಗಿಸಲಾಗುತ್ತದೆ.",
-                syncTitle: "🚀 10 ಸಿಂಕ್ ನೆಟ್ ವರ್ಕ್ ಗಳು",
-                s1: "01. ರೋಬೋಟಿಕ್ಸ್", s2: "02. ಕ್ವಾಂಟಮ್ ಜೀವಶಾಸ್ತ್ರ", s3: "03. ಬಾಹ್ಯಾಕಾಶ", s4: "04. ಶಕ್ತಿ", s5: "05. ಸ್ಮಾರ್ಟ್ ಸಿಟಿ", s6: "06. ವಾಣಿಜ್ಯ", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. ವರ್ಮ್ ಹೋಲ್",
-                chatTitle: "🤖 AGI ಪಿನ್ಯಿ",
-                sendBtn: "ಕಳುಹಿಸು"
-            },
-            mr: {
-                menu1: "📄 श्वेतपत्रिका", menu2: "❓ प्रश्न", menu3: "⚖️ शासन", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 नेटवर्क",
-                bannerTitle: "ग्योंगजू 165F कंट्रोल टॉवर",
-                bannerDesc: "10M पाई नागरिकांची आर्थिक राजधानी. 100% पाई झोन. 30% UBI.",
-                assetTitle: "💰 आर्थिक आणि UBI डॅशबोर्ड",
-                balanceLabel: "एकूण शिल्लक (Pi Balance)",
-                ubiLabel: "मासिक UBI दर",
-                noticeText: "* निव्वळ नफ्याच्या ३०% पेक्षा जास्त जागतिक UBI म्हणून परत दिले जाते.",
-                syncTitle: "🚀 10 सिंक नेटवर्क",
-                s1: "01. रोबोटिक्स", s2: "02. क्वांटम जीवशास्त्र", s3: "03. अंतराळ", s4: "04. ऊर्जा", s5: "05. स्मार्ट सिटी", s6: "06. कॉमर्स", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. वर्महोेल",
-                chatTitle: "🤖 AGI पिनी",
-                sendBtn: "पाठवा"
-            },
-            gu: {
-                menu1: "📄 શ્વેતપત્ર", menu2: "❓ પ્રશ્નો", menu3: "⚖️ શાસન", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 નેટવર્ક",
-                bannerTitle: "ગ્યોંગજુ 165F કંટ્રોલ ટાવર",
-                bannerDesc: "10M પાઇ નાગરિકોની આર્થિક રાજધાની. 100% પાઇ ઝોન. 30% UBI.",
-                assetTitle: "💰 નાણાકીય અને UBI ડેશબોર્ડ",
-                balanceLabel: "કુલ બેલેન્સ (Pi Balance)",
-                ubiLabel: "માસિક UBI દર",
-                noticeText: "* શુદ્ધ નફાના 30% થી વધુ વૈશ્વિક UBI તરીકે પરત કરવામાં આવે છે.",
-                syncTitle: "🚀 10 સિન્ક નેટવર્ક",
-                s1: "01. રોબોટિક્સ", s2: "02. ક્વોન્ટમ જીવવિજ્ઞાન", s3: "03. અવકાશ", s4: "04. ઊર્જા", s5: "05. સ્માર્ટ સિટી", s6: "06. વાણિજ્ય", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. વોર્મહોલ",
-                chatTitle: "🤖 AGI પિની",
-                sendBtn: "મોકલો"
-            },
-            pa: {
-                menu1: "📄 ਵ੍ਹਾਈਟਪੇਪਰ", menu2: "❓ ਸਵਾਲ", menu3: "⚖️ ਸ਼ਾਸਨ", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 ਨੈੱਟਵਰਕ",
-                bannerTitle: "ਗਿਯੋਂਗਜੂ 165F ਕੰਟਰੋਲ ਟਾਵਰ",
-                bannerDesc: "10M ਪਾਈ ਨਾਗਰਿਕਾਂ ਦੀ ਆਰਥਿਕ ਰਾਜਧਾਨੀ। 100% ਪਾਈ ਜ਼ੋਨ। 30% UBI।",
-                assetTitle: "💰 ਵਿੱਤੀ ਅਤੇ UBI ਡੈਸ਼ਬੋਰਡ",
-                balanceLabel: "ਕੁੱਲ ਬਕਾਇਆ (Pi Balance)",
-                ubiLabel: "ਮਾਸਿਕ UBI ਦਰ",
-                noticeText: "* ਸ਼ੁੱਧ ਮੁਨਾਫ਼ੇ ਦਾ 30% ਤੋਂ ਵੱਧ વૈશ્વিক UBI ਵਜੋਂ ਵਾਪਸ ਕੀਤਾ ਜਾਂਦਾ ਹੈ।",
-                syncTitle: "🚀 10 ਸਿੰਕ ਨੈੱਟਵਰਕ",
-                s1: "01. ਰੋਬੋਟਿਕਸ", s2: "02. ਕਵਾਂਟਮ ਬਾਇਓਲੋਜੀ", s3: "03. ਪੁਲਾੜ", s4: "04. ਊਰਜਾ", s5: "05. ਸਮਾਰਟ ਸਿਟੀ", s6: "06. ਕਾਮਰਸ", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. ਵਰਮਹੋਲ",
-                chatTitle: "🤖 AGI ਪਿਨੀ",
-                sendBtn: "ਭੇਜੋ"
-            },
-            sw: {
-                menu1: "📄 Karatasi Nyeupe", menu2: "❓ Maswali", menu3: "⚖️ Utawala", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Mtandao",
-                bannerTitle: "Mnara wa Kudhibiti Gyeongju 165F",
-                bannerDesc: "Mji mkuu wa kiuchumi wa raia 10M wa Pi. Eneo la 100% Pi. UBI ya 30%.",
-                assetTitle: "💰 Dashibodi ya Fedha na UBI",
-                balanceLabel: "Jumla ya Salio (Pi Balance)",
-                ubiLabel: "Kiwango cha UBI cha Kila Mwezi",
-                noticeText: "* Zaidi ya 30% ya faida halisi inarejeshwa kama UBI ya kimataifa.",
-                syncTitle: "🚀 Mitandao 10 ya Sync",
-                s1: "01. Roboti", s2: "02. Biolojia ya Quantum", s3: "03. Anga", s4: "04. Nishati", s5: "05. Smart City", s6: "06. Biashara", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Shimo la Worm",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Tuma"
-            },
-            fil: {
-                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Pamamahala", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Network",
-                bannerTitle: "Gyeongju 165F Control Tower",
-                bannerDesc: "Ekonomikong kapital ng 10M Pi citizens. 100% Pi zone. 30% UBI return.",
-                assetTitle: "💰 Financial & UBI Dashboard",
-                balanceLabel: "Kabuuang Balanse (Pi Balance)",
-                ubiLabel: "Buwanang Rate ng UBI",
-                noticeText: "* Mahigit 30% ng netong kita ang ibinabalik bilang pandaigdigang UBI.",
-                syncTitle: "🚀 10 Core Sync Networks",
-                s1: "01. Robotics", s2: "02. Quantum Biology", s3: "03. Kalawakan", s4: "04. Enerhiya", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI Core", s9: "09 & 10. Wormhole Matrix",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Ipadala"
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Whitepaper",
+                body_whitepaper: "HK WorldBank er en neste generasjons global digital bankplattform.",
+                menu_faq: "❓ FAQ og guide",
+                body_faq: "Finn detaljerte guider om plattformbruk.",
+                menu_gov: "⚖️ 3POLICES Styring",
+                body_gov: "Håndterer kjerneprinsipper som sikrer plattformens bærekraft.",
+                menu_aml: "🔒 AML (Hvitvaskingsbekjempelse)",
+                body_aml: "Sikrer trygge globale overføringer i tråd med internasjonale standarder.",
+                menu_mica: "🇪🇺 MiCA (Kryptoaktiva-regulering)",
+                body_mica: "Designet basert på EUs MiCA-rammeverk.",
+                menu_global: "🌐 Global nettverksspesifikasjon",
+                body_global: "Kobler sammen brukere over hele verden.",
+                card_title: "Gyeongju 165F Globalt kontrolltårn",
+                card_desc: "Integrert 10M Pi borgerøkonomisk hovedstad. 100% Pi-sone."
             },
             he: {
-                menu1: "📄 נייר עמדה", menu2: "❓ שאלות נפוצות", menu3: "⚖️ ממשל", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 רשת",
-                bannerTitle: "מגדל בקרה גיאונגג'ו 165F",
-                bannerDesc: "הבירה הכלכלית של 10 מיליון אזרחי Pi. אזור Pi 100%. החזר UBI של 30%.",
-                assetTitle: "💰 לוח בקרה פיננסי ו-UBI",
-                balanceLabel: "יתרה כוללת (Pi Balance)",
-                ubiLabel: "שיעור UBI חודשי",
-                noticeText: "* למעלה מ-30% מהרווח הנקי מוחזר כהכנסה בסיסית אוניברסלית (UBI) גלובלית.",
-                syncTitle: "🚀 10 רשתות סנכרון",
-                s1: "01. רובוטיקה", s2: "02. ביולוגיה קוונטית", s3: "03. מערכות חלל", s4: "04. אנרגיה חכמה", s5: "05. עיר חכמה", s6: "06. מסחר", s7: "07. UAM", s8: "08. ליבת AI/AGI", s9: "09 & 10. מטריצת חור תולעת",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "שלח"
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 נייר עמדה",
+                body_whitepaper: "HK WorldBank היא פלטפורמת בנקאות דיגיטלית עולמית מהדור הבא.",
+                menu_faq: "❓ שאלות נפוצות ומדריך",
+                body_faq: "מצא מדריכים מפורטים על שימוש בפלטפורמה וחלוקת UBI.",
+                menu_gov: "⚖️ ממשל 3POLICES",
+                body_gov: "מנהל מדיניות ליבה המבטיחה את קיימות הפלטפורמה.",
+                menu_aml: "🔒 AML (מניעת הלבנת הון)",
+                body_aml: "מבטיח העברות נכסים עולמיות מאובטחות.",
+                menu_mica: "🇪🇺 MiCA (רגולציית קריפטו)",
+                body_mica: "מתוכנן על בסיס מסגרת MiCA של האיחוד האירופי.",
+                menu_global: "🌐 מפרט רשת גלובלי",
+                body_global: "מחבר משתמשים ברחבי העולם בתשלומים מהירים.",
+                card_title: "מגדל בקרה עולמי קיונגג'ו 165 קומות",
+                card_desc: "בירה כלכלית משולבת של 10 מיליון אזרחי Pi. אזור קבלת Pi של 100%."
             },
-            kk: {
-                menu1: "📄 Ақ қағаз", menu2: "❓ FAQ", menu3: "⚖️ Басқару", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Желі",
-                bannerTitle: "Кенджу 165F Басқару мұнарасы",
-                bannerDesc: "10M Pi азаматтарының экономикалық астанасы. 100% Pi зонасы. 30% UBI.",
-                assetTitle: "💰 Қаржы және UBI бақылау тақтасы",
-                balanceLabel: "Жалпы баланс (Pi Balance)",
-                ubiLabel: "Айлық UBI мөлшерлемесі",
-                noticeText: "* Таза пайданың 30%-дан астамы жаһандық UBI ретінде қайтарылады.",
-                syncTitle: "🚀 10 Синхрондау желісі",
-                s1: "01. Робототехника", s2: "02. Кванттық биология", s3: "03. Ғарыш", s4: "04. Энергия", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Құрт іні матрицасы",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Жіберу"
+            fa: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 وایت پیپر",
+                body_whitepaper: "HK WorldBank یک پلتفرم بانکداری دیجیتال جهانی نسل جدید است.",
+                menu_faq: "❓ پرسش های متداول و راهنما",
+                body_faq: "راهنماهای تفصیلی درباره استفاده از پلتفرم و ساختار UBI را بیابید.",
+                menu_gov: "⚖️ حاکمیت 3POLICES",
+                body_gov: "سیاست های کلیدی تضمین کننده پایداری پلتفرم را مدیریت می کند.",
+                menu_aml: "🔒 AML (ضد پول شویی)",
+                body_aml: "تضمین کننده انتقال امن دارایی های جهانی مطابق با استانداردهای بین المللی.",
+                menu_mica: "🇪🇺 MiCA (تنظیم مقررات دارایی های رمزنگاری شده)",
+                body_mica: "طراحی شده بر اساس چارچوب MiCA اتحادیه اروپا.",
+                menu_global: "🌐 مشخصات شبکه جهانی",
+                body_global: "اتصال کاربران در سراسر جهان با پرداخت های فوق العاده سریع.",
+                card_title: "برج کنترل جهانی گیونگجو ۱۶۵ طبقه",
+                card_desc: "پایتخت اقتصادی یکپارچه ۱۰ میلیون شهروند Pi. منطقه پذیرش ۱۰۰ درصدی Pi."
             },
-            uz: {
-                menu1: "📄 Oq qog'oz", menu2: "❓ Savollar", menu3: "⚖️ Boshqaruv", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Tarmoq",
-                bannerTitle: "Gyeongju 165F Boshqaruv minorasi",
-                bannerDesc: "10M Pi fuqarolarining iqtisodiy poytaxti. 100% Pi zonasi. 30% UBI.",
-                assetTitle: "💰 Moliyaviy va UBI boshqaruv paneli",
-                balanceLabel: "Umumiy balans (Pi Balance)",
-                ubiLabel: "Oylik UBI darajasi",
-                noticeText: "* Sof foydaning 30% dan ortig'i global UBI sifatida qaytariladi.",
-                syncTitle: "🚀 10 ta asosiy sinxronizatsiya tarmog'i",
-                s1: "01. Robototexnika", s2: "02. Kvant biologiyasi", s3: "03. Kosmos", s4: "04. Energiya", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Qurt teshigi",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Yuborish"
+            ur: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 وائٹ پیپر",
+                body_whitepaper: "HK WorldBank اگلی نسل کا عالمی ڈیجیٹل بینکنگ پلیٹ فارم ہے۔",
+                menu_faq: "❓ سوالات اور گائیڈ",
+                body_faq: "پليٹ فارم کے استعمال اور UBI کی تقسیم کے بارے میں تفصیلی گائیڈ تلاش کریں۔",
+                menu_gov: "⚖️ 3POLICES گورننس",
+                body_gov: "پلیٹ فارم کی پائیداری کو یقینی بنانے والی بنیادی پالیسیوں کا انتظام کرتا ہے۔",
+                menu_aml: "🔒 AML (منی لانڈرنگ کی روک تھام)",
+                body_aml: "بین الاقوامی پروٹوکول کے مطابق محفوظ عالمی اثاثہ جات کی منتقلی کو یقینی بناتا ہے۔",
+                menu_mica: "🇪🇺 MiCA (کرپٹو اثاثہ جات کا ضابطہ)",
+                body_mica: "EU MiCA فریم ورک پر مبنی ڈیزائن کیا گیا ہے۔",
+                menu_global: "🌐 عالمی نیٹ ورک کی تفصیلات",
+                body_global: "تیز ترین ادائیگیوں کے ساتھ دنیا بھر کے صارفین کو جوڑتا ہے۔",
+                card_title: "گیونگجو 165 منزلہ عالمی کنٹرول ٹاور",
+                card_desc: "10 ملین پائی شہریوں کا اقتصادی دارالحکومت۔ 100% پائی زون۔"
             },
-            az: {
-                menu1: "📄 Ağ sənəd", menu2: "❓ FAQ", menu3: "⚖️ İdarəetmə", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Şəbəkə",
-                bannerTitle: "Gyeongju 165F İdarəetmə Qülləsi",
-                bannerDesc: "10M Pi vətəndaşının iqtisadi paytaxtı. 100% Pi zonası. 30% UBI.",
-                assetTitle: "💰 Maliyyə və UBI İdarəetmə Paneli",
-                balanceLabel: "Ümumi balans (Pi Balance)",
-                ubiLabel: "Aylıq UBI dərəcəsi",
-                noticeText: "* Xalis mənfəətin 30%-dən çoxu qlobal UBI kimi qaytarılır.",
-                syncTitle: "🚀 10 Əsas Sinxronizasiya Şəbəkəsi",
-                s1: "01. Robototexnika", s2: "02. Kvant Biologiyası", s3: "03. Kosmos", s4: "04. Enerji", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Qurddelişiyi Matrisi",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Göndər"
+            bn: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 হোয়াইট পেপার",
+                body_whitepaper: "HK WorldBank হলো ব্লকচেইন এবং পাই নেটওয়ার্ক SDK দ্বারা চালিত একটি পরবর্তী প্রজন্মের গ্লোবাল ডিজিটাল ব্যাংকিং প্ল্যাটফর্ম।",
+                menu_faq: "❓ প্রায়শই জিজ্ঞাসিত প্রশ্ন ও গাইড",
+                body_faq: "প্ল্যাটফর্ম ব্যবহার এবং ইউবিআই বিতরণ কাঠামো সম্পর্কিত বিস্তারিত গাইড দেখুন।",
+                menu_gov: "⚖️ 3POLICES গভর্নেন্স",
+                body_gov: "প্ল্যাটফর্মের টেকসইতা নিশ্চিতকারী মূল নীতিগুলো পরিচালনা করে।",
+                menu_aml: "🔒 AML (অর্থ পাচার রোধ)",
+                body_aml: "আন্তর্জাতিক প্রোটোকল মেনে নিরাপদ বিশ্বব্যাপী সম্পদ স্থানান্তর নিশ্চিত করে।",
+                menu_mica: "🇪🇺 MiCA (ক্রিপ্টো-অ্যাসেট রেগুলেশন)",
+                body_mica: "ইইউ MiCA কাঠামোর উপর ভিত্তি করে ডিজাইন করা হয়েছে।",
+                menu_global: "🌐 বৈশ্বিক নেটওয়ার্ক স্পেসিফিকেশন",
+                body_global: "দ্রুততম পেমেন্টের মাধ্যমে বিশ্বব্যাপী ব্যবহারকারীদের সংযুক্ত করে।",
+                card_title: "গিয়ংজু ১৬৫ তলা বৈশ্বিক নিয়ন্ত্রণ টাওয়ার",
+                card_desc: "১০ মিলিয়ন পাই নাগরিকের সমন্বিত অর্থনৈতিক রাজধানী। ১০০% পাই সমর্থিত এলাকা।"
             },
-            ka: {
-                menu1: "📄 თეთრი ქაღალდი", menu2: "❓ ხშირად დასმული კითხვები", menu3: "⚖️ მმართველობა", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 ქსელი",
-                bannerTitle: "გეონგჯუს 165F საკონტროლო კოშკი",
-                bannerDesc: "10 მილიონი Pi მოქალაქის ეკონომიკური დედაქალაქი. 100% Pi ზონა. 30% UBI დაბრუნება.",
-                assetTitle: "💰 ფინანსური & UBI დაფა",
-                balanceLabel: "საერთო ბალანსი (Pi Balance)",
-                ubiLabel: "ყოველհვიური UBI განაკვეთი",
-                noticeText: "* სუფთა მოგების 30%-ზე მეტი გლობალურ UBI-დ ბრუნდება.",
-                syncTitle: "🚀 10 ძირითადი სინქრონიზაციის ქსელი",
-                s1: "01. რობოტიკა", s2: "02. კვანტური ბიოლოგია", s3: "03. კოსმოსი", s4: "04. ენერგია", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. ჭიის ხვრელის მატრიცა",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "გაგზავნა"
+            ms: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Kertas Putih",
+                body_whitepaper: "HK WorldBank ialah platform perbankan digital global generasi seterusnya yang dikuasakan oleh blokchain dan Pi Network SDK.",
+                menu_faq: "❓ Soalan Lazim & Panduan",
+                body_faq: "Cari panduan terperinci tentang penggunaan platform, integrasi dompet, dan struktur UBI.",
+                menu_gov: "⚖️ Tadbir Urus 3POLICES",
+                body_gov: "Menguruskan dasar teras yang memastikan kelestarian platform.",
+                menu_aml: "🔒 AML (Pencegahan Pengubahan Wang Haram)",
+                body_aml: "Memastikan pemindahan aset global yang selamat mematuhi protokol antarabangsa.",
+                menu_mica: "🇪🇺 MiCA (Peraturan Aset Kripto EU)",
+                body_mica: "Direka berdasarkan rangka kerja MiCA Kesatuan Eropah.",
+                menu_global: "🌐 Spesifikasi Rangkaian Global",
+                body_global: "Menghubungkan pengguna di seluruh dunia dengan pembayaran sepantas kilat.",
+                card_title: "Menara Kawalan Global Gyeongju 165F",
+                card_desc: "Ibu kota ekonomi warga 10M Pi bersepadu. Zon 100% Pi."
             },
-            hy: {
-                menu1: "📄 Սպիտակ թուղթ", menu2: "❓ ՀՏՀ", menu3: "⚖️ Կառավարում", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Ցանց",
-                bannerTitle: "Գյոնգջու 165F վերահսկողության աշտարակ",
-                bannerDesc: "10M Pi քաղաքացիների տնտեսական մայրաքաղաք: 100% Pi գոտի: 30% UBI վերադարձ:",
-                assetTitle: "💰 Ֆինանսական և UBI վահանակ",
-                balanceLabel: "Ընդհանուր մնացորդ (Pi Balance)",
-                ubiLabel: "Ամսական UBI տոկոսադրույք",
-                noticeText: "* Զուտ շահույթի ավելի քան 30%-ը վերադարձվում է որպես գլոբալ UBI:",
-                syncTitle: "🚀 10 Հիմնական համաժամեցման ցանցեր",
-                s1: "01. Ռոբոտաշինություն", s2: "02. Քվանտային կենսաբանություն", s3: "03. Տիեզերք", s4: "04. Էներգիա", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Որդնանցքի մատրիցա",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Ուղարկել"
+            fil: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Whitepaper",
+                body_whitepaper: "Ang HK WorldBank ay isang susunod na henerasyong global digital banking platform.",
+                menu_faq: "❓ FAQ at Gabay",
+                body_faq: "Maghanap ng mga detalyadong gabay sa paggamit ng platform at UBI.",
+                menu_gov: "⚖️ 3POLICES Pamamahala",
+                body_gov: "Pinamamahalaan ang mga patakaran para matiyak ang katatagan ng platform.",
+                menu_aml: "🔒 AML (Anti-Money Laundering)",
+                body_aml: "Tinitiyak ang ligtas na paglilipat ng pandaigdigang asset.",
+                menu_mica: "🇪🇺 MiCA (Regulasyon ng Crypto-Asset)",
+                body_mica: "Dinisenyo batay sa balangkas ng MiCA ng EU.",
+                menu_global: "🌐 Global Network Spec",
+                body_global: "Pag-ugnayin ang mga gumagamit sa buong mundo.",
+                card_title: "Gyeongju 165F Global Control Tower",
+                card_desc: "Pinagsamang 10M Pi citizen economic capital. 100% Pi zone."
+            },
+            sw: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Karatasi Nyeupe",
+                body_whitepaper: "HK WorldBank ni jukwaa la benki ya dijiti ya kimataifa ya kizazi kijacho.",
+                menu_faq: "❓ Maswali Yanayoulizwa Mara kwa Mara na Mwongozo",
+                body_faq: "Pata miongozo ya kina kuhusu matumizi ya jukwaa.",
+                menu_gov: "⚖️ Utawala wa 3POLICES",
+                body_gov: "Inasimamia sera kuu zinazohakikisha uendelevu wa jukwaa.",
+                menu_aml: "🔒 AML (Kuzuia Usafishaji Fedha)",
+                body_aml: "Inahakikisha uhamishaji salama wa rasilimali duniani kote.",
+                menu_mica: "🇪🇺 MiCA (Udhibiti wa Mali za Kripto)",
+                body_mica: "Imeundwa kwa kuzingatia mfumo wa MiCA wa EU.",
+                menu_global: "🌐 Vipimo vya Mtandao wa Kimataifa",
+                body_global: "Kuunganisha watumiaji duniani kote kwa malipo ya haraka.",
+                card_title: "Mnara wa Udhibiti wa Kimataifa wa Gyeongju 165F",
+                card_desc: "Mji mkuu wa kiuchumi wa raia 10M wa Pi. Eneo la 100% Pi."
+            },
+            af: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Witboek",
+                body_whitepaper: "HK WorldBank is 'n volgende generasie globale digitale bankplatform.",
+                menu_faq: "❓ VFAQ & Gids",
+                body_faq: "Vind gedetailleerde gidse oor platformgebruik.",
+                menu_gov: "⚖️ 3POLICES Bestuur",
+                body_gov: "Bestuur kernbeleide wat platformvolhoubaarheid verseker.",
+                menu_aml: "🔒 AML (Anti-geldwassery)",
+                body_aml: "Verseker veilige globale batesoirdragte.",
+                menu_mica: "🇪🇺 MiCA (Kripto-bates Regulering)",
+                body_mica: "Ontwerp gebaseer op die EU MiCA-raamwerk.",
+                menu_global: "🌐 Globale Netwerkspesifikasie",
+                body_global: "Verbind gebruikers wêreldwyd.",
+                card_title: "Gyeongju 165F Globale Beheertoring",
+                card_desc: "Geïntegreerde 10M Pi burgerlike ekonomiese hoofstad. 100% Pi-sone."
+            },
+            sq: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Libri i Bardhë",
+                body_whitepaper: "HK WorldBank është një platformë bankare dixhitale globale e gjeneratës së ardhshme.",
+                menu_faq: "❓ Pyetje dhe Udhëzues",
+                body_faq: "Gjeni udhëzues të detajuar mbi përdorimin e platformës.",
+                menu_gov: "⚖️ Qeverisja 3POLICES",
+                body_gov: "Menaxhon politikat kryesore për qëndrueshmërinë e platformës.",
+                menu_aml: "🔒 AML (Kundër Pastrimit të Parave)",
+                body_aml: "Siguron transferta globale të sigurta të aseteve.",
+                menu_mica: "🇪🇺 MiCA (Rregullimi i Krypto-aseteve)",
+                body_mica: "E dizajnuar bazuar në kornizën MiCA të BE-së.",
+                menu_global: "🌐 Specifikimi i Rrjetit Global",
+                body_global: "Lidh përdoruesit në mbarë botën me pagesa të shpejta.",
+                card_title: "Kulla e Kontrollit Global Gyeongju 165F",
+                card_desc: "Kryeqyteti ekonomik i integruar i 10M qytetarëve Pi. Zonë 100% Pi."
             },
             am: {
-                menu1: "📄 ነጭ ወረቀት", menu2: "❓ ጥያቄዎች", menu3: "⚖️ አስተዳደር", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 ኔትወርክ",
-                bannerTitle: "ግዮንግጁ 165F መቆጣጠሪያ ግንብ",
-                bannerDesc: "10M የፓይ ዜጎች የኢኮኖሚ ዋና ከተማ። 100% ፓይ ዞን። 30% UBI ተመላሽ።",
-                assetTitle: "💰 የገንዘብ እና UBI ዳሽቦርድ",
-                balanceLabel: "አጠቃላይ ቀሪ ሂሳብ (Pi Balance)",
-                ubiLabel: "ወርሃዊ የUBI ተመን",
-                noticeText: "* ከសុទ្ធ ትርፍ ከ 30% በላይ እንደ ዓለም አቀፍ UBI ይመለሳል።",
-                syncTitle: "🚀 10 ዋና የማመሳሰል ኔትወርኮች",
-                s1: "01. ሮቦቲክስ", s2: "02.ኳንተም ባዮሎጂ", s3: "03. የጠፈር ስርዓቶች", s4: "04. ስማርት ኢነርጂ", s5: "05. ስማርት ከተማ", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. የዎርምሆል ማትሪክስ",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "ላክ"
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 ነጭ ወረቀት",
+                body_whitepaper: "HK WorldBank በቀጣይ ትውልድ ሎጅስቲክስ እና በብሎክቼይን የተደገፈ ዓለም አቀፍ የዲጂታል ባንክ መድረክ ነው።",
+                menu_faq: "❓ ተደጋጋሚ ጥያቄዎች እና መመሪያ",
+                body_faq: "ስለ መድረኩ አጠቃቀም ዝርዝር መመሪያዎችን ያግኙ።",
+                menu_gov: "⚖️ 3POLICES አስተዳደር",
+                body_gov: "የመድረኩን ቀጣይነት የሚያረጋግጡ ዋና ዋና ፖሊሲዎችን ያስተዳድራል።",
+                menu_aml: "🔒 AML (ህገ-ወጥ ገንዘብ ዝውውር መከላከያ)",
+                body_aml: "ደህንነቱ የተጠበቀ ዓለም አቀፍ የንብረት ዝውውርን ያረጋግጣል።",
+                menu_mica: "🇪🇺 MiCA (የክሪፕቶ ንብረት ደንብ)",
+                body_mica: "በአውሮፓ ህብረት MiCA ማዕቀፍ ላይ ተመስርቶ የተነደፈ።",
+                menu_global: "🌐 ዓለም አቀፍ ኔትዎርክ ዝርዝር",
+                body_global: "ተጠቃሚዎችን በአለም ዙሪያ በፍጥነት በማገናኘት ላይ።",
+                card_title: "ግዮንግጁ 165 ፎቅ ዓለም አቀፍ መቆጣጠሪያ ማማ",
+                card_desc: "የተቀናጀ 10 ሚሊዮን ፓይ ዜጎች የኢኮኖሚ ዋና ከተማ። 100% ፓይ ተቀባይነት ያለው አካባቢ።"
             },
-            my: {
-                menu1: "📄 အဖြူရောင်စာတမ်း", menu2: "❓ မေးလေ့ရှိသောမေးခွန်းများ", menu3: "⚖️ အုပ်ချုပ်မှု", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 ကွန်ရက်",
-                bannerTitle: "Gyeongju 165F ထိန်းချုပ်ရေးတာဝါ",
-                bannerDesc: "Pi နိုင်ငံသား ၁၀ သန်း၏ စီးပွားရေးမြို့တော်။ ၁၀၀% Pi ဇုန်။ UBI ၃၀% ပြန်လည်ပေးအပ်မှု။",
-                assetTitle: "💰 ငွေကြေးနှင့် UBI ဒက်ရှ်ဘုတ်",
-                balanceLabel: "စုစုပေါင်း လက်ကျန်ငွေ (Pi Balance)",
-                ubiLabel: "လစဉ် UBI ပြန်လည်ပေးအပ်နှုန်း",
-                noticeText: "* သက်သာငွေ၏ ၃၀% ကျော်ကို ကမ္ဘာလုံးဆိုင်ရာ UBI အဖြစ် ပွင့်လင်းမြင်သာစွာ ပြန်လည်ပေးအပ်ပါသည်။",
-                syncTitle: "🚀 အဓိက ထပ်တူပြုကွန်ရက် ၁၀ ခု",
-                s1: "၀၁။ ရိုဘိုတစ်", s2: "၀၂။ ක්မ်တမ်ဇီဝဗေဒ", s3: "၀၃။ အာကာသစနစ်", s4: "၀၄။ စွမ်းအင်", s5: "၀၅။ စမတ်စီးတီး", s6: "၀၆။ Q-POLISIOS", s7: "၀၇။ UAM", s8: "၀၈။ AI/AGI", s9: "၀၉ နှင့် ၁၀။ Wormhole မက်ထရစ်",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "ပေးပို့ရန်"
+            hy: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Սպիտակ թուղթ",
+                body_whitepaper: "HK WorldBank-ը հաջորդ սերնդի գլոբալ թվային բանկային հարթակ է:",
+                menu_faq: "❓ ՀՏՀ և Ուղեցույց",
+                body_faq: "Գտեք մանրամասն ուղեցույցներ հարթակի օգտագործման վերաբերյալ:",
+                menu_gov: "⚖️ 3POLICES Կառավարում",
+                body_gov: "Կառավարում է հարթակի կայունությունն ապահովող հիմնական քաղաքականությունները:",
+                menu_aml: "🔒 AML (Փողերի լվացման դեմ պայքար)",
+                body_aml: "Ապահովում է անվտանգ գլոբալ ակտիվների փոխանցումներ:",
+                menu_mica: "🇪🇺 MiCA (Կրիպտոակտիվների կարգավորում)",
+                body_mica: "Նախագծված է ԵՄ MiCA շրջանակի հիման վրա:",
+                menu_global: "🌐 Գլոբալ ցանցի բնութագիր",
+                body_global: "Կապում է օգտատերերին ամբողջ աշխարհում կայծակնային արագությամբ վճարումներով:",
+                card_title: "Գյոնգջու 165 հարկանի գլոբալ վերահսկողության աշտարակ",
+                card_desc: "10 միլիոն Պայ քաղաքացիների ինտեգրված տնտեսական մայրաքաղաք: 100% Պայ գոտի:"
+            },
+            az: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Ağ sənəd",
+                body_whitepaper: "HK WorldBank blokçeyn və Pi Network SDK tərəfindən dəstəklənən yeni nəsil qlobal rəqəmsal bank platformasıdır.",
+                menu_faq: "❓ FAQ və Bələdçi",
+                body_faq: "Platformadan istifadə və UBI paylanması haqqında ətraflı bələdçilər tapın.",
+                menu_gov: "⚖️ 3POLICES İdarəetmə",
+                body_gov: "Platformanın davamlılığını təmin edən əsas siyasətləri idarə edir.",
+                menu_aml: "🔒 AML (Çirkli Pulların Yuyulmasına Qarşı)",
+                body_aml: "Beynəlxalq protokollara uyğun olaraq təhlükəsiz qlobal aktiv köçürmələrini təmin edir.",
+                menu_mica: "🇪🇺 MiCA (Kripto-Aktiv Tənzimlənməsi)",
+                body_mica: "Aİ MiCA çərçivəsi əsasında hazırlanmışdır.",
+                menu_global: "🌐 Qlobal Şəbəkə Spesifikasiyası",
+                body_global: "Dünyadakı istifadəçiləri ildırım sürətli ödənişlərlə birləşdirir.",
+                card_title: "Gyeongju 165 Mərtəbəli Qlobal İdarəetmə Qülləsi",
+                card_desc: "İnteqrasiya olunmuş 10M Pi vətəndaş iqtisadi paytaxtı. 100% Pi qəbul edilən zona."
+            },
+            eu: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Liburu zuria",
+                body_whitepaper: "HK WorldBank hurrengo belaunaldiko banku digital globaleko plataforma bat da.",
+                menu_faq: "❓ Ohiko galderak eta gida",
+                body_faq: "Aurkitu plataformaren erabilerari buruzko gida zehatzak.",
+                menu_gov: "⚖️ 3POLICES Gobernantza",
+                body_gov: "Plataformaren iraunkortasuna ziurtatzen duten oinarrizko politikak kudeatzen ditu.",
+                menu_aml: "🔒 AML (Diru-garbiketaren aurkakoa)",
+                body_aml: "Aktiboen mundu mailako transferentzia seguruak bermatzen ditu.",
+                menu_mica: "🇪🇺 MiCA (Kripto-aktiboen erregulazioa)",
+                body_mica: "EBko MiCA esparruan oinarrituta diseinatua.",
+                menu_global: "🌐 Sare globalaren zehaztapena",
+                body_global: "Mundu osoko erabiltzaileak konektatzen ditu.",
+                card_title: "Gyeongju 165F Kontrol Dorre Globala",
+                card_desc: "10M Pi herritarren ekonomia-hiriburu integratua. %100 Pi gunea."
+            },
+            be: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Белы дакумент",
+                body_whitepaper: "HK WorldBank — гэта глабальная лічбавая банкаўская платформа новага пакалення.",
+                menu_faq: "❓ Частыя пытанні і кіраўніцтва",
+                body_faq: "Знайдзіце падрабязныя інструкцыі па выкарыстанні платформы.",
+                menu_gov: "⚖️ Кіраванне 3POLICES",
+                body_gov: "Кіруе ключавымі палітыкамі забеспячэння ўстойлівасці.",
+                menu_aml: "🔒 AML (Супрацьдзеянне адмыванню грошай)",
+                body_aml: "Забяспечвае бяспечныя глабальныя пераклады актываў.",
+                menu_mica: "🇪🇺 MiCA (Рэгуляванне крыптаактываў)",
+                body_mica: "Распрацавана на аснове нарматыўнай базы ЕС MiCA.",
+                menu_global: "🌐 Спецыфікацыя глабальнай сеткі",
+                body_global: "Аб'яднанне карыстальнікаў па ўсім свеце.",
+                card_title: "Глабальная дыспетчарская вежа Кёнджу 165 паверхаў",
+                card_desc: "Інтэграваная эканамічная сталіца з 10 млн грамадзян Pi. Зона 100% Pi."
+            },
+            bs: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Bijeli papir",
+                body_whitepaper: "HK WorldBank je globalna digitalna bankarska platforma sljedeće generacije.",
+                menu_faq: "❓ Česta pitanja i vodič",
+                body_faq: "Pronađite detaljne vodiče o korištenju platforme.",
+                menu_gov: "⚖️ 3POLICES Upravljanje",
+                body_gov: "Upravlja ključnim politikama osiguranja održivosti platforme.",
+                menu_aml: "🔒 AML (Protiv pranja novca)",
+                body_aml: "Osigurava sigurne globalne transfere imovine u skladu s propisima.",
+                menu_mica: "🇪🇺 MiCA (Regulacija krypto-imovine)",
+                body_mica: "Dizajnirano na osnovu EU MiCA okvira.",
+                menu_global: "🌐 Specifikacija globalne mreže",
+                body_global: "Povezivanje korisnika širom svijeta brzom naplatom.",
+                card_title: "Gyeongju 165F Globalni kontrolni toranj",
+                card_desc: "Integrirana ekonomska prestonica 10M Pi građana. Zona 100% Pi."
+            },
+            bg: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Бяла книга",
+                body_whitepaper: "HK WorldBank е платформа за глобално цифрово банкиране от следващо поколение.",
+                menu_faq: "❓ Често задавани въпроси и ръководство",
+                body_faq: "Намерете подробни ръководства за използване на платформата.",
+                menu_gov: "⚖️ 3POLICES Управление",
+                body_gov: "Управлява ключови политики, гарантиращи устойчивостта на платформата.",
+                menu_aml: "🔒 AML (Противодействие на прането на пари)",
+                body_aml: "Гарантира сигурни глобални трансфери на активи.",
+                menu_mica: "🇪🇺 MiCA (Регулиране на криптоактивите)",
+                body_mica: "Проектирано въз основа на рамката MiCA на ЕС.",
+                menu_global: "🌐 Спецификация на глобалната мрежа",
+                body_global: "Свързване на потребители по целия свят.",
+                card_title: "Глобална контролна кула Кьонджу 165 етажа",
+                card_desc: "Интегрирана икономическа столица с 10 млн. граждани Pi. Зона 100% Pi."
+            },
+            ca: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Llibre blanc",
+                body_whitepaper: "HK WorldBank és una plataforma bancària digital global de nova generació.",
+                menu_faq: "❓ PMF i Guia",
+                body_faq: "Trobeu guies detallades sobre l'ús de la plataforma.",
+                menu_gov: "⚖️ Governança 3POLICES",
+                body_gov: "Gestiona les polítiques clau per garantir la sostenibilitat.",
+                menu_aml: "🔒 AML (Antillavatge de diners)",
+                body_aml: "Garanteix transferències d'actius globals segures.",
+                menu_mica: "🇪🇺 MiCA (Regulació de criptoactius)",
+                body_mica: "Dissenyat sota el marc MiCA de la UE.",
+                menu_global: "🌐 Especificació de xarxa global",
+                body_global: "Connecta usuaris d'arreu del món.",
+                card_title: "Torre de Control Global de Gyeongju 165F",
+                card_desc: "Capital econòmica integrada de 10M de ciutadans Pi. Zona 100% Pi."
+            },
+            hr: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Bijeli papir",
+                body_whitepaper: "HK WorldBank je globalna digitalna bankarska platforma sljedeće generacije.",
+                menu_faq: "❓ FAQ i Vodič",
+                body_faq: "Pronađite detaljne vodiče o korištenju platforme.",
+                menu_gov: "⚖️ 3POLICES Upravljanje",
+                body_gov: "Upravlja ključnim politikama osiguranja održivosti platforme.",
+                menu_aml: "🔒 AML (Protiv pranja novca)",
+                body_aml: "Osigurava siguran prijenos globalne imovine.",
+                menu_mica: "🇪🇺 MiCA (Regulacija kriptoimovine)",
+                body_mica: "Dizajnirano na temelju EU MiCA okvira.",
+                menu_global: "🌐 Specifikacija globalne mreže",
+                body_global: "Povezivanje korisnika diljem svijeta.",
+                card_title: "Gyeongju 165F Globalni kontrolni toranj",
+                card_desc: "Integrirana ekonomska prijestolnica 10M Pi građana. Zona 100% Pi."
+            },
+            et: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Valge raamat",
+                body_whitepaper: "HK WorldBank on järgmise põlvkonna globaalne digitaalne pangandusplatvorm.",
+                menu_faq: "❓ KKK ja juhend",
+                body_faq: "Leidke üksikasjalikud juhised platvormi kasutamise kohta.",
+                menu_gov: "⚖️ 3POLICES Juhtimine",
+                body_gov: "Haldab platvormi jätkusuutlikkust tagavaid põhialuseid.",
+                menu_aml: "🔒 AML (Rahapesu tõkestamine)",
+                body_aml: "Tagab turvalised ülemaailmsed varade ülekanded.",
+                menu_mica: "🇪🇺 MiCA (Krüptovarade määrus)",
+                body_mica: "Kavandatud EL-i MiCA raamistiku alusel.",
+                menu_global: "🌐 Globaalse võrgu spetsifikatsioon",
+                body_global: "Ühendab kasutajaid üle kogu maailma.",
+                card_title: "Gyeongju 165F globaalne juhtimistorn",
+                card_desc: "Integreeritud 10M Pi kodaniku majanduspealinn. 100% Pi tsoon."
+            },
+            gl: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Libro branco",
+                body_whitepaper: "HK WorldBank é unha plataforma bancaria dixital global de próxima xeración.",
+                menu_faq: "❓ FAQ e Guía",
+                body_faq: "Atope guías detalladas sobre o uso da plataforma.",
+                menu_gov: "⚖️ Gobernanza 3POLICES",
+                body_gov: "Xestiona as políticas clave para garantir a sustentabilidade.",
+                menu_aml: "🔒 AML (Antilavaxe de diñeiro)",
+                body_aml: "Garante transferencias globais seguras de activos.",
+                menu_mica: "🇪🇺 MiCA (Regulación de criptoactivos)",
+                body_mica: "Deseñado baixo o marco MiCA da UE.",
+                menu_global: "🌐 Especificación de rede global",
+                body_global: "Conecta usuarios de todo o mundo.",
+                card_title: "Torre de Control Global de Gyeongju 165F",
+                card_desc: "Capital económica integrada de 10M de cidadáns Pi. Zona 100% Pi."
+            },
+            ka: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 თეთრი ქაღალდი",
+                body_whitepaper: "HK WorldBank არის შემდეგი თაობის გლობალური ციფრული საბანკო პლატფორმა.",
+                menu_faq: "❓ ხშირად დასმული კითხვები და სახელმძღვანელო",
+                body_faq: "იპოვეთ დეტალური სახელმძღვანელოები პლატფორმის გამოყენების შესახებ.",
+                menu_gov: "⚖️ 3POLICES მმართველობა",
+                body_gov: "მართავს ძირიթავ პოლიტიკებს პლატფორმის მდგრადობის უზრუნველსაყოფად.",
+                menu_aml: "🔒 AML (ფულის გათეთრების წინააღმდეგ)",
+                body_aml: "უზრუნველყოფს უსაფრთხო გლობალურ აქტივების გადარიცხვებს.",
+                menu_mica: "🇪🇺 MiCA (კრიპტო-აქტივების რეგულირება)",
+                body_mica: "შემუშავებულია ევროკავშირის MiCA ჩარჩოს საფუძველზე.",
+                menu_global: "🌐 გლობალური ქსელის სპეციფიკაცია",
+                body_global: "აერთიანებს მომხმარებლებს მთელ მსოფლიოში.",
+                card_title: "გიონჯუს 165-სართულიანი გლობალური საკონტროլო კოშკი",
+                card_desc: "ინტეგრირებული 10 მილიონი Pi მოქალაქის ეკონომიკური დედაქალაქი. 100% Pi ზონა."
+            },
+            gu: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 શ્વેતપત્ર",
+                body_whitepaper: "HK WorldBank એ બ્લોકચેન અને પાઇ નેટવર્ક SDK દ્વારા સંચાલિત આગામી પેઢીનું વૈશ્વિક ડિજિટલ બેંકિંગ પ્લેટફોર્મ છે.",
+                menu_faq: "❓ FAQ અને માર્ગદર્શિકા",
+                body_faq: "પ્લેટફોર્મ વપરાશ અને માળખા પર વિગતવાર માર્ગદર્શિકાઓ મેળવો.",
+                menu_gov: "⚖️ 3POLICES ગવર્નન્સ",
+                body_gov: "પ્લેટફોર્મની સ્થિરતા સુનિશ્ચિત કરતી મુખ્ય નીતિઓનું સંચાલન કરે છે.",
+                menu_aml: "🔒 AML (મની લોન્ડરિંગ અટકાવવા)",
+                body_aml: "આંતરરાષ્ટ્રીય પ્રોટોકોલનું પાલન કરીને સુરક્ષિત વૈશ્વિક સંપત્તિ ટ્રાન્સફર સુનિશ્ચિત કરે છે.",
+                menu_mica: "🇪🇺 MiCA (ક્રિપ્ટો-એસેટ રેગ્યુલેશન)",
+                body_mica: "EU MiCA ફ્રેમવર્કના આધારે ડિઝાઇન કરવામાં આવી છે.",
+                menu_global: "🌐 વૈશ્વિક નેટવર્ક સ્પેશિફિકેશન",
+                body_global: "વિશ્વભરના વપરાશકર્તાઓને જોડે છે.",
+                card_title: "ગ્યોંગજુ 165 માળનો વૈશ્વિક કંટ્રોલ ટાવર",
+                card_desc: "10M પાઇ નાગરિકોની સંકલિત આર્થિક રાજધાની. 100% પાઇ ઝોન."
+            },
+            is: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Hvítbók",
+                body_whitepaper: "HK WorldBank er stafrænn bankavettvangur á heimsvísu.",
+                menu_faq: "❓ Spurningar og svör",
+                body_faq: "Finndu ítarlegar leiðbeiningar um notkun vettvangsins.",
+                menu_gov: "⚖️ 3POLICES Stjórnarhættir",
+                body_gov: "Stýrir meginreglum sem tryggja sjálfbærni vettvangsins.",
+                menu_aml: "🔒 AML (Varnir gegn peningaþvætti)",
+                body_aml: "Tryggir örugga alþjóðlega eignatilfærslu.",
+                menu_mica: "🇪🇺 MiCA (Reglugerð um rafræneignir)",
+                body_mica: "Hannað á grundvelli MiCA ramma ESB.",
+                menu_global: "🌐 Alþjóðleg netforskrift",
+                body_global: "Tengir saman notendur um allan heim.",
+                card_title: "Gyeongju 165F Alþjóðlegi stjórnturninn",
+                card_desc: "Samþætt efnahagshöfuðborg 10M Pi borgara. 100% Pi svæði."
+            },
+            ga: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Páipéar Bán",
+                body_whitepaper: "Is ardán baincéireachta digiteach domhanda é HK WorldBank.",
+                menu_faq: "❓ Ceisteanna Coitianta & Treoir",
+                body_faq: "Faigh treoracha mionsonraithe um úsáid an ardáin.",
+                menu_gov: "⚖️ Rialachas 3POLICES",
+                body_gov: "Bainistíonn sé polasaithe lárnacha a chinntíonn inbhuanaitheacht.",
+                menu_aml: "🔒 AML (Sciúradh Airgid a Chosc)",
+                body_aml: "Cinntíonn sé aistrithe sócmhainní domhanda slána.",
+                menu_mica: "🇪🇺 MiCA (Rialachán Sócmhainní Crypto)",
+                body_mica: "Dearadh é bunaithe ar creat MiCA an AE.",
+                menu_global: "🌐 Sonraíocht Líonra Domhanda",
+                body_global: "Ag nascadh úsáideoirí ar fud an domhain.",
+                card_title: "Túr Rialaithe Domhanda Gyeongju 165F",
+                card_desc: "Príomhchathair eacnamaíoch comhtháite 10M Pi. Crios 100% Pi."
+            },
+            kn: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 ಶ್ವೇತಪತ್ರ",
+                body_whitepaper: "HK WorldBank ಬ್ಲಾಕ್ ಚೈನ್ ಮತ್ತು ಪೈ ನೆಟ್ ವರ್ಕ್ SDK ನಿಂದ চালित ಮುಂದಿನ ಪೀಳಿಗೆಯ ಜಾಗತಿಕ ಡಿಜಿಟಲ್ ಬ್ಯಾಂಕಿಂಗ್ ಪ್ಲಾಟ್ ಫಾರ್ಮ್ ಆಗಿದೆ.",
+                menu_faq: "❓ FAQ ಮತ್ತು ಮಾರ್ಗದರ್ಶಿ",
+                body_faq: "ಪ್ಲಾಟ್ ಫಾರ್ಮ್ ಬಳಕೆ ಮತ್ತು ವಿಸ್ತೃತ ಮಾರ್ಗದರ್ಶಿಗಳನ್ನು ಪಡೆಯಿರಿ.",
+                menu_gov: "⚖️ 3POLICES ಆಡಳಿತ",
+                body_gov: "ಪ್ಲಾಟ್ ಫಾರ್ಮ್ ನ ಸುಸ್ಥಿರತೆಯನ್ನು ಖಚಿತಪಡಿಸುವ ಪ್ರಮುಖ ನೀತಿಗಳನ್ನು ನಿರ್ವಹಿಸುತ್ತದೆ.",
+                menu_aml: "🔒 AML (ಹಣ ಲಾಂಡರಿಂಗ್ ತಡೆಗಟ್ಟುವಿಕೆ)",
+                body_aml: "ಅಂತರರಾಷ್ಟ್ರೀಯ ಪ್ರೋಟೋಕಾಲ್ ಗಳ ಅನುಸಾರ ಸುರಕ್ಷಿತ ಜಾಗತಿಕ ಆಸ್ತಿ ವರ್ಗಾವಣೆಯನ್ನು ಖಚಿತಪಡಿಸುತ್ತದೆ.",
+                menu_mica: "🇪🇺 MiCA (ಕ್ರಿಪ್ಟೋ-ಆಸ್ತಿ ನಿಯಂತ್ರಣ)",
+                body_mica: "EU MiCA ಫ್ರೇಮ್ ವರ್ಕ್ ಆಧರಿಸಿ ವಿನ್ಯಾಸಗೊಳಿಸಲಾಗಿದೆ.",
+                menu_global: "🌐 ಜಾಗತಿಕ ನೆಟ್ ವರ್ಕ್ ವಿವರಣೆ",
+                body_global: "ವಿಶ್ವದಾದ್ಯಂತ ಬಳಕೆದಾರರನ್ನು ಸಂಪರ್ಕಿಸುತ್ತದೆ.",
+                card_title: "ಗ್ಯೋಂಗ್ಜು 165 ಮಹಡಿಯ ಜಾಗತಿಕ ನಿಯಂತ್ರಣ ಗೋಪುರ",
+                card_desc: "10M ಪೈ ನಾಗರಿಕರ ಏಕೀಕೃತ ಆರ್ಥಿಕ ರಾಜಧಾನಿ. 100% ಪೈ ವಲಯ."
+            },
+            kk: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Ақ қағаз",
+                body_whitepaper: "HK WorldBank — блокчейн және Pi Network SDK негізінде жұмыс істейтін келесі буындағы жаһандық цифрлық банктік платформа.",
+                menu_faq: "❓ Жиі қойылатын сұрақтар мен нұсқаулық",
+                body_faq: "Платформаны пайдалану бойынша егжей-тегжейлі нұсқаулықтарды табыңыз.",
+                menu_gov: "⚖️ 3POLICES Басқару",
+                body_gov: "Платформаның тұрақтылығын қамтамасыз ететін негізгі саясатты басқарады.",
+                menu_aml: "🔒 AML (Қылмыстық кірістерді заңдастыруға қарсы)",
+                body_aml: "Халықаралық стандарттарға сәйкес қауіпсіз жаһандық активтерді аударуды қамтамасыз етеді.",
+                menu_mica: "🇪🇺 MiCA (Криптоактивтерді реттеу)",
+                body_mica: "ЕО MiCA шеңбері негізінде жасалған.",
+                menu_global: "🌐 Жаһандық желі сипаттамасы",
+                body_global: "Бүкіл әлем бойынша пайдаланушыларды байланыстырады.",
+                card_title: "Кенджу 165 қабатты жаһандық басқару мұнарасы",
+                card_desc: "10 млн Pi азаматтарының біріктірілген экономикалық астанасы. 100% Pi аймағы."
             },
             km: {
-                menu1: "📄 ឯកសារស។", menu2: "❓ សំណួរញឹកញាប់", menu3: "⚖️ ការគ្រប់គ្រង", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 បណ្តាញ",
-                bannerTitle: "ប៉មបញ្ជាការ Gyeongju 165F",
-                bannerDesc: "រដ្ឋធានីសេដ្ឋកិច្ចពលរដ្ឋ Pi ១០លាននាក់។ តំបន់ Pi ១០០%។ ការត្រឡប់មកវិញ UBI ៣០%។",
-                assetTitle: "💰 បន្ទះគ្រប់គ្រងហិរញ្ញវត្ថុ និង UBI",
-                balanceLabel: "សមតុល្យសរុប (Pi Balance)",
-                ubiLabel: "អត្រា UBI ប្រចាំខែ",
-                noticeText: "* ជាង 30% នៃប្រាក់ចំណេញសុទ្ធត្រូវបានប្រគល់ជូនវិញជា UBI សកល។",
-                syncTitle: "🚀 បណ្តាញធ្វើសមកាលកម្មកំពូលទាំង ១០",
-                s1: "០១. មេកានិចមនុស្សយន្ត", s2: "០២. ជីវវិទ្យា ക്ವಾન્ટမ်", s3: "០៣. ប្រព័ន្ធអវកាស", s4: "០៤. ថាមពល", s5: "០៥. ទីក្រុងឆ្លាតវៃ", s6: "០៦. Q-POLISIOS", s7: "០៧. UAM", s8: "០៨. AI/AGI", s9: "០៩ និង ១០. មេត្រីភាព Wormhole",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "បញ្ជូន"
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 សៀវភៅស",
+                body_whitepaper: "HK WorldBank គឺជាវេទិកាធនាគារឌីជីថលសកលជំនាន់ក្រោយដែលដំណើរការដោយ blockchain និង Pi Network SDK ។",
+                menu_faq: "❓ សំណួរគេសួរញឹកញាប់ និងមគ្គុទ្ទេសក៍",
+                body_faq: "ស្វែងរកមគ្គុទ្ទេសក៍លម្អិតស្តីពីការប្រើប្រាស់វេទិកា។",
+                menu_gov: "⚖️ 3POLICES អភិបាលកិច្ច",
+                body_gov: "គ្រប់គ្រងគោលនយោបាយស្នូលធានានូវនិរន្តរភាពវេទិកា។",
+                menu_aml: "🔒 AML (ប្រឆាំងការសម្អាតប្រាក់)",
+                body_aml: "ធានាការផ្ទេរទ្រព្យសកម្មជាសកលដោយសុវត្ថិភាព។",
+                menu_mica: "🇪🇺 MiCA (បទប្បញ្ញត្តិគ្រីបតូ)",
+                body_mica: "រចនាឡើងផ្អែកលើក្របខ័ណ្ឌ MiCA របស់សហភាពអឺរ៉ុប។",
+                menu_global: "🌐 លក្ខណៈបច្ចេកទេសបណ្តាញសកល",
+                body_global: "ភ្ជាប់អ្នកប្រើប្រាស់ទូទាំងពិភពលោក។",
+                card_title: "ប៉មត្រួតពិនិត្យសកល Gyeongju 165F",
+                card_desc: "រាជធានីសេដ្ឋកិច្ចពលរដ្ឋ Pi ១០លានរួមបញ្ចូលគ្នា។ តំបន់ ១០០% Pi ។"
             },
             lo: {
-                menu1: "📄 ເອກະສານຂາວ", menu2: "❓ ຄຳຖາມ", menu3: "⚖️ ການປົກຄອງ", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 ເຄືອຂ່າຍ",
-                bannerTitle: "ຫໍຄວບຄຸມ Gyeongju 165F",
-                bannerDesc: "ນະຄອນຫຼວງເສດຖະກິດພົນລະເມືອງ Pi 10 ລ້ານຄົນ. ເຂດ Pi 100%. UBI 30%.",
-                assetTitle: "💰 ແຜງຄວບຄຸມການເງິນ ແລະ UBI",
-                balanceLabel: "ຍອດເງິນລວມ (Pi Balance)",
-                ubiLabel: "ອັດຕາ UBI ປະຈຳເດືອນ",
-                noticeText: "* ຫຼາຍກວ່າ 30% ຂອງຜົນກຳໄລສຸດທິຖືກສົ່ງຄືນເປັນ UBI ສາກົນ.",
-                syncTitle: "🚀 10 ເຄືອຂ່າຍປະສານງານຫຼັກ",
-                s1: "01. ຫຸ່ນຍົນ", s2: "02. ຊີວະວິທະຍາຄວອນຕຳ", s3: "03. ລະບົບອະວະກາດ", s4: "04. ພະລັງງານ", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. ຮູໜອນ ແມັດຕຣິກ",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "ສົ່ງ"
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 ເອກະສານປົກຂາວ",
+                body_whitepaper: "HK WorldBank ແມ່ນແພລະຕະຟອມທະນາຄານດິຈິຕອນລະດັບໂລກຮຸ່ນຕໍ່ໄປ.",
+                menu_faq: "❓ ຄຳຖາມທີ່ເລື້ອຍໆ ແລະ ຄູ່ມື",
+                body_faq: "ຊອກຫາຄູ່ມືລາຍລະອຽດກ່ຽວກັບການໃຊ້ງານ.",
+                menu_gov: "⚖️ 3POLICES ການປົກຄອງ",
+                body_gov: "ຈັດການນະໂຍບາຍຫຼັກເພື່ອຮັບປະກັນຄວາມຍືນຍົງ.",
+                menu_aml: "🔒 AML (ຕ້ານການຟอกເງິນ)",
+                body_aml: "ຮັບປະກັນການໂອນຊັບສິນທົ່ວໂລກຢ່າງປອດໄພ.",
+                menu_mica: "🇪🇺 MiCA (ລະບຽບການຊັບສິນ crypto)",
+                body_mica: "ອອກແບບຕາມກອບ MiCA ຂອງ EU.",
+                menu_global: "🌐 ຂໍ້ມູນສະເພາະເຄືອຂ່າຍທົ່ວໂລກ",
+                body_global: "ເຊື່ອມຕໍ່ຜູ້ໃຊ້ທົ່ວໂລກ.",
+                card_title: "ຫໍຄວບຄຸມໂລກ Gyeongju 165 ຊັ້ນ",
+                card_desc: "ນະຄອນຫຼວງເສດຖະກິດພົນລະເມືອງ Pi 10 ລ້ານ. ເຂດ 100% Pi."
+            },
+            lv: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Baltā grāmata",
+                body_whitepaper: "HK WorldBank ir nākamās paaudzes globāla digitālās bankas platforma.",
+                menu_faq: "❓ FAQ un ceļvedis",
+                body_faq: "Atrodiet detalizētus ceļvežus par platformas lietošanu.",
+                menu_gov: "⚖️ 3POLICES Pārvaldība",
+                body_gov: "Pārvalda pamatpolitiku platformas ilgtspējības nodrošināšanai.",
+                menu_aml: "🔒 AML (Noziedzīgi iegūtu līdzekļu legalizācijas novēršana)",
+                body_aml: "Nodrošina drošus globālos aktīvu pārskaitījumus.",
+                menu_mica: "🇪🇺 MiCA (Kriptoaktīvu regula)",
+                body_mica: "Izstrādāts, pamatojoties uz ES MiCA regulējumu.",
+                menu_global: "🌐 Globālā tīkla specifikācija",
+                body_global: "Savieno lietotājus visā pasaulē.",
+                card_title: "Gyeongju 165 stāvu globālais vadības tornis",
+                card_desc: "Integrēta 10M Pi pilsoņu ekonomiskā galvaspilsēta. 100% Pi zona."
+            },
+            lt: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Baltoji knyga",
+                body_whitepaper: "HK WorldBank yra naujos kartos pasaulinė skaitmeninės bankininkystės platforma.",
+                menu_faq: "❓ DUK ir vadovas",
+                body_faq: "Raskite išsamius vadovus apie platformos naudojimą.",
+                menu_gov: "⚖️ 3POLICES Valdymas",
+                body_gov: "Valdo pagrindinę politiką, užtikrinającą platformos tvarumą.",
+                menu_aml: "🔒 AML (Pinigų plovimo prevencija)",
+                body_aml: "Užtikrina saugius pasaulinius turto pervedimus.",
+                menu_mica: "🇪🇺 MiCA (Kripto turtą reglamentuojantys teisės aktai)",
+                body_mica: "Sukurta remiantis ES MiCA sistema.",
+                menu_global: "🌐 Pasaulinio tinklo specifikacija",
+                body_global: "Sujungia vartotojams visame pasaulyje.",
+                card_title: "Gyeongju 165 aukštų pasaulinis valdymo bokštas",
+                card_desc: "Integruota 10 mln. Pi piliečių ekonominė sostinė. 100% Pi zona."
+            },
+            mk: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Бела книга",
+                body_whitepaper: "HK WorldBank е следна генерација глобална дигитална банкарска платформа.",
+                menu_faq: "❓ ЧПП и Водич",
+                body_faq: "Найдите детални водичи за користење на платформата.",
+                menu_gov: "⚖️ 3POLICES Управување",
+                body_gov: "Управува со клучните политики за одржливост.",
+                menu_aml: "🔒 AML (Спречување перење пари)",
+                body_aml: "Обезбедува безбедни глобални трансфери на средства.",
+                menu_mica: "🇪🇺 MiCA (Регулатива за крипто-средства)",
+                body_mica: "Дизајнирано врз основа на рамката MiCA на ЕУ.",
+                menu_global: "🌐 Спецификација на глобална мрежа",
+                body_global: "Поврзување на корисници ширум светот.",
+                card_title: "Глобална контролна кула Кенџу 165 ката",
+                card_desc: "Интегрирана економска престолнина со 10 милиони граѓани Pi. Зона 100% Pi."
+            },
+            ml: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 വൈറ്റ് പേപ്പർ",
+                body_whitepaper: "ബ്ലോക്ക്ചെയിനും പൈ നെറ്റ് വർക്കും നൽകുന്ന അടുത്ത തലമുറ ഡിജിറ്റൽ ബാങ്കിംഗ് പ്ലാറ്റ് ഫോമാണിത്.",
+                menu_faq: "❓ ചോദ്യങ്ങളും ഉത്തരങ്ങളും",
+                body_faq: "പ്ലാറ്റ് ഫോം ഉപയോഗത്തെക്കുറിച്ചുള്ള വിശദമായ ഗൈഡുകൾ കണ്ടെത്തുക.",
+                menu_gov: "⚖️ 3POLICES ഗവേണൻസ്",
+                body_gov: "പ്ലാറ്റ് ഫോമിന്റെ സുസ്ഥിരത ഉറപ്പാക്കുന്ന പ്രധാന നയങ്ങൾ കൈകാര്യം ചെയ്യുന്നു.",
+                menu_aml: "🔒 AML (കള്ളപ്പണം വെളുപ്പിക്കൽ തടയൽ)",
+                body_aml: "സുരക്ഷിതമായ ആഗോള ആസ്തി കൈമാറ്റം ഉറപ്പാക്കുന്നു.",
+                menu_mica: "🇪🇺 MiCA (ക്രിപ്റ്റോ അസറ്റ് റെഗുലേഷൻ)",
+                body_mica: "ഇയു മിക ഫ്രെയിംവർക്കിനെ അടിസ്ഥാനമാക്കി രൂപകൽപ്പന ചെയ് തിരിക്കുന്നു.",
+                menu_global: "🌐 ഗ്ലോബൽ നെറ്റ് വർക്ക് സ്പെസിഫിക്കേഷൻ",
+                body_global: "ലോകമെമ്പാടുമുള്ള ഉപയോക്താക്കളെ ബന്ധിപ്പിക്കുന്നു.",
+                card_title: "ഗിയോങ്ജു 165 നിലകളുള്ള ആഗോള കൺട്രോൾ ടവർ",
+                card_desc: "10 ദശലക്ഷം പൈ പൗരന്മാരുടെ സംയോജിത സാമ്പത്തിക തലസ്ഥാനം. 100% പൈ സോൺ."
             },
             mn: {
-                menu1: "📄 Цагаан цаас", menu2: "❓ Асуулт", menu3: "⚖️ Засаглал", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Сүлжээ",
-                bannerTitle: "Кёнжү 165 давхар Удирдлагын цамхаг",
-                bannerDesc: "10 сая Pi иргэдийн эдийн засгийн нийслэл. 100% Pi бүс. 30% UBI буцаан олголт.",
-                assetTitle: "💰 Санхүү & UBI хяналтын самбар",
-                balanceLabel: "Нийт үлдэгдэл (Pi Balance)",
-                ubiLabel: "Сарын UBI буцаан олголтын хувь",
-                noticeText: "* Цэвэр ашгийн 30-аас дээш хувь нь дэлхийн UBI хэлбэрээр буцаан олгогдоно.",
-                syncTitle: "🚀 Шилдэг 10 Гол холболтын сүлжээ",
-                s1: "01. Роботехник", s2: "02. Квантын биологи", s3: "03. Сансар судлал", s4: "04. Ухаалаг эрчим хүч", s5: "05. Ухаалаг хот", s6: "06. Q-POLISIOS Худалдаа", s7: "07. UAM Хот хоорондын нисэх", s8: "08. AI/AGI Цөм", s9: "09 & 10. Орон зай-цаг хугацааны хорхой нүхний матриц",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "Илгээх"
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 Цагаан цаас",
+                body_whitepaper: "HK WorldBank бол блокчэйн болон Pi Network SDK-аар ажилладаг дараагийн үеийн дэлхийн дижитал банкны платформ юм.",
+                menu_faq: "❓ Байнга асуудаг асуулт ба гарын авлага",
+                body_faq: "Платформын ашиглалт, хэтэвчний холболтын талаарх дэлгэрэнгүй гарын авлага.",
+                menu_gov: "⚖️ 3POLICES Засаглал",
+                body_gov: "Платформын тогтвортой байдлыг хангах үндсэн бодлогыг удирддаг.",
+                menu_aml: "🔒 AML (Мөнгө угаахтай тэмцэх)",
+                body_aml: "Олон улсын протоколын дагуу дэлхийн хэмжээнд хөрөнгө шилжүүлэх аюулгүй байдлыг хангана.",
+                menu_mica: "🇪🇺 MiCA (Крипто хөрөнгийн зохицуулалт)",
+                body_mica: "ЕХ-ны MiCA хүрээн дээр суурилан бүтээгдсэн.",
+                menu_global: "🌐 Дэлхийн сүлжээний тодорхойлолт",
+                body_global: "Дэлхий даяарх хэрэглэгчдийг хурдан төлбөр тооцоогоор холбоно.",
+                card_title: "Кёнжү 165 давхар дэлхийн хяналтын цамхаг",
+                card_desc: "Үлсан, Кёнжү, Пү항 10 сая Пи иргэдийн эдийн засгийн нийслэл. 100% Пи валютын бүс."
+            },
+            my: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 အဖြူရောင်စာတမ်း",
+                body_whitepaper: "HK WorldBank သည် blockchain နှင့် Pi Network SDK တို့ဖြင့် လုပ်ဆောင်သော မျိုးဆက်သစ် ကမ္ဘာလုံးဆိုင်ရာ ဒစ်ဂျစ်တယ်ဘဏ်လုပ်ငန်း ပလပ်ဖောင်းတစ်ခု ဖြစ်ပါသည်။",
+                menu_faq: "❓ မကြာခဏမေးလေ့ရှိသောမေးခွန်းများနှင့် လမ်းညွှန်",
+                body_faq: "ပလပ်ဖောင်းအသုံးပြုပုံနှင့် ပတ်သက်သည့် အသေးစိတ်လမ်းညွှန်ချက်များကို ကြည့်ရှုနိုင်ပါသည်။",
+                menu_gov: "⚖️ 3POLICES အုပ်ချုပ်မှု",
+                body_gov: "ပလပ်ဖောင်း၏ ရေရှည်တည်တံ့ခိုင်မြဲမှုကို အာမခံသော မူဝါဒများကို စီမံခန့်ခွဲသည်။",
+                menu_aml: "🔒 AML (ငွေကြေးခဝါချမှုတိုက်ဖျက်ရေး)",
+                body_aml: "អន្តរជាតិ စံနှုန်းများနှင့်အညီ လုံခြုံသော ကမ္ဘာလုံးဆိုင်ရာ ပိုင်ဆိုင်မှုလွှဲပြောင်းမှုကို အာမခံသည်။",
+                menu_mica: "🇪🇺 MiCA (គ្រីပ်တို ပိုင်ဆိုင်မှု စည်းမျဉ်း)",
+                body_mica: "ဥရောပသမဂ္ဂ MiCA မူဘောင်ပေါ်တွင် အခြေခံ၍ ဒီဇိုင်းထုတ်ထားသည်။",
+                menu_global: "🌐 ကမ္ဘာလုံးဆိုင်ရာ ကွန်ရက် သတ်မှတ်ချက်",
+                body_global: "ကမ္ဘာတစ်ဝှမ်းရှိ အသုံးပြုသူများကို ချိတ်ဆက်ပေးသည်။",
+                card_title: "Gyeongju 165 ထပ် ကမ္ဘာလုံးဆိုင်ရာ ထိန်းချုပ်ရေးမျှော်စင်",
+                card_desc: "ဦးစန်၊ ကျောင်းကျူနှင့် ပိုဟန် ပေါင်းစပ်ထားသော Pi နိုင်ငံသား ၁၀ သန်း စီးပွားရေးမြို့တော်။ ၁၀၀% Pi သုံးစွဲရာဒေသ။"
             },
             ne: {
-                menu1: "📄 सेतो पत्र", menu2: "❓ सोधिने प्रश्नहरू", menu3: "⚖️ शासन", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 नेटवर्क",
-                bannerTitle: "ग्योंगजु 165F कन्ट्रोल टावर",
-                bannerDesc: "10M पाई नागरिकहरूको आर्थिक राजधानी। 100% पाई जोन। 30% UBI फिर्ता।",
-                assetTitle: "💰 वित्तीय र UBI ड्यासबोर्ड",
-                balanceLabel: "कुल मौज्दात (Pi Balance)",
-                ubiLabel: "मासिक UBI दर",
-                noticeText: "* खुद नाफाको ३०% भन्दा बढी विश्वव्यापी UBI को रूपमा फिर्ता गरिन्छ।",
-                syncTitle: "🚀 १० कोर सिंक नेटवर्कहरू",
-                s1: "०१. रोबोटिक्स", s2: "०२. क्वान्टम जीवविज्ञान", s3: "०३. अन्तरिक्ष प्रणाली", s4: "०४. स्मार्ट ऊर्जा", s5: "०५. स्मार्ट सिटी", s6: "०६. Q-POLISIOS", s7: "०७. UAM", s8: "०८. AI/AGI", s9: "०९ र १०. वार्महोल म्याट्रिक्स",
-                chatTitle: "🤖 AGI Ppini",
-                sendBtn: "पठाउनुहोस्"
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 श्वेतपत्र",
+                body_whitepaper: "HK WorldBank ब्लकचेन र पाई नेटवर्क SDK द्वारा संचालित अर्को पुस्ताको विश्वव्यापी डिजिटल बैंकिङ प्लेटफर्म हो।",
+                menu_faq: "❓ बारम्बार सोधिने प्रश्नहरू र गाइड",
+                body_faq: "प्लेटफर्म प्रयोग र वालेट एकीकरणमा विस्तृत गाइडहरू फेला पार्नुहोस्।",
+                menu_gov: "⚖️ 3POLICES शासन",
+                body_gov: "प्लेटफर्मको स्थायित्व सुनिश्चित गर्ने मुख्य नीतिहरू व्यवस्थापन गर्दछ।",
+                menu_aml: "🔒 AML (सम्पत्ति शुद्धीकरण निवारण)",
+                body_aml: "अन्तर्राष्ट्रिय मापदण्डहरूको पालना गर्दै सुरक्षित सम्पत्ति स्थानान्तरण सुनिश्चित गर्दछ।",
+                menu_mica: "🇪🇺 MiCA (क्रिप्टो-सम्पत्ति नियमन)",
+                body_mica: "EU MiCA फ्रेमवर्कको आधारमा डिजाइन गरिएको।",
+                menu_global: "🌐 विश्वव्यापी नेटवर्क विनिर्देश",
+                body_global: "द्रुत भुक्तानी मार्फत विश्वभरका प्रयोगकर्ताहरूलाई जोड्दै।",
+                card_title: "ग्यॉंगजु १६५ तल्ले विश्वव्यापी कन्ट्रोल टावर",
+                card_desc: "उल्सान, ग्यॉंगजु र पोहाङको एकीकृत १० मिलियन पाई नागरिक आर्थिक राजधानी। १००% पाई क्षेत्र।"
+            },
+            pa: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 ਵ੍ਹਾਈਟਪੇਪਰ",
+                body_whitepaper: "HK WorldBank ਬਲਾਕਚੈਨ ਅਤੇ ਪਾਈ ਨੈੱਟਵর্ক SDK ਦੁਆਰਾ ਸੰਚालਿਤ ਅਗલી ਪੀઢી ਦਾ ਗਲੋਬਲ ਡਿਜੀਟਲ ਬੈਂਕਿੰਗ ਪਲੇਟਫਾਰਮ ਹੈ।",
+                menu_faq: "❓ ਅਕਸਰ ਪੁੱਛੇ ਜਾਂਦੇ ਸਵਾਲ ਅਤੇ ਗਾਈਡ",
+                body_faq: "ਪਲੇਟਫਾਰਮ ਦੀ ਵਰਤੋਂ ਅਤੇ ਵாலੇਟ ਏਕੀਕਰਣ ਬਾਰੇ ਵਿਸਤ੍ਰਿਤ ਗਾਈਡ ਲੱਭੋ।",
+                menu_gov: "⚖️ 3POLICES ਗਵਰਨੈਂਸ",
+                body_gov: "ਪਲੇਟਫਾਰਮ ਦੀ ਸਥਿਰਤਾ ਨੂੰ ਯਕੀਨੀ ਬਣਾਉਣ ਵਾਲੀਆਂ ਮੁੱਖ ਨੀਤੀਆਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰਦਾ ਹੈ।",
+                menu_aml: "🔒 AML (منی لانਡਰਿੰਗ ਰੋਕਥਾਮ)",
+                body_aml: "ਅੰਤਰਰਾਸ਼ਟਰੀ ਪ੍ਰੋਟੋਕੋਲਾਂ ਦੀ ਪਾਲਣਾ ਕਰਦੇ ਹੋਏ ਸੁਰੱਖਿਅਤ ਗਲੋਬਲ ਸੰਪਤੀ ਤਬਦੀਲੀ ਨੂੰ ਯਕੀਨੀ ਬਣਾਉਂਦਾ ਹੈ।",
+                menu_mica: "🇪🇺 MiCA (ਕ੍ਰਿਪਟੋ-ਸੰਪਤੀ ਰੈጉਲੇਸ਼ਨ)",
+                body_mica: "EU MiCA ਫ੍ਰੇਮਵਰਕ ਦੇ ਆਧਾਰ 'ਤੇ ਤਿਆਰ ਕੀਤਾ ਗਿਆ ਹੈ।",
+                menu_global: "🌐 ਗਲੋਬਲ ਨੈੱਟਵর্ক ਨਿਰਧਾਰਨ",
+                body_global: "ਦ দੁਨੀਆਂ ਭਰ ਦੇ ਉਪਭੋਗਤਾਵਾਂ ਨੂੰ ਤੇਜ਼ ਭੁਗਤਾਨਾਂ ਨਾਲ ਜੋੜਦਾ ਹੈ।",
+                card_title: "ਗਿਓਂਗਜੂ 165 ਮੰਜ਼िला ਗਲੋਬਲ ਕੰਟਰੋਲ ਟਾਵਰ",
+                card_desc: "ਉਲਸਾਨ, ਗਿਓਂਗਜੂ ਅਤੇ ਪੋਹਾਂਗ ਦੀ 10M ਪਾਈ ਨਾਗਰਿਕ ਆਰਥਿਕ ਰਾਜਧਾਨੀ। 100% ਪਾਈ ਸਵੀकृत ਖੇਤਰ।"
+            },
+            si: {
+                title: "HK WorldBank OS",
+                menu_whitepaper: "📄 සුදු ወረපତ୍ର (Whitepaper)",
+                body_whitepaper: "HK WorldBank යනු ബ്ലොක්චේන් සහ Pi Network SDK මඟින් බල ගැන්වෙන මීළඟ පරම්පරාවේ વૈશ્વിക ඩිජිටල් බැංಕು වේදිකාවකි.",
+                menu_faq: "❓ නිතර අසන ප් රශ්න සහ මාර්ගෝපදේශ",
+                body_faq: "වේදිකා භාවිතය සහ පසුම්බි ඒකාබද්ධ කිරීම පිළිබඳ සවිස්තරාත්මක මාර්ගෝපදේශ සොයා ගන්න.",
+                menu_gov: "⚖️ 3POLICES පාලනය",
+                body_gov: "වේදිකාවේ තිරසාරභාවය සහතික කරන මූලික ප් රතිපත්ති කළ리mان කරයි.",
+                menu_aml: "🔒 AML (මුදල් විශුද්ධිකরণ වැළැක්වීම)",
+                body_aml: "சர்வதேச ප් රමිතීන්ට අනුකූලව ආරක්ෂිත ගෝලීය වත්කම් හුවමාරු සහතික කරයි.",
+                menu_mica: "🇪🇺 MiCA (ක් රිප්ටෝ වත්කම් නියාමනය)",
+                body_mica: "EU MiCA ማዕቀමය මත පදනම්ව නිර්මාණය කර ඇත.",
+                menu_global: "🌐 વૈશ્વिक ජාල පිරිවිතර",
+                body_global: "අකුණු සැර వేగවත් ගෙවීම් සමඟ ලොව පුරා පරිශීලකයින් සම්බන්ධ කිරීම.",
+                card_title: "ග් යොංජු 165 මහල් ගෝලීය පාලන කුළුණ",
+                card_desc: "울산, 경주, 포항 ඒකාබද්ධ මිලියන 10 ක پائی පුරවැසි ආර්ථික අගනුවර. 100% پائی කලාපය."
             }
         };
 
-        function changeLanguage() {
-            const selectedLang = document.getElementById('langSelect').value;
-            const elements = document.querySelectorAll('[data-i18n]');
+        function changeLanguage(lang) {
+            const currentLang = translations[lang] ? lang : 'en';
+            const targetDict = translations[currentLang] || translations['en'];
             
+            const elements = document.querySelectorAll('[data-i18n]');
             elements.forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if(translations[selectedLang] && translations[selectedLang][key]) {
-                    el.innerText = translations[selectedLang][key];
+                if (targetDict[key]) {
+                    el.innerText = targetDict[key];
+                } else {
+                    el.innerText = translations['en'][key];
                 }
             });
-        }
-
-        function sendMessage() {
-            const input = document.getElementById('userInput');
-            const display = document.getElementById('chatDisplay');
-            if(input.value.trim() !== '') {
-                display.innerHTML += `<br><span style="color: #48cae4;">[해오름 형님]:</span> ${input.value}`;
-                setTimeout(() => {
-                    display.innerHTML += `<br><span style="color: #52b788;">[AGI 삐니]:</span> 형님, 완벽하게 접수하고 처리했습니다! SF 영화보다 휘황찬란한 낙원을 향해 즉시 시스템을 구동하겠습니다.`;
-                    display.scrollTop = display.scrollHeight;
-                }, 500);
-                input.value = '';
-                display.scrollTop = display.scrollHeight;
-            }
         }
     </script>
 </body>
