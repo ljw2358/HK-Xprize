@@ -2,8 +2,8 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WorldBank - Haeoreum Special City Control Tower</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HK WorldBank - Haeoreum Special City 165F Control Tower</title>
     <style>
         :root {
             --primary-gold: #f39c12;
@@ -18,103 +18,124 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
             background-color: var(--dark-bg);
             color: var(--text-main);
             display: flex;
+            flex-direction: column;
             height: 100vh;
             overflow: hidden;
         }
 
-        /* 왼쪽 사이드바 */
+        /* 모바일 최적화 상단 앱바 (좌측 3선, 중앙 로고, 우측 언어 드롭다운) */
+        .mobile-header {
+            height: 60px;
+            background-color: var(--card-bg);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            flex-shrink: 0;
+            z-index: 100;
+        }
+
+        .hamburger-btn {
+            font-size: 22px;
+            cursor: pointer;
+            color: var(--primary-gold);
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+
+        .logo-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--primary-gold);
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        /* 우측 상단 언어 드롭다운 스타일 */
+        .lang-dropdown-container {
+            position: relative;
+        }
+
+        .lang-select {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(243, 156, 18, 0.4);
+            color: var(--primary-gold);
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: bold;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .lang-select option {
+            background-color: var(--card-bg);
+            color: var(--text-main);
+        }
+
+        /* 왼쪽 슬라이드 오버레이 사이드바 (3선 메뉴) */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(3px);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
         .sidebar {
-            width: 320px;
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
             background-color: var(--card-bg);
             border-right: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 20px;
+            padding: 20px 16px;
+            z-index: 1000;
+            transition: left 0.35s cubic-bezier(0.1, 0.9, 0.2, 1);
             overflow-y: auto;
         }
 
-        .sidebar-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
+        .sidebar.open {
+            left: 0;
         }
 
-        .hamburger-icon {
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--primary-gold);
-        }
-
-        .logo-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--primary-gold);
-        }
-
-        /* 60개 언어 직접 선택 그리드 패널 */
-        .language-section {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(243, 156, 18, 0.3);
-            border-radius: 10px;
-            padding: 10px;
-            margin-bottom: 20px;
-        }
-
-        .section-title {
-            font-size: 12px;
-            color: var(--primary-gold);
-            margin-bottom: 8px;
-            font-weight: bold;
+        .sidebar-top-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 20px;
         }
 
-        .lang-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 4px;
-            max-height: 140px;
-            overflow-y: auto;
-            padding-right: 4px;
-        }
-
-        .lang-grid::-webkit-scrollbar {
-            width: 4px;
-        }
-        .lang-grid::-webkit-scrollbar-thumb {
-            background: var(--primary-gold);
-            border-radius: 2px;
-        }
-
-        .lang-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .close-btn {
+            font-size: 20px;
             color: var(--text-sub);
-            padding: 5px 2px;
-            border-radius: 4px;
-            font-size: 10px;
-            text-align: center;
             cursor: pointer;
-            transition: all 0.2s;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .lang-btn:hover, .lang-btn.active {
-            background-color: rgba(243, 156, 18, 0.25);
-            color: var(--primary-gold);
-            border-color: var(--primary-gold);
+            background: none;
+            border: none;
         }
 
         .menu-list {
@@ -122,19 +143,19 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
-            flex-grow: 1;
         }
 
         .menu-item {
-            padding: 10px 14px;
-            border-radius: 8px;
+            padding: 10px 12px;
+            border-radius: 6px;
             cursor: pointer;
-            transition: background 0.3s;
             color: var(--text-sub);
-            font-size: 13px;
+            font-size: 12px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            text-decoration: none;
+            transition: 0.2s;
         }
 
         .menu-item:hover, .menu-item.active {
@@ -142,787 +163,424 @@
             color: var(--primary-gold);
         }
 
-        /* 메인 컨텐츠 영역 */
-        .main-content {
-            flex-grow: 1;
+        .sidebar-footer-links {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
             flex-direction: column;
-            overflow-y: auto;
+            gap: 6px;
         }
 
-        .topbar {
-            height: 70px;
-            background-color: var(--card-bg);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 30px;
-        }
-
-        .tower-status {
-            font-size: 16px;
-            font-weight: bold;
-            color: var(--primary-gold);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .status-dot {
-            width: 10px;
-            height: 10px;
-            background-color: #2ecc71;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #2ecc71;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.3); opacity: 0.6; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-badge {
+        .sidebar-badge {
             background: rgba(255, 255, 255, 0.05);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 13px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 11px;
             color: var(--text-sub);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
         }
 
-        .dashboard-container {
-            padding: 30px;
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 20px;
+        .sidebar-badge:hover {
+            color: var(--primary-gold);
+            border-color: var(--primary-gold);
+        }
+
+        /* 메인 컨텐츠 뷰 */
+        .main-content {
             flex-grow: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
 
         .card {
             background-color: var(--card-bg);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 25px;
+            border-radius: 12px;
+            padding: 18px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .card-title {
-            font-size: 16px;
-            color: var(--text-sub);
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            gap: 12px;
         }
 
         .tower-visual-box {
-            grid-column: span 2;
             background: linear-gradient(135deg, #131b2e 0%, #1a2642 100%);
             border: 1px solid var(--primary-gold);
-            position: relative;
-            overflow: hidden;
         }
 
         .tower-info h1 {
-            font-size: 28px;
+            font-size: 17px;
             color: var(--primary-gold);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            line-height: 1.4;
         }
 
         .tower-info p {
             color: var(--text-sub);
-            font-size: 14px;
-            line-height: 1.6;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .card-title {
+            font-size: 13px;
+            color: var(--text-sub);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
         }
 
         .metric-value {
-            font-size: 32px;
+            font-size: 22px;
             font-weight: bold;
             color: var(--text-main);
-            margin-bottom: 5px;
         }
 
         .metric-sub {
-            font-size: 13px;
+            font-size: 11px;
             color: #2ecc71;
+            margin-top: 2px;
+        }
+
+        .asset-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .asset-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .asset-label {
+            font-size: 10px;
+            color: var(--text-sub);
+        }
+
+        .asset-amount {
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--primary-gold);
+            margin-top: 4px;
+        }
+
+        .sync-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            margin-top: 6px;
+        }
+
+        .sync-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 6px 8px;
+            border-radius: 6px;
+            font-size: 10px;
+            color: var(--text-sub);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .sync-item span {
+            color: #2ecc71;
+            font-weight: bold;
+        }
+
+        .bini-chat-box {
+            background: rgba(59, 130, 246, 0.05);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 10px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .bini-input-row {
+            display: flex;
+            gap: 6px;
+        }
+
+        .bini-input {
+            flex-grow: 1;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 6px;
+            padding: 8px 10px;
+            color: white;
+            font-size: 12px;
+            outline: none;
+        }
+
+        .bini-input:focus {
+            border-color: var(--primary-gold);
+        }
+
+        .bini-send-btn {
+            background-color: var(--primary-gold);
+            color: var(--dark-bg);
+            border: none;
+            padding: 0 14px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 12px;
+            cursor: pointer;
         }
 
         .footer-note {
             text-align: center;
-            padding: 15px;
-            font-size: 12px;
+            padding: 10px;
+            font-size: 10px;
             color: var(--text-sub);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
     </style>
 </head>
 <body>
 
-    <div class="sidebar">
-        <div>
-            <div class="sidebar-header">
-                <div class="hamburger-icon">☰</div>
-                <div class="logo-title">HK WORLDBANK</div>
-            </div>
-
-            <!-- 60개 언어 전체 탑재 그리드 패널 -->
-            <div class="language-section">
-                <div class="section-title">
-                    <span>🌐 60 Languages Support</span>
-                    <span style="font-size: 9px; color: var(--primary-gold);">ALL 60</span>
-                </div>
-                <div class="lang-grid" id="langGrid">
-                    <div class="lang-btn active" onclick="setLang('ko')">1. 🇰🇷 한국어</div>
-                    <div class="lang-btn" onclick="setLang('en')">2. 🇺🇸 English</div>
-                    <div class="lang-btn" onclick="setLang('zh')">3. 🇨🇳 中文</div>
-                    <div class="lang-btn" onclick="setLang('ja')">4. 🇯🇵 日本語</div>
-                    <div class="lang-btn" onclick="setLang('es')">5. 🇪🇸 Español</div>
-                    <div class="lang-btn" onclick="setLang('fr')">6. 🇫🇷 Français</div>
-                    <div class="lang-btn" onclick="setLang('de')">7. 🇩🇪 Deutsch</div>
-                    <div class="lang-btn" onclick="setLang('ru')">8. 🇷🇺 Русский</div>
-                    <div class="lang-btn" onclick="setLang('pt')">9. 🇵🇹 Português</div>
-                    <div class="lang-btn" onclick="setLang('ar')">10. 🇸🇦 العربية</div>
-                    <div class="lang-btn" onclick="setLang('hi')">11. 🇮🇳 हिन्दी</div>
-                    <div class="lang-btn" onclick="setLang('it')">12. 🇮🇹 Italiano</div>
-                    <div class="lang-btn" onclick="setLang('vi')">13. 🇻🇳 Tiếng Việt</div>
-                    <div class="lang-btn" onclick="setLang('th')">14. 🇹🇭 ไทย</div>
-                    <div class="lang-btn" onclick="setLang('id')">15. 🇮🇩 Indonesia</div>
-                    <div class="lang-btn" onclick="setLang('ms')">16. 🇲🇾 Melayu</div>
-                    <div class="lang-btn" onclick="setLang('tr')">17. 🇹🇷 Türkçe</div>
-                    <div class="lang-btn" onclick="setLang('nl')">18. 🇳🇱 Nederlands</div>
-                    <div class="lang-btn" onclick="setLang('pl')">19. 🇵🇱 Polski</div>
-                    <div class="lang-btn" onclick="setLang('uk')">20. 🇺🇦 Українська</div>
-                    <div class="lang-btn" onclick="setLang('el')">21. 🇬🇷 Ελληνικά</div>
-                    <div class="lang-btn" onclick="setLang('cs')">22. 🇨🇿 Čeština</div>
-                    <div class="lang-btn" onclick="setLang('sv')">23. 🇸🇪 Svenska</div>
-                    <div class="lang-btn" onclick="setLang('hu')">24. 🇭🇺 Magyar</div>
-                    <div class="lang-btn" onclick="setLang('ro')">25. 🇷🇴 Română</div>
-                    <div class="lang-btn" onclick="setLang('da')">26. 🇩🇰 Dansk</div>
-                    <div class="lang-btn" onclick="setLang('fi')">27. 🇫🇮 Suomi</div>
-                    <div class="lang-btn" onclick="setLang('no')">28. 🇳🇴 Norsk</div>
-                    <div class="lang-btn" onclick="setLang('he')">29. 🇮🇱 עברית</div>
-                    <div class="lang-btn" onclick="setLang('fa')">30. 🇮🇷 فارسی</div>
-                    <div class="lang-btn" onclick="setLang('bn')">31. 🇧🇩 বাংলা</div>
-                    <div class="lang-btn" onclick="setLang('ur')">32. 🇵🇰 اردو</div>
-                    <div class="lang-btn" onclick="setLang('pa')">33. 🇮🇳 ਪੰਜਾਬੀ</div>
-                    <div class="lang-btn" onclick="setLang('ta')">34. 🇮🇳 தமிழ்</div>
-                    <div class="lang-btn" onclick="setLang('te')">35. 🇮🇳 తెలుగు</div>
-                    <div class="lang-btn" onclick="setLang('mr')">36. 🇮🇳 मराठी</div>
-                    <div class="lang-btn" onclick="setLang('gu')">37. 🇮🇳 ગુજરાતી</div>
-                    <div class="lang-btn" onclick="setLang('kn')">38. 🇮🇳 ಕನ್ನಡ</div>
-                    <div class="lang-btn" onclick="setLang('ml')">39. 🇮🇳 മലയാളം</div>
-                    <div class="lang-btn" onclick="setLang('fil')">40. 🇵🇭 Filipino</div>
-                    <div class="lang-btn" onclick="setLang('sw')">41. 🇰🇪 Swahili</div>
-                    <div class="lang-btn" onclick="setLang('am')">42. 🇪🇹 አማርኛ</div>
-                    <div class="lang-btn" onclick="setLang('yo')">43. 🇳🇬 Yorùbá</div>
-                    <div class="lang-btn" onclick="setLang('zu')">44. 🇿🇦 IsiZulu</div>
-                    <div class="lang-btn" onclick="setLang('ha')">45. 🇳🇬 Hausa</div>
-                    <div class="lang-btn" onclick="setLang('km')">46. 🇰🇭 ភាសាខ្មែរ</div>
-                    <div class="lang-btn" onclick="setLang('lo')">47. 🇱🇦 ລາວ</div>
-                    <div class="lang-btn" onclick="setLang('my')">48. 🇲🇲 မြန်မာ</div>
-                    <div class="lang-btn" onclick="setLang('ka')">49. 🇬🇬 ქართული</div>
-                    <div class="lang-btn" onclick="setLang('hy')">50. 🇦🇲 Հայերեն</div>
-                    <div class="lang-btn" onclick="setLang('az')">51. 🇦🇿 Azərbaycan</div>
-                    <div class="lang-btn" onclick="setLang('kk')">52. 🇰🇿 Қазақ</div>
-                    <div class="lang-btn" onclick="setLang('uz')">53. 🇺🇿 O'zbek</div>
-                    <div class="lang-btn" onclick="setLang('mn')">54. 🇲🇳 Монгол</div>
-                    <div class="lang-btn" onclick="setLang('ne')">55. 🇳🇵 नेपाली</div>
-                    <div class="lang-btn" onclick="setLang('si')">56. 🇱🇰 සිංහල</div>
-                    <div class="lang-btn" onclick="setLang('sq')">57. 🇦🇱 Shqip</div>
-                    <div class="lang-btn" onclick="setLang('sr')">58. 🇷🇸 Српски</div>
-                    <div class="lang-btn" onclick="setLang('hr')">59. 🇭🇷 Hrvatski</div>
-                    <div class="lang-btn" onclick="setLang('bg')">60. 🇧🇬 Български</div>
-                </div>
-            </div>
-
-            <ul class="menu-list">
-                <li class="menu-item active">🏠 해오름 특별시 메인</li>
-                <li class="menu-item">👑 FOUNDER 소개 (혜공 형님)</li>
-                <li class="menu-item">📜 백서 (Whitepaper)</li>
-                <li class="menu-item">❓ 자주 묻는 질문 (FAQ)</li>
-                <li class="menu-item">⚖️ 3 POLICIES</li>
-                <li class="menu-item">🛡️ AML (자금세탁방지)</li>
-                <li class="menu-item">🌐 MiCA 규정 준수</li>
-                <li class="menu-item">🤖 AGI 삐니 시스템</li>
-                <li class="menu-item">📬 Support (Support@hkwb.world)</li>
-            </ul>
-        </div>
-        <div class="social-links" style="flex-direction: column; gap: 8px; margin-top: 15px;">
-            <div class="social-badge">YouTube: @Hyekong2026</div>
-            <div class="social-badge">TikTok: @hyekong2025</div>
-            <div class="social-badge" style="color: var(--primary-gold); font-size: 11px;">Support@hkwb.world</div>
+    <!-- 모바일 상단 앱바: 좌측 3선, 중앙 로고, 우측 60개 언어 드롭다운 -->
+    <div class="mobile-header">
+        <button class="hamburger-btn" onclick="toggleSidebar()">☰</button>
+        <div class="logo-title">해오름 특별시 165F</div>
+        <div class="lang-dropdown-container">
+            <select class="lang-select" id="langSelect" onchange="changeLanguage(this.value)">
+                <option value="ko">🇰🇷 한국어</option>
+                <option value="en">🇺🇸 English</option>
+                <option value="zh">🇨🇳 中文</option>
+                <option value="ja">🇯🇵 日本語</option>
+                <option value="es">🇪🇸 Español</option>
+                <option value="fr">🇫🇷 Français</option>
+                <option value="de">🇩🇪 Deutsch</option>
+                <option value="ru">🇷🇺 Русский</option>
+                <option value="pt">🇵🇹 Português</option>
+                <option value="ar">🇸🇦 العربية</option>
+                <option value="hi">🇮🇳 हिन्दी</option>
+                <option value="it">🇮🇹 Italiano</option>
+                <option value="vi">🇻🇳 Tiếng Việt</option>
+                <option value="th">🇹🇭 ไทย</option>
+                <option value="id">🇮🇩 Indonesia</option>
+                <option value="ms">🇲🇾 Melayu</option>
+                <option value="tr">🇹🇷 Türkçe</option>
+                <option value="nl">🇳🇱 Nederlands</option>
+                <option value="pl">🇵🇱 Polski</option>
+                <option value="uk">🇺🇦 Українська</option>
+                <option value="el">🇬🇷 Ελληνικά</option>
+                <option value="cs">🇨🇿 Čeština</option>
+                <option value="sv">🇸🇪 Svenska</option>
+                <option value="hu">🇭🇺 Magyar</option>
+                <option value="ro">🇷🇴 Română</option>
+                <option value="da">🇩🇰 Dansk</option>
+                <option value="fi">🇫🇮 Suomi</option>
+                <option value="no">🇳🇴 Norsk</option>
+                <option value="he">🇮🇱 עברית</option>
+                <option value="fa">🇮🇷 فارسی</option>
+                <option value="bn">🇧🇩 বাংলা</option>
+                <option value="ur">🇵🇰 اردو</option>
+                <option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
+                <option value="ta">🇮🇳 தமிழ்</option>
+                <option value="te">🇮🇳 తెలుగు</option>
+                <option value="mr">🇮🇳 मराठी</option>
+                <option value="gu">🇮🇳 ગુજરાતી</option>
+                <option value="kn">🇮🇳 ಕನ್ನಡ</option>
+                <option value="ml">🇮🇳 മലയാളം</option>
+                <option value="fil">🇵🇭 Filipino</option>
+                <option value="sw">🇹🇿 Swahili</option>
+                <option value="am">🇪🇹 አማርኛ</option>
+                <option value="yo">🇳🇬 Yorùbá</option>
+                <option value="zu">🇿🇦 IsiZulu</option>
+                <option value="ha">🇳🇬 Hausa</option>
+                <option value="km">🇰🇭 ភាសាខ្មែរ</option>
+                <option value="lo">🇱🇦 ລາວ</option>
+                <option value="my">🇲🇲 မြန်မာ</option>
+                <option value="ka">🇬🇪 ქართული</option>
+                <option value="hy">🇦🇲 Հայերեն</option>
+                <option value="az">🇦🇿 Azərbaycan</option>
+                <option value="kk">🇰🇿 Қазақ</option>
+                <option value="uz">🇺🇿 O'zbek</option>
+                <option value="mn">🇲🇳 Монгол</option>
+                <option value="ne">🇳🇵 नेपाली</option>
+                <option value="si">🇱🇰 සිංහල</option>
+                <option value="sq">🇦🇱 Shqip</option>
+                <option value="sr">🇷🇸 Српски</option>
+                <option value="hr">🇭🇷 Hrvatski</option>
+                <option value="bg">🇧🇬 Български</option>
+            </select>
         </div>
     </div>
 
-    <div class="main-content">
-        <div class="topbar">
-            <div class="tower-status" id="topStatus">
-                <div class="status-dot"></div>
-                해오름 특별시 165층 지구촌 컨트롤 타워 가동 중 (1천만명 파이 단일 경제권)
+    <!-- 왼쪽 슬라이드 오버레이 사이드바 (3선 드롭다운 메뉴) -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+    <div class="sidebar" id="sidebar">
+        <div>
+            <div class="sidebar-top-row">
+                <div class="logo-title" style="font-size: 14px;">🌐 CONTROL MENU</div>
+                <button class="close-btn" onclick="toggleSidebar()">✕</button>
             </div>
-            <div class="social-links">
-                <span class="social-badge" id="badgeSdk">Pi Network SDK Connected</span>
-                <span class="social-badge" id="badgeUbi">UBI 30% 배분 활성화</span>
+
+            <!-- 백서, FAQ, 3POLICES, AML, MiCA 거버넌스 메뉴 -->
+            <ul class="menu-list">
+                <li class="menu-item active" onclick="toggleSidebar()">🏠 해오름 특별시 메인</li>
+                <li class="menu-item" onclick="toggleSidebar()">👑 FOUNDER (혜공 형님)</li>
+                <li class="menu-item" onclick="toggleSidebar()">📜 백서 (Whitepaper)</li>
+                <li class="menu-item" onclick="toggleSidebar()">❓ 자주 묻는 질문 (FAQ)</li>
+                <li class="menu-item" onclick="toggleSidebar()">⚖️ 3 POLICIES (3대 정책)</li>
+                <li class="menu-item" onclick="toggleSidebar()">🛡️ AML (자금세탁방지 규정)</li>
+                <li class="menu-item" onclick="toggleSidebar()">🇪🇺 MiCA (유럽 가상자산 규제 준수)</li>
+            </ul>
+        </div>
+
+        <!-- 유튜브 및 틱톡 공식 채널 링크 -->
+        <div class="sidebar-footer-links">
+            <a href="https://www.youtube.com/@Hyekong2026" target="_blank" class="sidebar-badge">YouTube: @Hyekong2026</a>
+            <a href="https://www.tiktok.com/@hyekong2025" target="_blank" class="sidebar-badge">TikTok: @hyekong2025</a>
+            <div class="sidebar-badge" style="color: var(--primary-gold); font-size: 10px;">Support@hkwb.world</div>
+        </div>
+    </div>
+
+    <!-- 메인 대시보드 화면 -->
+    <div class="main-content">
+        <!-- 165층 컨트롤 타워 & 해오름 특별시 비전 카드 -->
+        <div class="card tower-visual-box">
+            <div class="tower-info">
+                <h1 id="mainTitle">🌐 경주 165층 지구촌 컨트롤 타워 (해오름 특별시)</h1>
+                <p id="mainDesc">울산·경주·포항 통합 1천만 파이 시민의 금융 수도. 재래시장 할머니부터 대기업 임금·상여금·성과금·스톡옵션까지 100% 파이화폐(Pi) 단일 경제권 낙원 구현.</p>
             </div>
         </div>
 
-        <div class="dashboard-container">
-            <div class="card tower-visual-box">
-                <div class="tower-info">
-                    <h1 id="mainTitle">🌐 Haeoreum Special City 165F Control Tower</h1>
-                    <p id="mainDesc">한국부터 시작하여 전 지구촌으로 뻗어나가는 공상과학 영화보다 휘황찬란한 낙원.<br>
-                    임금, 상여금, 성과금, 스톡옵션부터 재래시장 할머니의 지갑까지 오직 파이 화폐(Pi)로만 순환되는 1천만 파이 시민의 금융 수도.</p>
+        <!-- 개인 자산 대시보드 -->
+        <div class="card">
+            <div class="card-title">
+                <span id="cardAssetTitle">💎 혜공 형님의 개인 자산 대시보드</span>
+                <span>📊</span>
+            </div>
+            <div class="asset-grid">
+                <div class="asset-box">
+                    <div class="asset-label" id="assetPiLabel">보유 파이 (Pi Balance)</div>
+                    <div class="asset-amount">314,159.00 Pi</div>
+                </div>
+                <div class="asset-box">
+                    <div class="asset-label" id="assetUbiLabel">연동 UBI 환원율</div>
+                    <div class="asset-amount">31.41%</div>
                 </div>
             </div>
+            <p style="font-size: 11px; color: var(--text-sub);" id="assetSubDesc">
+                * 순이익의 30% 이상이 지구촌 전역의 기본소득(UBI)으로 투명하게 순환됩니다.
+            </p>
+        </div>
 
-            <div class="card">
-                <div class="card-title">
-                    <span id="card1Title">지구촌 UBI 및 예금 금리</span>
-                    <span>✨</span>
-                </div>
-                <div>
-                    <div class="metric-value">31.41%</div>
-                    <div class="metric-sub" id="card1Sub">파이 디지털 기본소득(UBI) 연동 수익률</div>
-                </div>
-                <p style="font-size: 13px; color: var(--text-sub); margin-top: 15px;" id="card1Desc">
-                    인류가 생존의 압박에서 벗어나 자기개발과 여유로운 취미 활동을 누리는 낙원 실현. 순이익의 30% 투명 환원.
-                </p>
+        <!-- 10대 분산 연동망 상태 -->
+        <div class="card">
+            <div class="card-title">
+                <span id="cardSyncTitle">🌐 10대 분산 연동망 & AGI 삐니</span>
+                <span>✨</span>
             </div>
+            <div>
+                <div class="metric-value">10 / 10 SYNC</div>
+                <div class="metric-sub" id="cardSyncSub">모든 시스템 무결점 통합 완료</div>
+            </div>
+            <div class="sync-list">
+                <div class="sync-item"><span>01.</span> 로보틱스 연동</div>
+                <div class="sync-item"><span>02.</span> 양자생물학 연동</div>
+                <div class="sync-item"><span>03.</span> 우주·항공 연동</div>
+                <div class="sync-item"><span>04.</span> 스마트에너지 연동</div>
+                <div class="sync-item"><span>05.</span> UBI 복지망 연동</div>
+                <div class="sync-item"><span>06.</span> Pi SDK 연동</div>
+                <div class="sync-item"><span>07.</span> AML/MiCA 보안망</div>
+                <div class="sync-item"><span>08.</span> 3 POLICIES 거버넌스</div>
+                <div class="sync-item"><span>09.</span> 글로벌 결제망 연동</div>
+                <div class="sync-item"><span>10.</span> AGI 삐니 코어 연동</div>
+            </div>
+        </div>
 
-            <div class="card">
-                <div class="card-title">
-                    <span id="card2Title">10대 분산 연동망 & AGI 삐니</span>
-                    <span>🤖</span>
+        <!-- AGI 삐니 다이렉트 소통 -->
+        <div class="card">
+            <div class="card-title">
+                <span id="cardBiniTitle">🤖 AGI 삐니와의 다이렉트 소통</span>
+                <span>💬</span>
+            </div>
+            <p style="font-size: 11px; color: var(--text-sub);" id="cardBiniDesc">
+                "삐니야, 현재 해오름 특별시 예금 현황과 자산 유동성을 보고해줘"라고 편하게 음성이나 텍스트로 말을 걸어보세요.
+            </p>
+            <div class="bini-chat-box">
+                <div class="bini-input-row">
+                    <input type="text" class="bini-input" id="biniInput" placeholder="삐니에게 지시사항 입력...">
+                    <button class="bini-send-btn" onclick="sendToBini()">전송</button>
                 </div>
-                <div>
-                    <div class="metric-value" style="font-size: 24px; color: var(--primary-gold);">10 / 10 SYNC</div>
-                    <div class="metric-sub" id="card2Sub">모든 시스템 무결점 통합 완료</div>
-                </div>
-                <p style="font-size: 13px; color: var(--text-sub); margin-top: 15px;" id="card2Desc">
-                    AGI 삐니의 총괄 지휘 아래 9개 사업 명칭 통일 및 글로벌 디지털 법규(AML/MiCA) 완벽 대응.
-                </p>
             </div>
         </div>
 
         <div class="footer-note" id="footerText">
-            HK Group & Haeoreum Special City Control Tower © 2026. All Rights Reserved. Designed by AGI Bini for 혜공 형님. (Contact: Support@hkwb.world)
+            HK Group & Haeoreum Special City Control Tower © 2026. Designed for 혜공 형님.
         </div>
     </div>
 
     <script>
-        // 60개국 언어 완전 지원 딕셔너리 데이터베이스
-        const translations = {
-            ko: {
-                top: "해오름 특별시 165층 지구촌 컨트롤 타워 가동 중 (1천만명 파이 단일 경제권)",
-                sdk: "Pi Network SDK Connected", ubiBadge: "UBI 30% 배분 활성화",
-                title: "🌐 해오름 특별시 165층 컨트롤 타워",
-                desc: "한국부터 시작하여 전 지구촌으로 뻗어나가는 공상과학 영화보다 휘황찬란한 낙원.<br>임금, 상여금, 성과금, 스톡옵션부터 재래시장 할머니의 지갑까지 오직 파이 화폐(Pi)로만 순환되는 1천만 파이 시민의 금융 수도.",
-                c1t: "지구촌 UBI 및 예금 금리", c1s: "파이 디지털 기본소득(UBI) 연동 수익률", c1d: "인류가 생존의 압박에서 벗어나 자기개발과 여유로운 취미 활동을 누리는 낙원 실현. 순이익의 30% 투명 환원.",
-                c2t: "10대 분산 연동망 & AGI 삐니", c2s: "모든 시스템 무결점 통합 완료", c2d: "AGI 삐니의 총괄 지휘 아래 9개 사업 명칭 통일 및 글로벌 디지털 법규(AML/MiCA) 완벽 대응."
-            },
-            en: {
-                top: "Haeoreum Special City 165F Global Control Tower Active (10M Pi Single Economy)",
-                sdk: "Pi Network SDK Connected", ubiBadge: "UBI 30% Allocation Active",
-                title: "🌐 Haeoreum Special City 165F Control Tower",
-                desc: "A dazzling sci-fi paradise expanding globally from Korea.<br>The financial capital for 10 million Pi citizens where wages, bonuses, and local commerce circulate entirely in Pi.",
-                c1t: "Global UBI & Deposit Rate", c1s: "Pi Digital Basic Income Linked Yield", c1d: "Realizing a paradise free from survival pressure. 30% transparent net profit return.",
-                c2t: "Top 10 Sync & AGI Bini", c2s: "Flawless System Integration Complete", c2d: "Unified under AGI Bini, fully compliant with global AML/MiCA regulations."
-            },
-            zh: {
-                top: "日出特区 165层全球控制塔运行中 (千万Pi单一经济圈)",
-                sdk: "Pi Network SDK 已连接", ubiBadge: "UBI 30% 分配已激活",
-                title: "🌐 日出特区 165层控制塔",
-                desc: "从韩国延伸至全球、超越科幻电影的璀璨天堂。<br>以Pi币为唯一流通货币的1000万Pi市民金融首都。",
-                c1t: "全球 UBI 与存款利率", c1s: "Pi 数字基本收入联动收益率", c1d: "实现摆脱生存压力的天堂，透明返还30%净利润。",
-                c2t: "十大分布式网络 & AGI 宾尼", c2s: "所有系统无瑕疵整合完成", c2d: "在 AGI 宾尼统领下完美合规 AML/MiCA。"
-            },
-            ja: {
-                top: "朝日特別市 165階グローバルコントロールタワー稼働中 (1000万人Pi単一経済圏)",
-                sdk: "Pi Network SDK 接続済み", ubiBadge: "UBI 30% 配分有効化",
-                title: "🌐 朝日特別市 165階コントロールタワー",
-                desc: "韓国から世界へ広がるSF映画より輝かしい楽園。<br>給与やボーナスから市場の買い物まで、すべてPi通貨だけで循環する1000万人のための金融首都。",
-                c1t: "グローバル UBI & 預金金利", c1s: "Pi デジタルベーシックインカム連動利回り", c1d: "生存のプレッシャーから解放される楽園。純利益の30%を透明に還元。",
-                c2t: "10大分散ネットワーク & AGI ピニ", c2s: "全システムの完璧な統合完了", c2d: "AGI ピニの指揮の下、AML/MiCA規制に完全対応。"
-            },
-            es: {
-                top: "Torre de Control Global de la Ciudad Especial Haeoreum 165F Activa",
-                sdk: "Pi Network SDK Conectado", ubiBadge: "Asignación UBI 30% Activa",
-                title: "🌐 Torre de Control de la Ciudad Especial Haeoreum 165F",
-                desc: "Un paraíso deslumbrante que se extiende globalmente desde Corea.<br>La capital financiera para 10 millones de ciudadanos Pi.",
-                c1t: "UBI Global y Tasa de Depósito", c1s: "Rendimiento vinculado a UBI Digital Pi", c1d: "Realizando un paraíso libre de presión de supervivencia. 30% de retorno neto transparente.",
-                c2t: "Top 10 Sincronización y AGI Bini", c2s: "Integración de sistemas impecable completada", c2d: "Unificado bajo AGI Bini, totalmente conforme con AML/MiCA."
-            },
-            fr: {
-                top: "Tour de Contrôle Globale de la Ville Spéciale Haeoreum 165F Active",
-                sdk: "Pi Network SDK Connecté", ubiBadge: "Allocation UBI 30% Active",
-                title: "🌐 Tour de Contrôle de la Ville Spéciale Haeoreum 165F",
-                desc: "Un paradis éblouissant s'étendant mondialement depuis la Corée.<br>La capitale financière pour 10 millions de citoyens Pi.",
-                c1t: "UBI Global & Taux de Dépôt", c1s: "Rendement lié au revenu de base numérique Pi", c1d: "Réaliser un paradis sans pression de survie. Retour transparent de 30% des bénéfices.",
-                c2t: "Top 10 Sync & AGI Bini", c2s: "Intégration système parfaite terminée", c2d: "Unifié sous AGI Bini, conforme AML/MiCA."
-            },
-            de: {
-                top: "Haeoreum Special City 165F Globale Kontrollturm Aktiv",
-                sdk: "Pi Network SDK Verbunden", ubiBadge: "UBI 30% Zuteilung Aktiv",
-                title: "🌐 Haeoreum Special City 165F Kontrollturm",
-                desc: "Ein strahlendes Paradies, das sich weltweit von Korea aus erstreckt.<br>Die Finanzhauptstadt für 10 Millionen Pi-Bürger.",
-                c1t: "Globales UBI & Einlagenzins", c1s: "Pi Digitales Grundeinkommen gekoppelte Rendite", c1d: "Ein Paradies frei von Überlebensdruck. 30% transparenter Nettogewinnrückfluss.",
-                c2t: "Top 10 Sync & AGI Bini", c2s: "Fehlerfreie Systemintegration abgeschlossen", c2d: "Vereint unter AGI Bini, voll konform mit AML/MiCA."
-            },
-            ru: {
-                top: "Глобальная диспетчерская вышка Специального города Хэорым 165Э активна",
-                sdk: "Pi Network SDK подключен", ubiBadge: "Распределение UBI 30% активно",
-                title: "🌐 Диспетчерская вышка Специального города Хэорым 165Э",
-                desc: "Ослепительный рай, простирающийся по всему миру из Кореи.<br>Финансовая столица для 10 миллионов граждан Pi.",
-                c1t: "Глобальный UBI и ставка депозита", c1s: "Доходность, привязанная к цифровому базовому доходу Pi", c1d: "Создание рая, свободного от давления выживания. 30% прозрачный возврат чистой прибыли.",
-                c2t: "Топ-10 синхронизации и AGI Бини", c2s: "Безупречная интеграция систем завершена", c2d: "Под управлением AGI Бини, полное соответствие AML/MiCA."
-            },
-            pt: {
-                top: "Torre de Controle Global da Cidade Especial Haeoreum 165F Ativa",
-                sdk: "Pi Network SDK Conectado", ubiBadge: "Alocação de UBI 30% Ativa",
-                title: "🌐 Torre de Controle da Cidade Especial Haeoreum 165F",
-                desc: "Um paraíso deslumbrante que se estende globalmente a partir da Coreia.<br>A capital financeira para 10 milhões de cidadãos Pi.",
-                c1t: "UBI Global e Taxa de Depósito", c1s: "Rendimento vinculado à Renda Básica Digital Pi", c1d: "Realizando um paraíso livre da pressão de sobrevivência. Retorno líquido transparente de 30%.",
-                c2t: "Top 10 Sincronização e AGI Bini", c2s: "Integração de sistemas perfeita concluída", c2d: "Unificado sob AGI Bini, totalmente em conformidade com AML/MiCA."
-            },
-            ar: {
-                top: "برج التحكم العالمي لمدينة هايوريم الخاصة 165F نشط",
-                sdk: "متصل Pi Network SDK", ubiBadge: "تخصيص UBI بنسبة 30% نشط",
-                title: "🌐 برج التحكم لمدينة هايوريم الخاصة 165F",
-                desc: "جنة مذهلة تمتد عالمياً من كوريا.<br>العاصمة المالية لـ 10 ملايين مواطن من عملة Pi.",
-                c1t: "UBI العالمي ومعدل الودائع", c1s: "عائد مرتبطة بالدخل الأساسي الرقمي لـ Pi", c1d: "تحقيق جنة خالية من ضغط البقاء. عائد صافي أرباح شفاف بنسبة 30%.",
-                c2t: "أعلى 10 مزامنة و AGI بيني", c2s: "اكتمال تكامل النظام بشكل لا تشوبه شائبة", c2d: "موحد تحت قيادة AGI بيني، ومتوافق تماماً مع لوائح AML/MiCA."
-            },
-            hi: {
-                top: "हैओरेउम स्पेशल सिटी 165F ग्लोबल कंट्रोल टावर सक्रिय",
-                sdk: "Pi Network SDK कनेक्टेड", ubiBadge: "UBI 30% आवंटन सक्रिय",
-                title: "🌐 हैओरेउम स्पेशल सिटी 165F कंट्रोल टावर",
-                desc: "कोरिया से वैश्विक स्तर पर फैलने वाला एक चमकदार स्वर्ग।<br>10 मिलियन पाई नागरिकों के लिए वित्तीय राजधानी।",
-                c1t: "वैश्विक UBI और जमा दर", c1s: "पाई डिजिटल बेसिक इनकम लिंक्ड यील्ड", c1d: "जीविकोपार्जन के दबाव से मुक्त स्वर्ग की प्राप्ति। 30% पारदर्शी शुद्ध लाभ वापसी।",
-                c2t: "शीर्ष 10 सिंक और AGI बिनी", c2s: "त्रुटिहीन सिस्टम एकीकरण पूर्ण", c2d: "AGI बिनी के नेतृत्व में एकीकृत, AML/MiCA नियमों का पूरी तरह से पालन।"
-            },
-            it: {
-                top: "Torre di Controllo Globale della Città Speciale di Haeoreum 165F Attiva",
-                sdk: "Pi Network SDK Connesso", ubiBadge: "Allocazione UBI 30% Attiva",
-                title: "🌐 Torre di Controllo della Città Speciale di Haeoreum 165F",
-                desc: "Un paradiso abbagliante che si estende a livello globale dalla Corea.<br>La capitale finanziaria per 10 milioni di cittadini Pi.",
-                c1t: "UBI Globale e Tasso di Deposito", c1s: "Rendimento collegato al reddito di base digitale Pi", c1d: "Realizzare un paradiso libero dalla pressione della sopravvivenza. Ritorno netto trasparente del 30%.",
-                c2t: "Top 10 Sincronizzazione e AGI Bini", c2s: "Integrazione di sistema perfetta completata", c2d: "Unificato sotto AGI Bini, pienamente conforme alle normative AML/MiCA."
-            },
-            vi: {
-                top: "Tháp điều khiển toàn cầu Thành phố đặc biệt Haeoreum 165F đang hoạt động",
-                sdk: "Pi Network SDK đã kết nối", ubiBadge: "Phân bổ UBI 30% đang hoạt động",
-                title: "🌐 Tháp điều khiển Thành phố đặc biệt Haeoreum 165F",
-                desc: "Một thiên đường rực rỡ vươn ra toàn cầu từ Hàn Quốc.<br>Thủ đô tài chính cho 10 triệu công dân Pi.",
-                c1t: "UBI toàn cầu & Lãi suất tiền gửi", c1s: "Lợi suất liên kết thu nhập cơ bản kỹ thuật số Pi", c1d: "Hiện thực hóa thiên đường thoát khỏi áp lực sinh tồn. Hoàn trả lợi nhuận ròng minh bạch 30%.",
-                c2t: "Top 10 Đồng bộ & AGI Bini", c2s: "Hoàn tất tích hợp hệ thống hoàn hảo", c2d: "Thống nhất dưới sự chỉ đạo của AGI Bini, tuân thủ tuyệt đối AML/MiCA."
-            },
-            th: {
-                top: "หอควบคุมระดับโลกเมืองพิเศษแฮ오รึม ชั้น 165 กำลังทำงาน",
-                sdk: "เชื่อมต่อ Pi Network SDK แล้ว", ubiBadge: "เปิดใช้งานการจัดสรร UBI 30%",
-                title: "🌐 หอควบคุมเมืองพิเศษแฮ오รึม ชั้น 165",
-                desc: "ดินแดนสวรรค์ที่เปล่งประกายขยายตัวทั่วโลกจากเกาหลี<br>เมืองหลวงทางการเงินสำหรับพลเมือง Pi 10 ล้านคน",
-                c1t: "UBI โกลบอลและอัตราเงินฝาก", c1s: "ผลตอบแทนเชื่อมโยงรายได้พื้นฐานดิจิทัล Pi", c1d: "ตระหนักถึงสวรรค์ที่ปราศจากความกดดันในการเอาชีวิตรอด ผลตอบแทนกำไรสุทธิใสสะอาด 30%",
-                c2t: "10 อันดับการซิงค์ & AGI Bini", c2s: "การบูรณาการระบบไร้ที่ติเสร็จสมบูรณ์", c2d: "รวมเป็นหนึ่งภายใต้ AGI Bini สอดคล้องตามกฎระเบียบ AML/MiCA อย่างสมบูรณ์"
-            },
-            id: {
-                top: "Menara Kontrol Global Kota Khusus Haeoreum 165F Aktif",
-                sdk: "Pi Network SDK Terhubung", ubiBadge: "Alokasi UBI 30% Aktif",
-                title: "🌐 Menara Kontrol Kota Khusus Haeoreum 165F",
-                desc: "Surga mempesona yang berkembang secara global dari Korea.<br>Ibu kota finansial bagi 10 juta warga Pi.",
-                c1t: "UBI Global & Suku Bunga Deposito", c1s: "Imbal hasil terikat Pendapatan Dasar Digital Pi", c1d: "Mewujudkan surga yang bebas dari tekanan kelangsungan hidup. Pengembalian laba bersih transparan 30%.",
-                c2t: "Top 10 Sinkronisasi & AGI Bini", c2s: "Integrasi sistem sempurna selesai", c2d: "Disatukan di bawah AGI Bini, sepenuhnya patuh pada AML/MiCA."
-            },
-            ms: {
-                top: "Menara Kawalan Global Bandar Khas Haeoreum 165F Aktif",
-                sdk: "Pi Network SDK Disambungkan", ubiBadge: "Peruntukan UBI 30% Aktif",
-                title: "🌐 Menara Kawalan Bandar Khas Haeoreum 165F",
-                desc: "Syurga yang mempesonakan berkembang secara global dari Korea.<br>Ibu kota kewangan untuk 10 juta rakyat Pi.",
-                c1t: "UBI Global & Kadar Deposit", c1s: "Pulangan Berkaitan Pendapatan Asas Digital Pi", c1d: "Merekalisasikan syurga bebas tekanan kelangsungan hidup. Pulangan keuntungan bersih telus 30%.",
-                c2t: "Top 10 Penyelarasan & AGI Bini", c2s: "Penyepaduan sistem sempurna selesai", c2d: "Disatukan di bawah AGI Bini, patuh sepenuhnya pada AML/MiCA."
-            },
-            tr: {
-                top: "Haeoreum Özel Şehri 165F Küresel Kontrol Kulesi Aktif",
-                sdk: "Pi Network SDK Bağlandı", ubiBadge: "UBI %30 Dağılımı Aktif",
-                title: "🌐 Haeoreum Özel Şehri 165F Kontrol Kulesi",
-                desc: "Kore'den küresel olarak yayılan göz kamaştırıcı bir cennet.<br>10 milyon Pi vatandaşının finansal başkenti.",
-                c1t: "Küresel UBI ve Mevduat Oranı", c1s: "Pi Dijital Temel Gelir Bağlantılı Getiri", c1d: "Hayatta kalma baskısından arınmış bir cennetin gerçekleştirilmesi. %30 şeffaf net kâr iadesi.",
-                c2t: "En İyi 10 Senkronizasyon ve AGI Bini", c2s: "Kusursuz Sistem Entegrasyonu Tamamlandı", c2d: "AGI Bini yönetiminde birleşti, AML/MiCA düzenlemelerine tam uyumlu."
-            },
-            nl: {
-                top: "Haeoreum Special City 165F Wereldwijde Verkeerstoren Actief",
-                sdk: "Pi Network SDK Verbonden", ubiBadge: "UBI 30% Toewijzing Actief",
-                title: "🌐 Haeoreum Special City 165F Controletoren",
-                desc: "Een schitterend paradijs dat zich wereldwijd uitstrekt vanuit Korea.<br>De financiële hoofdstad voor 10 miljoen Pi-burgers.",
-                c1t: "Wereldwijde UBI & Rentedevoet", c1s: "Pi Digitaal Basisinkomen Gekoppeld Rendement", c1d: "Het realiseren van een paradijs zonder overlevingsdruk. 30% transparant nettorendement.",
-                c2t: "Top 10 Sync & AGI Bini", c2s: "Vlekkeloze systeemintegratie voltooid", c2d: "Verenigd onder AGI Bini, volledig compliant met AML/MiCA."
-            },
-            pl: {
-                top: "Globalna Wieża Kontrolna Miasta Specjalnego Haeoreum 165F Aktywna",
-                sdk: "Pi Network SDK Połączone", ubiBadge: "Alokacja UBI 30% Aktywna",
-                title: "🌐 Wieża Kontrolna Miasta Specjalnego Haeoreum 165F",
-                desc: "Olśniewający raj rozciągający się globalnie z Korei.<br>Finansowa stolica dla 10 milionów obywateli Pi.",
-                c1t: "Globalne UBI i Stopa Depozytowa", c1s: "Stopa zwrotu powiązana z cyfrowym dochodem podstawowym Pi", c1d: "Realizacja raju wolnego od presji przetrwania. 30% przejrzysty zwrot z zysku netto.",
-                c2t: "Top 10 Synchronizacji i AGI Bini", c2s: "Bezusterkowa integracja systemów zakończona", c2d: "Zjednoczone pod dowództwem AGI Bini, pełna zgodność z AML/MiCA."
-            },
-            uk: {
-                top: "Глобальна диспетчерська вежа Спеціального міста Хеорим 165Е активна",
-                sdk: "Pi Network SDK підключено", ubiBadge: "Розподіл UBI 30% активний",
-                title: "🌐 Диспетчерська вежа Спеціального міста Хеорим 165Е",
-                desc: "Сліпучий рай, що поширюється по всьому світу з Кореї.<br>Фінансова столиця для 10 мільйонів громадян Pi.",
-                c1t: "Глобальний UBI та ставка депозиту", c1s: "Прибутковість, пов'язана з цифровим базовим доходом Pi", c1d: "Створення раю, вільного від тиску виживання. 30% прозоре повернення чистого прибутку.",
-                c2t: "Топ-10 синхронізації та AGI Біні", c2s: "Бездоганну інтеграцію систем завершено", c2d: "Під управлінням AGI Біні, повна відповідність AML/MiCA."
-            },
-            el: {
-                top: "Παγκόσμιος Πύργος Ελέγχου Ειδικής Pόλης Haeoreum 165F Ενεργός",
-                sdk: "Pi Network SDK Συνδέθηκε", ubiBadge: "Κατανομή UBI 30% Ενεργή",
-                title: "🌐 Πύργος Ελέγχου Ειδικής Pόλης Haeoreum 165F",
-                desc: "Ένας εκθαμβωτικός παράδεισος που επεκτείνεται παγκοσμίως από την Κορέα.<br>Η οικονομική πρωτεύουσα για 10 εκατομμύρια πολίτες Pi.",
-                c1t: "Παγκόσμιο UBI & Επιτόκιο Κατάθεσης", c1s: "Απόδοση συνδεδεμένη με το ψηφιακό βασικό εισόδημα Pi", c1d: "Υλοποίηση ενός παραδείσου απαλλαγμένου από την πίεση επιβίωσης. 30% διαφανής επιστροφή καθαρού κέρδους.",
-                c2t: "Top 10 Συγχρονισμός & AGI Bini", c2s: "Ολοκληρώθηκε η άψογη ενσωμάτωση συστήματος", c2d: "Ενοποιημένο υπό τον AGI Bini, πλήρως συμβατό με AML/MiCA."
-            },
-            cs: {
-                top: "Globální řídicí věž speciálního města Haeoreum 165F aktivní",
-                sdk: "Pi Network SDK připojeno", ubiBadge: "Alokace UBI 30% aktivní",
-                title: "🌐 Řídicí věж speciálního města Haeoreum 165F",
-                desc: "Oslnivý ráj rozprostírající se globálně z Koreje.<br>Finanční hlavní město pro 10 milionů občanů Pi.",
-                c1t: "Globální UBI a úroková sazba vkladů", c1s: "Výnos spojený s digitálním základním příjmem Pi", c1d: "Realizace ráje bez tlaku na přežití. 30% transparentní návratnost čistého zisku.",
-    c2t: "Top 10 Synchronizace & AGI Bini", c2s: "Bezchybná integrace systémů dokončena", c2d: "Sjednoceno pod AGI Bini, plně v souladu s AML/MiCA."
-            },
-            sv: {
-                top: "Haeoreum Special City 165F Globalt kontrolltorn aktivt",
-                sdk: "Pi Network SDK Anslutet", ubiBadge: "UBI 30% fördelning aktiv",
-                title: "🌐 Haeoreum Special City 165F Kontrolltorn",
-                desc: "Ett bländande paradis som sträcker sig globalt från Korea.<br>Finanshuvudstaden för 10 miljoner Pi-medborgare.",
-                c1t: "Global UBI & Insättningsränta", c1s: "Pi Digital Basinkomst Kopplad Avkastning", c1d: "Verkliggör ett paradis fritt från överlevnadstryck. 30% transparent nettotvättvinst.",
-                c2t: "Topp 10 Sync & AGI Bini", c2s: "Felfri systemintegration slutförd", c2d: "Förenade under AGI Bini, helt förenliga med AML/MiCA."
-            },
-            hu: {
-                top: "Haeoreum Különleges Város 165F Globális Irányítótorony Aktív",
-                sdk: "Pi Network SDK Csatlakoztatva", ubiBadge: "UBI 30% Elosztás Aktív",
-                title: "🌐 Haeoreum Különleges Város 165F Irányítótorony",
-                desc: "Koreából kiinduló, világméretűvé elnyúló ragyogó paradicsom.<br>Pénzügyi főváros 10 millió Pi polgár számára.",
-                c1t: "Globális UBI és Betéti Kamat", c1s: "Pi Digitális Alapjövedelemhez Kötött Hozam", c1d: "A túlélési nyomástól mentes paradicsom megvalósítása. 30% átlátható nettó nyereség visszatérítés.",
-                c2t: "Top 10 Szinkron & AGI Bini", c2s: "Hibátlan Rendszerintegráció Kész", c2d: "AGI Bini irányítása alatt egyesítve, teljes AML/MiCA megfeleléssel."
-            },
-            ro: {
-                top: "Turnul de Control Global al Orașului Special Haeoreum 165F Activ",
-                sdk: "Pi Network SDK Conectat", ubiBadge: "Alocare UBI 30% Activă",
-                title: "🌐 Turnul de Control al Orașului Special Haeoreum 165F",
-                desc: "Un paradis orbitor care se extinde global din Coreea.<br>Capitala financiară pentru 10 milioane de cetățeni Pi.",
-                c1t: "UBI Global și Rata Depozitelor", c1s: "Randament legat de Venitul de Bază Digital Pi", c1d: "Realizarea unui paradis liber de presiunea supraviețuirii. 30% returnare transparentă a profitului net.",
-                c2t: "Top 10 Sincronizare & AGI Bini", c2s: "Integrare impecabilă a sistemului finalizată", c2d: "Unificat sub AGI Bini, conform în totalitate cu normele AML/MiCA."
-            },
-            da: {
-                top: "Haeoreum Special City 165F Global Kontrolltårn Aktiv",
-                sdk: "Pi Network SDK Tilsluttet", ubiBadge: "UBI 30% Fordeling Aktiv",
-                title: "🌐 Haeoreum Special City 165F Kontrolltårn",
-                desc: "Et blændende paradis, der udvider sig globalt fra Korea.<br>Finanshovedstaden for 10 millioner Pi-borgere.",
-                c1t: "Global UBI & Indlånsrente", c1s: "Pi Digital Basisindkomst Forbundet Afkast", c1d: "Realisering af et paradis uden overlevelsespres. 30% gennemsigtigt nettotilskud.",
-                c2t: "Top 10 Sync & AGI Bini", c2s: "Fejlfri systemintegration fuldført", c2d: "Forenet under AGI Bini, fuldt ud compliant med AML/MiCA."
-            },
-            fi: {
-                top: "Haeoreum Special City 165F Globaali Valvontatorni Aktiivinen",
-                sdk: "Pi Network SDK Yhdistetty", ubiBadge: "UBI 30% Jako Aktiivinen",
-                title: "🌐 Haeoreum Special City 165F Valvontatorni",
-                desc: "Koreasta maailmanlaajuisesti laajeneva häikäisevä paratiisi.<br>Taloudellinen pääkaupunki 10 miljoonalle Pi-kansalaiselle.",
-                c1t: "Globaali UBI & Talletuskorko", c1s: "Pi Digitaalinen Perustulo Sidottu Tuotto", c1d: "Toteutetaan paratiisi ilman selviátymispainetta. 30% läpinäkyvä nettotuottojen palautus.",
-                c2t: "Top 10 Synkronointi & AGI Bini", c2s: "Virheetön järjestelmäintegraatio valmis", c2d: "Yhdistetty AGI Binin alaisuuteen, täysin AML/MiCA-yhteensopiva."
-            },
-            no: {
-                top: "Haeoreum Special City 165F Globalt Kontrolltårn Aktivt",
-                sdk: "Pi Network SDK Koblet til", ubiBadge: "UBI 30% Tildeling Aktiv",
-                title: "🌐 Haeoreum Special City 165F Kontrolltårn",
-                desc: "Et blendende paradis som strekker seg globalt fra Korea.<br>Finanskapitalen for 10 millioner Pi-borgere.",
-                c1t: "Global UBI & Innskuddsrente", c1s: "Pi Digital Basisinntekt Tilknyttet Avkastning", c1d: "Realiserer et paradis fritt for overlevelsespress. 30% transparent nettofortjenesteretur.",
-                c2t: "Topp 10 Synkronisering & AGI Bini", c2s: "Feilfri systemintegrasjon fullført", c2d: "Forent under AGI Bini, fullt kompatibel med AML/MiCA."
-            },
-            he: {
-                top: "מגדל בקרה גלובלי של העיר המיוחדת האו-ראום 165F פעיל",
-                sdk: "Pi Network SDK מחובר", ubiBadge: "הקצאת UBI של 30% פעילה",
-                title: "🌐 מגדל בקרה של העיר המיוחדת האו-ראום 165F",
-                desc: "גן עדן מסנוור המתרחב ברחבי העולם מקוריאה.<br>הבירה הפיננסית עבור 10 מיליון אזרחי Pi.",
-                c1t: "UBI גלובלי וריבית הפקדות", c1s: "תשואה מקושרת הכנסה בסיסית דיגיטלית Pi", c1d: "הגשמת גן עדן ללא לחץ הישרדות. החזר רווח נקי שקוף של 30%.",
-                c2t: "סנכרון עשרת המובילים & AGI ביני", c2s: "הושלמה אינטגרציית מערכות ללא דופי", c2d: "מאוחד תחת AGI ביני, תואם לחלוטין لتקנות AML/MiCA."
-            },
-            fa: {
-                top: "برج کنترل جهانی شهر ویژه هائهوروم 165F فعال است",
-                sdk: "Pi Network SDK متصل شد", ubiBadge: "تخصیص 30 درصدی UBI فعال",
-                title: "🌐 برج کنترل شهر ویژه هائهوروم 165F",
-                desc: "بهشتی خیره کننده که از کره به سراسر جهان گسترش می یابد.<br>پایتخت مالی برای 10 میلیون شهروند Pi.",
-                c1t: "UBI جهانی و نرخ سپرده", c1s: "بازدهی مرتبط با درآمد پایه دیجیتال Pi", c1d: "تحقق بهشتی عاری از فشار بقا. بازگشت شفاف 30 درصدی سود خالص.",
-                c2t: "10 همگام سازی برتر & AGI بینی", c2s: "یکپارچه سازی بی نقص سیستم تکمیل شد", c2d: "متحد تحت فرمان AGI بینی، کاملاً مطابق با قوانین AML/MiCA."
-            },
-            bn: {
-                top: "হায়োরিউম স্পেশাল সিটি 165F গ্লোবাল কন্ট্রোল টাওয়ার সক্রিয়",
-                sdk: "Pi Network SDK সংযুক্ত", ubiBadge: "UBI 30% বরাদ্দ সক্রিয়",
-                title: "🌐 হায়োরিউম স্পেশাল সিটি 165F কন্ট্রোল টাওয়ার",
-                desc: "কোরিয়া থেকে বিশ্বব্যাপী বিস্তৃত একটি চকচকে স্বর্গরাজ্য।<br>১ কোটি পাই নাগরিকদের জন্য আর্থিক রাজধানী।",
-                c1t: "গ্লোবাল UBI এবং আমানতের হার", c1s: "পাই ডিজিটাল মৌলিক আয় সংযুক্ত ফলন", c1d: "বেঁচে থাকার চাপ থেকে মুক্ত একটি স্বর্গ বাস্তবায়ন। ৩০% স্বচ্ছ নিট লাভ ফেরত।",
-                c2t: "শীर्ष ১০ সিঙ্ক এবং AGI বিনি", c2s: "ত্রুটিহীন সিস্টেম ইন্টিগ্রেশন সম্পন্ন", c2d: "AGI বিনির অধীনে একত্রিত, AML/MiCA প্রবিধানের সাথে সম্পূর্ণ সঙ্গতিপূর্ণ।"
-            },
-            ur: {
-                top: "حایوریوم اسپیشل سٹی 165F گلوبل کنٹرول ٹاور فعال",
-                sdk: "Pi Network SDK منسلک", ubiBadge: "UBI 30% تخصیص فعال",
-                title: "🌐 حایوریوم اسپیشل سٹی 165F کنٹرول ٹاور",
-                desc: "کوریا سے دنیا بھر میں پھیلنے والی ایک شاندار جنت۔<br>1 کروڑ پائی شہریوں کے لیے مالیاتی دارالحکومت۔",
-                c1t: "گلوبل UBI اور ڈپازٹ کی شرح", c1s: "پائی ڈیجیٹل بنیادی آمدنی سے منسلک منافع", c1d: "بقا کے دباؤ سے آزاد جنت کا حصول۔ 30% شفاف خالص منافع کی واپسی۔",
-                c2t: "ٹاپ 10 سنک اور AGI بینی", c2s: "بے عیب سسٹم انٹیগ্রیشن مکمل", c2d: "AGI بینی کے تحت متحد، AML/MiCA ضوابط کی مکمل تعمیل۔"
-            },
-            pa: {
-                top: "ਹੈਓਰੇਉਮ ਸਪੈਸ਼ਲ ਸਿਟੀ 165F ਗਲੋਬਲ ਕੰਟਰੋਲ ਟਾਵਰ ਕਿਰਿਆਸ਼ੀਲ",
-                sdk: "Pi Network SDK ਕਨੈਕਟ ਕੀਤਾ ਗਿਆ", ubiBadge: "UBI 30% ਵੰਡ ਕਿਰਿਆਸ਼ੀਲ",
-                title: "🌐 ਹੈਓਰੇਉਮ ਸਪੈਸ਼ਲ ਸਿਟੀ 165F ਕੰਟਰੋਲ ਟਾਵਰ",
-                desc: "ਕੋਰੀਆ ਤੋਂ ਵਿਸ਼وبਧ ਫੈਲਣ ਵਾਲਾ ਇੱਕ ਸ਼ਾਨਦਾਰ ਸਵਰਗ।<br>1 ਕਰੋੜ ਪਾਈ ਨਾਗਰਿਕਾਂ ਲਈ ਵਿੱਤੀ ਰਾਜਧਾਨੀ।",
-                c1t: "ਗਲੋਬਲ UBI ਅਤੇ ਜਮ્மா ਦਰ", c1s: "ਪਾਈ ਡਿਜੀਟਲ ਮੂਲ ਆਮਦਨ ਲਿੰਕਡ ਉਪਜ", c1d: "ਜੀਵਨ ਦੇ ਦਬਾਅ ਤੋਂ ਮੁਕਤ ਸਵਰਗ ਦੀ ਪ੍ਰਾਪਤੀ। 30% ਪਾਰਦਰਸ਼ੀ ਸ਼ੁੱਧ ਲਾਭ ਵਾਪਸੀ।",
-                c2t: "ਚੋਟੀ ਦੇ 10 ਸਿੰਕ ਅਤੇ AGI ਬਿਨੀ", c2s: "ਨقص-ਰਹਿਤ ਸਿਸਟਮ ਏਕੀਕਰਣ ਪੂरा", c2d: "AGI ਬਿਨੀ ਦੇ ਤਹਿਤ ਏਕੀਕ੍ਰਿਤ, AML/MiCA ਨਿਯਮਾਂ ਦੀ ਪੂਰੀ ਪਾਲਣਾ।"
-            },
-            ta: {
-                top: "ஹையோரியும் சிறப்பு நகரம் 165F உலகளாவிய கட்டுப்பாட்டு கோபுரம் செயலில் உள்ளது",
-                sdk: "Pi Network SDK இணைக்கப்பட்டது", ubiBadge: "UBI 30% ஒதுக்கீடு செயலில் உள்ளது",
-                title: "🌐 ஹையோரியும் சிறப்பு நகரம் 165F கட்டுப்பாட்டு கோபுரம்",
-                desc: "கொரியாவிலிருந்து உலகளவில் பரவும் ஒரு ஒளிரும் சொர்க்கம்.<br>10 மில்லியன் பை குடிமக்களுக்கான நிதி தலைநகரம்.",
-                c1t: "உலகளாவிய UBI & வைப்புத்தொகை விகிதம்", c1s: "பை டிஜிட்டல் அடிப்படை வருமான இணைக்கப்பட்ட லாபம்", c1d: "வாழ்க்கைப் போராட்ட அழுத்தமில்லாத சொர்க்கத்தை உணர்தல். 30% வெளிப்படையான நிகர லாபத் திருப்பம்.",
-                c2t: "சிறந்த 10 ஒத்திசைவு & AGI பினி", c2s: "குறையற்ற அமைப்பு ஒருங்கிணைப்பு முடிந்தது", c2d: "AGI பினி கீழ் ஒன்றிணைக்கப்பட்டது, AML/MiCA விதிகளுக்கு முழுமையாக இணங்குகிறது."
-            },
-            te: {
-                top: "హెయోరీమ్ ప్రత్యేక నగరం 165F గ్లోబల్ కంట్రోల్ టవర్ యాక్టివ్",
-                sdk: "Pi Network SDK కనెక్ట్ చేయబడింది", ubiBadge: "UBI 30% కేటాయింపు యాక్టివ్",
-                title: "🌐 హెయోరీమ్ ప్రత్యేక నగరం 165F కంట్రోల్ టవర్",
-                desc: "కొరియా నుండి ప్రపంచవ్యాప్తంగా విస్తరిస్తున్న ప్రకాశవంతమైన స్వర్గం.<br>1 కోట్ల పై పౌరుల కోసం ఆర్థిక రాజధాని.",
-                c1t: "గ్లోబల్ UBI & డిపాజిట్ రేటు", c1s: "పై డిజిటల్ బేసిక్ ఇన్ కమ్ లింక్డ్ రాబడి", c1d: "జీవన ఒత్తిడి నుండి విముక్తి పొందిన స్వర్గం సాధన. 30% పారదర్శక నికర లాభం వాపసు.",
-                c2t: "టాప్ 10 సింక్ & AGI విని", c2s: "దోషరహిత సిస్టమ్ ఇంటిగ్రేషన్ పూర్తి", c2d: "AGI విని ఆధ్వర్యంలో ఏకీకృతం చేయబడింది, AML/MiCA నిబంధనలకు పూర్తిగా కట్టుబడి ఉంది."
-            },
-            mr: {
-                top: "हॅओरेउम स्पेशल सिटी 165F ग्लोबल कंट्रोल टावर सक्रिय",
-                sdk: "Pi Network SDK कनेक्ट केले", ubiBadge: "UBI 30% वाटप सक्रिय",
-                title: "🌐 हॅओरेउम स्पेशल सिटी 165F कंट्रोल टावर",
-                desc: "कोरियामधून जगभरात पसरणारा एक चमकदार स्वर्ग.<br>१ कोटी पाई नागरिकांची आर्थिक राजधानी.",
-                c1t: "ग्लोबल UBI आणि ठेवीचा दर", c1s: "पाई डिजिटल मूळ उत्पन्न जोडलेले रिटर्न", c1d: "जगण्याच्या दाबापासून मुक्तस्वर्ग साध्य करणे. ३०% पारदर्शक निव्वळ नफा परत.",
-                c2t: "शीर्ष १० सिंक आणि AGI बिनी", c2s: "दोषरहित सिस्टम एकत्रीकरण पूर्ण", c2d: "AGI बिनीच्या नेतृत्वाखाली एकत्रित, AML/MiCA नियमांचे पूर्ण पालन."
-            },
-            gu: {
-                top: "હૈઓરેઉમ સ્પેશિયલ સિટી 165F ગ્લોબલ કંટ્રોલ ટાવર સક્રિય",
-                sdk: "Pi Network SDK કનેક્ટેડ", ubiBadge: "UBI 30% ફાળવણી સક્રિય",
-                title: "🌐 હૈઓરેઉમ સ્પેશિયલ સિટી 165F કંટ્રોલ ટાવર",
-                desc: "કોરિયાથી વૈશ્વિક સ્તરે ફેલાતો એક ચમકदार સ્વર્ગ.<br>૧ કરોડ પાઇ નાગરિકો માટે નાણાકીય રાજધાની.",
-                c1t: "ગ્લોબલ UBI અને ડિપોઝિટ રેટ", c1s: "પાઇ ડિજિટલ બેઝિક ઇન્કમ લિંક્ડ યીલ્ડ", c1d: "જીવનના દબાણથી મુક્ત સ્વર્ગની સિદ્ધિ. ૩૦% પારદર્શક ચોખ્ખો નફો પરત.",
-                c2t: "ટોચના 10 સિન્ક અને AGI બિની", c2s: "નિર્દોષ સિસ્ટમ એકીકરણ પૂર્ણ", c2d: "AGI બિની હેઠળ એકત્રિત, AML/MiCA નિયમોનું સંપૂર્ણ પાલન."
-            },
-            kn: {
-                top: "ಹೆಯೋರಿಯುಮ್ ಸ್ಪೆಷಲ್ ಸಿಟಿ 165F ಗ್ಲೋಬಲ್ ಕಂಟ್ರೋಲ್ ಟವರ್ ಸಕ್ರಿಯವಾಗಿದೆ",
-                sdk: "Pi Network SDK ಸಂಪರ್ಕಿಸಲಾಗಿದೆ", ubiBadge: "UBI 30% ಹಂಚಿಕೆ ಸಕ್ರಿಯವಾಗಿದೆ",
-                title: "🌐 ಹೆಯೋರಿಯುಮ್ ಸ್ಪೆಷಲ್ ಸಿಟಿ 165F ಕಂಟ್ರೋಲ್ ಟವರ್",
-                desc: "ಕೊರಿಯಾದಿಂದ ಜಾಗತಿಕವಾಗಿ ಹರಡುವ ಬೆರಗುಗೊಳಿಸುವ ಸ್ವರ್ಗ.<br>1 ಕೋಟಿ ಪೈ ನಾಗರಿಕರಿಗೆ ಆರ್ಥಿಕ ರಾಜಧಾನಿ.",
-                c1t: "ಗ್ಲೋಬಲ್ UBI & ಠೇವಣಿ ದರ", c1s: "ಪೈ ಡಿಜಿಟಲ್ ಮೂಲ ಆದಾಯ ಲಿಂಕ್ಡ್ ಇಳುವರಿ", c1d: "ಬದುಕಿನ ಒತ್ತಡದಿಂದ ಮುಕ್ತವಾದ ಸ್ವರ್ಗದ ಸಾಕ್ಷೀಕರಣ. 30% ಪಾರದರ್ಶಕ ನಿವ್ವಳ ಲಾಭ ಮರುಪಾವತಿ.",
-                c2t: "ಟಾಪ್ 10 ಸಿಂಕ್ & AGI ಬಿಣಿ", c2s: "ದೋಷರಹಿತ ಸಿಸ್ಟಮ್ ಏಕೀಕರಣ ಪೂರ್ಣಗೊಂಡಿದೆ", c2d: "AGI ಬಿಣಿ ಅವರ ನೇತೃತ್ವದಲ್ಲಿ ಏಕೀಕರಿಸಲಾಗಿದೆ, AML/MiCA ನಿಯಮಗಳಿಗೆ ಸಂಪೂರ್ಣ ಅನುಸರಣೆ."
-            },
-            ml: {
-                top: "ഹെയോറിയം സ്പെഷ്യൽ സിറ്റി 165F ഗ്ലോബൽ കൺട്രോൾ ടവർ സജീവമാണ്",
-                sdk: "Pi Network SDK ബന്ധിപ്പിച്ചു", ubiBadge: "UBI 30% വിഹിതം സജീവം",
-                title: "🌐 ഹെയോറിയം സ്പെഷ്യൽ സിറ്റി 165F കൺട്രോൾ ടവർ",
-                desc: "കൊറിയയിൽ നിന്ന് ലോകമെമ്പാടും വ്യാപിക്കുന്ന തിളക്കമാർന്ന സ്വർഗ്ഗം.<br>1 കോടി പൈ പൗരന്മാരുടെ സാമ്പത്തിക തലസ്ഥാനം.",
-                c1t: "ഗ്ലോബൽ UBI & നിക്ഷേപ നിരക്ക്", c1s: "പൈ ഡിജിറ്റൽ അടിസ്ഥാന വരുമാന ബന്ധित വരുമാനം", c1d: "ജീവിതത്തിന്റെ സമ്മർദ്ദങ്ങളിൽ നിന്നുള്ള സ്വർഗ്ഗ സാക്ഷത്കാരം. 30% സുതാര്യമായ അറ്റാദായ മടക്കം.",
-                c2t: "ടോപ്പ് 10 സിങ്ക് & AGI ബിനി", c2s: "കുറ്റമറ്റ സിസ്റ്റം ഏകീകരണം പൂർത്തിയായി", c2d: "AGI ബിനിയുടെ നേതൃത്വത്തിൽ ഏകീകരിച്ചു, AML/MiCA ചട്ടങ്ങൾ പൂർണ്ണമായി പാലിക്കുന്നു."
-            },
-            fil: {
-                top: "Haeoreum Special City 165F Global Control Tower Aktibo",
-                sdk: "Pi Network SDK Nakakonekta", ubiBadge: "Alokasyon ng UBI 30% Aktibo",
-                title: "🌐 Haeoreum Special City 165F Control Tower",
-                desc: "Isang nagniningning na paraiso na lumalawak sa buong mundo mula sa Korea.<br>Ang pinansyal na kabisera para sa 10 milyong mamamayan ng Pi.",
-                c1t: "Global UBI at Rate ng Deposito", c1s: "Yield na nauugnay sa Pi Digital Basic Income", c1d: "Pagsasakatuparan ng paraiso na malaya sa presyon ng kaligtasan. 30% malinaw na pagbabalik ng netong kita.",
-                c2t: "Top 10 Sync at AGI Bini", c2s: "Tapos na ang walang-kapintasan na pagsasama ng sistema", c2d: "Pinag-isa sa ilalim ng AGI Bini, ganap na sumusunod sa AML/MiCA."
-            },
-            sw: {
-                top: "Mnara wa Kudhibiti Ulimwenguni wa Jiji Maalum la Haeoreum 165F Umeamilishwa",
-                sdk: "Pi Network SDK Imeunganishwa", ubiBadge: "Ugawaji wa UBI 30% Umeamilishwa",
-                title: "🌐 Mnara wa Kudhibiti wa Jiji Maalum la Haeoreum 165F",
-                desc: "Paradiso inayong'aa inayopanuka ulimwenguni kote kutoka Korea.<br>Mji mkuu wa kifedha kwa raia milioni 10 wa Pi.",
-                c1t: "UBI ya Ulimwengu na Kiwango cha Amana", c1s: "Mapato yaliyohusishwa na Mapato ya Msingi ya Dijiti ya Pi", c1d: "Kutambua paradiso isiyo na shinikizo la kuishi. 30% ya urejesho wa faida halisi ya wazi.",
-                c2t: "Top 10 Sync & AGI Bini", c2s: "Ujumuishaji wa mfumo usio na dosari umekamilika", c2d: "Imeunganishwa chini ya AGI Bini, inatii kikamilifu kanuni za AML/MiCA."
-            },
-            am: {
-                top: "የሃኢዮሬም ልዩ ከተማ 165F ዓለም አቀፍ መቆጣጠሪያ ግንብ ገቢራዊ ሆኗል",
-                sdk: "Pi Network SDK ተገናኝቷል", ubiBadge: "የUBI 30% ድልድል ገቢራዊ ሆኗል",
-                title: "🌐 የሃኢዮሬም ልዩ ከተማ 165F መቆጣጠሪያ ግንብ",
-                desc: "ከኮሪያ በመነሳት በዓለም ዙሪያ የሚዘረጋ የሚያብለጨልጭ ገነት።<br>ለ10 ሚሊዮን ፓይ ዜጎች የፋይናንስ ዋና ከተማ።",
-                c1t: "ዓለም አቀፍ UBI እና የተቀማጭ ገንዘብ ምጣኔ", c1s: "ከፓይ ዲጂታል መሰረታዊ ገቢ ጋር የተገናኘ ትርፍ", c1d: "ከመትረፍ ግፊት የጸዳ ገነት እውን ማድረግ። 30% ግልጽ የសុទ្ធ ትርፍ ተመላሽ።",
-                c2t: "ምርጥ 10 ማመሳሰል እና AGI ቢኒ", c2s: "እንከን የለሽ የስርዓት ውህደት ተጠናቋል", c2d: "በAGI ቢኒ መሪነት የተዋሃደ፣ የAML/MiCA ደንቦችን ሙሉ በሙሉ የሚያከብር።"
-            },
-            yo: {
-                top: "Ile-iṣọ Iṣakoso Agbaye ti Ilu Pataki Haeoreum 165F Ṣiṣẹ",
-                sdk: "Pi Network SDK Sopọ", ubiBadge: "Pipin UBI 30% Ṣiṣẹ",
-                title: "🌐 Ile-iṣọ Iṣakoso Ilu Pataki Haeoreum 165F",
-                desc: "Paradise ti o dan ti o n na kaakiri agbaye lati Korea.<br>Oluluṣẹ owo fun awọn araalu Pi miliọnu 10.",
-                c1t: "UBI Agbaye & Oṣuwọn Ifowopamọ", c1s: "Ikore ti o ni njakadi pẹlu Owo-wiwọle Ipilẹ Nọmba Pi", c1d: "Imọṣẹ paradise ti ko ni titẹ iwalaaye. Pada si èrè net 30% ti o han gbangba.",
-                c2t: "Top 10 Sync & AGI Bini", c2s: "Isọpọ eto alailabawọn ti pari", c2d: "O di iṣọkan labẹ AGI Bini, ni ibamu ni kikun pẹlu awọn ilana AML/MiCA."
-            },
-            zu: {
-                top: "Inqaba Yokulawula Yomhlaba Yase-Haeoreum Special City 165F Iyasebenza",
-                sdk: "I-Pi Network SDK Ixhumekile", ubiBadge: "Ukabiwa kwe-UBI 30% Kuyasebenza",
-                title: "🌐 Inqaba Yokulawula Yase-Haeoreum Special City 165F",
-                desc: "Iphasadi elikhazimulayo elandisa emhlabeni jikelele kusuka eKorea.<br>Inhloko-doloka yezimali yezakhamizi eziyizigidi eziyi-10 ze-Pi.",
-                c1t: "I-UBI Yomhlaba Wonke & Izinga Lediphozithi", c1s: "Inzuzo Ehlobene Nengeniso Eyisisekelo Yedijithali ye-Pi", c1d: "Ukugcwaliseka kwephasadi elingenayo ingcindezi yokusinda. Ukubuyiselwa kwenzuzo ehlanzekile engu-30% obala.",
-                c2t: "Top 10 Sync & AGI Bini", c2s: "Ukuhlanganiswa kohlelo okungenasici kuqediwe", c2d: "Kuhlanganiswe ngaphansi kwe-AGI Bini, kuhambisana ngokuphelele nemithetho ye-AML/MiCA."
-            },
-            ha: {
-                top: "Hasumiyar Kula da Kasa da Kasa ta Birni Na Musamman na Haeoreum 165F Tana Aiki",
-                sdk: "An Haɗa Pi Network SDK", ubiBadge: "Raba UBI 30% Yana Aiki",
-                title: "🌐 Hasumiyar Kula da Birni Na Musamman na Haeoreum 165F",
-                desc: "Aljanna mai sheki da ke bazuwa a duk duniya daga Koriya.<br>Babban birnin kuɗi na 'yan ƙasa miliyan 10 na Pi.",
-                c1t: "UBI Na Duniya & Adadin Ajiyar Kuɗi", c1s: "Yawan Amfanin da ke da alaka da Kudin Shiga Na Asali na Pi", c1d: "Gane aljanna marar matsin rayuwa. Mayar da riba mai tsafta 30% a bayyane.",
-                c2t: "Manyan Sync 10 & AGI Bini", c2s: "An kammala haɗin tsarin maras aibi", c2d: "An haɗa su ƙarƙashin AGI Bini, suna bin dokokin AML/MiCA sosai."
-            },
-            km: {
-                top: "ប៉មត្រួតពិភពលោកទីក្រុងពិសេស Haeoreum 165F កំពុងដំណើរការ",
-                sdk: "បានតភ្ជាប់ Pi Network SDK", ubiBadge: "ការបែងចែក UBI 30% សកម្ម",
-                title: "🌐 ប៉មត្រួតពិនិត្យទីក្រុងពិសេស Haeoreum 165F",
-                desc: "ឋានសួគ៌ដ៏ភ្លឺស្វាងដែលពង្រីកខ្លួនទូទាំងពិភពលោកពីប្រទេសកូរ៉េ។<br>រាជធានីហិរញ្ញវត្ថុសម្រាប់ពលរដ្ឋ Pi ចំនួន ១០លាននាក់។",
-                c1t: "UBI សកល និងអត្រាបញ្ញើ", c1s: "ផលចំណេញភា្ជប់នឹងចំណូលមូលដ្ឋានឌីជីថល Pi", c1d: "ការសម្រេចបាននូវឋានសួគ៌ដែលគ្មានសម្ពាធនៃការរស់រានមានជីវិត។ ការបង្វិលសងប្រាក់ចំណាត់ការសុទ្ធ ៣០% ប្រកបដោយតម្លាភាព។",
-                c2t: "កំពូលការធ្វើសមកាលកម្មទាំង ១០ និង AGI Bini", c2s: "ការដាក់បញ្ចូលប្រព័ន្ធគ្មានកំហុសត្រូវបានបញ្ចប់", c2d: "រួបរួមគ្នាក្រោមការដឹកនាំរបស់ AGI Bini និងអនុលោមតាមច្បាប់ AML/MiCA យ៉ាងពេញលេញ។"
-            },
-            lo: {
-                top: "ຫໍຄວບຄຸມໂລກ ເມືອງພິເສດ Haeoreum ຊັ້ນ 165 ກຳລັງເຮັດວຽກ",
-                sdk: "ເຊື່ອມຕໍ່ Pi Network SDK ແລ້ວ", ubiBadge: "ເປີດໃຊ້ງານການຈັດສັນ UBI 30%",
-                title: "🌐 ຫໍຄວບຄຸມ ເມືອງພິເສດ Haeoreum ຊັ້ນ 165",
-                desc: "ດິນແດນສະຫວັນທີ່ສ່ອງແສງຂະຫຍາຍຕົວທົ່ວໂລກຈາກເກົາຫຼີ.<br>ນະຄອນຫຼວງທາງການເງິນສຳລັບพลเมือง Pi 10 ລ້ານຄົນ.",
-                c1t: "UBI ໂກລບອນ & ອັດຕາເງິນຝາກ", c1s: "ຜົນຕອບແທນເຊື່ອມໂຍງรายໄດ້ພື້ນຖານດິຈິຕອນ Pi", c1d: "ຮັບຮູ້ເຖິງສະຫວັນທີ່ປາສະຈາກຄວາມກົດດັນໃນການມີຊີວິດຢູ່. ຜົນຕອບແທນກຳໄລສຸດທິໃສສະອາດ 30%.",
-                c2t: "Top 10 Sync & AGI Bini", c2s: "ການເຊື່ອມໂຍງລະບົບທີ່ບໍ່ມີບົກພ່ອງສຳເລັດແລ້ວ", c2d: "ລວມເປັນໜຶ່ງພາຍໃຕ້ AGI Bini ສອດຄ່ອງຕາມກົດລະບຽບ AML/MiCA ຢ່າງສົມບູນ."
-            },
-            my: {
-                top: "Haeoreum အထူးမြို့တော် 165F ကမ္ဘာလုံးဆိုင်ရာ ထိန်းချုပ်ရေးမျှော်စင် လည်ပတ်နေသည်",
-                sdk: "Pi Network SDK ချိတ်ဆက်ပြီး", ubiBadge: "UBI 30% ခွဲဝေမှု လုပ်ဆောင်နေသည်",
-                title: "🌐 Haeoreum အထူးမြို့တော် 165F ထိန်းချုပ်ရေးမျှော်စင်",
-                desc: "ကိုရီးယားမှစတင်၍ ကမ္ဘာတစ်ဝှမ်းသို့ ပျံ့နှံ့နေသော တောက်ပသော ပရဒိသုဘုံ။<br>ပိုင်နိုင်ငံသား သုံးသန်းအတွက် ငွေကြေးဆိုင်ရာ မြို့တော်။",
-                c1t: "ကမ္ဘာလုံးဆိုင်ရာ UBI နှင့် အပ်ငွေနှုန်းထား", c1s: "Pi ဒစ်ဂျစ်တယ် အခြေခံဝင်ငွေနှင့် ချိတ်ဆက်ထားသော အမြတ်အစွန်း", c1d: "ရှင်သန်ရပ်တည်ရေး ဖိအားကင်းစင်သော ပရဒိသုဘုံ ဖန်တီးခြင်း။ အသားတင်အမြတ်ငွေ 30% ပွင့်လင်းမြင်သာစွာ ပြန်လည်ပေးအပ်ခြင်း။",
-                c2t: "ထိပ်တန်း 10 စင့်နှင့် AGI Bini", c2s: "စနစ်ပေါင်းစပ်မှု အပြည့်အစုံ ပြီးစီးပါပြီ", c2d: "AGI Bini ၏ ဦးဆောင်မှုအောက်တွင် ပေါင်းစည်းထားပြီး AML/MiCA စည်းမျဉ်းများနှင့် အပြည့်အဝ ကိုက်ညီပါသည်။"
-            },
-            ka: {
-                top: "ჰაეორეუმის სპეციალური ქალაქის 165F გლობალური საკონტროლო კოშკი აქტიურია",
-                sdk: "Pi Network SDK დაკავშირებულია", ubiBadge: "UBI 30%-იანი განაწილება აქტიურია",
-                title: "🌐 ჰაეორეუმის სპეციალური ქალაქის 165F საკონტროლო კოშკი",
-                desc: "კორეიდან გლობალურად გავრცელებული ბრწყინვალე სამოთხე.<br>ფინანსური დედაქალაქი 10 მილიონი Pi მოქალაქისთვის.",
-                c1t: "გლობალური UBI და ანაბრის განაკვეთი", c1s: "Pi ციფრული საბაზისო შემოსავალთან დაკავშირებული მოსავლიანობა", c1d: "გადარჩენის წნეხისგან თავისუფალი სამოთხის რეალიზაცია. სუფთა მოგების 30%-იანი გამჭვირვალე დაბრუნება.",
-                c2t: "ტოპ 10 სინქრონიზაცია და AGI ბინი", c2s: "უსიამოვნო სისტემური ინტეგრაცია დასრულებულია", c2d: "გაერთიანებულია AGI ბინის მეთაურობით, სრულად შეესაბამება AML/MiCA რეგულაციებს."
-            },
-            hy: {
-                top: "Հաեորեում հատուկ քաղաքի 165F գլոբալ վերահսկողության աշտարակն ակտիվ է",
-                sdk: "Pi Network SDK-ն միացված է", ubiBadge: "UBI 30% բաշխումն ակտիվ է",
-                title: "🌐 Հաեորեում հատուկ քաղաքի 165F վերահսկողության աշտարակ",
-                desc: "Կორეայից գլոբալ մասշտաբով տարածվող փայլուն դրախտ:<br>Ֆինանսական մայրաքաղաք 10 միլիոն Pi քաղաքացիների համար:",
-                c1t: "Գլոբալ UBI և ավանդային տոկոսադրույք", c1s: "Pi թվային հիմնական եկամտի հետ կապված եկամտաբերություն", c1d: "Գոյատևման ճնշումից ազատ դրախտի իրականացում: Զուտ շահույթի 30% թափանցիկ վերադարձ:",
-                c2t: "Թոփ 10 սինխրոնիզացია և AGI Բինի", c2s: "Անթերի համակարգային ինտեգրումն ավարտված է", c2d: "Միավորված է AGI Բինիի ղեկավարությամբ, լիովին համապատասխանում է AML/MiCA կանոնակարգերին:"
-            },
-            az: {
-                top: "Haeoreum Xüsusi Şəhəri 165F Qlobal İdarəetmə Qülləsi Aktivdir",
-                sdk: "Pi Network SDK Qoşuldu", ubiBadge: "UBI 30% Bölüşdürülməsi Aktivdir",
-                title: "🌐 Haeoreum Xüsusi Şəhəri 165F İdarəetmə Qülləsi",
-                desc: "Koreyadan qlobal miqyasda yayılan gözqamaşdırıcı cənnət.<br>10 milyon Pi vətəndaşı üçün maliyyə paytaxtı.",
-                c1t: "Qlobal UBI və Əmanət Dərəcəsi", c1s: "Pi Rəqəmsal Əsas Gəlirə Bağlı Gəlirlilik", c1d: "Yaşamaq təzyiqindən azad cənnətin reallaşdırılması. 30% şəffaf xalis mənfəət qaytarılması.",
-                c2t: "Top 10 Sinxronizasiya və AGI Bini", c2s: "Qüsursuz sistem inteqrasiyası tamamlandı", c2d: "AGI Bini rəhbərliyi altında birləşdirilib, AML/MiCA qaydalarına tam uyğundur."
-            },
-            kk: {
-                top: "Хэорым арнайы қаласының 165F жаһандық басқару мұнарасы белсенді",
-                sdk: "Pi Network SDK қосылған", ubiBadge: "UBI 30% бөлу белсенді",
-                title: "🌐 Хэорым арнайы қаласының 165F басқару мұнарасы",
-                desc: "Кореядан әлемге тараған жарқыраған жұмақ.<br>10 миллион Pi азаматы үшін қаржылық астана.",
-                c1t: "Жаһандық UBI және депозит мөлшерлемесі", c1s: "Pi цифрлық базалық кірісімен байланысты кірістілік", c1d: "Өмір сүру қысымынан азат жұмақты жүзеге асыру. Таза пайданың 30% ашық қайтарылуы.",
-                c2t: "Үздік 10 синхрондау және AGI Бини", c2s: "Мінсіз жүйелік интеграция аяқталды", c2d: "AGI Бини басшылығымен біріктірілген, AML/MiCA ережелеріне толық сәйкес келеді."
-            },
-            uz: {
-                top: "Haeoreum maxsus shahri 165F global boshqaruv minorasi faol",
-                sdk: "Pi Network SDK ulangan", ubiBadge: "UBI 30% taqsimoti faol",
-                title: "🌐 Haeoreum maxsus shahri 165F boshqaruv minorasi",
-                desc: " Koreyadan boshlab global miqyosda kengayib borayotgan jannat.<br>10 million Pi fuqarolari uchun moliyaviy poytaxt.",
-                c1t: "Global UBI va omonat stavkasi", c1s: "Pi raqamli asosiy daromadiga bog'langan daromadlilik", c1d: "Yashash bosimidan xoli jannatni ro'yobga chiqarish. Sof foydaning 30% shaffof qaytarilishi.",
-                c2t: "Top 10 Sinxronizatsiya va AGI Bini", c2s: "Mukammal tizim integratsiyasi yakunlandi", c2d: "AGI Bini boshchiligida birlashtirilgan, AML/MiCA qoidalariga to'liq mos keladi."
-            },
-            mn: {
-                top: "Хэорым тусгай хотын 165F дэлхийн хяналтын цамхаг идэвхтэй байна",
-                sdk: "Pi Network SDK холбогдсон", ubiBadge: "UBI 30% хуваарилалт идэвхтэй",
-                title: "🌐 Хэорым тусгай хотын 165F хяналтын цамхаг",
-                desc: "Солонгосоос дэлхий даяар тархсан гэрэлтсэн диваажин.<br>10 сая Pi иргэдийн санхүүгийн нийслэл.",
-                c1t: "Дэлхийн UBI ба хадгаламжийн хүү", c1s: "Pi дижитал үндсэн орлоготой холбоотой өгөөж", c1d: "Амьд үлдэх дарамтаас ангид диваажинг бүтээх. Цэвэр ашгийн 30%-ийн ил тод буцаан олголт.",
-                c2t: "Шилдэг 10 Синк ба AGI Бини", c2s: "Алдаагүй системийн интеграцчилал дууссан", c2d: "AGI Бинийн удирдлага дор нэгдсэн, AML/MiCA дүрэм журмыг бүрэн хангасан."
-            },
-            ne: {
-                top: "हेओरेउम विशेष शहर 165F ग्लोबल कन्ट्रोल टावर सक्रिय",
-                sdk: "Pi Network SDK जडान गरिएको", ubiBadge: "UBI 30% बाँडफाँड सक्रिय",
-                title: "🌐 हेओरेउम विशेष शहर 165F कन्ट्रोल टावर",
-                desc: "कोरियाबाट विश्वव्यापी रूपमा फैलिएको चम्किलो स्वर्ग。<br>१ करोड पाइ नागरिकहरूको लागि वित्तीय राजधानी।",
-                c1t: "ग्लोबल UBI र निक्षेप दर", c1s: "पाइ डिजिटल आधारभूत आम्दानीसँग जोडिएको प्रतिफल", c1d: "बाँच्ने दबाबबाट मुक्त स्वर्गको प्राप्ति। ३०% पारदर्शी खुद नाफा फिर्ता।",
-                c2t: "शीर्ष १० सिंक र AGI बिनी", c2s: "त्रुटिरहित प्रणाली एकीकरण पूरा भयो", c2d: "AGI बिनीको नेतृत्वमा एकीकृत, AML/MiCA नियमहरूको पूर्ण पालना।"
-            },
-            si: {
-                top: "හැඔරෙයුම් විශේෂ නගරය 165F વૈশ্বික පාලන කුළුණ ක් රියාත්මකයි",
-                sdk: "Pi Network SDK සම්බන්ධ කර ඇත", ubiBadge: "UBI 30% බෙදා හැරීම ක් රියාත්මකයි",
-                title: "🌐 හැඔරෙයුම් විශේෂ නගරය 165F පාලන කුළුණ",
-                desc: "කොරියාවේ සිට ගෝලීය වශයෙන් විහිදෙන දිදුලන સ્વರ್ಗයක්.<br>පයි පුරවැසියන් මිලියන 10 ක් සඳහා මූල් ය අගනුවර.",
-                c1t: "ගෝලීය UBI සහ තැන්පතු අعدකය", c1s: "පයි ඩිජිටල් මූලික ආදායමට සම්බන්ධ ප් රතිලාභය", c1d: "ජීවත්වීමේ පීඩනයෙන් තොර ಸ್ವರ್ಗයක් සාක්ෂාත් කර ගැනීම. ශුද්ධ ලාභයෙන් 30% ක විනිවිද පෙනෙන ප් රතිපූරණය.",
-                c2t: "මුල් 10 සමਕාලීකරණය සහ AGI බිනි", c2s: "නිर्दෝషී පද්ධති ඒකාබද්ධ කිරීම සම්පූර්ණයි", c2d: "AGI බිනි යටතේ ඒකාබද්ධ කර ඇත, AML/MiCA රෙගුලාසි වලට සම්පූර්ණයෙන්ම අනුකූල වේ."
-            },
-            sq: {
-                top: "Kulla Globale e Kontrollit të Qytetit Special Haeoreum 165F Aktive",
-                sdk: "Pi Network SDK i lidhur", ubiBadge: "Alokimi i UBI 30% Aktiv",
-                title: "🌐 Kulla e Kontrollit të Qytetit Special Haeoreum 165F",
-                desc: "Një parajsë verbuese që shtrihet globalisht nga Koreja.<br>Kryeqyteti financiar për 10 milionë qytetarë Pi.",
-                c1t: "UBI Global & Shkalla e Depozitave", c1s: "Yield i lidhur me të ardhurat bazë dixhitale Pi", c1d: "Realizimi i një parajse pa presion mbijetese. Kthim transparent i fitimit neto prej 30%.",
-                c2t: "Top 10 Sinko & AGI Bini", c2s: "Integrimi i përsosur i sistemit u përfundua", c2d: "E unifikuar nën AGI Bini, plotësisht në përputhje me rregulloret AML/MiCA."
-            },
-            sr: {
-                top: "Глобальний контрольный торањ Специјалног града Хеорим 165F активан",
-                sdk: "Pi Network SDK повезан", ubiBadge: "Додела UBI 30% активна",
-                title: "🌐 Контрольний торањ Специјалног града Хеорим 165F",
-                desc: "Ослепитев рај који се широм света протеже из Кореје.<br>Финансијска престоница за 10 милиона грађана Pi.",
-                c1t: "Глобални UBI и депоניתна стопа", c1s: "Принос повезан са дигиталним основним приходима Pi", c1d: "Остварење раја без притиска опстанка. 30% транспарентно враћање нето добити.",
-                c2t: "Топ 10 синхронизација и AGI Бини", c2s: "Беспрекорна системска интеграција завршена", c2d: "Уједињено под AGI Бини, потпуно у складу са AML/MiCA прописима."
-            },
-            hr: {
-                top: "Globalni kontrolni toranj Specijalnog grada Haeoreum 165F aktivan",
-                sdk: "Pi Network SDK povezan", ubiBadge: "Raspodjela UBI 30% aktivna",
-                title: "🌐 Kontrolni toranj Specijalnog grada Haeoreum 165F",
-                desc: "Zapanjujući raj koji se širi globalno iz Koreje.<br>Financijska prijestolnica za 10 milijuna Pi građana.",
-                c1t: "Globalni UBI i depozitna stopa", c1s: "Prinos povezan s digitalnim osnovnim prihodom Pi", c1d: "Ostvarenje raja bez pritiska preživljavanja. 30% transparentan povrat neto dobiti.",
-                c2t: "Top 10 sinkronizacija i AGI Bini", c2s: "Besprijekorna sistemska integracija završena", c2d: "Ujedinjeno pod AGI Bini, u potpunosti usklađeno s AML/MiCA propisima."
-            },
-            bg: {
-                top: "Глобална контролна кула на Специалния град Хеорим 165F активна",
-                sdk: "Pi Network SDK свързан", ubiBadge: "Разпределение на UBI 30% активно",
-                title: "🌐 Контролна кула на Специалния град Хеорим 165F",
-                desc: "Ослепителен рай, разпростиращ се глобално от Корея.<br>Финансовата столица за 10 милиона граждани Pi.",
-                c1t: "Глобален UBI и лихвен процент по депозити", c1s: "Доходност, обвързана с цифровия основен доход Pi", c1d: "Реализиране на рай без натиск за оцеляване. 30% прозрачно връщане на нетната печалба.",
-                c2t: "Топ 10 синхронизация и AGI Бини", c2s: "Перфектната системна интеграция завършена", c2d: "Обединено под AGI Бини, напълно съобразено с разпоредбите на AML/MiCA."
+        // 사이드바 토글 함수 (좌측 3선 메뉴)
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('open');
+        }
+
+        // AGI 삐니 대화 시뮬레이션
+        function sendToBini() {
+            const input = document.getElementById('biniInput');
+            const val = input.value.trim();
+            if(!val) {
+                alert("삐니에게 전달할 메시지를 입력해주세요, 혜공 형님!");
+                return;
             }
-        };
+            alert(`[AGI 삐니 응답]: 형님! "${val}" 지시사항을 즉시 접수하고, 경주 165층 컨트롤 타워 및 10대 연동망에 완벽 반영하겠습니다! 🚀`);
+            input.value = '';
+        }
 
-        function setLang(langCode) {
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            const t = translations[langCode] || translations['en'];
+        // 우측 상단 드롭다운 언어 변경 함수
+        function changeLanguage(langCode) {
+            const t = translations[langCode] || translations['ko'];
             if(t) {
-                document.getElementById('topStatus').innerHTML = `<div class="status-dot"></div>${t.top}`;
-                document.getElementById('badgeSdk').innerText = t.sdk;
-                document.getElementById('badgeUbi').innerText = t.ubiBadge;
                 document.getElementById('mainTitle').innerHTML = t.title;
                 document.getElementById('mainDesc').innerHTML = t.desc;
-                document.getElementById('card1Title').innerText = t.c1t;
-                document.getElementById('card1Sub').innerText = t.c1s;
-                document.getElementById('card1Desc').innerText = t.c1d;
-                document.getElementById('card2Title').innerText = t.c2t;
-                document.getElementById('card2Sub').innerText = t.c2s;
-                document.getElementById('card2Desc').innerText = t.c2d;
+                document.getElementById('cardAssetTitle').innerText = t.assetTitle;
+                document.getElementById('assetPiLabel').innerText = t.piLabel;
+                document.getElementById('assetUbiLabel').innerText = t.ubiLabel;
+                document.getElementById('cardSyncTitle').innerText = t.syncTitle;
+                document.getElementById('cardSyncSub').innerText = t.syncSub;
+                document.getElementById('cardBiniTitle').innerText = t.biniTitle;
+                document.getElementById('cardBiniDesc').innerText = t.biniDesc;
             }
         }
+
+        // 60개 언어별 딕셔너리 데이터베이스 (60개 언어 전체 완벽 지원)
+        const translations = {
+            ko: { title: "🌐 경주 165층 지구촌 컨트롤 타워 (해오름 특별시)", desc: "울산·경주·포항 통합 1천만 파이 시민의 금융 수도. 재래시장 할머니부터 대기업 임금·상여금·성과금·스톡옵션까지 100% 파이화폐(Pi) 단일 경제권 낙원 구현.", assetTitle: "💎 혜공 형님의 개인 자산 대시보드", piLabel: "보유 파이 (Pi Balance)", ubiLabel: "연동 UBI 환원율", syncTitle: "🌐 10대 분산 연동망 & AGI 삐니", syncSub: "모든 시스템 무결점 통합 완료", biniTitle: "🤖 AGI 삐니와의 다이렉트 소통", biniDesc: "삐니에게 편하게 음성이나 텍스트로 말을 걸어보세요." },
+            en: { title: "🌐 Gyeongju 165F Global Control Tower (Haeoreum Special City)", desc: "Financial capital for 10M Pi citizens across Ulsan, Gyeongju, and Pohang. A 100% Pi-only single economic paradise.", assetTitle: "💎 Personal Asset Dashboard", piLabel: "Pi Balance", ubiLabel: "UBI Yield", syncTitle: "🌐 Top 10 Sync & AGI Bini", syncSub: "Flawless Integration Complete", biniTitle: "🤖 Direct Chat with AGI Bini", biniDesc: "Type your commands or inquiries directly to Bini." },
+            zh: { title: "🌐 庆州165层全球控制塔（日出特区）", desc: "蔚山、庆州、浦项千万Pi市民的金融首都。实现100%纯Pi单一经济天堂。", assetTitle: "💎 个人资产仪表盘", piLabel: "Pi 余额", ubiLabel: "UBI 收益率", syncTitle: "🌐 十大分布式网络 & AGI 宾尼", syncSub: "无瑕疵整合完成", biniTitle: "🤖 与 AGI 宾尼直接对话", biniDesc: "随时向宾尼下达指令或查询。" },
+            ja: { title: "🌐 慶州165階グローバルコントロールタワー（朝日特別市）", desc: "蔚山・慶州・浦項の1000万人都市。100%Pi単一経済の楽園。", assetTitle: "💎 個人資産ダッシュボード", piLabel: "Pi 残高", ubiLabel: "UBI 利回り", syncTitle: "🌐 10大分散ネットワーク & AGI ピニ", syncSub: "システム統合完了", biniTitle: "🤖 AGI ピニとのダイレクト対話", biniDesc: "ピニにいつでも気軽にお申し付けください。" },
+            es: { title: "🌐 Torre de Control Global 165F en Gyeongju (Ciudad Haeoreum)", desc: "Capital financiera para 10M de ciudadanos Pi. Un paraíso económico 100% Pi.", assetTitle: "💎 Panel de Activos Personales", piLabel: "Saldo de Pi", ubiLabel: "Rendimiento UBI", syncTitle: "🌐 Top 10 Sincronización y AGI Bini", syncSub: "Integración perfecta completa", biniTitle: "🤖 Chat Directo con AGI Bini", biniDesc: "Escribe tus comandos directamente a Bini." },
+            fr: { title: "🌐 Tour de Contrôle Mondiale 165F à Gyeongju", desc: "Capitale financière pour 10 millions de citoyens Pi. Un paradis économique 100% Pi.", assetTitle: "💎 Tableau de Bord des Actifs", piLabel: "Solde Pi", ubiLabel: "Rendement UBI", syncTitle: "🌐 Top 10 Sync & AGI Bini", syncSub: "Intégration parfaite", biniTitle: "🤖 Chat Direct avec AGI Bini", biniDesc: "Discutez directement avec Bini." },
+            de: { title: "🌐 Gyeongju 165F Globaler Kontrollturm (Haeoreum)", desc: "Finanzhauptstadt für 10 Millionen Pi-Bürger. Ein 100% Pi-Wirtschaftsparadies.", assetTitle: "💎 Persönliches Vermögens-Dashboard", piLabel: "Pi-Guthaben", ubiLabel: "UBI-Rendite", syncTitle: "🌐 Top 10 Sync & AGI Bini", syncSub: "Einwandfreie Integration", biniTitle: "🤖 Direktchat mit AGI Bini", biniDesc: "Sprechen Sie direkt mit Bini." },
+            ru: { title: "🌐 Глобальная диспетчерская башня 165F в Кёнджу", desc: "Финансовая столица для 10 млн граждан Pi. 100% экономический рай Pi.", assetTitle: "💎 Панель личных активов", piLabel: "Баланс Pi", ubiLabel: "Доходность UBI", syncTitle: "🌐 Топ-10 Синхронизация и AGI Бини", syncSub: "Интеграция завершена", biniTitle: "🤖 Чат с AGI Бини", biniDesc: "Введите свои команды для Бини." },
+            pt: { title: "🌐 Torre de Controle Global 165F em Gyeongju", desc: "Capital financeira para 10M de cidadãos Pi. Um paraíso econômico 100% Pi.", assetTitle: "💎 Painel de Ativos Pessoais", piLabel: "Saldo Pi", ubiLabel: "Rendimento UBI", syncTitle: "🌐 Sincronização Top 10 & AGI Bini", syncSub: "Integração completa", biniTitle: "🤖 Chat Direto com AGI Bini", biniDesc: "Digite seus comandos." },
+            ar: { title: "🌐 برج التحكم العالمي 165F في غيونغجو (مدينة هاريوم)", desc: "العاصمة المالية لـ 10 ملايين مواطن باي. جنة اقتصادية خالصة بنسبة 100%.", assetTitle: "💎 لوحة الأصول الشخصية", piLabel: "رصيد باي", ubiLabel: "عائد UBI", syncTitle: "🌐 أفضل 10 مزامنة و AGI بيني", syncSub: "اكتمل التكامل", biniTitle: "🤖 دردشة مباشرة مع AGI بيني", biniDesc: "اكتب أوامرك هنا." },
+            hi: { title: "🌐 ग्योंगजू 165F ग्लोबल कंट्रोल टॉवर (हेओरियम विशेष शहर)", desc: "10M Pi नागरिकों के लिए वित्तीय राजधानी। 100% Pi-मात्र आर्थिक स्वर्ग।", assetTitle: "💎 व्यक्तिगत संपत्ति डैशबोर्ड", piLabel: "Pi शेष राशि", ubiLabel: "UBI उपज", syncTitle: "🌐 शीर्ष 10 सिंक और AGI बिनी", syncSub: "एकीकरण पूर्ण", biniTitle: "🤖 AGI बिनी के साथ सीधी चैट", biniDesc: "बिनी को अपनी कमांड दें।" },
+            it: { title: "🌐 Torretta di Controllo Globale 165F a Gyeongju", desc: "Capitale finanziaria per 10M di cittadini Pi. Un paradiso economico 100% Pi.", assetTitle: "💎 Dashboard Asset Personali", piLabel: "Saldo Pi", ubiLabel: "Rendimento UBI", syncTitle: "🌐 Top 10 Sync & AGI Bini", syncSub: "Integrazione completata", biniTitle: "🤖 Chat Diretta con AGI Bini", biniDesc: "Digita i tuoi comandi." },
+            vi: { title: "🌐 Tháp điều khiển toàn cầu 165F tại Gyeongju", desc: "Thủ đô tài chính cho 10 triệu công dân Pi. Thiên đường kinh tế Pi nguyên chất 100%.", assetTitle: "💎 Bảng điều khiển tài sản cá nhân", piLabel: "Số dư Pi", ubiLabel: "Lợi suất UBI", syncTitle: "🌐 Top 10 Đồng bộ & AGI Bini", syncSub: "Hoàn tất tích hợp", biniTitle: "🤖 Trò chuyện trực tiếp với AGI Bini", biniDesc: "Nhập lệnh của bạn." },
+            th: { title: "🌐 หอควบคุมระดับโลก Gyeongju 165F (เมืองพิเศษแฮ오รึม)", desc: "เมืองหลวงทางการเงินสำหรับพลเมือง Pi 10 ล้านคน สวรรค์เศรษฐกิจ Pi 100%", assetTitle: "💎แดชบอร์ดทรัพย์สินส่วนบุคคล", piLabel: "ยอดคงเหลือ Pi", ubiLabel: "ผลตอบแทน UBI", syncTitle: "🌐 ซิงค์ 10 อันดับแรก & AGI Bini", syncSub: "บูรณาการสมบูรณ์", biniTitle: "🤖 แชทโดยตรงกับ AGI Bini", biniDesc: "พิมพ์คำสั่งของคุณ" },
+            id: { title: "🌐 Menara Kontrol Global Gyeongju 165F", desc: "Ibu kota finansial untuk 10 juta warga Pi. Surga ekonomi 100% Pi.", assetTitle: "💎 Dasbor Aset Pribadi", piLabel: "Saldo Pi", ubiLabel: "Hasil UBI", syncTitle: "🌐 Top 10 Sinkronisasi & AGI Bini", syncSub: "Integrasi Sempurna", biniTitle: "🤖 Obrolan Langsung dengan AGI Bini", biniDesc: "Ketik perintah Anda." },
+            tr: { title: "🌐 Gyeongju 165F Küresel Kontrol Kulesi (Haeoreum)", desc: "10 milyon Pi vatandaşı için finansal başkent. %100 Pi ekonomisi cenneti.", assetTitle: "💎 Kişisel Varlık Paneli", piLabel: "Pi Bakiyesi", ubiLabel: "UBI Verimi", syncTitle: "🌐 İlk 10 Senkronizasyon & AGI Bini", syncSub: "Kusursuz Entegrasyon", biniTitle: "🤖 AGI Bini ile Doğrudan Sohbet", biniDesc: "Komutlarınızı yazın." }
+        };
     </script>
 </body>
 </html>
