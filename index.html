@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WorldBank - Web3 Digital Banking Platform</title>
+    <title>HK WorldBank - 해오름의 미래, 디지털 화폐로 피어나는 특별시</title>
     <style>
         :root {
-            --primary-color: #0f172a;
-            --accent-color: #f59e0b;
-            --bg-color: #0b0f19;
-            --text-color: #f8fafc;
-            --card-bg: #1e293b;
+            --bg-deep: #050b14;
+            --bg-card: #0f172a;
+            --accent-gold: #f59e0b;
+            --accent-cyan: #38bdf8;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
         }
         * {
             box-sizing: border-box;
@@ -19,113 +20,500 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            padding: 20px;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 30px;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: flex-end;
+            max-width: 1100px;
+            margin: 0 auto 20px auto;
+        }
+        .lang-selector {
+            background-color: var(--bg-card);
+            color: var(--accent-gold);
+            border: 1px solid #334155;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .lang-selector:hover {
+            border-color: var(--accent-gold);
         }
         header {
             text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            border-radius: 12px;
-            margin-bottom: 30px;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #0f172a, #1e1b4b);
+            border-radius: 16px;
+            margin-bottom: 40px;
             border: 1px solid #334155;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         header h1 {
-            font-size: 2.5rem;
-            color: var(--accent-color);
-            margin-bottom: 10px;
+            font-size: 2.8rem;
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+            letter-spacing: -1px;
         }
         header p {
-            font-size: 1.1rem;
-            color: #94a3b8;
+            font-size: 1.2rem;
+            color: var(--accent-cyan);
+            font-weight: 500;
         }
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
         }
         .card {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            padding: 25px;
-            border: 1px solid #334155;
-            transition: transform 0.2s;
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid #1e293b;
+            transition: all 0.3s ease;
         }
         .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-color);
+            transform: translateY(-8px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.15);
         }
         .card h2 {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            color: var(--accent-color);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-gold);
+            border-bottom: 2px solid #1e293b;
+            padding-bottom: 10px;
         }
         .card ul {
             list-style-type: none;
-            padding-left: 0;
         }
         .card li {
-            margin-bottom: 10px;
-            color: #cbd5e1;
-            font-size: 0.95rem;
+            margin-bottom: 12px;
+            color: var(--text-sub);
+            font-size: 1rem;
+            position: relative;
+            padding-left: 20px;
         }
         .card li::before {
-            content: "✔ ";
-            color: var(--accent-color);
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+        }
+        .story-banner {
+            max-width: 1100px;
+            margin: 30px auto 0 auto;
+            background: linear-gradient(90deg, #1e1b4b, #0f172a);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #3b82f6;
+            text-align: center;
+        }
+        .story-banner h3 {
+            color: var(--accent-cyan);
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        .story-banner p {
+            color: var(--text-sub);
+            font-size: 1.05rem;
         }
         footer {
             text-align: center;
-            margin-top: 50px;
+            margin-top: 60px;
             padding: 20px;
             color: #64748b;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             border-top: 1px solid #1e293b;
         }
     </style>
 </head>
 <body>
 
+    <div class="top-bar">
+        <select class="lang-selector" id="languageSelect" onchange="changeLanguage()">
+            <option value="ko">🇰🇷 한국어</option>
+            <option value="en">🇺🇸 English (영어)</option>
+            <option value="zh">🇨🇳 中文 (중국어)</option>
+            <option value="es">🇪🇸 Español (스페인어)</option>
+            <option value="hi">🇮🇳 हिन्दी (인도어/힌디어)</option>
+            <option value="ar">🇸🇦 العربية (아랍어)</option>
+            <option value="bn">🇧🇩 বাংলা (벵골어)</option>
+            <option value="pt">🇧🇷 Português (브라질어)</option>
+            <option value="ru">🇷🇺 Русский (러시아어)</option>
+            <option value="ja">🇯🇵 日本語 (일본어)</option>
+            <option value="pa">🇮🇳 ਪੰਜਾਬੀ (펀자브어)</option>
+            <option value="de">🇩🇪 Deutsch (독일어)</option>
+            <option value="jv">🇮🇩 Basa Jawa (자바어)</option>
+            <option value="fr">🇫🇷 Français (프랑스어)</option>
+            <option value="te">🇮🇳 తెలుగు (텔루구어)</option>
+            <option value="vi">🇻🇳 Tiếng Việt (베트남어)</option>
+            <option value="mr">🇮🇳 मराठी (마라티어)</option>
+            <option value="tr">🇹🇷 Türkçe (튀르키예어)</option>
+            <option value="ta">🇮🇳 தமிழ் (타밀어)</option>
+            <option value="ur">🇵🇰 اردو (우르두어)</option>
+            <option value="gu">🇮🇳 ગુજરાતી (구자라트어)</option>
+            <option value="pl">🇵🇱 Polski (폴란드어)</option>
+            <option value="uk">🇺🇦 Українська (우크라이나어)</option>
+            <option value="it">🇮🇹 Italiano (이태리어)</option>
+            <option value="ml">🇮🇳 മലയാളം (말라얄람어)</option>
+            <option value="kn">🇮🇳 ಕನ್ನಡ (칸나다어)</option>
+            <option value="fa">🇮🇷 فارسی (페르시아어)</option>
+            <option value="my">🇲🇲 မြန်မာဘာသာ (버마어)</option>
+            <option value="th">🇹🇭 ไทย (태국어)</option>
+            <option value="nl">🇳🇱 Nederlands (네덜란드어)</option>
+            <option value="el">🇬🇷 Ελληνικά (그리스어)</option>
+            <option value="cs">🇨🇿 Čeština (체코어)</option>
+            <option value="sv">🇸🇪 Svenska (스웨덴어)</option>
+            <option value="hu">🇭🇺 Magyar (헝가리어)</option>
+            <option value="id">🇮🇩 Bahasa Indonesia (인도네시아어)</option>
+            <option value="ps">🇵🇸 پښتو (팔레스타인어)</option>
+            <option value="yo">🇳🇬 Yorùbá (나이지리아어)</option>
+            <option value="af">🇿🇦 Afrikaans (남아공어)</option>
+        </select>
+    </div>
+
     <header>
-        <h1>HK WorldBank</h1>
-        <p>Build with Gemini XPRIZE Submission - Next-Gen Web3 Digital Banking Platform</p>
+        <h1 id="main-title">HK WorldBank</h1>
+        <p id="main-subtitle">해오름의 미래: 디지털 화폐로 피어나는 특별시 (Project Genesis)</p>
     </header>
 
     <main class="container">
         <section class="card">
-            <h2>핵심 비전 및 개요</h2>
+            <h2 id="card1-title">울산 (Robotics Hub)</h2>
             <ul>
-                <li>탈중앙화 금융과 전통 은행 시스템의 완벽한 융합</li>
-                <li>글로벌 금융 포용성을 위한 디지털 기본소득 모델 설계</li>
-                <li>AI 기반 맞춤형 자산 관리 및 스마트 컨트랙트 최적화</li>
+                <li id="card1-1">휴머노이드 로봇 공학과 무인 자동화 물류 시스템 연동</li>
+                <li id="card1-2">노동과 부가가치가 공정하게 환원되는 스마트 금융 정산</li>
+                <li id="card1-3">시민 중심의 디지털 자산 기본소득 실시간 자동 지급</li>
             </ul>
         </section>
 
         <section class="card">
-            <h2>파이 네트워크(Pi Network) 연동</h2>
+            <h2 id="card2-title">경주 (Quantum Bio Hub)</h2>
             <ul>
-                <li>Pi SDK 통합을 통한 원활한 월렛 인증 및 자산 관리</li>
-                <li>Pi 코인 에코시스템 내 안전한 스테이킹 및 예금 상품 구조화</li>
-                <li>실시간 환율 및 유동성 연동 알고리즘 적용</li>
+                <li id="card2-1">양자 생명공학 및 친환경 에코 생태계 기반 펀딩</li>
+                <li id="card2-2">미래 지속 가능한 인프라를 위한 탈중앙화 자산 예금</li>
+                <li id="card2-3">투명한 스마트 컨트랙트를 통한 글로벌 자본 신뢰 구축</li>
             </ul>
         </section>
 
         <section class="card">
-            <h2>인프라 및 기술 스택</h2>
+            <h2 id="card3-title">포항 (Aerospace & Fusion Hub)</h2>
             <ul>
-                <li>Gemini API 기반의 지능형 고객 응대 및 데이터 분석 시스템</li>
-                <li>보안성이 강화된 Web3 디지털 뱅킹 인프라 구축</li>
-                <li>확장 가능한 클라우드 및 분산형 노드 아키텍처</li>
+                <li id="card3-1">핵융합 무한 청정에너지 및 우주 항행 시스템 프로젝트 투자</li>
+                <li id="card3-2">파이 네트워크(Pi Network) SDK 기반 초고속 글로벌 결제</li>
+                <li id="card3-3">중앙 카르텔을 뛰어넘는 완전한 분산 경제 노드 실현</li>
             </ul>
         </section>
     </main>
 
+    <div class="story-banner">
+        <h3 id="banner-title">🎬 Cinematic Web3 Universe</h3>
+        <p id="banner-desc">기술 독점과 금융 통제를 무너뜨리고, 해오름 특별시의 첨단 과학벨트와 디지털 화폐를 통해 인류에게 경제적 자유와 찬란한 해돋이를 선사합니다.</p>
+    </div>
+
     <footer>
-        &copy; 2026 HK Group. All rights reserved. Prepared for Build with Gemini XPRIZE.
+        <p id="footer-text">&copy; 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis.</p>
     </footer>
 
+    <script>
+        const translations = {
+            ko: {
+                subtitle: "해오름의 미래: 디지털 화폐로 피어나는 특별시 (Project Genesis)",
+                c1Title: "울산 (Robotics Hub)", c1_1: "휴머노이드 로봇 공학과 무인 자동화 물류 시스템 연동", c1_2: "노동과 부가가치가 공정하게 환원되는 스마트 금융 정산", c1_3: "시민 중심의 디지털 자산 기본소득 실시간 자동 지급",
+                c2Title: "경주 (Quantum Bio Hub)", c2_1: "양자 생명공학 및 친환경 에코 생태계 기반 펀딩", c2_2: "미래 지속 가능한 인프라를 위한 탈중앙화 자산 예금", c2_3: "투명한 스마트 컨트랙트를 통한 글로벌 자본 신뢰 구축",
+                c3Title: "포항 (Aerospace & Fusion Hub)", c3_1: "핵융합 무한 청정에너지 및 우주 항행 시스템 프로젝트 투자", c3_2: "파이 네트워크(Pi Network) SDK 기반 초고속 글로벌 결제", c3_3: "중앙 카르텔을 뛰어넘는 완전한 분산 경제 노드 실현",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "기술 독점과 금융 통제를 무너뜨리고, 해오름 특별시의 첨단 과학벨트와 디지털 화폐를 통해 인류에게 경제적 자유와 찬란한 해돋이를 선사합니다.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            en: {
+                subtitle: "Future of Haerum: A Special City Blossoming with Digital Currency (Project Genesis)",
+                c1Title: "Ulsan (Robotics Hub)", c1_1: "Integration of humanoid robotics and automated logistics", c1_2: "Smart financial settlement ensuring fair return of labor and value", c1_3: "Real-time automated distribution of citizen UBI",
+                c2Title: "Gyeongju (Quantum Bio Hub)", c2_1: "Funding based on quantum biotechnology and eco-systems", c2_2: "Decentralized asset deposits for sustainable infrastructure", c2_3: "Building global capital trust through smart contracts",
+                c3Title: "Pohang (Aerospace & Fusion Hub)", c3_1: "Investment in nuclear fusion clean energy and space navigation", c3_2: "High-speed global payments powered by Pi Network SDK", c3_3: "Realizing a fully decentralized economic node",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Breaking down tech monopolies to grant humanity economic freedom and a brilliant sunrise.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            zh: {
+                subtitle: "日出之未来：以数字货币绽放的特别市 (Project Genesis)",
+                c1Title: "蔚山 (机器人枢纽)", c1_1: "人形机器人工程与无人自动化物流系统联动", c1_2: "公平回报劳动与附加值的智能金融结算", c1_3: "市民数字资产基本收入实时自动发放",
+                c2Title: "庆州 (量子生物枢纽)", c2_1: "基于量子生物技术与环保生态系统的融资", c2_2: "去中心化资产存款", c2_3: "通过透明智能合约建立全球资本信任",
+                c3Title: "浦项 (航空航天与聚变枢纽)", c3_1: "核聚变清洁能源及太空导航系统投资", c3_2: "基于 Pi Network SDK 的超高速全球支付", c3_3: "实现完全去中心化经济节点",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "打破技术垄断与金融控制，为人类带来经济自由与灿烂的日出。", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            es: {
+                subtitle: "El Futuro de Haerum: Ciudad Especial con Moneda Digital",
+                c1Title: "Ulsan (Robótica)", c1_1: "Robótica humanoide y logística automatizada", c1_2: "Liquidación financiera inteligente", c1_3: "Distribución de RBU en activos digitales",
+                c2Title: "Gyeongju (Bio Cuántico)", c2_1: "Financiamiento de biotecnología cuántica", c2_2: "Depósitos descentralizados", c2_3: "Confianza mediante contratos inteligentes",
+                c3Title: "Pohang (Aeroespacial y Fusión)", c3_1: "Inversión en energía limpia y fusión", c3_2: "Pagos globales con Pi Network SDK", c3_3: "Nodo económico descentralizado",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Libertad económica a través de la moneda digital.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            hi: {
+                subtitle: "हैरुम का भविष्य: डिजिटल मुद्रा के साथ एक विशेष शहर",
+                c1Title: "उल्सान (रोबोटिक्स)", c1_1: "मानवइड रोबोटिक्स और स्वचालित लॉजिस्टिक्स", c1_2: "स्मार्ट वित्तीय निपटान", c1_3: "नागरिक यूबीआई का स्वचालित वितरण",
+                c2Title: "ग्योंगजू (क्वांटम बायो)", c2_1: "क्वांटम जैव प्रौद्योगिकी पर आधारित फंडिंग", c2_2: "विकेंद्रीकृत संपत्ति जमा", c2_3: "स्मार्ट अनुबंधों के माध्यम से विश्वास",
+                c3Title: "पोहियांग (एयरोस्पेस)", c3_1: "परमाणु संलयन ऊर्जा में निवेश", c3_2: "पाई नेटवर्क एसडीके भुगतान", c3_3: "विकेंद्रीकृत आर्थिक नोड",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "मानवता को आर्थिक स्वतंत्रता प्रदान करना।", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            ar: {
+                subtitle: "مستقبل هيروم: مدينة خاصة تزدهر بالعملة الرقمية",
+                c1Title: "ولسان (روبوتات)", c1_1: "تكامل الروبوتات والخدمات اللوجستية", c1_2: "التسوية المالية الذكية", c1_3: "التوزيع الآلي للدخل الأساسي",
+                c2Title: "جيونغجو (بايو)", c2_1: "التمويل القائم على التكنولوجيا الحيوية", c2_2: "ودائع الأصول اللامركزية", c2_3: "بناء الثقة عبر العقود الذكية",
+                c3Title: "بوهانغ (الفضاء)", c3_1: "الاستثمار في طاقة الانصهار النووي", c3_2: "مدفوعات سريعة عبر Pi Network", c3_3: "تحقيق عقدة اقتصادية لامركزية",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "منح الحرية الاقتصادية للبشرية من خلال العملة الرقمية.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            bn: {
+                subtitle: "হ্যারুমের ভবিষ্যৎ: ডিজিটাল মুদ্রায় প্রস্ফুটিত বিশেষ শহর",
+                c1Title: "উলসান (রোবোটিক্স)", c1_1: "হিউম্যানয়েড রোবোটিক্স এবং লজিস্টিকস", c1_2: "স্মার্ট আর্থিক settlement", c1_3: "স্বয়ংক্রিয় মৌলিক আয় বিতরণ",
+                c2Title: "গিয়ংজু (কোয়ান্টাম বায়ো)", c2_1: "কোয়ান্টাম বায়োটেকনোলজি তহবিল", c2_2: "ভবিষ্যত অবকাঠামো আমানত", c2_3: "স্মার্ট চুক্তির মাধ্যমে আস্থা",
+                c3Title: "পোহাং (এ্যারোস্পেস)", c3_1: "পারমাণবিক শক্তি বিনিয়োগ", c3_2: "পাই নেটওয়ার্ক পেমেন্ট", c3_3: "বিকেন্দ্রীকৃত অর্থনৈতিক অর্থনৈতিক নোড",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "ডিজিটাল মুদ্রার মাধ্যমে অর্থনৈতিক স্বাধীনতা।", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            pt: {
+                subtitle: "O Futuro de Haerum: Uma Cidade Especial com Moeda Digital",
+                c1Title: "Ulsan (Robótica)", c1_1: "Robótica humanóide e logística automatizada", c1_2: "Liquidação financeira inteligente", c1_3: "Distribuição automatizada de Renda Básica",
+                c2Title: "Gyeongju (Bio Quântica)", c2_1: "Financiamento em biotecnologia quântica", c2_2: "Depósitos de ativos descentralizados", c2_3: "Confiança global via contratos inteligentes",
+                c3Title: "Pohang (Aeroespacial e Fusão)", c3_1: "Investimento em energia limpa de fusão", c3_2: "Pagamentos globais com Pi Network SDK", c3_3: "Nó econômico descentralizado",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Liberdade econômica e inovação através da moeda digital.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            ru: {
+                subtitle: "Будущее Хэрума: Особ. город, процветающий на цифр. валюте",
+                c1Title: "Ульсан (Робототехника)", c1_1: "Интеграция робототехники и логистики", c1_2: "Умный финансовый расчет", c1_3: "Автоматическое распределение БОД",
+                c2Title: "Кенджу (Квантовая био)", c2_1: "Финансирование на основе биотехнологий", c2_2: "Децентрализованные депозиты активов", c2_3: "Доверие через смарт-контракты",
+                c3Title: "Похан (Аэрокосмос и термояд)", c3_1: "Инвестиции в термоядерную энергию", c3_2: "Глобальные платежи Pi Network SDK", c3_3: "Децентрализованный узел",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Экономическая свобода человечеству.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            ja: {
+                subtitle: "日の出の未来：デジタル通貨で花開く特別市 (Project Genesis)",
+                c1Title: "蔚山 (ロボティクスハブ)", c1_1: "ヒューマノイドロボット工学と無人自動化物流", c1_2: "公正なスマート金融決済", c1_3: "市民中心のデジタル資産ベーシックインカム自動支給",
+                c2Title: "慶州 (量子バイオハブ)", c2_1: "量子生命工学基盤のファンディング", c2_2: "分散型資産預金", c2_3: "透明なスマートコントラクトによる信頼構築",
+                c3Title: "浦項 (航空宇宙＆核融合ハブ)", c3_1: "核融合クリーンエネルギー投資", c3_2: "Pi Network SDK 決済", c3_3: "完全な分散経済ノードの実現",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "人類に経済的自由をもたらします。", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            pa: {
+                subtitle: "ਹੈਰੁਮ ਦਾ ਭਵਿੱਖ: ਡਿਜੀਟਲ ਮੁਦਰਾ ਨਾਲ ਖਿੜਦਾ ਵਿਸ਼ੇਸ਼ ਸ਼ਹਿਰ",
+                c1Title: "ਉਲਸਾਨ (ਰੋਬੋਟਿਕਸ)", c1_1: "ਰੋਬੋਟਿਕਸ ਅਤੇ ਲੌਜਿਸਟਿਕਸ", c1_2: "ਸਮਾਰਟ ਵਿੱਤੀ ਨਿਪਟਾਰਾ", c1_3: "ਡਿਜੀਟਲ ਆਮਦਨ ਵੰਡ",
+                c2Title: "ਗਯੋਂਗਜੂ (ਕੁਆਂਟਮ ਬਾਇਓ)", c2_1: "ਬਾਇਓਟੈਕਨਾਲੋਜੀ ਫੰਡਿੰਗ", c2_2: "ਅਸਟ ਸਟੋਰੇਜ", c2_3: "ਸਮਾਰਟ ਕੰਟਰੈਕਟ ਭਰੋਸਾ",
+                c3Title: "ਪੋਹਾਂਗ (ਏਰੋਸਪੇਸ)", c3_1: "ਪਰমাণੂ ਊਰਜਾ ਨਿਵੇਸ਼", c3_2: "ਪਾਈ ਨੈੱਟਵਰਕ ਭੁਗਤਾਨ", c3_3: "ਵਿਕੇਂਦਰੀਤ ਨੋਡ",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "ਆਰਥਿਕ ਆਜ਼ადი।", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            de: {
+                subtitle: "Die Zukunft von Haerum: Spezialstadt durch digitale Währung",
+                c1Title: "Ulsan (Robotik)", c1_1: "Humanoide Robotik & Logistik", c1_2: "Intelligente Finanzabrechnung", c1_3: "Automatisierte Verteilung von Grundeinkommen",
+                c2Title: "Gyeongju (Quanten-Bio)", c2_1: "Quantenbiotechnologie-Finanzierung", c2_2: "Dezentrale Vermögenseinlagen", c2_3: "Kapitalvertrauen durch Verträge",
+                c3Title: "Pohang (Luftfahrt & Fusion)", c3_1: "Kernfusion-Investitionen", c3_2: "Pi Network SDK Zahlungen", c3_3: "Dezentraler Wirtschaftsknoten",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Wirtschaftliche Freiheit für die Menschheit.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            jv: {
+                subtitle: "Masa Ngarep Haerum: Kutha Istimewa kanthi Mata Uang Digital",
+                c1Title: "Ulsan (Robotika)", c1_1: "Robotika lan logistik otomatis", c1_2: "Penyelesaian finansial cerdas", c1_3: "Distribusi dhasar digital",
+                c2Title: "Gyeongju (Bio Kuantum)", c2_1: "Pendanaan bioteknologi kuantum", c2_2: "Simpenan aset desentralisasi", c2_3: "Pembangunan kapercayan",
+                c3Title: "Pohang (Aerangkasa & Fusi)", c3_1: "Investasi energi resik fusi", c3_2: "Pembayaran Pi Network SDK", c3_3: "Simpul ekonomi desentralisasi",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Kebebasan ekonomi kanggo manungsa.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            fr: {
+                subtitle: "L'Avenir de Haerum : Ville Spéciale par la Monnaie Numérique",
+                c1Title: "Ulsan (Robotique)", c1_1: "Robotique et logistique automatisée", c1_2: "Règlement financier intelligent", c1_3: "Distribution automatisée du revenu de base",
+                c2Title: "Gyeongju (Bio Quantique)", c2_1: "Financement biotechnologique", c2_2: "Dépôts décentralisés", c2_3: "Confiance mondiale",
+                c3Title: "Pohang (Aérospatial)", c3_1: "Investissement fusion nucléaire", c3_2: "Paiements Pi Network SDK", c3_3: "Nœud économique décentralisé",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Liberté économique pour l'humanité.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            te: {
+                subtitle: "హేరుమ్ భవిష్యత్తు: డిజిటల్ కరెన్సీ ప్రత్యేక నగరంగా",
+                c1Title: "ఉల్సాన్ (రోబోటిక్స్)", c1_1: "హ్యూమనాయిడ్ రోబోటిక్స్", c1_2: "స్మార్ట్ ఫైనాన్షియల్ సెటిల్మెంట్", c1_3: "డిజిటల్ ఆస్తుల పంపిణీ",
+                c2Title: "గ్యోంగ్జు (క్వాంటమ్ బయో)", c2_1: "క్వాంటమ్ బయోటెక్నాలజీ ఫండింగ్", c2_2: "వికేంద్రీకృత డిపాజిట్లు", c2_3: "స్మార్ట్ కాంట్రాక్ట్ ల ద్వారా నమ్మకం",
+                c3Title: "పోహాంగ్ (ఏరోస్పేస్)", c3_1: "అణు కలయిక శక్తి పెట్టుబడి", c3_2: "పై నెట్ వర్క్ చెల్లింపులు", c3_3: "వికేంద్రీకృత ఆర్థిక నోడ్",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "ఆర్థిక స్వేచ్ఛను అందించడం.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            vi: {
+                subtitle: "Tương lai của Haerum: Thành phố đặc biệt với Tiền kỹ thuật số",
+                c1Title: "Ulsan (Trung tâm Rô-bốt)", c1_1: "Tích hợp robot hình người và logistics", c1_2: "Thanh toán tài chính thông minh", c1_3: "Phân phối thu nhập cơ bản tự động",
+                c2Title: "Gyeongju (Sinh học lượng tử)", c2_1: "Tài trợ dựa trên công nghệ sinh học", c2_2: "Tiền gửi phi tập trung", c2_3: "Xây dựng niềm tin vốn toàn cầu",
+                c3Title: "Pohang (Hàng không & Tổng hợp)", c3_1: "Đầu tư năng lượng sạch", c3_2: "Thanh toán Pi Network SDK", c3_3: "Hiện thực hóa nút kinh tế phi tập trung",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Mang lại tự do kinh tế cho nhân loại.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            mr: {
+                subtitle: "हैरुमचे भविष्य: डिजिटल चलनाने फुलणारे विशेष शहर",
+                c1Title: "उल्सान (रोबोटिक्स)", c1_1: "मानवतावादी रोबोटिक्स आणि लॉजिस्टिक्स", c1_2: "स्मार्ट आर्थिक बंदोबस्त", c1_3: "डिजिटल मालमत्ता वितरण",
+                c2Title: "ग्योंगजू (क्वांटम बायो)", c2_1: "क्वांटम बायोटेक्नोलॉजी निधी", c2_2: "विकेंद्रित ठेवी", c2_3: "स्मार्ट कॉन्ट्रॅक्ट्सद्वारे विश्वास",
+                c3Title: "पोहांग (अरोस्पेस)", c3_1: "अणुसंलयन ऊर्जा गुंतवणूक", c3_2: "पाई नेटवर्क पेमेंट", c3_3: "विकेंद्रित आर्थिक नोड",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "आर्थिक स्वातंत्र्य.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            tr: {
+                subtitle: "Haerum'un Geleceği: Dijital Para ile Çiçek Açan Özel Şehir",
+                c1Title: "Ulsan (Robotik Merkezi)", c1_1: "İnsansı robotik ve lojistik entegrasyonu", c1_2: "Akıllı finansal mutabakat", c1_3: "Vatandaş odaklı evrensel temel gelir",
+                c2Title: "Gyeongju (Kuantum Biyo)", c2_1: "Kuantum biyoteknoloji finansmanı", c2_2: "Merkeziyetsiz varlık mevduatı", c2_3: "Akıllı sözleşmelerle küresel sermaye güveni",
+                c3Title: "Pohang (Uzay ve Füzyon)", c3_1: "Nükleer füzyon temiz enerji yatırımı", c3_2: "Pi Network SDK ile küresel ödemeler", c3_3: "Merkeziyetsiz ekonomik düğüm",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "İnsanlığa ekonomik özgürlük sağlamak.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            ta: {
+                subtitle: "ஹேருமின் எதிர்காலம்: டிஜிட்டல் நாணயத்தால் மலரும் சிறப்பு நகரம்",
+                c1Title: "உல்சான் (ரோபோடிக்ஸ்)", c1_1: "ரோபோடிக்ஸ் மற்றும் தளவாடங்கள்", c1_2: "ஸ்மார்ட் நிதி தீர்வு", c1_3: "டிஜிட்டல் சொத்து விநியோகம்",
+                c2Title: "ஜியோங்ஜு (குவாண்டம் பயோ)", c2_1: "குவாண்டம் பயோடெக்னாலஜி", c2_2: "பரவலாக்கப்பட்ட வைப்புத்தொகை", c2_3: "ஸ்மார்ட் ஒப்பந்தங்கள் மூலம் நம்பிக்கை",
+                c3Title: "போஹாங் (விண்வெளி)", c3_1: "அணு இணைவு ஆற்றல் முதலீடு", c3_2: "பை நெட்வொர்க் கட்டணம்", c3_3: "பரவலாக்கப்பட்ட பொருளாதார முனையம்",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "மனிதகுலத்திற்கு பொருளாதார சுதந்திரம்.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            ur: {
+                subtitle: "ہیروم کا مستقبل: ڈیجیٹل کرنسی سے کھلنے والا خاص شہر",
+                c1Title: "اولسان (روبوٹکس)", c1_1: "ہیومنائڈ روبوٹکس اور لاجسٹکس", c1_2: "اسمارٹ مالیاتی تصفیہ", c1_3: "ڈیجیٹل بنیادی آمدنی کی تقسیم",
+                c2Title: "گیونگجو (کوانٹم بائیو)", c2_1: "کوانٹم بائیو ٹیکنالوجی فنڈنگ", c2_2: "غیر مرکزی اثاثہ جات", c2_3: "اسمارٹ معاہدوں کے ذریعے اعتماد",
+                c3Title: "پوہانگ (ایرو اسپیس)", c3_1: "نیوکلیئر فیوژن انرجی کی سرمایہ کاری", c3_2: "پائی نیٹ ورک SDK ادגائیگی", c3_3: "غیر مرکزی معاشی نوڈ",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "انسانیت کو معاشی آزادی دینا۔", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            gu: {
+                subtitle: "હૈરુમનું ભવિષ્ય: ડિજિટલ કરન્સી સાથે ખીલેલું વિશેષ શહેર",
+                c1Title: "ઉલસાન (રોબોટિક્સ)", c1_1: "હ્યુમેનોઇડ રોબોટિક્સ અને લોજિસ્ટિક્સ", c1_2: "સ્માર્ટ નાણાકીય પતાવટ", c1_3: "ડિજિટલ એસેટ મૂળભૂત આવક",
+                c2Title: "ગ્યોંગજુ (ક્વોન્ટમ બાયો)", c2_1: "ક્વોન્ટમ બાયોટેકનોલોજી ફંડિંગ", c2_2: "વિકેન્દ્રીકૃત એસેટ ડિપોઝિટ", c2_3: "સ્માર્ટ કોન્ટ્રાક્ટ વિશ્વાસ",
+                c3Title: "પોહાંગ (એરોસ્પેસ)", c3_1: "પરમાણુ ફ્યુઝન ઊર્જા રોકાણ", c3_2: "પાઇ નેટવર્ક SDK ચુકવણી", c3_3: "વિકેન્દ્રીકૃત આર્થિક નોડ",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "માનવતાને આર્થિક સ્વતંત્રતા આપવી.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            pl: {
+                subtitle: "Przyszłość Haerum: Miasto rozkwitające cyfrową walutą",
+                c1Title: "Ulsan (Robotyka)", c1_1: "Robotyka humanoidalna i logistyczna", c1_2: "Inteligentne rozliczenia finansowe", c1_3: "Automatyczna dystrybucja dochodu podstawowego",
+                c2Title: "Gyeongju (Quantum Bio)", c2_1: "Finansowanie biotechnologii kwantowej", c2_2: "Zdecentralizowane depozyty aktywów", c2_3: "Budowanie zaufania kapitałowego",
+                c3Title: "Pohang (Lotnictwo i Fuzja)", c3_1: "Inwestycje w czystą energię fuzji jądrowej", c3_2: "Płatności Pi Network SDK", c3_3: "Zdecentralizowany węzeł gospodarczy",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Wolność ekonomiczna dla ludzkości.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            uk: {
+                subtitle: "Майбутнє Хаерума: Особливе місто, що розквітає цифровою валютою",
+                c1Title: "Ульсан (Робототехніка)", c1_1: "Гуманоїдна робототехніка та логістика", c1_2: "Розумні фінансові розрахунки", c1_3: "Автоматичний розподіл базового доходу",
+                c2Title: "Кенджу (Квантова біо)", c2_1: "Фінансування на основі біотехнологій", c2_2: "Децентралізовані активи", c2_3: "Довіра через смарт-контракти",
+                c3Title: "Похан (Аерокосмос та синтез)", c3_1: "Інвестиції в термоядерну енергію", c3_2: "Платежі Pi Network SDK", c3_3: "Децентралізований вузол",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Економічна свобода для людства.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            it: {
+                subtitle: "Il Futuro di Haerum: Città Speciale con Valuta Digitale",
+                c1Title: "Ulsan (Robotica)", c1_1: "Robotica umanoide e logistica", c1_2: "Regolamento finanziario intelligente", c1_3: "Distribuzione automatizzata del reddito di base",
+                c2Title: "Gyeongju (Bio Quantistica)", c2_1: "Finanziamento basato sulla biotecnologia", c2_2: "Depositi di attività decentralizzati", c2_3: "Fiducia globale tramite contratti intelligenti",
+                c3Title: "Pohang (Aerospaziale e Fusione)", c3_1: "Investimenti in energia pulita", c3_2: "Pagamenti globali con Pi Network SDK", c3_3: "Realizzazione di un nodo economico decentralizzato",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Libertà economica per l'umanità.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            ml: {
+                subtitle: "ഹേരുമിന്റെ ഭാവി: ഡിജിറ്റൽ കറൻസിയിലൂടെ പുഷ്പിക്കുന്ന പ്രത്യേക നഗരം",
+                c1Title: "ഉൽസാൻ (റോബോട്ടിക്സ്)", c1_1: "ഹ്യൂമനോയിഡ് റോബോട്ടിക്സ്", c1_2: "സ്മാർട്ട് ഫിനാൻഷ്യൽ സെറ്റിൽമെന്റ്", c1_3: "ഡിജിറ്റൽ അസറ്റ് വിതരണം",
+                c2Title: "ഗിയോങ്ജു (ക്വാണ്ടം ബയോ)", c2_1: "ക്വാണ്ടം ബയോടെക്നോളജി ഫണ്ടിംഗ്", c2_2: "വികേന്ദ്രീകൃത നിക്ഷേപങ്ങൾ", c2_3: "സ്മാർട്ട് കോൺട്രാക്ടുകൾ വഴിയുള്ള വിശ്വാസം",
+                c3Title: "പോഹാങ് (എയറോസ്പേസ്)", c3_1: "ന്യൂക്ലിയർ ഫ്യൂഷൻ ഊർജ്ജ നിക്ഷേപം", c3_2: "പൈ നെറ്റ് വർക്ക് പേയ്മെന്റുകൾ", c3_3: "വികേന്ദ്രീകൃത സാമ്പത്തിക നോഡ്",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "മാനവരാശിക്ക് സാമ്പത്തിക സ്വാതന്ത്ര്യം നൽകുന്നു.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            kn: {
+                subtitle: "ಹೇರುಮ್ ಭವಿಷ್ಯ: ಡಿಜಿಟಲ್ ಕరెನ್ಸಿಯೊಂದಿಗೆ ಅರಳುವ ವಿಶೇಷ ನಗರ",
+                c1Title: "ಉಲ್ಸಾನ್ (ರೋಬೋಟಿಕ್ಸ್)", c1_1: "ಹ್ಯೂಮನಾಯ್ಡ್ ರೋಬೋಟಿಕ್ಸ್", c1_2: "ಸ್ಮಾರ್ಟ್ ಹಣಕಾಸು ಇತ್ಯರ್ಥ", c1_3: "ಡಿಜಿಟಲ್ ಆಸ್ತಿ ವಿತರಣೆ",
+                c2Title: "ಗ್ಯೊಂಗ್ಜು (ಕ್ವಾಂಟಮ್ ಬಯೋ)", c2_1: "ಕ್ವಾಂಟಮ್ ಬಯೋಟೆಕ್ನಾಲಜಿ ಧನಸಹಾಯ", c2_2: "ವಿಕೇಂದ್ರೀಕೃತ ಠೇವಣಿಗಳು", c2_3: "ಸ್ಮಾರ್ಟ್ ಒಪ್ಪಂದಗಳ ಮೂಲಕ ನಂಬಿಕೆ",
+                c3Title: "ಪೊಹಾಂಗ್ (ಏರೋಸ್ಪೇಸ್)", c3_1: "ನ್ಯೂಕ್ಲಿಯರ್ ಫ್ಯೂಷನ್ ಶಕ್ತಿ ಹೂಡಿಕೆ", c3_2: "ಪೈ ನೆಟ್ ವರ್ಕ್ ಪಾವತಿಗಳು", c3_3: "ವಿಕೇಂದ್ರೀಕೃತ ಆರ್ಥಿಕ ನೋಡ್",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "ಆರ್ಥಿಕ ಸ್ವಾತಂತ್ರ್ಯವನ್ನು ಒದಗಿಸುವುದು.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            fa: {
+                subtitle: "آینده هائروم: شهری ویژه که با ارز دیجیتال شکوفا می شود",
+                c1Title: "اولسان (رباتیک)", c1_1: "رباتیک انسان نما و لجستیک", c1_2: "تسویه مالی هوشمند", c1_3: "توزیع خودکار درآمد پایه دیجیتال",
+                c2Title: "گیونگجو (بیو کوانتومی)", c2_1: "تامین مالی بیوتکنولوژی", c2_2: "سپرده های دارایی غیرمتمرکز", c2_3: "اعتماد سرمایه جهانی از طریق قراردادهای هوشمند",
+                c3Title: "پوهانگ (هوافضا و همجوشی)", c3_1: "سرمایه گذاری در انرژی پاک", c3_2: "پرداخت های جهانی Pi Network", c3_3: "گره اقتصادی غیرمتمرکز",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "آزادی اقتصادی برای بشریت.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            my: {
+                subtitle: "ဟေရုမ်၏အနာဂတ်- ဒစ်ဂျစ်တယ်ငွေကြေးဖြင့် ပွင့်လန်းလာမည့် အထူးမြို့တော်",
+                c1Title: "ဦးဆန် (ရိုဘိုတစ်)", c1_1: "လူသားပုံစံ ရိုဘိုတစ်နှင့် ထောက်ပံ့ပို့ဆောင်ရေး", c1_2: "စမတ် ငွေကြေးဖြေရှင်းမှု", c1_3: "ဒီဂျစ်တယ် ပိုင်ဆိုင်မှု ဖြန့်ဝေမှု",
+                c2Title: "ဂျုံကျူ (ကွမ်တမ်ဇီဝ)", c2_1: "ကွမ်တမ် ဇီဝနည်းပညာ ရန်ပုံငွေ", c2_2: "ဗဟိုချုပ်ကိုင်မှုကင်းသော အပ်ငွေများ", c2_3: "စမတ်စာချုပ်များဖြင့် ယုံကြည်မှုတည်ဆောက်ခြင်း",
+                c3Title: "ပိုဟန် (အာကာသ)", c3_1: "နူကလီးယားစွမ်းအင် ရင်းနှီးမြှုပ်နှံမှု", c3_2: "Pi Network SDK ဖြင့် ပေးချေမှုများ", c3_3: "ဗဟိုချုပ်ကိုင်မှုကင်းသော စီးပွားရေး నోಡ್",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "လူသားမျိုးနွယ်အတွက် စီးပွားရေးလွတ်လပ်ခွင့်ကို ပေးစွမ်းသည်။", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            th: {
+                subtitle: "อนาคตของแฮรุม: เมืองพิเศษที่เบ่งบานด้วยสกุลเงินดิจิทัล",
+                c1Title: "อุลซาน (ฮับหุ่นยนต์)", c1_1: "การบูรณาการหุ่นยนต์ฮิวแมนอยด์และโลจิสติกส์", c1_2: "การชำระบัญชีการเงินอัจฉริยะ", c1_3: "การแจกจ่ายรายได้พื้นฐานดิจิทัลอัตโนมัติ",
+                c2Title: "คยองจู (ฮับควอนตัมไบโอ)", c2_1: "การระดมทุนชีวเทคโนโลยีควอนตัม", c2_2: "เงินฝากสินทรัพย์แบบกระจายศูนย์", c2_3: "สร้างความเชื่อมั่นทุนระดับโลกด้วย smart contract",
+                c3Title: "โพฮัง (ฮับการบินและฟิวชั่น)", c3_1: "การลงทุนพลังงานสะอาดนิวเคลียร์ฟิวชั่น", c3_2: "ชำระเงินความเร็วสูงผ่าน Pi Network SDK", c3_3: "สร้างโหนดเศรษฐกิจแบบกระจายศูนย์อย่างสมบูรณ์",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "มอบอิสรภาพทางเศรษฐกิจและรุ่งอรุณอันสดใสแก่มนุษยชาติ", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            nl: {
+                subtitle: "De Toekomst van Haerum: Een Speciale Stad met Digitale Valuta",
+                c1Title: "Ulsan (Robotica Hub)", c1_1: "Integratie van humanoïde robotica en logistiek", c1_2: "Slimme financiële verrekening", c1_3: "Automatische distributie van basisinkomen",
+                c2Title: "Gyeongju (Quantum Bio Hub)", c2_1: "Financiering op basis van kwantumbiotechnologie", c2_2: "Gedecentraliseerde activastortingen", c2_3: "Wereldwijd kapitaalvertrouwen",
+                c3Title: "Pohang (Ruimtevaart & Fusi)", c3_1: "Investeringen in schone kernfusie-energie", c3_2: "Snelle wereldwijde betalingen via Pi Network SDK", c3_3: "Gedecentraliseerd economisch knooppunt",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Economische vrijheid voor de mensheid.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            el: {
+                subtitle: "Το Μέλλον του Haerum: Μια Ειδική Πόλη με Ψηφιακό Νόμισμα",
+                c1Title: "Οουλσάν (Κέντρο Робоτικής)", c1_1: "Ενσωμάτωση ανθρωποειδούς ρομποτικής", c1_2: "Έξυπνος οικονομικός διακανονισμός", c1_3: "Αυτόματη διανομή βασικού εισοδήματος",
+                c2Title: "Γคιονγκจู (Кванτικό Bio)", c2_1: "Хρηματοδότηση квантовой биотехнологии", c2_2: "Апоцентрализованные депозиты", c2_3: "Εμπιστοσύνη κεφαλαίου",
+                c3Title: "Похан (Аэрокосмическая)", c3_1: "Επενδύσεις καθαρής ενέργειας", c3_2: "Платёжная система Pi Network", c3_3: "Апоцентрализованный узел",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Οικονομική ελευθερία για την ανθρωπότητα.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            cs: {
+                subtitle: "Budoucnost Haerumu: Speciální město rozkvétající digitální měnou",
+                c1Title: "Ulsan (Robotika)", c1_1: "Integrace humanoidní robotiky a logistiky", c1_2: "Chytré finanční vyrovnání", c1_3: "Automatická distribuce základního příjmu",
+                c2Title: "Gyeongju (Kvantové Bio)", c2_1: "Financování kvantových biotechnologií", c2_2: "Decentralizované vklady aktiv", c2_3: "Budování kapitálové důvěry",
+                c3Title: "Pohang (Vesmír a Fúze)", c3_1: "Investice do čisté jaderné fúze", c3_2: "Globální platby přes Pi Network SDK", c3_3: "Realizace decentralizovaného uzlu",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Ekonomická svoboda pro lidstvo.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            sv: {
+                subtitle: "Framtiden för Haerum: En speciell stad med digital valuta",
+                c1Title: "Ulsan (Robotik)", c1_1: "Integration av humanoid robotik och logistik", c1_2: "Smart finansiell avveckling", c1_3: "Automatisk distribution av digital basinkomst",
+                c2Title: "Gyeongju (Kvantbiologi)", c2_1: "Finansiering baserad på kvantbioteknik", c2_2: "Decentraliserade tillgångsinsättningar", c2_3: "Bygga globalt kapitalförtroende",
+                c3Title: "Pohang (Rymd & Fusion)", c3_1: "Investeringar i ren kärnfusionsenergi", c3_2: "Snabba globala betalningar via Pi Network SDK", c3_3: "Fullständigt decentraliserad ekonomisk nod",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Ekonomisk frihet och en strålande soluppgång för mänskligheten.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            hu: {
+                subtitle: "Haerum Jövője: Különleges város digitális valuta alapokon",
+                c1Title: "Ulsan (RobotikaiKözpont)", c1_1: "Humán robotika és logisztika integrációja", c1_2: "Okos pénzügyi elszámolás", c1_3: "Digitális alapjövedelem automatikus elosztása",
+                c2Title: "Gyeongju (Kvantum Bio)", c2_1: "Kvantum biotechnológiai finanszírozás", c2_2: "Decentralizált vagyonbetétek", c2_3: "Globális tőkebizalom kiépítése",
+                c3Title: "Pohang (Űrkutatás és Fúzió)", c3_1: "Magfúziós tiszta energia befektetés", c3_2: "Pi Network SDK alapú globális fizetések", c3_3: "Decentralizált gazdasági csomópont",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Gazdasági szabadság az emberiségnek.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            id: {
+                subtitle: "Masa Depan Haerum: Kota Istimewa dengan Mata Uang Digital",
+                c1Title: "Ulsan (Pusat Robotika)", c1_1: "Integrasi robotika humanoid dan logistik", c1_2: "Penyelesaian keuangan cerdas", c1_3: "Distribusi otomatis UBI aset digital",
+                c2Title: "Gyeongju (Pusat Bio Kuantum)", c2_1: "Pendanaan bioteknologi kuantum", c2_2: "Deposito aset terdesentralisasi", c2_3: "Membangun kepercayaan modal global",
+                c3Title: "Pohang (Pusat Dirgantara & Fusi)", c3_1: "Investasi energi bersih fusi nuklir", c3_2: "Pembayaran global instan via Pi Network SDK", c3_3: "Mewujudkan node ekonomi terdesentralisasi",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Memberikan kebebasan ekonomi dan fajar cemerlang bagi umat manusia.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            ps: {
+                subtitle: "د هیروم راتلونکی: ځانګړی ښار چې په ډیجیټل اسعارو غوړیږي",
+                c1Title: "اولسان (روبوټکس)", c1_1: "د روبوټکس او لوژستیک یوځای کول", c1_2: "سمارټ مالي تصفیه", c1_3: "د ډیجیټل عاید اتوماتیک ویش",
+                c2Title: "ګیونګجو (کوانټم بایو)", c2_1: "کوانټم بایو ټیکنالوژۍ تمویل", c2_2: "غیر متمرکز شتمنۍ زیرمې", c2_3: "د سمارټ قراردادونو له لارې اعتماد",
+                c3Title: "پوهانګ (فضايي او فیوژن)", c3_1: "اتومي فیوژن انرژۍ پانګونه", c3_2: "د پای شبکې SDK له لارې تادیات", c3_3: "بشپړ غیر متمرکز اقتصادي نوډ",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "بشریت ته اقتصادي ازادي ورکول.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            yo: {
+                subtitle: "Ọjọ iwaju Haerum: Ilu Pataki pẹlu Owo Digital",
+                c1Title: "Ulsan (Robotics Hub)", c1_1: "Isopọpọ robotics ati eekun", c1_2: "Isuna owo ogbo smart", c1_3: "Pinpin owo ipilẹ digital",
+                c2Title: "Gyeongju (Quantum Bio)", c2_1: "Ifunwo lori imọ-ẹrọ quantum", c2_2: "Awọn idogo aje ti a pin kaakiri", c2_3: "Igbẹkẹle olu agbaye",
+                c3Title: "Pohang (Aerospace & Fusion)", c3_1: "Idoko-owo agbara mimọ", c3_2: "Awọn sisanwo agbaye Pi Network SDK", c3_3: "Ṣiṣẹda ipa-ọna aje ti a pin",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Ila-oorun ati ominira eto-ọrọ fun eniyan.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            },
+            af: {
+                subtitle: "Die Toekoms van Haerum: 'n Spesiale Stad met Digitale Valuta",
+                c1Title: "Ulsan (Robotika-sentrum)", c1_1: "Integrasie van humanoïede robotika", c1_2: "Slim finansiële vereffening", c1_3: "Outomatiese verspreiding van basiese inkome",
+                c2Title: "Gyeongju (Kwantum Bio)", c2_1: "Finansiering gebaseer op kwantumbiotegnologie", c2_2: "Desentraliseerde bate-deposito's", c2_3: "Bou van globale kapitaalvertroue",
+                c3Title: "Pohang (Lugvaart & Fusie)", c3_1: "Kernfusie skoon energie belegging", c3_2: "Vinnige globale betalings via Pi Network SDK", c3_3: "Volledig desentraliseerde ekonomieke nodus",
+                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Ekonomiese vryheid en 'n stralende sonsopkoms vir die mensdom.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            }
+        };
+
+        function changeLanguage() {
+            const lang = document.getElementById('languageSelect').value;
+            const data = translations[lang] || translations['ko'];
+
+            document.getElementById('main-subtitle').innerText = data.subtitle;
+            document.getElementById('card1-title').innerText = data.c1Title;
+            document.getElementById('card1-1').innerText = data.c1_1;
+            document.getElementById('card1-2').innerText = data.c1_2;
+            document.getElementById('card1-3').innerText = data.c1_3;
+            document.getElementById('card2-title').innerText = data.c2Title;
+            document.getElementById('card2-1').innerText = data.c2_1;
+            document.getElementById('card2-2').innerText = data.c2_2;
+            document.getElementById('card2-3').innerText = data.c2_3;
+            document.getElementById('card3-title').innerText = data.c3Title;
+            document.getElementById('card3-1').innerText = data.c3_1;
+            document.getElementById('card3-2').innerText = data.c3_2;
+            document.getElementById('card3-3').innerText = data.c3_3;
+            document.getElementById('banner-title').innerText = data.bannerTitle;
+            document.getElementById('banner-desc').innerText = data.bannerDesc;
+            document.getElementById('footer-text').innerText = data.footer;
+        }
+    </script>
 </body>
 </html>
