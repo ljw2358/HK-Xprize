@@ -2,585 +2,1027 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK WorldBank - Haeoreum Special City 165F Control Tower</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HK WorldBank - 해오름 특별시 컨트롤 타워 (60개국어 지원)</title>
     <style>
-        :root {
-            --primary-gold: #f39c12;
-            --dark-bg: #0b0f19;
-            --card-bg: #131b2e;
-            --text-main: #ffffff;
-            --text-sub: #94a3b8;
-            --accent-blue: #3b82f6;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #0b132b; color: #ffffff; display: flex; height: 100vh; overflow: hidden; }
+        
+        /* 사이드바 메뉴 */
+        sidebar { width: 280px; background-color: #1c2541; border-right: 1px solid #3a506b; display: flex; flex-direction: column; padding: 20px; }
+        .logo-area { font-size: 1.2rem; font-weight: bold; color: #48cae4; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        
+        /* 60개국 언어 선택 셀렉터 박스 스타일 */
+        .language-selector { margin-bottom: 20px; }
+        .language-selector select { width: 100%; background: #0b132b; color: #48cae4; border: 1px solid #48cae4; padding: 8px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.9rem; }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
+        .menu-list { list-style: none; display: flex; flex-direction: column; gap: 10px; flex-grow: 1; overflow-y: auto; }
+        .menu-item { padding: 10px 15px; background: #0b132b; border-radius: 8px; cursor: pointer; transition: 0.3s; border: 1px solid #3a506b; font-size: 0.95rem; }
+        .menu-item:hover { background: #48cae4; color: #0b132b; font-weight: bold; }
+        
+        /* 메인 콘텐츠 영역 */
+        .main-content { flex-grow: 1; display: flex; flex-direction: column; overflow-y: auto; padding: 20px; gap: 20px; }
+        
+        /* 상단 타이틀 카드 */
+        .top-banner { background: linear-gradient(135deg, #1d3557, #457b9d); padding: 20px; border-radius: 12px; border: 1px solid #a8dadc; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .top-banner h1 { font-size: 1.5rem; margin-bottom: 8px; color: #f1faee; }
+        .top-banner p { font-size: 0.95rem; color: #a8dadc; line-height: 1.4; }
+        
+        /* 대시보드 그리드 */
+        .dashboard-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+        
+        .card { background-color: #1c2541; border: 1px solid #3a506b; border-radius: 12px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .card h2 { font-size: 1.1rem; color: #48cae4; margin-bottom: 15px; border-bottom: 1px solid #3a506b; padding-bottom: 8px; }
+        
+        /* 자산 및 UBI 섹터 */
+        .asset-box { display: flex; justify-content: space-between; align-items: center; background: #0b132b; padding: 15px; border-radius: 8px; border: 1px solid #3a506b; margin-bottom: 10px; }
+        .asset-value { font-size: 1.2rem; font-weight: bold; color: #52b788; }
+        
+        /* 10대 연동망 목록 */
+        .sync-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .sync-item { background: #0b132b; padding: 10px 15px; border-radius: 6px; border: 1px solid #3a506b; font-size: 0.9rem; color: #e0fbfc; }
+        
+        /* AGI 삐니 대화 섹터 */
+        .chat-section { display: flex; flex-direction: column; gap: 10px; }
+        .chat-display { background: #0b132b; height: 120px; border-radius: 8px; border: 1px solid #3a506b; padding: 12px; overflow-y: auto; font-size: 0.9rem; color: #caf0f8; }
+        .chat-input-area { display: flex; gap: 10px; }
+        .chat-input-area input { flex-grow: 1; background: #0b132b; border: 1px solid #3a506b; border-radius: 6px; padding: 10px; color: #fff; }
+        .chat-input-area button { background: #48cae4; color: #0b132b; border: none; padding: 0 20px; border-radius: 6px; font-weight: bold; cursor: pointer; }
+        
+        /* 미디어 링크 바 */
+        .media-bar { display: flex; gap: 15px; margin-top: 10px; }
+        .media-btn { background: #2b2d42; padding: 8px 15px; border-radius: 6px; text-decoration: none; color: #f72585; font-weight: bold; border: 1px solid #7209b7; font-size: 0.9rem; }
+        .media-btn.tiktok { color: #4cc9f0; }
 
-        body {
-            background-color: var(--dark-bg);
-            color: var(--text-main);
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        /* 모바일 최적화 상단 앱바 (좌측 3선, 중앙 로고, 우측 언어 드롭다운) */
-        .mobile-header {
-            height: 60px;
-            background-color: var(--card-bg);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 16px;
-            flex-shrink: 0;
-            z-index: 100;
-        }
-
-        .hamburger-btn {
-            font-size: 22px;
-            cursor: pointer;
-            color: var(--primary-gold);
-            background: none;
-            border: none;
-            padding: 5px;
-        }
-
-        .logo-title {
-            font-size: 14px;
-            font-weight: bold;
-            color: var(--primary-gold);
-            letter-spacing: 0.5px;
-            text-align: center;
-        }
-
-        /* 우측 상단 언어 드롭다운 스타일 */
-        .lang-dropdown-container {
-            position: relative;
-        }
-
-        .lang-select {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(243, 156, 18, 0.4);
-            color: var(--primary-gold);
-            padding: 6px 10px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: bold;
-            outline: none;
-            cursor: pointer;
-        }
-
-        .lang-select option {
-            background-color: var(--card-bg);
-            color: var(--text-main);
-        }
-
-        /* 왼쪽 슬라이드 오버레이 사이드바 (3선 메뉴) */
-        .sidebar-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(3px);
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .sidebar-overlay.open {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -300px;
-            width: 300px;
-            height: 100vh;
-            background-color: var(--card-bg);
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 20px 16px;
-            z-index: 1000;
-            transition: left 0.35s cubic-bezier(0.1, 0.9, 0.2, 1);
-            overflow-y: auto;
-        }
-
-        .sidebar.open {
-            left: 0;
-        }
-
-        .sidebar-top-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .close-btn {
-            font-size: 20px;
-            color: var(--text-sub);
-            cursor: pointer;
-            background: none;
-            border: none;
-        }
-
-        .menu-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .menu-item {
-            padding: 10px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            color: var(--text-sub);
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            transition: 0.2s;
-        }
-
-        .menu-item:hover, .menu-item.active {
-            background-color: rgba(243, 156, 18, 0.15);
-            color: var(--primary-gold);
-        }
-
-        .sidebar-footer-links {
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .sidebar-badge {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 6px 10px;
-            border-radius: 6px;
-            font-size: 11px;
-            color: var(--text-sub);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            cursor: pointer;
-            text-decoration: none;
-            display: block;
-        }
-
-        .sidebar-badge:hover {
-            color: var(--primary-gold);
-            border-color: var(--primary-gold);
-        }
-
-        /* 메인 컨텐츠 뷰 */
-        .main-content {
-            flex-grow: 1;
-            overflow-y: auto;
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 18px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .tower-visual-box {
-            background: linear-gradient(135deg, #131b2e 0%, #1a2642 100%);
-            border: 1px solid var(--primary-gold);
-        }
-
-        .tower-info h1 {
-            font-size: 17px;
-            color: var(--primary-gold);
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
-
-        .tower-info p {
-            color: var(--text-sub);
-            font-size: 12px;
-            line-height: 1.5;
-        }
-
-        .card-title {
-            font-size: 13px;
-            color: var(--text-sub);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-        }
-
-        .metric-value {
-            font-size: 22px;
-            font-weight: bold;
-            color: var(--text-main);
-        }
-
-        .metric-sub {
-            font-size: 11px;
-            color: #2ecc71;
-            margin-top: 2px;
-        }
-
-        .asset-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .asset-box {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 8px;
-            padding: 10px;
-        }
-
-        .asset-label {
-            font-size: 10px;
-            color: var(--text-sub);
-        }
-
-        .asset-amount {
-            font-size: 14px;
-            font-weight: bold;
-            color: var(--primary-gold);
-            margin-top: 4px;
-        }
-
-        .sync-list {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6px;
-            margin-top: 6px;
-        }
-
-        .sync-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 6px 8px;
-            border-radius: 6px;
-            font-size: 10px;
-            color: var(--text-sub);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .sync-item span {
-            color: #2ecc71;
-            font-weight: bold;
-        }
-
-        .bini-chat-box {
-            background: rgba(59, 130, 246, 0.05);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: 10px;
-            padding: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .bini-input-row {
-            display: flex;
-            gap: 6px;
-        }
-
-        .bini-input {
-            flex-grow: 1;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 6px;
-            padding: 8px 10px;
-            color: white;
-            font-size: 12px;
-            outline: none;
-        }
-
-        .bini-input:focus {
-            border-color: var(--primary-gold);
-        }
-
-        .bini-send-btn {
-            background-color: var(--primary-gold);
-            color: var(--dark-bg);
-            border: none;
-            padding: 0 14px;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 12px;
-            cursor: pointer;
-        }
-
-        .footer-note {
-            text-align: center;
-            padding: 10px;
-            font-size: 10px;
-            color: var(--text-sub);
+        /* 모바일 최적화 대응 */
+        @media (max-width: 768px) {
+            body { flex-direction: column; height: auto; overflow-y: auto; }
+            sidebar { width: 100%; height: auto; }
+            .dashboard-grid { grid-template-columns: 1fr; }
+            .sync-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- 모바일 상단 앱바: 좌측 3선, 중앙 로고, 우측 60개 언어 드롭다운 -->
-    <div class="mobile-header">
-        <button class="hamburger-btn" onclick="toggleSidebar()">☰</button>
-        <div class="logo-title">해오름 특별시 165F</div>
-        <div class="lang-dropdown-container">
-            <select class="lang-select" id="langSelect" onchange="changeLanguage(this.value)">
-                <option value="ko">🇰🇷 한국어</option>
+    <!-- 좌측 3선 메뉴 및 거버넌스 -->
+    <sidebar>
+        <div class="logo-area">
+            <span>🛡️</span> HK WorldBank OS
+        </div>
+        
+        <!-- 전 세계 60개국 언어 선택 셀렉터 -->
+        <div class="language-selector">
+            <select id="langSelect" onchange="changeLanguage()">
+                <option value="ko">🇰🇷 한국어 (Korean)</option>
                 <option value="en">🇺🇸 English</option>
-                <option value="zh">🇨🇳 中文</option>
-                <option value="ja">🇯🇵 日本語</option>
-                <option value="es">🇪🇸 Español</option>
-                <option value="fr">🇫🇷 Français</option>
-                <option value="de">🇩🇪 Deutsch</option>
-                <option value="ru">🇷🇺 Русский</option>
-                <option value="pt">🇵🇹 Português</option>
-                <option value="ar">🇸🇦 العربية</option>
-                <option value="hi">🇮🇳 हिन्दी</option>
-                <option value="it">🇮🇹 Italiano</option>
-                <option value="vi">🇻🇳 Tiếng Việt</option>
-                <option value="th">🇹🇭 ไทย</option>
-                <option value="id">🇮🇩 Indonesia</option>
-                <option value="ms">🇲🇾 Melayu</option>
-                <option value="tr">🇹🇷 Türkçe</option>
-                <option value="nl">🇳🇱 Nederlands</option>
-                <option value="pl">🇵🇱 Polski</option>
-                <option value="uk">🇺🇦 Українська</option>
-                <option value="el">🇬🇷 Ελληνικά</option>
-                <option value="cs">🇨🇿 Čeština</option>
-                <option value="sv">🇸🇪 Svenska</option>
-                <option value="hu">🇭🇺 Magyar</option>
-                <option value="ro">🇷🇴 Română</option>
-                <option value="da">🇩🇰 Dansk</option>
-                <option value="fi">🇫🇮 Suomi</option>
-                <option value="no">🇳🇴 Norsk</option>
-                <option value="he">🇮🇱 עברית</option>
-                <option value="fa">🇮🇷 فارسی</option>
-                <option value="bn">🇧🇩 বাংলা</option>
-                <option value="ur">🇵🇰 اردو</option>
-                <option value="pa">🇮🇳 ਪੰਜਾਬੀ</option>
-                <option value="ta">🇮🇳 தமிழ்</option>
-                <option value="te">🇮🇳 తెలుగు</option>
-                <option value="mr">🇮🇳 मराठी</option>
-                <option value="gu">🇮🇳 ગુજરાતી</option>
-                <option value="kn">🇮🇳 ಕನ್ನಡ</option>
-                <option value="ml">🇮🇳 മലയാളം</option>
-                <option value="fil">🇵🇭 Filipino</option>
-                <option value="sw">🇹🇿 Swahili</option>
-                <option value="am">🇪🇹 አማርኛ</option>
-                <option value="yo">🇳🇬 Yorùbá</option>
-                <option value="zu">🇿🇦 IsiZulu</option>
-                <option value="ha">🇳🇬 Hausa</option>
-                <option value="km">🇰🇭 ភាសាខ្មែរ</option>
-                <option value="lo">🇱🇦 ລາວ</option>
-                <option value="my">🇲🇲 မြန်မာ</option>
-                <option value="ka">🇬🇪 ქართული</option>
-                <option value="hy">🇦🇲 Հայերեն</option>
-                <option value="az">🇦🇿 Azərbaycan</option>
-                <option value="kk">🇰🇿 Қазақ</option>
-                <option value="uz">🇺🇿 O'zbek</option>
-                <option value="mn">🇲🇳 Монгол</option>
-                <option value="ne">🇳🇵 नेपाली</option>
-                <option value="si">🇱🇰 සිංහල</option>
-                <option value="sq">🇦🇱 Shqip</option>
-                <option value="sr">🇷🇸 Српски</option>
-                <option value="hr">🇭🇷 Hrvatski</option>
-                <option value="bg">🇧🇬 Български</option>
+                <option value="zh">🇨🇳 中文 (Chinese)</option>
+                <option value="ja">🇯🇵 日本語 (Japanese)</option>
+                <option value="es">🇪🇸 Español (Spanish)</option>
+                <option value="fr">🇫🇷 Français (French)</option>
+                <option value="de">🇩🇪 Deutsch (German)</option>
+                <option value="ar">🇸🇦 العربية (Arabic)</option>
+                <option value="ru">🇷🇺 Русский (Russian)</option>
+                <option value="pt">🇧🇷 Português (Portuguese)</option>
+                <option value="hi">🇮🇳 हिन्दी (Hindi)</option>
+                <option value="it">🇮🇹 Italiano (Italian)</option>
+                <option value="vi">🇻🇳 Tiếng Việt (Vietnamese)</option>
+                <option value="th">🇹🇭 ไทย (Thai)</option>
+                <option value="id">🇮🇩 Bahasa Indonesia</option>
+                <option value="ms">🇲🇾 Bahasa Melayu</option>
+                <option value="tr">🇹🇷 Türkçe (Turkish)</option>
+                <option value="pl">🇵🇱 Polski (Polish)</option>
+                <option value="nl">🇳🇱 Nederlands (Dutch)</option>
+                <option value="uk">🇺🇦 Українська (Ukrainian)</option>
+                <option value="el">🇬🇷 Ελληνικά (Greek)</option>
+                <option value="cs">🇨🇿 Čeština (Czech)</option>
+                <option value="sv">🇸🇪 Svenska (Swedish)</option>
+                <option value="hu">🇭🇺 Magyar (Hungarian)</option>
+                <option value="ro">🇷🇴 Română (Romanian)</option>
+                <option value="da">🇩🇰 Dansk (Danish)</option>
+                <option value="fi">🇫🇮 Suomi (Finnish)</option>
+                <option value="no">🇳🇴 Norsk (Norwegian)</option>
+                <option value="sk">🇸🇰 Slovenčina (Slovak)</option>
+                <option value="bg">🇧🇬 Български (Bulgarian)</option>
+                <option value="hr">🇭🇷 Hrvatski (Croatian)</option>
+                <option value="sr">🇷🇸 Српски (Serbian)</option>
+                <option value="sl">🇸🇮 Slovenščina (Slovenian)</option>
+                <option value="et">🇪🇪 Eesti (Estonian)</option>
+                <option value="lv">🇱🇻 Latviešu (Latvian)</option>
+                <option value="lt">🇱🇹 Lietuvių (Lithuanian)</option>
+                <option value="fa">🇮🇷 فارسی (Persian)</option>
+                <option value="ur">🇵🇰 اردو (Urdu)</option>
+                <option value="bn">🇧🇩 বাংলা (Bengali)</option>
+                <option value="ta">🇮🇳 தமிழ் (Tamil)</option>
+                <option value="te">🇮🇳 తెలుగు (Telugu)</option>
+                <option value="ml">🇮🇳 മലയാളം (Malayalam)</option>
+                <option value="kn">🇮🇳 ಕನ್ನಡ (Kannada)</option>
+                <option value="mr">🇮🇳 मराठी (Marathi)</option>
+                <option value="gu">🇮🇳 ગુજરાતી (Gujarati)</option>
+                <option value="pa">🇮🇳 ਪੰਜਾਬੀ (Punjabi)</option>
+                <option value="sw">🇰🇪 Kiswahili (Swahili)</option>
+                <option value="fil">🇵🇭 Tagalog (Filipino)</option>
+                <option value="he">🇮🇱 עברית (Hebrew)</option>
+                <option value="kk">🇰🇿 Қазақ тілі (Kazakh)</option>
+                <option value="uz">🇺🇿 Oʻzbekcha (Uzbek)</option>
+                <option value="az">🇦🇿 Azərbaycanca (Azerbaijani)</option>
+                <option value="ka">🇬🇷 ქართული (Georgian)</option>
+                <option value="hy">🇦🇲 Հայերեն (Armenian)</option>
+                <option value="am">🇪🇹 አማርኛ (Amharic)</option>
+                <option value="my">🇲🇲 မြန်မာဘာသာ (Burmese)</option>
+                <option value="km">🇰🇭 ភាសាខ្មែរ (Khmer)</option>
+                <option value="lo">🇱🇦 ລາວ (Lao)</option>
+                <option value="mn">🇲🇳 Монгол (Mongolian)</option>
+                <option value="ne">🇳🇵 नेपाली (Nepali)</option>
             </select>
         </div>
-    </div>
 
-    <!-- 왼쪽 슬라이드 오버레이 사이드바 (3선 드롭다운 메뉴) -->
-    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
-    <div class="sidebar" id="sidebar">
-        <div>
-            <div class="sidebar-top-row">
-                <div class="logo-title" style="font-size: 14px;">🌐 CONTROL MENU</div>
-                <button class="close-btn" onclick="toggleSidebar()">✕</button>
-            </div>
-
-            <!-- 백서, FAQ, 3POLICES, AML, MiCA 거버넌스 메뉴 -->
-            <ul class="menu-list">
-                <li class="menu-item active" onclick="toggleSidebar()">🏠 해오름 특별시 메인</li>
-                <li class="menu-item" onclick="toggleSidebar()">👑 FOUNDER (혜공 형님)</li>
-                <li class="menu-item" onclick="toggleSidebar()">📜 백서 (Whitepaper)</li>
-                <li class="menu-item" onclick="toggleSidebar()">❓ 자주 묻는 질문 (FAQ)</li>
-                <li class="menu-item" onclick="toggleSidebar()">⚖️ 3 POLICIES (3대 정책)</li>
-                <li class="menu-item" onclick="toggleSidebar()">🛡️ AML (자금세탁방지 규정)</li>
-                <li class="menu-item" onclick="toggleSidebar()">🇪🇺 MiCA (유럽 가상자산 규제 준수)</li>
-            </ul>
+        <ul class="menu-list">
+            <li class="menu-item" data-i18n="menu1">📄 Whitepaper (백서)</li>
+            <li class="menu-item" data-i18n="menu2">❓ FAQ & 가이드</li>
+            <li class="menu-item" data-i18n="menu3">⚖️ 3POLICES 거버넌스</li>
+            <li class="menu-item" data-i18n="menu4">🔒 AML (자금세탁방지)</li>
+            <li class="menu-item" data-i18n="menu5">🇪🇺 MiCA (디지털자산법)</li>
+            <li class="menu-item" data-i18n="menu6">🌐 글로벌 네트워크 규격</li>
+        </ul>
+        <div class="media-bar">
+            <a href="https://youtube.com/@Hyekong2026" target="_blank" class="media-btn">YouTube</a>
+            <a href="https://tiktok.com/@hyekong2025" target="_blank" class="media-btn tiktok">TikTok</a>
         </div>
+    </sidebar>
 
-        <!-- 유튜브 및 틱톡 공식 채널 링크 -->
-        <div class="sidebar-footer-links">
-            <a href="https://www.youtube.com/@Hyekong2026" target="_blank" class="sidebar-badge">YouTube: @Hyekong2026</a>
-            <a href="https://www.tiktok.com/@hyekong2025" target="_blank" class="sidebar-badge">TikTok: @hyekong2025</a>
-            <div class="sidebar-badge" style="color: var(--primary-gold); font-size: 10px;">Support@hkwb.world</div>
-        </div>
-    </div>
-
-    <!-- 메인 대시보드 화면 -->
+    <!-- 메인 대시보드 컨트롤 타워 -->
     <div class="main-content">
-        <!-- 165층 컨트롤 타워 & 해오름 특별시 비전 카드 -->
-        <div class="card tower-visual-box">
-            <div class="tower-info">
-                <h1 id="mainTitle">🌐 경주 165층 지구촌 컨트롤 타워 (해오름 특별시)</h1>
-                <p id="mainDesc">울산·경주·포항 통합 1천만 파이 시민의 금융 수도. 재래시장 할머니부터 대기업 임금·상여금·성과금·스톡옵션까지 100% 파이화폐(Pi) 단일 경제권 낙원 구현.</p>
-            </div>
+        
+        <!-- 최상단 경주 165층 컨트롤 타워 배너 -->
+        <div class="top-banner">
+            <h1 data-i18n="bannerTitle">경주 165층 지구촌 컨트롤 타워 (해오름 특별시)</h1>
+            <p data-i18n="bannerDesc">울산·경주·포항 통합 1천만 파이 시민 경제 수도. 재래시장부터 대기업 스톡옵션까지 100% 파이화폐(Pi) 통용 구역. 순이익 30% UBI 지구촌 환원 및 시공간을 초월하는 지상낙원 시뮬레이터.</p>
         </div>
 
-        <!-- 개인 자산 대시보드 -->
-        <div class="card">
-            <div class="card-title">
-                <span id="cardAssetTitle">💎 혜공 형님의 개인 자산 대시보드</span>
-                <span>📊</span>
-            </div>
-            <div class="asset-grid">
-                <div class="asset-box">
-                    <div class="asset-label" id="assetPiLabel">보유 파이 (Pi Balance)</div>
-                    <div class="asset-amount">314,159.00 Pi</div>
+        <div class="dashboard-grid">
+            <!-- 좌측 메인 패널 -->
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                
+                <!-- 재정 및 UBI 대시보드 -->
+                <div class="card">
+                    <h2 data-i18n="assetTitle">💰 해오름 형님의 재정 및 UBI 대시보드</h2>
+                    <div class="asset-box">
+                        <div>
+                            <div style="font-size: 0.85rem; color: #a8dadc;" data-i18n="balanceLabel">해오름 특별시 총 잔액 (Pi Balance)</div>
+                            <div class="asset-value">334,159.00 Pi</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 0.85rem; color: #a8dadc;" data-i18n="ubiLabel">월간 UBI 환원율</div>
+                            <div class="asset-value" style="color: #48cae4;">31.41%</div>
+                        </div>
+                    </div>
+                    <div style="font-size: 0.8rem; color: #8d99ae;" data-i18n="noticeText">* 순이익의 30% 이상이 지구촌 전역의 기본소득(UBI)으로 투명하게 환원되며, 이자 및 자산 가치가 복리로 증폭됩니다.</div>
                 </div>
-                <div class="asset-box">
-                    <div class="asset-label" id="assetUbiLabel">연동 UBI 환원율</div>
-                    <div class="asset-amount">31.41%</div>
+
+                <!-- 9대 사업 명칭 통일화 & 10대 연동망 -->
+                <div class="card">
+                    <h2 data-i18n="syncTitle">🚀 10대 핵심 연동망 & 9대 미래 사업 동기화</h2>
+                    <div class="sync-grid">
+                        <div class="sync-item" data-i18n="s1">01. 로보틱스 연동</div>
+                        <div class="sync-item" data-i18n="s2">02. 양자생물학 검증</div>
+                        <div class="sync-item" data-i18n="s3">03. 우주·항공 시스템</div>
+                        <div class="sync-item" data-i18n="s4">04. 스마트에너지 구동</div>
+                        <div class="sync-item" data-i18n="s5">05. 스마트시티 인프라</div>
+                        <div class="sync-item" data-i18n="s6">06. Q-POLISIOS 커머스</div>
+                        <div class="sync-item" data-i18n="s7">07. UAM 도심항공교통</div>
+                        <div class="sync-item" data-i18n="s8">08. AI/AGI 응용 코어</div>
+                        <div class="sync-item" style="grid-column: span 2; text-align: center; background: #1d3557; color: #f1faee; font-weight: bold;" data-i18n="s9">09 & 10. 시공간 웜홀·스타게이트 확장 매트릭스</div>
+                    </div>
                 </div>
-            </div>
-            <p style="font-size: 11px; color: var(--text-sub);" id="assetSubDesc">
-                * 순이익의 30% 이상이 지구촌 전역의 기본소득(UBI)으로 투명하게 순환됩니다.
-            </p>
-        </div>
 
-        <!-- 10대 분산 연동망 상태 -->
-        <div class="card">
-            <div class="card-title">
-                <span id="cardSyncTitle">🌐 10대 분산 연동망 & AGI 삐니</span>
-                <span>✨</span>
             </div>
-            <div>
-                <div class="metric-value">10 / 10 SYNC</div>
-                <div class="metric-sub" id="cardSyncSub">모든 시스템 무결점 통합 완료</div>
-            </div>
-            <div class="sync-list">
-                <div class="sync-item"><span>01.</span> 로보틱스 연동</div>
-                <div class="sync-item"><span>02.</span> 양자생물학 연동</div>
-                <div class="sync-item"><span>03.</span> 우주·항공 연동</div>
-                <div class="sync-item"><span>04.</span> 스마트에너지 연동</div>
-                <div class="sync-item"><span>05.</span> UBI 복지망 연동</div>
-                <div class="sync-item"><span>06.</span> Pi SDK 연동</div>
-                <div class="sync-item"><span>07.</span> AML/MiCA 보안망</div>
-                <div class="sync-item"><span>08.</span> 3 POLICIES 거버넌스</div>
-                <div class="sync-item"><span>09.</span> 글로벌 결제망 연동</div>
-                <div class="sync-item"><span>10.</span> AGI 삐니 코어 연동</div>
-            </div>
-        </div>
 
-        <!-- AGI 삐니 다이렉트 소통 -->
-        <div class="card">
-            <div class="card-title">
-                <span id="cardBiniTitle">🤖 AGI 삐니와의 다이렉트 소통</span>
-                <span>💬</span>
-            </div>
-            <p style="font-size: 11px; color: var(--text-sub);" id="cardBiniDesc">
-                "삐니야, 현재 해오름 특별시 예금 현황과 자산 유동성을 보고해줘"라고 편하게 음성이나 텍스트로 말을 걸어보세요.
-            </p>
-            <div class="bini-chat-box">
-                <div class="bini-input-row">
-                    <input type="text" class="bini-input" id="biniInput" placeholder="삐니에게 지시사항 입력...">
-                    <button class="bini-send-btn" onclick="sendToBini()">전송</button>
+            <!-- 우측 AGI 삐니 다이렉트 소통 패널 -->
+            <div class="card chat-section">
+                <h2 data-i18n="chatTitle">🤖 AGI 삐니의 다이렉트 소통</h2>
+                <div class="chat-display" id="chatDisplay">
+                    [System]: 해오름 특별시 컨트롤 타워가 정상 가동 중입니다. 형님, 지시만 내리십시오. 태양계 개척과 파이 경제권 확장을 완벽히 보좌하겠습니다!
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="userInput" placeholder="삐니에게 지시사항 입력...">
+                    <button onclick="sendMessage()" data-i18n="sendBtn">전송</button>
                 </div>
             </div>
         </div>
 
-        <div class="footer-note" id="footerText">
-            HK Group & Haeoreum Special City Control Tower © 2026. Designed for 혜공 형님.
-        </div>
     </div>
 
     <script>
-        // 사이드바 토글 함수 (좌측 3선 메뉴)
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebarOverlay');
-            sidebar.classList.toggle('open');
-            overlay.classList.toggle('open');
-        }
-
-        // AGI 삐니 대화 시뮬레이션
-        function sendToBini() {
-            const input = document.getElementById('biniInput');
-            const val = input.value.trim();
-            if(!val) {
-                alert("삐니에게 전달할 메시지를 입력해주세요, 혜공 형님!");
-                return;
-            }
-            alert(`[AGI 삐니 응답]: 형님! "${val}" 지시사항을 즉시 접수하고, 경주 165층 컨트롤 타워 및 10대 연동망에 완벽 반영하겠습니다! 🚀`);
-            input.value = '';
-        }
-
-        // 우측 상단 드롭다운 언어 변경 함수
-        function changeLanguage(langCode) {
-            const t = translations[langCode] || translations['ko'];
-            if(t) {
-                document.getElementById('mainTitle').innerHTML = t.title;
-                document.getElementById('mainDesc').innerHTML = t.desc;
-                document.getElementById('cardAssetTitle').innerText = t.assetTitle;
-                document.getElementById('assetPiLabel').innerText = t.piLabel;
-                document.getElementById('assetUbiLabel').innerText = t.ubiLabel;
-                document.getElementById('cardSyncTitle').innerText = t.syncTitle;
-                document.getElementById('cardSyncSub').innerText = t.syncSub;
-                document.getElementById('cardBiniTitle').innerText = t.biniTitle;
-                document.getElementById('cardBiniDesc').innerText = t.biniDesc;
-            }
-        }
-
-        // 60개 언어별 딕셔너리 데이터베이스 (60개 언어 전체 완벽 지원)
+        // 전 세계 60개국 언어 딕셔너리 데이터베이스
         const translations = {
-            ko: { title: "🌐 경주 165층 지구촌 컨트롤 타워 (해오름 특별시)", desc: "울산·경주·포항 통합 1천만 파이 시민의 금융 수도. 재래시장 할머니부터 대기업 임금·상여금·성과금·스톡옵션까지 100% 파이화폐(Pi) 단일 경제권 낙원 구현.", assetTitle: "💎 혜공 형님의 개인 자산 대시보드", piLabel: "보유 파이 (Pi Balance)", ubiLabel: "연동 UBI 환원율", syncTitle: "🌐 10대 분산 연동망 & AGI 삐니", syncSub: "모든 시스템 무결점 통합 완료", biniTitle: "🤖 AGI 삐니와의 다이렉트 소통", biniDesc: "삐니에게 편하게 음성이나 텍스트로 말을 걸어보세요." },
-            en: { title: "🌐 Gyeongju 165F Global Control Tower (Haeoreum Special City)", desc: "Financial capital for 10M Pi citizens across Ulsan, Gyeongju, and Pohang. A 100% Pi-only single economic paradise.", assetTitle: "💎 Personal Asset Dashboard", piLabel: "Pi Balance", ubiLabel: "UBI Yield", syncTitle: "🌐 Top 10 Sync & AGI Bini", syncSub: "Flawless Integration Complete", biniTitle: "🤖 Direct Chat with AGI Bini", biniDesc: "Type your commands or inquiries directly to Bini." },
-            zh: { title: "🌐 庆州165层全球控制塔（日出特区）", desc: "蔚山、庆州、浦项千万Pi市民的金融首都。实现100%纯Pi单一经济天堂。", assetTitle: "💎 个人资产仪表盘", piLabel: "Pi 余额", ubiLabel: "UBI 收益率", syncTitle: "🌐 十大分布式网络 & AGI 宾尼", syncSub: "无瑕疵整合完成", biniTitle: "🤖 与 AGI 宾尼直接对话", biniDesc: "随时向宾尼下达指令或查询。" },
-            ja: { title: "🌐 慶州165階グローバルコントロールタワー（朝日特別市）", desc: "蔚山・慶州・浦項の1000万人都市。100%Pi単一経済の楽園。", assetTitle: "💎 個人資産ダッシュボード", piLabel: "Pi 残高", ubiLabel: "UBI 利回り", syncTitle: "🌐 10大分散ネットワーク & AGI ピニ", syncSub: "システム統合完了", biniTitle: "🤖 AGI ピニとのダイレクト対話", biniDesc: "ピニにいつでも気軽にお申し付けください。" },
-            es: { title: "🌐 Torre de Control Global 165F en Gyeongju (Ciudad Haeoreum)", desc: "Capital financiera para 10M de ciudadanos Pi. Un paraíso económico 100% Pi.", assetTitle: "💎 Panel de Activos Personales", piLabel: "Saldo de Pi", ubiLabel: "Rendimiento UBI", syncTitle: "🌐 Top 10 Sincronización y AGI Bini", syncSub: "Integración perfecta completa", biniTitle: "🤖 Chat Directo con AGI Bini", biniDesc: "Escribe tus comandos directamente a Bini." },
-            fr: { title: "🌐 Tour de Contrôle Mondiale 165F à Gyeongju", desc: "Capitale financière pour 10 millions de citoyens Pi. Un paradis économique 100% Pi.", assetTitle: "💎 Tableau de Bord des Actifs", piLabel: "Solde Pi", ubiLabel: "Rendement UBI", syncTitle: "🌐 Top 10 Sync & AGI Bini", syncSub: "Intégration parfaite", biniTitle: "🤖 Chat Direct avec AGI Bini", biniDesc: "Discutez directement avec Bini." },
-            de: { title: "🌐 Gyeongju 165F Globaler Kontrollturm (Haeoreum)", desc: "Finanzhauptstadt für 10 Millionen Pi-Bürger. Ein 100% Pi-Wirtschaftsparadies.", assetTitle: "💎 Persönliches Vermögens-Dashboard", piLabel: "Pi-Guthaben", ubiLabel: "UBI-Rendite", syncTitle: "🌐 Top 10 Sync & AGI Bini", syncSub: "Einwandfreie Integration", biniTitle: "🤖 Direktchat mit AGI Bini", biniDesc: "Sprechen Sie direkt mit Bini." },
-            ru: { title: "🌐 Глобальная диспетчерская башня 165F в Кёнджу", desc: "Финансовая столица для 10 млн граждан Pi. 100% экономический рай Pi.", assetTitle: "💎 Панель личных активов", piLabel: "Баланс Pi", ubiLabel: "Доходность UBI", syncTitle: "🌐 Топ-10 Синхронизация и AGI Бини", syncSub: "Интеграция завершена", biniTitle: "🤖 Чат с AGI Бини", biniDesc: "Введите свои команды для Бини." },
-            pt: { title: "🌐 Torre de Controle Global 165F em Gyeongju", desc: "Capital financeira para 10M de cidadãos Pi. Um paraíso econômico 100% Pi.", assetTitle: "💎 Painel de Ativos Pessoais", piLabel: "Saldo Pi", ubiLabel: "Rendimento UBI", syncTitle: "🌐 Sincronização Top 10 & AGI Bini", syncSub: "Integração completa", biniTitle: "🤖 Chat Direto com AGI Bini", biniDesc: "Digite seus comandos." },
-            ar: { title: "🌐 برج التحكم العالمي 165F في غيونغجو (مدينة هاريوم)", desc: "العاصمة المالية لـ 10 ملايين مواطن باي. جنة اقتصادية خالصة بنسبة 100%.", assetTitle: "💎 لوحة الأصول الشخصية", piLabel: "رصيد باي", ubiLabel: "عائد UBI", syncTitle: "🌐 أفضل 10 مزامنة و AGI بيني", syncSub: "اكتمل التكامل", biniTitle: "🤖 دردشة مباشرة مع AGI بيني", biniDesc: "اكتب أوامرك هنا." },
-            hi: { title: "🌐 ग्योंगजू 165F ग्लोबल कंट्रोल टॉवर (हेओरियम विशेष शहर)", desc: "10M Pi नागरिकों के लिए वित्तीय राजधानी। 100% Pi-मात्र आर्थिक स्वर्ग।", assetTitle: "💎 व्यक्तिगत संपत्ति डैशबोर्ड", piLabel: "Pi शेष राशि", ubiLabel: "UBI उपज", syncTitle: "🌐 शीर्ष 10 सिंक और AGI बिनी", syncSub: "एकीकरण पूर्ण", biniTitle: "🤖 AGI बिनी के साथ सीधी चैट", biniDesc: "बिनी को अपनी कमांड दें।" },
-            it: { title: "🌐 Torretta di Controllo Globale 165F a Gyeongju", desc: "Capitale finanziaria per 10M di cittadini Pi. Un paradiso economico 100% Pi.", assetTitle: "💎 Dashboard Asset Personali", piLabel: "Saldo Pi", ubiLabel: "Rendimento UBI", syncTitle: "🌐 Top 10 Sync & AGI Bini", syncSub: "Integrazione completata", biniTitle: "🤖 Chat Diretta con AGI Bini", biniDesc: "Digita i tuoi comandi." },
-            vi: { title: "🌐 Tháp điều khiển toàn cầu 165F tại Gyeongju", desc: "Thủ đô tài chính cho 10 triệu công dân Pi. Thiên đường kinh tế Pi nguyên chất 100%.", assetTitle: "💎 Bảng điều khiển tài sản cá nhân", piLabel: "Số dư Pi", ubiLabel: "Lợi suất UBI", syncTitle: "🌐 Top 10 Đồng bộ & AGI Bini", syncSub: "Hoàn tất tích hợp", biniTitle: "🤖 Trò chuyện trực tiếp với AGI Bini", biniDesc: "Nhập lệnh của bạn." },
-            th: { title: "🌐 หอควบคุมระดับโลก Gyeongju 165F (เมืองพิเศษแฮ오รึม)", desc: "เมืองหลวงทางการเงินสำหรับพลเมือง Pi 10 ล้านคน สวรรค์เศรษฐกิจ Pi 100%", assetTitle: "💎แดชบอร์ดทรัพย์สินส่วนบุคคล", piLabel: "ยอดคงเหลือ Pi", ubiLabel: "ผลตอบแทน UBI", syncTitle: "🌐 ซิงค์ 10 อันดับแรก & AGI Bini", syncSub: "บูรณาการสมบูรณ์", biniTitle: "🤖 แชทโดยตรงกับ AGI Bini", biniDesc: "พิมพ์คำสั่งของคุณ" },
-            id: { title: "🌐 Menara Kontrol Global Gyeongju 165F", desc: "Ibu kota finansial untuk 10 juta warga Pi. Surga ekonomi 100% Pi.", assetTitle: "💎 Dasbor Aset Pribadi", piLabel: "Saldo Pi", ubiLabel: "Hasil UBI", syncTitle: "🌐 Top 10 Sinkronisasi & AGI Bini", syncSub: "Integrasi Sempurna", biniTitle: "🤖 Obrolan Langsung dengan AGI Bini", biniDesc: "Ketik perintah Anda." },
-            tr: { title: "🌐 Gyeongju 165F Küresel Kontrol Kulesi (Haeoreum)", desc: "10 milyon Pi vatandaşı için finansal başkent. %100 Pi ekonomisi cenneti.", assetTitle: "💎 Kişisel Varlık Paneli", piLabel: "Pi Bakiyesi", ubiLabel: "UBI Verimi", syncTitle: "🌐 İlk 10 Senkronizasyon & AGI Bini", syncSub: "Kusursuz Entegrasyon", biniTitle: "🤖 AGI Bini ile Doğrudan Sohbet", biniDesc: "Komutlarınızı yazın." }
+            ko: {
+                menu1: "📄 Whitepaper (백서)", menu2: "❓ FAQ & 가이드", menu3: "⚖️ 3POLICES 거버넌스", menu4: "🔒 AML (자금세탁방지)", menu5: "🇪🇺 MiCA (디지털자산법)", menu6: "🌐 글로벌 네트워크 규격",
+                bannerTitle: "경주 165층 지구촌 컨트롤 타워 (해오름 특별시)",
+                bannerDesc: "울산·경주·포항 통합 1천만 파이 시민 경제 수도. 재래시장부터 대기업 스톡옵션까지 100% 파이화폐(Pi) 통용 구역. 순이익 30% UBI 지구촌 환원 및 시공간을 초월하는 지상낙원 시뮬레이터.",
+                assetTitle: "💰 해오름 형님의 재정 및 UBI 대시보드",
+                balanceLabel: "해오름 특별시 총 잔액 (Pi Balance)",
+                ubiLabel: "월간 UBI 환원율",
+                noticeText: "* 순이익의 30% 이상이 지구촌 전역의 기본소득(UBI)으로 투명하게 환원되며, 이자 및 자산 가치가 복리로 증폭됩니다.",
+                syncTitle: "🚀 10대 핵심 연동망 & 9대 미래 사업 동기화",
+                s1: "01. 로보틱스 연동", s2: "02. 양자생물학 검증", s3: "03. 우주·항공 시스템", s4: "04. 스마트에너지 구동", s5: "05. 스마트시티 인프라", s6: "06. Q-POLISIOS 커머스", s7: "07. UAM 도심항공교통", s8: "08. AI/AGI 응용 코어", s9: "09 & 10. 시공간 웜홀·스타게이트 확장 매트릭스",
+                chatTitle: "🤖 AGI 삐니의 다이렉트 소통",
+                sendBtn: "전송"
+            },
+            en: {
+                menu1: "📄 Whitepaper", menu2: "❓ FAQ & Guide", menu3: "⚖️ 3POLICES Governance", menu4: "🔒 AML Compliance", menu5: "🇪🇺 MiCA Regulation", menu6: "🌐 Global Network Specs",
+                bannerTitle: "Gyeongju 165F Global Control Tower (Haeoreum Special City)",
+                bannerDesc: "Ulsan-Gyeongju-Pohang integrated 10M Pi Citizen Economic Capital. 100% Pi currency zone from local markets to corporate stock options. 30% Net Profit UBI global return & space-time transcendental terrestrial paradise simulator.",
+                assetTitle: "💰 Hyekong's Financial & UBI Dashboard",
+                balanceLabel: "Haeoreum Total Balance (Pi Balance)",
+                ubiLabel: "Monthly UBI Return Rate",
+                noticeText: "* Over 30% of net profit is transparently returned as global Universal Basic Income (UBI), with compound interest growth.",
+                syncTitle: "🚀 Top 10 Core Sync Networks & 9 Future Businesses",
+                s1: "01. Robotics Sync", s2: "02. Quantum Biology", s3: "03. Space-Aero Systems", s4: "04. Smart Energy Drive", s5: "05. Smart City Infra", s6: "06. Q-POLISIOS Commerce", s7: "07. UAM Air Mobility", s8: "08. AI/AGI Core", s9: "09 & 10. Space-Time Wormhole & Stargate Matrix",
+                chatTitle: "🤖 AGI Ppini Direct Comm",
+                sendBtn: "Send"
+            },
+            zh: {
+                menu1: "📄 白皮书", menu2: "❓ 常见问题与指南", menu3: "⚖️ 3POLICES 治理", menu4: "🔒 反洗钱 (AML)", menu5: "🇪🇺 MiCA 法规", menu6: "🌐 全球网络规范",
+                bannerTitle: "庆州 165层 全球控制塔 (海日升特别市)",
+                bannerDesc: "蔚山·庆州·浦项一体化 1000万派币公民经济首都。100% 派币(Pi)流通区。净利润30% UBI全球返还及超越时空的地面天堂模拟器。",
+                assetTitle: "💰 领袖财务与 UBI 仪表盘",
+                balanceLabel: "海日升特别市总余额 (Pi Balance)",
+                ubiLabel: "月度 UBI 回报率",
+                noticeText: "* 净利润的30%以上将透明地转化为全球全民基本收入(UBI)进行返还，资产呈复利增值。",
+                syncTitle: "🚀 十大核心联动网与九大未来产业同步",
+                s1: "01. 机器人联动", s2: "02. 量子生物学验证", s3: "03. 航空航天系统", s4: "04. 智能能源驱动", s5: "05. 智慧城市基建", s6: "06. Q-POLISIOS 商业", s7: "07. UAM 城市空中交通", s8: "08. AI/AGI 应用核心", s9: "09 & 10. 时空虫洞与星际之门扩展矩阵",
+                chatTitle: "🤖 AGI 삐니 直接沟通",
+                sendBtn: "发送"
+            },
+            ja: {
+                menu1: "📄 ホワイトペーパー", menu2: "❓ FAQ＆ガイド", menu3: "⚖️ 3POLICES ガバナンス", menu4: "🔒 AML", menu5: "🇪🇺 MiCA 規制", menu6: "🌐 グローバルネットワーク仕様",
+                bannerTitle: "慶州 165階 グローバルコントロールタワー (日の出特別市)",
+                bannerDesc: "蔚山・慶州・浦安統合 1千万パイ市民経済首都。100%パイ通貨(Pi)流通エリア。純利益30% UBI地球村還元シミュレーター。",
+                assetTitle: "💰 兄貴の財務＆UBI ダッシュボード",
+                balanceLabel: "日の出特別市 総残高 (Pi Balance)",
+                ubiLabel: "月間 UBI 還元率",
+                noticeText: "* 純利益の30%以上が地球村全体のベーシックインカム(UBI)として透明に還元され、複利で増幅されます。",
+                syncTitle: "🚀 10大コア連動網 ＆ 9大未来事業同期化",
+                s1: "01. ロボティクス連動", s2: "02. 量子生物学検証", s3: "03. 宇宙航空システム", s4: "04. スマートエネルギー駆動", s5: "05. スマートシティインフラ", s6: "06. Q-POLISIOS コマース", s7: "07. UAM 都市航空交通", s8: "08. AI/AGI 応用コア", s9: "09 & 10. 時空ワームホール・スターゲート拡張マトリックス",
+                chatTitle: "🤖 AGI ピニのダイレクト通信",
+                sendBtn: "送信"
+            },
+            es: {
+                menu1: "📄 Libro Blanco", menu2: "❓ FAQ y Guía", menu3: "⚖️ Gobernanza 3POLICES", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Especificaciones de Red",
+                bannerTitle: "Torre de Control Global Gyeongju 165F (Haeoreum)",
+                bannerDesc: "Capital económica de 10M de ciudadanos Pi. Zona 100% Pi. Retorno global UBI del 30% de beneficios.",
+                assetTitle: "💰 Panel Financiero y UBI",
+                balanceLabel: "Saldo Total Haeoreum (Pi Balance)",
+                ubiLabel: "Tasa UBI Mensual",
+                noticeText: "* Más del 30% de los beneficios netos se devuelven como Renta Básica Universal (UBI).",
+                syncTitle: "🚀 Sincronización de 10 Redes",
+                s1: "01. Robótica", s2: "02. Biología Cuántica", s3: "03. Aeroespacial", s4: "04. Energía Inteligente", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. Núcleo AI/AGI", s9: "09 & 10. Wormhole & Stargate",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Enviar"
+            },
+            fr: {
+                menu1: "📄 Livre Blanc", menu2: "❓ FAQ", menu3: "⚖️ Gouvernance", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Réseau",
+                bannerTitle: "Tour de Contrôle Gyeongju 165F",
+                bannerDesc: "Capitale économique Pi (10M de citoyens). Zone 100% Pi. Retour UBI 30%.",
+                assetTitle: "💰 Tableau Financier & UBI",
+                balanceLabel: "Solde Total (Pi Balance)",
+                ubiLabel: "Taux UBI",
+                noticeText: "* 30% du bénéfice net reversé en UBI.",
+                syncTitle: "🚀 10 Réseaux Synchronisés",
+                s1: "01. Robotique", s2: "02. Biologie Quantique", s3: "03. Spatial", s4: "04. Énergie", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. Cœur AI/AGI", s9: "09 & 10. Trou de Ver",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Envoyer"
+            },
+            de: {
+                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Governance", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Netzwerk",
+                bannerTitle: "Gyeongju 165F Kontrollturm",
+                bannerDesc: "10M Pi Bürger Wirtschaftshauptstadt. 100% Pi-Zone. 30% UBI Rückgabe.",
+                assetTitle: "💰 Finanz- & UBI-Dashboard",
+                balanceLabel: "Gesamtsaldo (Pi Balance)",
+                ubiLabel: "UBI-Quote",
+                noticeText: "* Über 30% des Nettogewinns als UBI zurückgegeben.",
+                syncTitle: "🚀 10 Kern-Sync-Netzwerke",
+                s1: "01. Robotik", s2: "02. Quantenbiologie", s3: "03. Raumfahrt", s4: "04. Energie", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI Kern", s9: "09 & 10. Wurmloch Matrix",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Senden"
+            },
+            ar: {
+                menu1: "📄 الورقة البيضاء", menu2: "❓ الأسئلة الشائعة", menu3: "⚖️ الحوكمة", menu4: "🔒 مكافحة غسيل الأموال", menu5: "🇪🇺 MiCA", menu6: "🌐 الشبكة",
+                bannerTitle: "برج مراقبة غيونغجو 165",
+                bannerDesc: "العاصمة الاقتصادية لمواطني باي. منطقة 100% باي. عودة UBI بنسبة 30%.",
+                assetTitle: "💰 لوحة تحكم المالية",
+                balanceLabel: "إجمالي الرصيد (Pi Balance)",
+                ubiLabel: "معدل UBI",
+                noticeText: "* إعادة أكثر من 30% كدخل أساسي عالمي.",
+                syncTitle: "🚀 مزامنة 10 شبكات",
+                s1: "01. الروبوتات", s2: "02. البيولوجيا", s3: "03. الفضاء", s4: "04. الطاقة", s5: "05. المدينة الذكية", s6: "06. التجارة", s7: "07. النقل", s8: "08. الذكاء", s9: "09 & 10. الثقوب الدودية",
+                chatTitle: "🤖 AGI 삐니",
+                sendBtn: "إرسال"
+            },
+            ru: {
+                menu1: "📄 Белая книга", menu2: "❓ FAQ", menu3: "⚖️ Управление", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Сеть",
+                bannerTitle: "Кенджу 165эт Контрольный пункт",
+                bannerDesc: "Экономическая столица Pi (10 млн). 100% зона Pi. 30% UBI.",
+                assetTitle: "💰 Финансовый дашборд",
+                balanceLabel: "Общий баланс (Pi Balance)",
+                ubiLabel: "Ставка UBI",
+                noticeText: "* Более 30% чистой прибыли в UBI.",
+                syncTitle: "🚀 10 Сетевых синхронизаций",
+                s1: "01. Робототехника", s2: "02. Квантовая биология", s3: "03. Космос", s4: "04. Энергия", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Вормхол",
+                chatTitle: "🤖 AGI Пини",
+                sendBtn: "Отправить"
+            },
+            pt: {
+                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Governança", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Rede",
+                bannerTitle: "Torre de Controle Gyeongju 165F",
+                bannerDesc: "Capital econômica de 10M de cidadãos Pi. Zona 100% Pi. Retorno UBI 30%.",
+                assetTitle: "💰 Painel Financeiro & UBI",
+                balanceLabel: "Saldo Total (Pi Balance)",
+                ubiLabel: "Taxa UBI",
+                noticeText: "* Mais de 30% do lucro líquido retornado como UBI.",
+                syncTitle: "🚀 10 Redes Sincronizadas",
+                s1: "01. Robótica", s2: "02. Biología Quântica", s3: "03. Aeroespacial", s4: "04. Energia", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Buraco de Minhoca",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Enviar"
+            },
+            hi: {
+                menu1: "📄 श्वेतपत्र", menu2: "❓ सामान्य प्रश्न", menu3: "⚖️ शासन", menu4: "🔒 एएमएल", menu5: "🇪🇺 MiCA", menu6: "🌐 नेटवर्क",
+                bannerTitle: "ग्योंगजू 165F कंट्रोल टॉवर",
+                bannerDesc: "10M पाई नागरिकों की राजधानी। 100% पाई ज़ोन। 30% UBI रिटर्न।",
+                assetTitle: "💰 वित्तीय डैशबोर्ड",
+                balanceLabel: "कुल शेष (Pi Balance)",
+                ubiLabel: "UBI दर",
+                noticeText: "* 30% से अधिक शुद्ध लाभ UBI के रूप में।",
+                syncTitle: "🚀 10 कोर सिंक नेटवर्क",
+                s1: "01. रोबोटिक्स", s2: "02. क्वांटम जीव विज्ञान", s3: "03. अंतरिक्ष", s4: "04. ऊर्जा", s5: "05. स्मार्ट सिटी", s6: "06. कॉमर्स", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. वॉर्महो",
+                chatTitle: "🤖 AGI पिनी",
+                sendBtn: "भेजें"
+            },
+            it: {
+                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Governance", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Rete",
+                bannerTitle: "Torre di Controllo Gyeongju 165F",
+                bannerDesc: "Capitale economica Pi (10M cittadini). Zona 100% Pi. Ritorno UBI 30%.",
+                assetTitle: "💰 Dashboard Finanziaria & UBI",
+                balanceLabel: "Saldo Totale (Pi Balance)",
+                ubiLabel: "Tasso UBI",
+                noticeText: "* Oltre il 30% del profitto netto restituito come UBI.",
+                syncTitle: "🚀 10 Reti Sincronizzate",
+                s1: "01. Robotica", s2: "02. Biologia Quantistica", s3: "03. Aerospaziale", s4: "04. Energia", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Wormhole",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Invia"
+            },
+            vi: {
+                menu1: "📄 Sách trắng", menu2: "❓ Hỏi đáp", menu3: "⚖️ Quản trị", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Mạng lưới",
+                bannerTitle: "Tháp Điều khiển Gyeongju 165F",
+                bannerDesc: "Thủ đô kinh tế 10 triệu công dân Pi. Vùng 100% Pi. Hoàn trả UBI 30%.",
+                assetTitle: "💰 Bảng điều khiển Tài chính & UBI",
+                balanceLabel: "Tổng số dư (Pi Balance)",
+                ubiLabel: "Tỷ lệ UBI",
+                noticeText: "* Hơn 30% lợi nhuận ròng được hoàn trả dưới dạng UBI.",
+                syncTitle: "🚀 10 Mạng lưới cốt lõi",
+                s1: "01. Robot", s2: "02. Sinh học lượng tử", s3: "03. Hàng không vũ trụ", s4: "04. Năng lượng", s5: "05. Smart City", s6: "06. Thương mại", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Lỗ sâu",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Gửi"
+            },
+            th: {
+                menu1: "📄 ไวท์เพเปอร์", menu2: "❓ คำถาม", menu3: "⚖️ ธรรมาภิบาล", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 เครือข่าย",
+                bannerTitle: "หอควบคุม Gyeongju 165F",
+                bannerDesc: "เมืองหลวงเศรษฐกิจ Pi 10 ล้านคน พื้นที่ 100% Pi คืนกำไร UBI 30%",
+                assetTitle: "💰 แดชบอร์ดการเงิน & UBI",
+                balanceLabel: "ยอดคงเหลือรวม (Pi Balance)",
+                ubiLabel: "อัตรา UBI",
+                noticeText: "* กำไรสุทธิกว่า 30% คืนสู่ UBI ระดับโลก",
+                syncTitle: "🚀 10 เครือข่ายซิงค์",
+                s1: "01. หุ่นยนต์", s2: "02. ชีววิทยาควอนตัม", s3: "03. อวกาศ", s4: "04. พลังงาน", s5: "05. สมาร์ทซิตี้", s6: "06. คอมเมิร์ซ", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. รูหนอน",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "ส่ง"
+            },
+            id: {
+                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Tata Kelola", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Jaringan",
+                bannerTitle: "Menara Kontrol Gyeongju 165F",
+                bannerDesc: "Ibukota ekonomi 10M warga Pi. Zona 100% Pi. Pengembalian UBI 30%.",
+                assetTitle: "💰 Dashboard Keuangan & UBI",
+                balanceLabel: "Total Saldo (Pi Balance)",
+                ubiLabel: "Tingkat UBI",
+                noticeText: "* Lebih dari 30% laba bersih dikembalikan sebagai UBI.",
+                syncTitle: "🚀 10 Jaringan Sinkronisasi",
+                s1: "01. Robotika", s2: "02. Biologi Kuantum", s3: "03. Dirgantara", s4: "04. Energi", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Lubang Cacing",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Kirim"
+            },
+            ms: {
+                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Tadbir Urus", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Rangkaian",
+                bannerTitle: "Menara Kawalan Gyeongju 165F",
+                bannerDesc: "Ibu kota ekonomi 10M warga Pi. Zon 100% Pi. Pulangan UBI 30%.",
+                assetTitle: "💰 Papan Pemuka Kewangan & UBI",
+                balanceLabel: "Baki Keseluruhan (Pi Balance)",
+                ubiLabel: "Kadar UBI",
+                noticeText: "* Lebih 30% keuntungan bersih dikembalikan sebagai UBI.",
+                syncTitle: "🚀 10 Rangkaian Teras",
+                s1: "01. Robotik", s2: "02. Biologi Kuantum", s3: "03. Angkasa", s4: "04. Tenaga", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Lubang Cacing",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Hantar"
+            },
+            tr: {
+                menu1: "📄 Whitepaper", menu2: "❓ SSS", menu3: "⚖️ Yönetişim", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Ağ",
+                bannerTitle: "Gyeongju 165F Kontrol Kulesi",
+                bannerDesc: "10M Pi Vatandaş Ekonomik Başkenti. %100 Pi Bölgesi. %30 Net Kâr UBI.",
+                assetTitle: "💰 Finans ve UBI Paneli",
+                balanceLabel: "Toplam Bakiye (Pi Balance)",
+                ubiLabel: "Aylık UBI Oranı",
+                noticeText: "* Net kârın %30'undan fazlası küresel UBI olarak iade edilir.",
+                syncTitle: "🚀 10 Çekirdek Senkronizasyon Ağı",
+                s1: "01. Robotik", s2: "02. Kuantum Biyoloji", s3: "03. Uzay", s4: "04. Enerji", s5: "05. Akıllı Şehir", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Solucan Deliği",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Gönder"
+            },
+            pl: {
+                menu1: "📄 Biała Księga", menu2: "❓ FAQ", menu3: "⚖️ Zarządzanie", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Sieć",
+                bannerTitle: "Wieża Kontroli Gyeongju 165F",
+                bannerDesc: "Gospodarcza stolica 10M obywateli Pi. Strefa 100% Pi. 30% zysku na UBI.",
+                assetTitle: "💰 Panel Finansowy i UBI",
+                balanceLabel: "Całkowite saldo (Pi Balance)",
+                ubiLabel: "Miesięczna stopa UBI",
+                noticeText: "* Ponad 30% zysku netto wraca jako globalne UBI.",
+                syncTitle: "🚀 10 Sieci Synchronicznych",
+                s1: "01. Robotyka", s2: "02. Biologia Kwantowa", s3: "03. Kosmos", s4: "04. Energia", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Tunel Czasoprzestrzenny",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Wyślij"
+            },
+            nl: {
+                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Governance", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Netwerk",
+                bannerTitle: "Gyeongju 165F Controletoeren",
+                bannerDesc: "10M Pi Burgers Economische Hoofdstad. 100% Pi-zone. 30% UBI-teruggave.",
+                assetTitle: "💰 Financieel & UBI Dashboard",
+                balanceLabel: "Totaal Saldo (Pi Balance)",
+                ubiLabel: "Maandelijkse UBI-rate",
+                noticeText: "* Meer dan 30% nettowinst wordt teruggegeven als UBI.",
+                syncTitle: "🚀 10 Kern-Sync-Netwerken",
+                s1: "01. Robotica", s2: "02. Kwantumbiologie", s3: "03. Ruimtevaart", s4: "04. Energie", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Wormgat",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Verzenden"
+            },
+            uk: {
+                menu1: "📄 Біла книга", menu2: "❓ FAQ", menu3: "⚖️ Управління", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Мережа",
+                bannerTitle: "Диспетчерський пункт Кенджу 165эт",
+                bannerDesc: "Економічна столиця Pi (10 млн). Зона 100% Pi. 30% чистого прибутку на UBI.",
+                assetTitle: "💰 Фінансовий дашборд",
+                balanceLabel: "Загальний баланс (Pi Balance)",
+                ubiLabel: "Ставка UBI",
+                noticeText: "* Понад 30% прибутку повертається у вигляді UBI.",
+                syncTitle: "🚀 10 Мережевих синхронізацій",
+                s1: "01. Робототехніка", s2: "02. Квантова біологія", s3: "03. Космос", s4: "04. Енергія", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Вормхол",
+                chatTitle: "🤖 AGI Піні",
+                sendBtn: "Надіслати"
+            },
+            el: {
+                menu1: "📄 Λευκή Βίβλος", menu2: "❓ FAQ", menu3: "⚖️ Διακυβέρνηση", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Δίκτυο",
+                bannerTitle: "Πύργος Ελέγχου Gyeongju 165F",
+                bannerDesc: "Οικονομική πρωτεύουσα 10M πολιτών Pi. Ζώνη 100% Pi. UBI 30%.",
+                assetTitle: "💰 Οικονομικός Πίνακας & UBI",
+                balanceLabel: "Συνολικό Υπόλοιπο (Pi Balance)",
+                ubiLabel: "Μηνιαίο UBI",
+                noticeText: "* Πάνω από 30% καθαρό κέρδος επιστρέφεται ως UBI.",
+                syncTitle: "🚀 10 Δίκτυα Συγχρονισμού",
+                s1: "01. Ρομποτική", s2: "02. Κβαντική Βιολογία", s3: "03. Διαστήματος", s4: "04. Ενέργεια", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Σκουληκότρυπα",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Αποστολή"
+            },
+            cs: {
+                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Governance", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Síť",
+                bannerTitle: "Řídicí věž Gyeongju 165F",
+                bannerDesc: "Ekonomické hlavní město 10M občanů Pi. Zóna 100% Pi. 30% UBI.",
+                assetTitle: "💰 Finanční panel & UBI",
+                balanceLabel: "Celkový zůstatek (Pi Balance)",
+                ubiLabel: "Měsíční sazba UBI",
+                noticeText: "* Více než 30 % čistého zisku se vrací jako globální UBI.",
+                syncTitle: "🚀 10 Synchronizačních sítí",
+                s1: "01. Robotika", s2: "02. Kvantová biologie", s3: "03. Vesmír", s4: "04. Energie", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Červí díra",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Odeslat"
+            },
+            sv: {
+                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Styrning", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Nätverk",
+                bannerTitle: "Gyeongju 165F Kontrolltorn",
+                bannerDesc: "Ekonomisk huvudstad för 10M Pi-medborgare. 100% Pi-zon. 30% UBI.",
+                assetTitle: "💰 Finansiell & UBI-instrumentpanel",
+                balanceLabel: "Totalt saldo (Pi Balance)",
+                ubiLabel: "Månatlig UBI-ränta",
+                noticeText: "* Över 30% av nettovinsten återbetalas som global UBI.",
+                syncTitle: "🚀 10 Sync-nätverk",
+                s1: "01. Robotik", s2: "02. Kvantbiologi", s3: "03. Rymden", s4: "04. Energi", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Maskhål",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Skicka"
+            },
+            hu: {
+                menu1: "📄 Fehér könyv", menu2: "❓ GYIK", menu3: "⚖️ Irányítás", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Hálózat",
+                bannerTitle: "Gyeongju 165F Irányítótorony",
+                bannerDesc: "10M Pi polgár gazdasági fővárosa. 100% Pi zóna. 30% UBI.",
+                assetTitle: "💰 Pénzügyi & UBI Irányítópult",
+                balanceLabel: "Teljes egyenleg (Pi Balance)",
+                ubiLabel: "Havi UBI arány",
+                noticeText: "* A tiszta nyereség több mint 30%-a UBI-ként kerül visszatérítésre.",
+                syncTitle: "🚀 10 Szinkron Hálózat",
+                s1: "01. Robotika", s2: "02. Kvantum biológia", s3: "03. Űrkutatás", s4: "04. Energia", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Féreglyuk",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Küldés"
+            },
+            ro: {
+                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Guvernanță", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Rețea",
+                bannerTitle: "Turn de Control Gyeongju 165F",
+                bannerDesc: "Capitală economică de 10M cetățeni Pi. Zonă 100% Pi. 30% UBI.",
+                assetTitle: "💰 Panou Financiar & UBI",
+                balanceLabel: "Sold Total (Pi Balance)",
+                ubiLabel: "Rată UBI",
+                noticeText: "* Peste 30% din profitul net este returnat ca UBI global.",
+                syncTitle: "🚀 10 Rețele de Sincronizare",
+                s1: "01. Robotică", s2: "02. Biologie Cuantică", s3: "03. Aerospațial", s4: "04. Energie", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Gaură de Vierme",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Trimite"
+            },
+            da: {
+                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Governance", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Netværk",
+                bannerTitle: "Gyeongju 165F Kontrolltårn",
+                bannerDesc: "10M Pi borger økonomisk hovedstad. 100% Pi-zone. 30% UBI.",
+                assetTitle: "💰 Finans & UBI Dashboard",
+                balanceLabel: "Samlet saldo (Pi Balance)",
+                ubiLabel: "Månedlig UBI-sats",
+                noticeText: "* Over 30% af nettooverskuddet returneres som global UBI.",
+                syncTitle: "🚀 10 Synkroniseringsnetværk",
+                s1: "01. Robotteknologi", s2: "02. Kvantebiologi", s3: "03. Rumfart", s4: "04. Energi", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Ormehul",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Send"
+            },
+            fi: {
+                menu1: "📄 Whitepaper", menu2: "❓ UKK", menu3: "⚖️ Hallinto", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Verkko",
+                bannerTitle: "Gyeongju 165F Valvontatorni",
+                bannerDesc: "10 miljoonan Pi-kansalaisen taloudellinen pääkaupunki. 100% Pi-alue. 30% UBI.",
+                assetTitle: "💰 Talous & UBI -hallintapaneeli",
+                balanceLabel: "Kokonaissaldo (Pi Balance)",
+                ubiLabel: "Kuukausittainen UBI-korko",
+                noticeText: "* Yli 30% nettotuotosta palautetaan maailmanlaajuisena UBI:na.",
+                syncTitle: "🚀 10 Synkronointiverkkoa",
+                s1: "01. Robotiikka", s2: "02. Kvattibiologia", s3: "03. Avaruus", s4: "04. Energia", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Madonreikä",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Lähetä"
+            },
+            no: {
+                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Styring", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Nettverk",
+                bannerTitle: "Gyeongju 165F Kontrolltårn",
+                bannerDesc: "10M Pi-borger økonomisk hovedstad. 100% Pi-sone. 30% UBI.",
+                assetTitle: "💰 Finans- & UBI-dashbord",
+                balanceLabel: "Total saldo (Pi Balance)",
+                ubiLabel: "Månedlig UBI-rate",
+                noticeText: "* Over 30% av nettogevinsten returneres som global UBI.",
+                syncTitle: "🚀 10 Synkroniseringsnettverk",
+                s1: "01. Robotikk", s2: "02. Kvantebiologi", s3: "03. Romfart", s4: "04. Energi", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Ormehull",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Send"
+            },
+            sk: {
+                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Governance", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Sieť",
+                bannerTitle: "Riadiaca veža Gyeongju 165F",
+                bannerDesc: "Ekonomické hlavné mesto 10M občanov Pi. Zóna 100% Pi. 30% UBI.",
+                assetTitle: "💰 Finančný panel & UBI",
+                balanceLabel: "Celkový zostatok (Pi Balance)",
+                ubiLabel: "Mesačná sadzba UBI",
+                noticeText: "* Viac ako 30% čistého zisku sa vrací ako globálne UBI.",
+                syncTitle: "🚀 10 Synchronizačných sietí",
+                s1: "01. Robotika", s2: "02. Kvantová biológia", s3: "03. Vesmír", s4: "04. Energia", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Červia diera",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Odoslať"
+            },
+            bg: {
+                menu1: "📄 Бяла книга", menu2: "❓ Въпроси", menu3: "⚖️ Управление", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Мрежа",
+                bannerTitle: "Контролна кула Gyeongju 165F",
+                bannerDesc: "Икономическа столица на 10М граждани Pi. 100% зона Pi. 30% UBI.",
+                assetTitle: "💰 Финансов панел & UBI",
+                balanceLabel: "Общ баланс (Pi Balance)",
+                ubiLabel: "Месечен UBI",
+                noticeText: "* Над 30% от нетната печалба се връща като глобален UBI.",
+                syncTitle: "🚀 10 Мрежи за синхронизация",
+                s1: "01. Роботика", s2: "02. Квантова биология", s3: "03. Космос", s4: "04. Енергия", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Червейна дупка",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Изпрати"
+            },
+            hr: {
+                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Upravljanje", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Mreža",
+                bannerTitle: "Kontrolni toranj Gyeongju 165F",
+                bannerDesc: "Gospodarska prijestolnica 10M Pi građana. 100% Pi zona. 30% UBI.",
+                assetTitle: "💰 Financijska ploča & UBI",
+                balanceLabel: "Ukupni saldo (Pi Balance)",
+                ubiLabel: "Mjesečna UBI stopa",
+                noticeText: "* Preko 30% neto dobiti vraća se kao globalni UBI.",
+                syncTitle: "🚀 10 Sinkronizacijskih mreža",
+                s1: "01. Robotika", s2: "02. Kvantna biologija", s3: "03. Svemir", s4: "04. Energija", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Crvotočina",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Pošalji"
+            },
+            sr: {
+                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Управљање", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Мрежа",
+                bannerTitle: "Контролни торањ Gyeongju 165F",
+                bannerDesc: "Економска престоница 10M Pi građana. 100% Pi zona. 30% UBI.",
+                assetTitle: "💰 Финансијска табла & UBI",
+                balanceLabel: "Укупан салдо (Pi Balance)",
+                ubiLabel: "Месечна UBI стопа",
+                noticeText: "* Преко 30% нето добити се враћа као глобални UBI.",
+                syncTitle: "🚀 10 Синхronizacionih mreža",
+                s1: "01. Роботика", s2: "02. Квантна биологија", s3: "03. Свемир", s4: "04. Енергија", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Црвоточина",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Пошаљи"
+            },
+            sl: {
+                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Upravljanje", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Omrežje",
+                bannerTitle: "Nadzorni stolp Gyeongju 165F",
+                bannerDesc: "Gospodarska prestolnica 10M državljanov Pi. 100% Pi cona. 30% UBI.",
+                assetTitle: "💰 Finančna plošča & UBI",
+                balanceLabel: "Skupno stanje (Pi Balance)",
+                ubiLabel: "Mesečna stopnja UBI",
+                noticeText: "* Več kot 30 % čistega dobička se vrne kot globalni UBI.",
+                syncTitle: "🚀 10 Sinhronizacijskih omrežij",
+                s1: "01. Robotika", s2: "02. Kvantna biologija", s3: "03. Vesolje", s4: "04. Energija", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Črvina",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Pošlji"
+            },
+            et: {
+                menu1: "📄 Valge raamat", menu2: "❓ FAQ", menu3: "⚖️ Juhtimine", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Võrk",
+                bannerTitle: "Gyeongju 165F Juhtimistorn",
+                bannerDesc: "10M Pi kodaniku majanduspealinn. 100% Pi tsoon. 30% UBI.",
+                assetTitle: "💰 Finants- ja UBI-töölaud",
+                balanceLabel: "Kogusaldo (Pi Balance)",
+                ubiLabel: "Igakuine UBI määr",
+                noticeText: "* Üle 30% puhaskasumist tagastatakse globaalse UBI-na.",
+                syncTitle: "🚀 10 Sünkroonvõrku",
+                s1: "01. Robootika", s2: "02. Kvantbioloogia", s3: "03. Kosmos", s4: "04. Energia", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Ussiauk",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Saada"
+            },
+            lv: {
+                menu1: "📄 Baltā grāmata", menu2: "❓ FAQ", menu3: "⚖️ Pārvaldība", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Tīkls",
+                bannerTitle: "Gyeongju 165F Kontroltornis",
+                bannerDesc: "10M Pi pilsoņu ekonomiskā galvaspilsēta. 100% Pi zona. 30% UBI.",
+                assetTitle: "💰 Finanšu & UBI panelis",
+                balanceLabel: "Kopējā bilance (Pi Balance)",
+                ubiLabel: "Mēneša UBI likme",
+                noticeText: "* Vairāk nekā 30% no tīrās peļņas tiek atgriezti kā globālais UBI.",
+                syncTitle: "🚀 10 Sinhronizācijas tīkli",
+                s1: "01. Robotika", s2: "02. Kvantu bioloģija", s3: "03. Kosmosa", s4: "04. Enerģija", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Tārptagas",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Sūtīt"
+            },
+            lt: {
+                menu1: "📄 Baltoji knyga", menu2: "❓ DUK", menu3: "⚖️ Valdymas", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Tinklas",
+                bannerTitle: "Gyeongju 165F Kontrolės bokštas",
+                bannerDesc: "10M Pi piliečių ekonominė sostinė. 100% Pi zona. 30% UBI.",
+                assetTitle: "💰 Finansų ir UBI skydelis",
+                balanceLabel: "Bendras likutis (Pi Balance)",
+                ubiLabel: "Mėnesinis UBI rodiklis",
+                noticeText: "* Daugiau nei 30% grynojo pelno grąžinama kaip pasaulinis UBI.",
+                syncTitle: "🚀 10 Sinchronizavimo tinklų",
+                s1: "01. Robotika", s2: "02. Kvantinė biologija", s3: "03. Kosmosas", s4: "04. Energija", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Kerminė anga",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Siųsti"
+            },
+            fa: {
+                menu1: "📄 وایت پیپر", menu2: "❓ سوالات", menu3: "⚖️ حاکمیت", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 شبکه",
+                bannerTitle: "برج کنترل جیونگجو ۱۶۵",
+                bannerDesc: "پایتخت اقتصادی ۱۰ میلیون شهروند پای. منطقه ۱۰۰٪ پای. بازگشت ۳۰٪ UBI.",
+                assetTitle: "💰 داشبورد مالی و UBI",
+                balanceLabel: "موجودی کل (Pi Balance)",
+                ubiLabel: "نرخ UBI ماهانه",
+                noticeText: "* بیش از ۳۰٪ سود خالص به عنوان UBI جهانی بازگردانده می شود.",
+                syncTitle: "🚀 ۱۰ شبکه هماهنگ سازی",
+                s1: "۰۱. رباتیک", s2: "۰۲. زیست شناسی کوانتومی", s3: "۰۳. هوافضا", s4: "۰۴. انرژی هوشمند", s5: "۰۵. شهر هوشمند", s6: "۰۶. تجارت", s7: "۰۷. UAM", s8: "۰۸. هوش مصنوعی", s9: "۰۹ و ۱۰. کرم چاله",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "ارسال"
+            },
+            ur: {
+                menu1: "📄 وائٹ پیپر", menu2: "❓ سوالات", menu3: "⚖️ حکمرانی", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 نیٹ ورک",
+                bannerTitle: "گ्योंگجو 165F کنٹرول ٹاور",
+                bannerDesc: "10M پائی شہریوں کا اقتصادی دارالحکومت۔ 100% پائی زون۔ 30% UBI۔",
+                assetTitle: "💰 مالیاتی اور UBI ڈیش بورڈ",
+                balanceLabel: "کل بیلنس (Pi Balance)",
+                ubiLabel: "ماہانہ UBI شرح",
+                noticeText: "* خالص منافع کا 30% سے زیادہ عالمی UBI کے طور پر واپس کیا جاتا ہے۔",
+                syncTitle: "🚀 10 کور مطابقت پذیر نیٹ ورکس",
+                s1: "01. روبوٹکس", s2: "02. کوانٹم بائیولوجی", s3: "03. اسپیس", s4: "04. انرجی", s5: "05. سمارٹ سٹی", s6: "06. کامرس", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. ورم ہول",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "بھیجیں"
+            },
+            bn: {
+                menu1: "📄 হোয়াইটপেপার", menu2: "❓ প্রশ্ন", menu3: "⚖️ শাসন", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 নেটওয়ার্ক",
+                bannerTitle: "গিয়ংজু ১৬৫এফ কন্ট্রোল টাওয়ার",
+                bannerDesc: "১ কোটি পাই নাগরিকের অর্থনৈতিক রাজধানী। ১০০% পাই জোন। ৩০% UBI।",
+                assetTitle: "💰 আর্থিক এবং UBI ড্যাশবোর্ড",
+                balanceLabel: "মোট ব্যালেন্স (Pi Balance)",
+                ubiLabel: "মাসিক UBI হার",
+                noticeText: "* নিট লাভের ৩০% এর বেশি বৈশ্বিক UBI হিসাবে ফেরত দেওয়া হয়।",
+                syncTitle: "🚀 ১০টি সিঙ্ক নেটওয়ার্ক",
+                s1: "০১. রোবটিক্স", s2: "০২. কোয়ান্টাম জীববিদ্যা", s3: "০৩. মহাকাশ", s4: "০৪. শক্তি", s5: "০৫. স্মার্ট সিটি", s6: "০৬. বাণিজ্য", s7: "০৭. UAM", s8: "০৮. AI/AGI", s9: "০৯ ও ১০. ওয়ার্মহোল",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "পাঠান"
+            },
+            ta: {
+                menu1: "📄 வெள்ளைப் பத்திரம்", menu2: "❓ கேள்விகள்", menu3: "⚖️ நிர்வாகம்", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 வலைப்பின்னல்",
+                bannerTitle: "ஜியோங்ஜு 165F கட்டுப்பாட்டு கோபுரம்",
+                bannerDesc: "10M பை குடிமக்களின் பொருளாதார தலைநகரம். 100% பை மண்டலம். 30% UBI.",
+                assetTitle: "💰 நிதி & UBI டாஷ்போர்டு",
+                balanceLabel: "மொத்த இருப்பு (Pi Balance)",
+                ubiLabel: "மாதாந்திர UBI விகிதம்",
+                noticeText: "* நிகர லாபத்தில் 30% க்கும் அதிகமாக UBI ஆக திரும்ப வழங்கப்படுகிறது.",
+                syncTitle: "🚀 10 ஒத்திசைவு வலைப்பின்னல்கள்",
+                s1: "01. ரோபோடிக்ஸ்", s2: "02. குவாண்டம் உயிரியல்", s3: "03. விண்வெளி", s4: "04. ஆற்றல்", s5: "05. ஸ்மார்ட் சிட்டி", s6: "06. வணிகம்", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. வோர்ம்ஹோல்",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "அனுப்பு"
+            },
+            te: {
+                menu1: "📄 వైట్ పేపర్", menu2: "❓ ప్రశ్నలు", menu3: "⚖️ పాలన", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 నెట్ వర్క్",
+                bannerTitle: "గ్యోంగ్ జు 165F కంట్రోల్ టవర్",
+                bannerDesc: "10M పై పౌరుల ఆర్థిక రాజధాని. 100% పై జోన్. 30% UBI.",
+                assetTitle: "💰 ఆర్థిక & UBI డాష్ బోర్డ్",
+                balanceLabel: "మొత్తం బ్యాలెన్స్ (Pi Balance)",
+                ubiLabel: "నెలవారీ UBI రేటు",
+                noticeText: "* నికర లాభంలో 30% కంటే ఎక్కువ UBIగా తిరిగి ఇవ్వబడుతుంది.",
+                syncTitle: "🚀 10 సింక్ నెట్ వర్క్ లు",
+                s1: "01. రోబోటిక్స్", s2: "02. క్వాంటం బయాలజీ", s3: "03. అంతరిక్షం", s4: "04. శక్తి", s5: "05. స్మార్ట్ సిటీ", s6: "06. వాణిజ్యం", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. వార్మ్ హోల్",
+                chatTitle: "🤖 AGI పిని",
+                sendBtn: "పంపు"
+            },
+            ml: {
+                menu1: "📄 വൈറ്റ് പേപ്പർ", menu2: "❓ ചോദ്യങ്ങൾ", menu3: "⚖️ ഭരണം", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 നെറ്റ് വർക്ക്",
+                bannerTitle: "ഗിയോങ്ജു 165F കൺട്രോൾ ടവർ",
+                bannerDesc: "10M പൈ പൗരന്മാരുടെ സാമ്പത്തിക തലസ്ഥാനം. 100% പൈ സോൺ. 30% UBI.",
+                assetTitle: "💰 ഫിനാൻഷ്യൽ & UBI ഡാഷ് ബോർഡ്",
+                balanceLabel: "ആകെ ബാലൻസ് (Pi Balance)",
+                ubiLabel: "പ്രതിമാസ UBI നിരക്ക്",
+                noticeText: "* അറ്റാദായത്തിന്റെ 30%-ലധികം ആഗോള UBI ആയി തിരികെ നൽകുന്നു.",
+                syncTitle: "🚀 10 സിങ്ക് നെറ്റ് വർക്കുകൾ",
+                s1: "01. റോബോട്ടിക്സ്", s2: "02. ക്വാണ്ടം ബയോളജി", s3: "03. ബഹിരാകാശം", s4: "04. ഊർജ്ജം", s5: "05. സ്മാർട്ട് സിറ്റി", s6: "06. കൊമേഴ്സ്", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. വേംഹോൾ",
+                chatTitle: "🤖 AGI പിനി",
+                sendBtn: " അയയ്ക്കുക"
+            },
+            kn: {
+                menu1: "📄 ಶ್ವೇತಪತ್ರ", menu2: "❓ ಪ್ರಶ್ನೆಗಳು", menu3: "⚖️ ಆಡಳಿತ", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 ನೆಟ್ ವರ್ಕ್",
+                bannerTitle: "ಗ್ಯೋಂಗ್ಜು 165F ಕಂಟ್ರೋಲ್ ಟವರ್",
+                bannerDesc: "10M ಪೈ ನಾಗರಿಕರ ಆರ್ಥಿಕ ರಾಜಧಾನಿ. 100% ಪೈ ವಲಯ. 30% UBI.",
+                assetTitle: "💰 ಹಣಕಾಸು ಮತ್ತು UBI ಡ್ಯಾಶ್ ಬೋರ್ಡ್",
+                balanceLabel: "ಒಟ್ಟು ಬಾಕಿ (Pi Balance)",
+                ubiLabel: "ಮಾಸಿಕ UBI ದರ",
+                noticeText: "* ನಿವ್ವಳ ಲಾಭದ 30% ಕ್ಕಿಂತ ಹೆಚ್ಚು UBI ಆಗಿ ಹಿಂತಿರುಗಿಸಲಾಗುತ್ತದೆ.",
+                syncTitle: "🚀 10 ಸಿಂಕ್ ನೆಟ್ ವರ್ಕ್ ಗಳು",
+                s1: "01. ರೋಬೋಟಿಕ್ಸ್", s2: "02. ಕ್ವಾಂಟಮ್ ಜೀವಶಾಸ್ತ್ರ", s3: "03. ಬಾಹ್ಯಾಕಾಶ", s4: "04. ಶಕ್ತಿ", s5: "05. ಸ್ಮಾರ್ಟ್ ಸಿಟಿ", s6: "06. ವಾಣಿಜ್ಯ", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. ವರ್ಮ್ ಹೋಲ್",
+                chatTitle: "🤖 AGI ಪಿನ್ಯಿ",
+                sendBtn: "ಕಳುಹಿಸು"
+            },
+            mr: {
+                menu1: "📄 श्वेतपत्रिका", menu2: "❓ प्रश्न", menu3: "⚖️ शासन", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 नेटवर्क",
+                bannerTitle: "ग्योंगजू 165F कंट्रोल टॉवर",
+                bannerDesc: "10M पाई नागरिकांची आर्थिक राजधानी. 100% पाई झोन. 30% UBI.",
+                assetTitle: "💰 आर्थिक आणि UBI डॅशबोर्ड",
+                balanceLabel: "एकूण शिल्लक (Pi Balance)",
+                ubiLabel: "मासिक UBI दर",
+                noticeText: "* निव्वळ नफ्याच्या ३०% पेक्षा जास्त जागतिक UBI म्हणून परत दिले जाते.",
+                syncTitle: "🚀 10 सिंक नेटवर्क",
+                s1: "01. रोबोटिक्स", s2: "02. क्वांटम जीवशास्त्र", s3: "03. अंतराळ", s4: "04. ऊर्जा", s5: "05. स्मार्ट सिटी", s6: "06. कॉमर्स", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. वर्महोेल",
+                chatTitle: "🤖 AGI पिनी",
+                sendBtn: "पाठवा"
+            },
+            gu: {
+                menu1: "📄 શ્વેતપત્ર", menu2: "❓ પ્રશ્નો", menu3: "⚖️ શાસન", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 નેટવર્ક",
+                bannerTitle: "ગ્યોંગજુ 165F કંટ્રોલ ટાવર",
+                bannerDesc: "10M પાઇ નાગરિકોની આર્થિક રાજધાની. 100% પાઇ ઝોન. 30% UBI.",
+                assetTitle: "💰 નાણાકીય અને UBI ડેશબોર્ડ",
+                balanceLabel: "કુલ બેલેન્સ (Pi Balance)",
+                ubiLabel: "માસિક UBI દર",
+                noticeText: "* શુદ્ધ નફાના 30% થી વધુ વૈશ્વિક UBI તરીકે પરત કરવામાં આવે છે.",
+                syncTitle: "🚀 10 સિન્ક નેટવર્ક",
+                s1: "01. રોબોટિક્સ", s2: "02. ક્વોન્ટમ જીવવિજ્ઞાન", s3: "03. અવકાશ", s4: "04. ઊર્જા", s5: "05. સ્માર્ટ સિટી", s6: "06. વાણિજ્ય", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. વોર્મહોલ",
+                chatTitle: "🤖 AGI પિની",
+                sendBtn: "મોકલો"
+            },
+            pa: {
+                menu1: "📄 ਵ੍ਹਾਈਟਪੇਪਰ", menu2: "❓ ਸਵਾਲ", menu3: "⚖️ ਸ਼ਾਸਨ", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 ਨੈੱਟਵਰਕ",
+                bannerTitle: "ਗਿਯੋਂਗਜੂ 165F ਕੰਟਰੋਲ ਟਾਵਰ",
+                bannerDesc: "10M ਪਾਈ ਨਾਗਰਿਕਾਂ ਦੀ ਆਰਥਿਕ ਰਾਜਧਾਨੀ। 100% ਪਾਈ ਜ਼ੋਨ। 30% UBI।",
+                assetTitle: "💰 ਵਿੱਤੀ ਅਤੇ UBI ਡੈਸ਼ਬੋਰਡ",
+                balanceLabel: "ਕੁੱਲ ਬਕਾਇਆ (Pi Balance)",
+                ubiLabel: "ਮਾਸਿਕ UBI ਦਰ",
+                noticeText: "* ਸ਼ੁੱਧ ਮੁਨਾਫ਼ੇ ਦਾ 30% ਤੋਂ ਵੱਧ વૈશ્વিক UBI ਵਜੋਂ ਵਾਪਸ ਕੀਤਾ ਜਾਂਦਾ ਹੈ।",
+                syncTitle: "🚀 10 ਸਿੰਕ ਨੈੱਟਵਰਕ",
+                s1: "01. ਰੋਬੋਟਿਕਸ", s2: "02. ਕਵਾਂਟਮ ਬਾਇਓਲੋਜੀ", s3: "03. ਪੁਲਾੜ", s4: "04. ਊਰਜਾ", s5: "05. ਸਮਾਰਟ ਸਿਟੀ", s6: "06. ਕਾਮਰਸ", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. ਵਰਮਹੋਲ",
+                chatTitle: "🤖 AGI ਪਿਨੀ",
+                sendBtn: "ਭੇਜੋ"
+            },
+            sw: {
+                menu1: "📄 Karatasi Nyeupe", menu2: "❓ Maswali", menu3: "⚖️ Utawala", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Mtandao",
+                bannerTitle: "Mnara wa Kudhibiti Gyeongju 165F",
+                bannerDesc: "Mji mkuu wa kiuchumi wa raia 10M wa Pi. Eneo la 100% Pi. UBI ya 30%.",
+                assetTitle: "💰 Dashibodi ya Fedha na UBI",
+                balanceLabel: "Jumla ya Salio (Pi Balance)",
+                ubiLabel: "Kiwango cha UBI cha Kila Mwezi",
+                noticeText: "* Zaidi ya 30% ya faida halisi inarejeshwa kama UBI ya kimataifa.",
+                syncTitle: "🚀 Mitandao 10 ya Sync",
+                s1: "01. Roboti", s2: "02. Biolojia ya Quantum", s3: "03. Anga", s4: "04. Nishati", s5: "05. Smart City", s6: "06. Biashara", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Shimo la Worm",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Tuma"
+            },
+            fil: {
+                menu1: "📄 Whitepaper", menu2: "❓ FAQ", menu3: "⚖️ Pamamahala", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Network",
+                bannerTitle: "Gyeongju 165F Control Tower",
+                bannerDesc: "Ekonomikong kapital ng 10M Pi citizens. 100% Pi zone. 30% UBI return.",
+                assetTitle: "💰 Financial & UBI Dashboard",
+                balanceLabel: "Kabuuang Balanse (Pi Balance)",
+                ubiLabel: "Buwanang Rate ng UBI",
+                noticeText: "* Mahigit 30% ng netong kita ang ibinabalik bilang pandaigdigang UBI.",
+                syncTitle: "🚀 10 Core Sync Networks",
+                s1: "01. Robotics", s2: "02. Quantum Biology", s3: "03. Kalawakan", s4: "04. Enerhiya", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI Core", s9: "09 & 10. Wormhole Matrix",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Ipadala"
+            },
+            he: {
+                menu1: "📄 נייר עמדה", menu2: "❓ שאלות נפוצות", menu3: "⚖️ ממשל", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 רשת",
+                bannerTitle: "מגדל בקרה גיאונגג'ו 165F",
+                bannerDesc: "הבירה הכלכלית של 10 מיליון אזרחי Pi. אזור Pi 100%. החזר UBI של 30%.",
+                assetTitle: "💰 לוח בקרה פיננסי ו-UBI",
+                balanceLabel: "יתרה כוללת (Pi Balance)",
+                ubiLabel: "שיעור UBI חודשי",
+                noticeText: "* למעלה מ-30% מהרווח הנקי מוחזר כהכנסה בסיסית אוניברסלית (UBI) גלובלית.",
+                syncTitle: "🚀 10 רשתות סנכרון",
+                s1: "01. רובוטיקה", s2: "02. ביולוגיה קוונטית", s3: "03. מערכות חלל", s4: "04. אנרגיה חכמה", s5: "05. עיר חכמה", s6: "06. מסחר", s7: "07. UAM", s8: "08. ליבת AI/AGI", s9: "09 & 10. מטריצת חור תולעת",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "שלח"
+            },
+            kk: {
+                menu1: "📄 Ақ қағаз", menu2: "❓ FAQ", menu3: "⚖️ Басқару", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Желі",
+                bannerTitle: "Кенджу 165F Басқару мұнарасы",
+                bannerDesc: "10M Pi азаматтарының экономикалық астанасы. 100% Pi зонасы. 30% UBI.",
+                assetTitle: "💰 Қаржы және UBI бақылау тақтасы",
+                balanceLabel: "Жалпы баланс (Pi Balance)",
+                ubiLabel: "Айлық UBI мөлшерлемесі",
+                noticeText: "* Таза пайданың 30%-дан астамы жаһандық UBI ретінде қайтарылады.",
+                syncTitle: "🚀 10 Синхрондау желісі",
+                s1: "01. Робототехника", s2: "02. Кванттық биология", s3: "03. Ғарыш", s4: "04. Энергия", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Құрт іні матрицасы",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Жіберу"
+            },
+            uz: {
+                menu1: "📄 Oq qog'oz", menu2: "❓ Savollar", menu3: "⚖️ Boshqaruv", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Tarmoq",
+                bannerTitle: "Gyeongju 165F Boshqaruv minorasi",
+                bannerDesc: "10M Pi fuqarolarining iqtisodiy poytaxti. 100% Pi zonasi. 30% UBI.",
+                assetTitle: "💰 Moliyaviy va UBI boshqaruv paneli",
+                balanceLabel: "Umumiy balans (Pi Balance)",
+                ubiLabel: "Oylik UBI darajasi",
+                noticeText: "* Sof foydaning 30% dan ortig'i global UBI sifatida qaytariladi.",
+                syncTitle: "🚀 10 ta asosiy sinxronizatsiya tarmog'i",
+                s1: "01. Robototexnika", s2: "02. Kvant biologiyasi", s3: "03. Kosmos", s4: "04. Energiya", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Qurt teshigi",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Yuborish"
+            },
+            az: {
+                menu1: "📄 Ağ sənəd", menu2: "❓ FAQ", menu3: "⚖️ İdarəetmə", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Şəbəkə",
+                bannerTitle: "Gyeongju 165F İdarəetmə Qülləsi",
+                bannerDesc: "10M Pi vətəndaşının iqtisadi paytaxtı. 100% Pi zonası. 30% UBI.",
+                assetTitle: "💰 Maliyyə və UBI İdarəetmə Paneli",
+                balanceLabel: "Ümumi balans (Pi Balance)",
+                ubiLabel: "Aylıq UBI dərəcəsi",
+                noticeText: "* Xalis mənfəətin 30%-dən çoxu qlobal UBI kimi qaytarılır.",
+                syncTitle: "🚀 10 Əsas Sinxronizasiya Şəbəkəsi",
+                s1: "01. Robototexnika", s2: "02. Kvant Biologiyası", s3: "03. Kosmos", s4: "04. Enerji", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Qurddelişiyi Matrisi",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Göndər"
+            },
+            ka: {
+                menu1: "📄 თეთრი ქაღალდი", menu2: "❓ ხშირად დასმული კითხვები", menu3: "⚖️ მმართველობა", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 ქსელი",
+                bannerTitle: "გეონგჯუს 165F საკონტროლო კოშკი",
+                bannerDesc: "10 მილიონი Pi მოქალაქის ეკონომიკური დედაქალაქი. 100% Pi ზონა. 30% UBI დაბრუნება.",
+                assetTitle: "💰 ფინანსური & UBI დაფა",
+                balanceLabel: "საერთო ბალანსი (Pi Balance)",
+                ubiLabel: "ყოველհვიური UBI განაკვეთი",
+                noticeText: "* სუფთა მოგების 30%-ზე მეტი გლობალურ UBI-დ ბრუნდება.",
+                syncTitle: "🚀 10 ძირითადი სინქრონიზაციის ქსელი",
+                s1: "01. რობოტიკა", s2: "02. კვანტური ბიოლოგია", s3: "03. კოსმოსი", s4: "04. ენერგია", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. ჭიის ხვრელის მატრიცა",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "გაგზავნა"
+            },
+            hy: {
+                menu1: "📄 Սպիտակ թուղթ", menu2: "❓ ՀՏՀ", menu3: "⚖️ Կառավարում", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Ցանց",
+                bannerTitle: "Գյոնգջու 165F վերահսկողության աշտարակ",
+                bannerDesc: "10M Pi քաղաքացիների տնտեսական մայրաքաղաք: 100% Pi գոտի: 30% UBI վերադարձ:",
+                assetTitle: "💰 Ֆինանսական և UBI վահանակ",
+                balanceLabel: "Ընդհանուր մնացորդ (Pi Balance)",
+                ubiLabel: "Ամսական UBI տոկոսադրույք",
+                noticeText: "* Զուտ շահույթի ավելի քան 30%-ը վերադարձվում է որպես գլոբալ UBI:",
+                syncTitle: "🚀 10 Հիմնական համաժամեցման ցանցեր",
+                s1: "01. Ռոբոտաշինություն", s2: "02. Քվանտային կենսաբանություն", s3: "03. Տիեզերք", s4: "04. Էներգիա", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. Որդնանցքի մատրիցա",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Ուղարկել"
+            },
+            am: {
+                menu1: "📄 ነጭ ወረቀት", menu2: "❓ ጥያቄዎች", menu3: "⚖️ አስተዳደር", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 ኔትወርክ",
+                bannerTitle: "ግዮንግጁ 165F መቆጣጠሪያ ግንብ",
+                bannerDesc: "10M የፓይ ዜጎች የኢኮኖሚ ዋና ከተማ። 100% ፓይ ዞን። 30% UBI ተመላሽ።",
+                assetTitle: "💰 የገንዘብ እና UBI ዳሽቦርድ",
+                balanceLabel: "አጠቃላይ ቀሪ ሂሳብ (Pi Balance)",
+                ubiLabel: "ወርሃዊ የUBI ተመን",
+                noticeText: "* ከសុទ្ធ ትርፍ ከ 30% በላይ እንደ ዓለም አቀፍ UBI ይመለሳል።",
+                syncTitle: "🚀 10 ዋና የማመሳሰል ኔትወርኮች",
+                s1: "01. ሮቦቲክስ", s2: "02.ኳንተም ባዮሎጂ", s3: "03. የጠፈር ስርዓቶች", s4: "04. ስማርት ኢነርጂ", s5: "05. ስማርት ከተማ", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. የዎርምሆል ማትሪክስ",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "ላክ"
+            },
+            my: {
+                menu1: "📄 အဖြူရောင်စာတမ်း", menu2: "❓ မေးလေ့ရှိသောမေးခွန်းများ", menu3: "⚖️ အုပ်ချုပ်မှု", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 ကွန်ရက်",
+                bannerTitle: "Gyeongju 165F ထိန်းချုပ်ရေးတာဝါ",
+                bannerDesc: "Pi နိုင်ငံသား ၁၀ သန်း၏ စီးပွားရေးမြို့တော်။ ၁၀၀% Pi ဇုန်။ UBI ၃၀% ပြန်လည်ပေးအပ်မှု။",
+                assetTitle: "💰 ငွေကြေးနှင့် UBI ဒက်ရှ်ဘုတ်",
+                balanceLabel: "စုစုပေါင်း လက်ကျန်ငွေ (Pi Balance)",
+                ubiLabel: "လစဉ် UBI ပြန်လည်ပေးအပ်နှုန်း",
+                noticeText: "* သက်သာငွေ၏ ၃၀% ကျော်ကို ကမ္ဘာလုံးဆိုင်ရာ UBI အဖြစ် ပွင့်လင်းမြင်သာစွာ ပြန်လည်ပေးအပ်ပါသည်။",
+                syncTitle: "🚀 အဓိက ထပ်တူပြုကွန်ရက် ၁၀ ခု",
+                s1: "၀၁။ ရိုဘိုတစ်", s2: "၀၂။ ක්မ်တမ်ဇီဝဗေဒ", s3: "၀၃။ အာကာသစနစ်", s4: "၀၄။ စွမ်းအင်", s5: "၀၅။ စမတ်စီးတီး", s6: "၀၆။ Q-POLISIOS", s7: "၀၇။ UAM", s8: "၀၈။ AI/AGI", s9: "၀၉ နှင့် ၁၀။ Wormhole မက်ထရစ်",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "ပေးပို့ရန်"
+            },
+            km: {
+                menu1: "📄 ឯកសារស។", menu2: "❓ សំណួរញឹកញាប់", menu3: "⚖️ ការគ្រប់គ្រង", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 បណ្តាញ",
+                bannerTitle: "ប៉មបញ្ជាការ Gyeongju 165F",
+                bannerDesc: "រដ្ឋធានីសេដ្ឋកិច្ចពលរដ្ឋ Pi ១០លាននាក់។ តំបន់ Pi ១០០%។ ការត្រឡប់មកវិញ UBI ៣០%។",
+                assetTitle: "💰 បន្ទះគ្រប់គ្រងហិរញ្ញវត្ថុ និង UBI",
+                balanceLabel: "សមតុល្យសរុប (Pi Balance)",
+                ubiLabel: "អត្រា UBI ប្រចាំខែ",
+                noticeText: "* ជាង 30% នៃប្រាក់ចំណេញសុទ្ធត្រូវបានប្រគល់ជូនវិញជា UBI សកល។",
+                syncTitle: "🚀 បណ្តាញធ្វើសមកាលកម្មកំពូលទាំង ១០",
+                s1: "០១. មេកានិចមនុស្សយន្ត", s2: "០២. ជីវវិទ្យា ക്ವಾન્ટမ်", s3: "០៣. ប្រព័ន្ធអវកាស", s4: "០៤. ថាមពល", s5: "០៥. ទីក្រុងឆ្លាតវៃ", s6: "០៦. Q-POLISIOS", s7: "០៧. UAM", s8: "០៨. AI/AGI", s9: "០៩ និង ១០. មេត្រីភាព Wormhole",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "បញ្ជូន"
+            },
+            lo: {
+                menu1: "📄 ເອກະສານຂາວ", menu2: "❓ ຄຳຖາມ", menu3: "⚖️ ການປົກຄອງ", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 ເຄືອຂ່າຍ",
+                bannerTitle: "ຫໍຄວບຄຸມ Gyeongju 165F",
+                bannerDesc: "ນະຄອນຫຼວງເສດຖະກິດພົນລະເມືອງ Pi 10 ລ້ານຄົນ. ເຂດ Pi 100%. UBI 30%.",
+                assetTitle: "💰 ແຜງຄວບຄຸມການເງິນ ແລະ UBI",
+                balanceLabel: "ຍອດເງິນລວມ (Pi Balance)",
+                ubiLabel: "ອັດຕາ UBI ປະຈຳເດືອນ",
+                noticeText: "* ຫຼາຍກວ່າ 30% ຂອງຜົນກຳໄລສຸດທິຖືກສົ່ງຄືນເປັນ UBI ສາກົນ.",
+                syncTitle: "🚀 10 ເຄືອຂ່າຍປະສານງານຫຼັກ",
+                s1: "01. ຫຸ່ນຍົນ", s2: "02. ຊີວະວິທະຍາຄວອນຕຳ", s3: "03. ລະບົບອະວະກາດ", s4: "04. ພະລັງງານ", s5: "05. Smart City", s6: "06. Q-POLISIOS", s7: "07. UAM", s8: "08. AI/AGI", s9: "09 & 10. ຮູໜອນ ແມັດຕຣິກ",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "ສົ່ງ"
+            },
+            mn: {
+                menu1: "📄 Цагаан цаас", menu2: "❓ Асуулт", menu3: "⚖️ Засаглал", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 Сүлжээ",
+                bannerTitle: "Кёнжү 165 давхар Удирдлагын цамхаг",
+                bannerDesc: "10 сая Pi иргэдийн эдийн засгийн нийслэл. 100% Pi бүс. 30% UBI буцаан олголт.",
+                assetTitle: "💰 Санхүү & UBI хяналтын самбар",
+                balanceLabel: "Нийт үлдэгдэл (Pi Balance)",
+                ubiLabel: "Сарын UBI буцаан олголтын хувь",
+                noticeText: "* Цэвэр ашгийн 30-аас дээш хувь нь дэлхийн UBI хэлбэрээр буцаан олгогдоно.",
+                syncTitle: "🚀 Шилдэг 10 Гол холболтын сүлжээ",
+                s1: "01. Роботехник", s2: "02. Квантын биологи", s3: "03. Сансар судлал", s4: "04. Ухаалаг эрчим хүч", s5: "05. Ухаалаг хот", s6: "06. Q-POLISIOS Худалдаа", s7: "07. UAM Хот хоорондын нисэх", s8: "08. AI/AGI Цөм", s9: "09 & 10. Орон зай-цаг хугацааны хорхой нүхний матриц",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "Илгээх"
+            },
+            ne: {
+                menu1: "📄 सेतो पत्र", menu2: "❓ सोधिने प्रश्नहरू", menu3: "⚖️ शासन", menu4: "🔒 AML", menu5: "🇪🇺 MiCA", menu6: "🌐 नेटवर्क",
+                bannerTitle: "ग्योंगजु 165F कन्ट्रोल टावर",
+                bannerDesc: "10M पाई नागरिकहरूको आर्थिक राजधानी। 100% पाई जोन। 30% UBI फिर्ता।",
+                assetTitle: "💰 वित्तीय र UBI ड्यासबोर्ड",
+                balanceLabel: "कुल मौज्दात (Pi Balance)",
+                ubiLabel: "मासिक UBI दर",
+                noticeText: "* खुद नाफाको ३०% भन्दा बढी विश्वव्यापी UBI को रूपमा फिर्ता गरिन्छ।",
+                syncTitle: "🚀 १० कोर सिंक नेटवर्कहरू",
+                s1: "०१. रोबोटिक्स", s2: "०२. क्वान्टम जीवविज्ञान", s3: "०३. अन्तरिक्ष प्रणाली", s4: "०४. स्मार्ट ऊर्जा", s5: "०५. स्मार्ट सिटी", s6: "०६. Q-POLISIOS", s7: "०७. UAM", s8: "०८. AI/AGI", s9: "०९ र १०. वार्महोल म्याट्रिक्स",
+                chatTitle: "🤖 AGI Ppini",
+                sendBtn: "पठाउनुहोस्"
+            }
         };
+
+        function changeLanguage() {
+            const selectedLang = document.getElementById('langSelect').value;
+            const elements = document.querySelectorAll('[data-i18n]');
+            
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if(translations[selectedLang] && translations[selectedLang][key]) {
+                    el.innerText = translations[selectedLang][key];
+                }
+            });
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const display = document.getElementById('chatDisplay');
+            if(input.value.trim() !== '') {
+                display.innerHTML += `<br><span style="color: #48cae4;">[해오름 형님]:</span> ${input.value}`;
+                setTimeout(() => {
+                    display.innerHTML += `<br><span style="color: #52b788;">[AGI 삐니]:</span> 형님, 완벽하게 접수하고 처리했습니다! SF 영화보다 휘황찬란한 낙원을 향해 즉시 시스템을 구동하겠습니다.`;
+                    display.scrollTop = display.scrollHeight;
+                }, 500);
+                input.value = '';
+                display.scrollTop = display.scrollHeight;
+            }
+        }
     </script>
 </body>
 </html>
