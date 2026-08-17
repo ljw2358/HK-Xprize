@@ -1,1 +1,1 @@
-# HKWB-Xprize
+# HK-Xprize
