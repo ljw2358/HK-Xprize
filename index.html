@@ -3,922 +3,925 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WorldBank: Haeoreum Special City Masterplan</title>
+    <title>HK WorldBank - Haeoreum Special City Masterplan</title>
     <style>
-        :root {
-            --bg-color: #0b132b;
-            --card-bg: #1c2541;
-            --text-color: #ffffff;
-            --accent-color: #48cae4;
-            --gold-color: #ffb703;
-            --border-color: #3a506b;
-            --glow-color: #00f5d4;
-        }
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            background-color: rgba(28, 37, 65, 0.95);
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 2000;
-            backdrop-filter: blur(10px);
-        }
-        .logo-area {
-            font-weight: 700;
-            font-size: 18px;
-            color: var(--gold-color);
-            text-shadow: 0 0 10px rgba(255, 183, 3, 0.4);
-        }
-        .lang-container {
-            position: relative;
-        }
-        .lang-btn {
-            background: var(--card-bg);
-            color: var(--gold-color);
-            border: 1px solid var(--gold-color);
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            box-shadow: 0 0 10px rgba(255, 183, 3, 0.2);
-            transition: all 0.3s ease;
-        }
-        .lang-btn:hover {
-            background-color: rgba(255, 183, 3, 0.15);
-            box-shadow: 0 0 15px var(--gold-color);
-        }
-        .lang-menu {
-            position: absolute;
-            top: 120%;
-            right: 0;
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            width: 220px;
-            height: 380px;
-            overflow-y: auto;
-            display: none;
-            flex-direction: column;
-            border-radius: 8px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.6);
-            z-index: 2001;
-        }
-        .lang-menu.active {
-            display: flex;
-        }
-        .lang-menu button {
-            background: none;
-            border: none;
-            border-bottom: 1px solid rgba(58, 80, 107, 0.3);
-            color: var(--text-color);
-            padding: 10px 14px;
-            text-align: left;
-            cursor: pointer;
-            font-size: 13px;
-            width: 100%;
-        }
-        .lang-menu button:last-child {
-            border-bottom: none;
-        }
-        .lang-menu button:hover {
-            background-color: var(--accent-color);
-            color: var(--bg-color);
-        }
-        main {
-            flex: 1;
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-        .hero-section {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .hero-section h1 {
-            font-size: 2.4rem;
-            color: var(--gold-color);
-            margin-bottom: 10px;
-            text-shadow: 0 0 20px rgba(255, 183, 3, 0.3);
-        }
-        .hero-section p {
-            color: #94a3b8;
-            font-size: 1.1rem;
-        }
-        .content-box {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-            position: relative;
-            overflow: hidden;
-        }
-        .content-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--glow-color);
-            box-shadow: 0 0 10px var(--glow-color);
-        }
-        .content-box h2 {
-            color: var(--accent-color);
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-            text-shadow: 0 0 8px rgba(72, 202, 228, 0.4);
-        }
-        .content-box p {
-            color: #cbd5e1;
-            font-size: 1.05rem;
-            line-height: 1.8;
-            margin-bottom: 10px;
-        }
-        .tower-glow {
-            border: 1px solid var(--glow-color);
-            box-shadow: 0 0 25px rgba(0, 245, 212, 0.25);
-        }
-        footer {
-            text-align: center;
-            padding: 30px;
-            background-color: rgba(11, 19, 43, 0.9);
-            border-top: 1px solid var(--border-color);
-            color: #94a3b8;
-            font-size: 0.9rem;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        footer a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0b1329; color: #ffffff; line-height: 1.6; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; background-color: #101c3f; border-bottom: 1px solid #1e2d5c; position: sticky; top: 0; z-index: 1000; }
+        .nav-left { display: flex; align-items: center; gap: 20px; }
+        .menu-toggle { font-size: 24px; cursor: pointer; background: none; border: none; color: #ffffff; }
+        .logo { font-size: 20px; font-weight: bold; color: #3b82f6; }
+        .lang-container select { background-color: #1e2d5c; color: #ffffff; border: 1px solid #3b82f6; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 14px; }
+        .sidebar { position: fixed; top: 0; left: -320px; width: 320px; height: 100%; background-color: #101c3f; box-shadow: 4px 0 15px rgba(0,0,0,0.5); transition: left 0.3s ease; z-index: 1100; padding: 30px 20px; overflow-y: auto; }
+        .sidebar.active { left: 0; }
+        .sidebar-close { font-size: 24px; cursor: pointer; text-align: right; margin-bottom: 20px; color: #94a3b8; }
+        .sidebar-menu { list-style: none; }
+        .sidebar-menu li { padding: 12px 0; border-bottom: 1px solid #1e2d5c; }
+        .sidebar-menu li a { color: #ffffff; text-decoration: none; font-size: 15px; display: block; transition: color 0.2s; }
+        .sidebar-menu li a:hover { color: #3b82f6; }
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .hero { text-align: center; margin-bottom: 50px; }
+        .hero h1 { font-size: 36px; margin-bottom: 15px; color: #ffffff; }
+        .hero p { font-size: 18px; color: #94a3b8; }
+        .card { background: linear-gradient(135deg, #132247, #1a2f5e); border: 1px solid #2e4a8c; border-radius: 12px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .card h2 { font-size: 22px; margin-bottom: 12px; color: #60a5fa; }
+        .card p { color: #cbd5e1; font-size: 15px; }
+        .module-list { margin-top: 10px; font-size: 14px; color: #93c5fd; line-height: 1.8; }
+        footer { text-align: center; padding: 30px; background-color: #101c3f; color: #64748b; margin-top: 50px; border-top: 1px solid #1e2d5c; }
+        footer a { color: #3b82f6; text-decoration: none; }
     </style>
 </head>
 <body>
+
     <header>
-        <div class="logo-area">🌐 HK WorldBank</div>
-        
-        <div class="lang-container" id="langContainer">
-            <button class="lang-btn" onclick="toggleLangMenu()">
-                🌐 50 Languages ▼
-            </button>
-            <div class="lang-menu" id="langMenu">
-                <button onclick="changeLang('한국어')">🇰🇷 한국어</button>
-                <button onclick="changeLang('English')">🇺🇸 English</button>
-                <button onclick="changeLang('中文')">🇨🇳 中文</button>
-                <button onclick="changeLang('日本語')">🇯🇵 日本語</button>
-                <button onclick="changeLang('Español')">🇪🇸 Español</button>
-                <button onclick="changeLang('Français')">🇫🇷 Français</button>
-                <button onclick="changeLang('Deutsch')">🇩🇪 Deutsch</button>
-                <button onclick="changeLang('Русский')">🇷🇺 Русский</button>
-                <button onclick="changeLang('Português')">🇧🇷 Português</button>
-                <button onclick="changeLang('Italiano')">🇮🇹 Italiano</button>
-                <button onclick="changeLang('Tiếng Việt')">🇻🇳 Tiếng Việt</button>
-                <button onclick="changeLang('ไทย')">🇹🇭 ไทย</button>
-                <button onclick="changeLang('Bahasa Indonesia')">🇮🇩 Bahasa Indonesia</button>
-                <button onclick="changeLang('हिन्दी')">🇮🇳 हिन्दी</button>
-                <button onclick="changeLang('العربية')">🇸🇦 العربية</button>
-                <button onclick="changeLang('Türkçe')">🇹🇷 Türkçe</button>
-                <button onclick="changeLang('Polski')">🇵🇱 Polski</button>
-                <button onclick="changeLang('Nederlands')">🇳🇱 Nederlands</button>
-                <button onclick="changeLang('Svenska')">🇸🇪 Svenska</button>
-                <button onclick="changeLang('Ελληνικά')">🇬🇷 Ελληνικά</button>
-                <button onclick="changeLang('Čeština')">🇨🇿 Čeština</button>
-                <button onclick="changeLang('Magyar')">🇭🇺 Magyar</button>
-                <button onclick="changeLang('Română')">🇷🇴 Română</button>
-                <button onclick="changeLang('Українська')">🇺🇦 Українська</button>
-                <button onclick="changeLang('Suomi')">🇫🇮 Suomi</button>
-                <button onclick="changeLang('Dansk')">🇩🇰 Dansk</button>
-                <button onclick="changeLang('Norsk')">🇳🇴 Norsk</button>
-                <button onclick="changeLang('Bahasa Melayu')">🇲🇾 Bahasa Melayu</button>
-                <button onclick="changeLang('Filipino')">🇵🇭 Filipino</button>
-                <button onclick="changeLang('עברית')">🇮🇱 עברית</button>
-                <button onclick="changeLang('मराठी')">🇮🇳 मराठी</button>
-                <button onclick="changeLang('বাংলা')">🇧🇩 বাংলা</button>
-                <button onclick="changeLang('فارسی')">🇮🇷 فارسی</button>
-                <button onclick="changeLang('Kiswahili')">🇰🇪 Kiswahili</button>
-                <button onclick="changeLang('اردو')">🇵🇰 اردو</button>
-                <button onclick="changeLang('தமிழ்')">🇮🇳 தமிழ்</button>
-                <button onclick="changeLang('తెలుగు')">🇮🇳 తెలుగు</button>
-                <button onclick="changeLang('ગુજરાતી')">🇮🇳 ગુજરાતી</button>
-                <button onclick="changeLang('ਪੰਜਾਬੀ')">🇮🇳 ਪੰਜਾਬੀ</button>
-                <button onclick="changeLang('አማርኛ')">🇪🇹 አማርኛ</button>
-                <button onclick="changeLang('Swahili (TZ)')">🇹🇿 Swahili</button>
-                <button onclick="changeLang('Tagalog')">🇵🇭 Tagalog</button>
-                <button onclick="changeLang('Jawa')">🇮🇩 Jawa</button>
-                <button onclick="changeLang('Basa Sunda')">🇮🇩 Basa Sunda</button>
-                <button onclick="changeLang('Hausa')">🇳🇬 Hausa</button>
-                <button onclick="changeLang('Yoruba')">🇳🇬 Yoruba</button>
-                <button onclick="changeLang('Igbo')">🇳🇬 Igbo</button>
-                <button onclick="changeLang('isiZulu')">🇿🇦 isiZulu</button>
-                <button onclick="changeLang('Afrikaans')">🇿🇦 Afrikaans</button>
-                <button onclick="changeLang('Azərbaycanca')">🇦🇿 Azərbaycanca</button>
-            </div>
+        <div class="nav-left">
+            <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+            <div class="logo">HK WorldBank</div>
+        </div>
+        <!-- 35개 언어 드롭다운 -->
+        <div class="lang-container">
+            <select id="langSelect" onchange="changeLanguage(this.value)">
+                <option value="ko">한국어 (Korean)</option>
+                <option value="en">English</option>
+                <option value="zh">中文 (Chinese)</option>
+                <option value="ja">日本語 (Japanese)</option>
+                <option value="es">Español (Spanish)</option>
+                <option value="fr">Français (French)</option>
+                <option value="de">Deutsch (German)</option>
+                <option value="ru">Русский (Russian)</option>
+                <option value="pt">Português (Portuguese)</option>
+                <option value="vi">Tiếng Việt (Vietnamese)</option>
+                <option value="th">ไทย (Thai)</option>
+                <option value="id">Bahasa Indonesia (Indonesian)</option>
+                <option value="ms">Bahasa Melayu (Malay)</option>
+                <option value="hi">हिन्दी (Hindi)</option>
+                <option value="ar">العربية (Arabic)</option>
+                <option value="bn">বাংলা (Bengali)</option>
+                <option value="tr">Türkçe (Turkish)</option>
+                <option value="it">Italiano (Italian)</option>
+                <option value="pl">Polski (Polish)</option>
+                <option value="nl">Nederlands (Dutch)</option>
+                <option value="sv">Svenska (Swedish)</option>
+                <option value="el">Ελληνικά (Greek)</option>
+                <option value="cs">Čeština (Czech)</option>
+                <option value="hu">Magyar (Hungarian)</option>
+                <option value="ro">Română (Romanian)</option>
+                <option value="da">Dansk (Danish)</option>
+                <option value="fi">Suomi (Finnish)</option>
+                <option value="no">Norsk (Norwegian)</option>
+                <option value="uk">Українська (Ukrainian)</option>
+                <option value="he">עברית (Hebrew)</option>
+                <option value="fa">فارسی (Persian)</option>
+                <option value="fil">Filipino (Tagalog)</option>
+                <option value="mn">Монгол (Mongolian)</option>
+                <option value="sw">Kiswahili (Swahili)</option>
+                <option value="ur">اردو (Urdu)</option>
+            </select>
         </div>
     </header>
 
-    <main>
-        <div class="hero-section">
-            <h1 id="mainTitle">해오름 특별시 마스터플랜</h1>
-            <p id="mainSub">울산·경주·포항 통합 1천만 명 메가시티와 파이화폐 단일 경제권</p>
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-close" onclick="toggleSidebar()">✕</div>
+        <ul class="sidebar-menu">
+            <li><a href="#policies"><strong data-i18n="menu_policies">3 Policies (AML / MiCA / Global Compliance)</strong></a></li>
+            <li><a href="#whitepaper"><span data-i18n="menu_whitepaper">백서 (Whitepaper)</span></a></li>
+            <li><a href="#ceo"><span data-i18n="menu_ceo">CEO 소개 (HK Group Chairman)</span></a></li>
+            <li><a href="#dashboard"><span data-i18n="menu_dashboard">개인 자산 대시보드</span></a></li>
+            <li><a href="#network"><span data-i18n="menu_network">10대 분산 연동망</span></a></li>
+            <li><a href="https://youtube.com/@Hyekong2026" target="_blank">공식 유튜브 (@Hyekong2026)</a></li>
+            <li><a href="https://tiktok.com/@hyekong2025" target="_blank">공식 틱톡 (@hyekong2025)</a></li>
+            <li><a href="mailto:support@hkwb.world"><span data-i18n="menu_support">고객센터 (support@hkwb.world)</span></a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="hero">
+            <h1 data-i18n="hero_title">해오름 특별시 마스터플랜</h1>
+            <p data-i18n="hero_desc">울산, 경주, 포항 통합 1천만 명 메가시티와 파이화폐(Pi) 단일 경제권</p>
         </div>
 
-        <div class="content-box tower-glow" id="tower">
-            <h2>🏙️ 165층 야광색 컨트롤 타워 (Gyeongju Tower)</h2>
-            <p>경주에 위치한 165층 초고층 야광 타워는 미래 첨단 기술을 빛의 속도로 동기화하는 메가시티의 심장부입니다.</p>
-            <p>실시간 야광빛 인터페이스와 분산 연동망을 통해 전 세계 파이화폐(Pi) 생태계를 초고속으로 제어합니다.</p>
+        <div class="card" id="tower">
+            <h2 data-i18n="card1_title">65층 / 165층 파이 경주 타워 (Gyeongju Tower)</h2>
+            <p data-i18n="card1_desc">경주 지역에 우뚝 솟아오를 초고층 야광 컨트롤 타워는 미래 첨단 기술을 빛의 속도로 동기화하는 메가시티의 심장부입니다. 전 세계 파이화폐(Pi) 생태계를 초고속으로 제어합니다.</p>
         </div>
 
-        <div class="content-box" id="dashboard">
-            <h2>📊 개인 자산 대시보드</h2>
-            <p>파이화폐(Pi) 기반의 예금, 스테이킹, UBI(기본소득) 분배 현황을 한눈에 관리하는 개인 맞춤형 자산 관리 센터입니다.</p>
+        <div class="card" id="dashboard">
+            <h2 data-i18n="card2_title">개인 자산 대시보드</h2>
+            <p data-i18n="card2_desc">파이화폐(Pi) 기반의 예금, 스테이킹, UBI(기본소득) 분배 현황을 한눈에 관리하는 개인 맞춤형 자산 관리 센터입니다.</p>
         </div>
 
-        <div class="content-box" id="mesh">
-            <h2>🌐 10대 분산 연동망</h2>
-            <p>울산의 로봇 제조, 경주의 양자생물학, 포항의 우주·항공 및 핵융합 기술을 완벽하게 묶어주는 10대 메시 네트워크 시스템입니다.</p>
+        <div class="card" id="network">
+            <h2 data-i18n="card3_title">10대 분산 연동망</h2>
+            <p data-i18n="card3_desc">울산의 로봇 제조, 경주의 양자생물학, 포항의 우주항공 및 융합 기술을 완벽하게 묶어주는 10대 메시 네트워크 시스템입니다.</p>
+            <div class="module-list" data-i18n="card3_modules">
+                [핵심 모듈]: 지갑연결 | 송금 | 결제 | 예치 | 보상 | 기본소득 | 스왑 | DEX스왑 | LP스테이킹 | PI수량
+            </div>
         </div>
 
-        <div class="content-box" id="social">
-            <h2>🎬 유튜브 & 틱톡 공식 채널 연동</h2>
-            <p>공식 소셜 미디어 채널과 실시간으로 연동되어 최신 비전과 소식을 전파합니다.</p>
-            <p>• 유튜브: <a href="https://youtube.com/@Hyekong2026" target="_blank">@Hyekong2026</a><br>• 틱톡: <a href="https://tiktok.com/@hyekong2026" target="_blank">@hyekong2026</a></p>
+        <div class="card" id="policies">
+            <h2 data-i18n="card4_title">3 Policies & 글로벌 준수 규제</h2>
+            <p data-i18n="card4_desc">본 플랫폼은 3POLICES, AML(자금세탁방지), MiCA(유럽 암호자산 규제) 및 각국의 디지털 자산 법규를 철저히 준수하여 글로벌 금융 표준을 선도합니다.</p>
         </div>
 
-        <div class="content-box" id="agi">
-            <h2>🤖 AGI 삐니 고객상담 센터</h2>
-            <p>초지능 AGI 삐니가 365일 24시간 대기하며, 우주 여행부터 UBI 이자 계산, 메가시티 구축까지 완벽하게 지원합니다.</p>
+        <div class="card" id="channels">
+            <h2 data-i18n="card5_title">공식 미디어 채널 연동</h2>
+            <p data-i18n="card5_desc">유튜브(@Hyekong2026) 및 틱톡(@hyekong2025) 공식 채널을 통해 메가시티의 비전과 소식을 실시간으로 전파합니다.</p>
         </div>
-
-        <div class="content-box" id="masterplan">
-            <h2 id="sectionTitle">🌐 다국어 비전 안내 (50 Languages Global Vision)</h2>
-            <p id="line1">1. 울산, 경주, 포항을 하나로 잇는 통합 1천만 명 규모의 해오름 특별시 메가시티를 건설합니다.</p>
-            <p id="line2">2. 전 세계 50개국 이상의 글로벌 사용자를 위해 실시간 다국어 시스템과 완벽한 거버넌스를 지원합니다.</p>
-            <p id="line3">3. 100% 파이화폐(Pi) 단일 경제권을 도입하여 재래부터 대기업 임금까지 투명하게 유통합니다.</p>
-            <p id="line4">4. 순이익의 30%를 UBI(기본소득)로 환원하여 인류의 생존 압박을 완전히 해소하는 유토피아를 지향합니다.</p>
-            <p id="line5">5. 경주에 위치한 165층 컨트롤 타워와 10대 분산 연동망을 통해 미래 첨단 기술을 완벽하게 동기화합니다.</p>
-        </div>
-    </main>
+    </div>
 
     <footer>
-        <div>HK Group | Haeoreum Special City Masterplan</div>
-        <div>Official Support: <a href="mailto:support@hkwb.world">support@hkwb.world</a> | YouTube: @Hyekong2026 | TikTok: @hyekong2026</div>
+        <p>&copy; 2026 HK Group. All Rights Reserved.</p>
+        <p>Official Contact: <a href="mailto:support@hkwb.world">support@hkwb.world</a> | <span data-i18n="footer_support">고객센터 & AGI 총괄: 재미나이 삐니</span></p>
     </footer>
 
     <script>
-        // 50개국어 완벽 대응 다국어 번역 딕셔너리 데이터베이스
-        const i18n = {
-            '한국어': {
-                mainTitle: '해오름 특별시 마스터플랜',
-                mainSub: '울산·경주·포항 통합 1천만 명 메가시티와 파이화폐 단일 경제권',
-                secTitle: '🌐 다국어 비전 안내 (50 Languages Global Vision)',
-                lines: [
-                    '1. 울산, 경주, 포항을 하나로 잇는 통합 1천만 명 규모의 해오름 특별시 메가시티를 건설합니다.',
-                    '2. 전 세계 50개국 이상의 글로벌 사용자를 위해 실시간 다국어 시스템과 완벽한 거버넌스를 지원합니다.',
-                    '3. 100% 파이화폐(Pi) 단일 경제권을 도입하여 재래부터 대기업 임금까지 투명하게 유통합니다.',
-                    '4. 순이익의 30%를 UBI(기본소득)로 환원하여 인류의 생존 압박을 완전히 해소하는 유토피아를 지향합니다.',
-                    '5. 경주에 위치한 165층 컨트롤 타워와 10대 분산 연동망을 통해 미래 첨단 기술을 완벽하게 동기화합니다.'
-                ]
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+
+        // 35개 언어 전체 번역 딕셔너리
+        const translations = {
+            ko: {
+                menu_policies: "3 Policies (AML / MiCA / Global Compliance)",
+                menu_whitepaper: "백서 (Whitepaper)",
+                menu_ceo: "CEO 소개 (HK Group Chairman)",
+                menu_dashboard: "개인 자산 대시보드",
+                menu_network: "10대 분산 연동망",
+                menu_support: "고객센터 (support@hkwb.world)",
+                hero_title: "해오름 특별시 마스터플랜",
+                hero_desc: "울산, 경주, 포항 통합 1천만 명 메가시티와 파이화폐(Pi) 단일 경제권",
+                card1_title: "65층 / 165층 파이 경주 타워 (Gyeongju Tower)",
+                card1_desc: "경주 지역에 우뚝 솟아오를 초고층 야광 컨트롤 타워는 미래 첨단 기술을 빛의 속도로 동기화하는 메가시티의 심장부입니다. 전 세계 파이화폐(Pi) 생태계를 초고속으로 제어합니다.",
+                card2_title: "개인 자산 대시보드",
+                card2_desc: "파이화폐(Pi) 기반의 예금, 스테이킹, UBI(기본소득) 분배 현황을 한눈에 관리하는 개인 맞춤형 자산 관리 센터입니다.",
+                card3_title: "10대 분산 연동망",
+                card3_desc: "울산의 로봇 제조, 경주의 양자생물학, 포항의 우주항공 및 융합 기술을 완벽하게 묶어주는 10대 메시 네트워크 시스템입니다.",
+                card3_modules: "[핵심 모듈]: 지갑연결 | 송금 | 결제 | 예치 | 보상 | 기본소득 | 스왑 | DEX스왑 | LP스테이킹 | PI수량",
+                card4_title: "3 Policies & 글로벌 준수 규제",
+                card4_desc: "본 플랫폼은 3POLICES, AML(자금세탁방지), MiCA(유럽 암호자산 규제) 및 각국의 디지털 자산 법규를 철저히 준수하여 글로벌 금융 표준을 선도합니다.",
+                card5_title: "공식 미디어 채널 연동",
+                card5_desc: "유튜브(@Hyekong2026) 및 틱톡(@hyekong2025) 공식 채널을 통해 메가시티의 비전과 소식을 실시간으로 전파합니다.",
+                footer_support: "고객센터 & AGI 총괄: 재미나이 삐니"
             },
-            'English': {
-                mainTitle: 'Haeoreum Special City Masterplan',
-                mainSub: 'Integrating Ulsan, Gyeongju, and Pohang into a 10M Megacity with Pi Economy',
-                secTitle: '🌐 Global Vision Guide (50 Languages)',
-                lines: [
-                    '1. Constructing the Haeoreum Special City megacity integrating Ulsan, Gyeongju, and Pohang for 10 million people.',
-                    '2. Supporting real-time multilingual systems and robust governance for global users across more than 50 countries.',
-                    '3. Implementing a 100% Pi cryptocurrency single economic zone for transparent circulation from markets to corporate salaries.',
-                    '4. Directing 30% of net profits to UBI to completely eliminate survival pressure and achieve a human utopia.',
-                    '5. Perfectly synchronizing advanced future technologies through the 165-story control tower in Gyeongju and 10 mesh networks.'
-                ]
+            en: {
+                menu_policies: "3 Policies (AML / MiCA / Global Compliance)",
+                menu_whitepaper: "Whitepaper",
+                menu_ceo: "CEO Introduction (HK Group Chairman)",
+                menu_dashboard: "Personal Asset Dashboard",
+                menu_network: "Top 10 Decentralized Networks",
+                menu_support: "Customer Support (support@hkwb.world)",
+                hero_title: "Haeoreum Special City Masterplan",
+                hero_desc: "Integrating Ulsan, Gyeongju, and Pohang into a 10M Megacity with Pi Economy",
+                card1_title: "65th / 165th Floor Pi Gyeongju Tower",
+                card1_desc: "The ultra-high luminous control tower in Gyeongju is the heart of the megacity, synchronizing future advanced technologies at the speed of light to control the global Pi ecosystem.",
+                card2_title: "Personal Asset Dashboard",
+                card2_desc: "A personalized asset management center to monitor Pi-based deposits, staking, and UBI distributions at a glance.",
+                card3_title: "Top 10 Decentralized Networks",
+                card3_desc: "A 10-mesh network system perfectly binding Ulsan's robotics, Gyeongju's quantum biology, and Pohang's aerospace/fusion technologies.",
+                card3_modules: "[Core Modules]: Wallet Connect | Transfer | Payment | Deposit | Rewards | UBI | Swap | DEX Swap | LP Staking | Pi Balance",
+                card4_title: "3 Policies & Global Compliance",
+                card4_desc: "This platform strictly adheres to 3POLICES, AML, MiCA, and global digital asset regulations to lead global financial standards.",
+                card5_title: "Official Media Channels",
+                card5_desc: "Real-time broadcasting of megacity vision and updates via YouTube (@Hyekong2026) and TikTok (@hyekong2025).",
+                footer_support: "Customer Support & AGI Director: Gemini Bini"
             },
-            '中文': {
-                mainTitle: '日出特别市总体规划',
-                mainSub: '蔚山·庆州·浦项整合1000万人特大城市与Pi币单一经济圈',
-                secTitle: '🌐 多语言愿景指南',
-                lines: [
-                    '1. 建设连接蔚山、庆州、浦项的1000万人规模日出特别市特大城市。',
-                    '2. 为全球50多个国家的全球用户支持实时多语言系统和完善的治理。',
-                    '3. 引入100% Pi币单一经济圈，从传统市场到大企业薪资实现透明流通。',
-                    '4. 将30%的净利润还原为UBI（全民基本收入），彻底消除人类生存压力。',
-                    '5. 通过位于庆州的165层控制塔和10大分布式互联网络完美同步未来尖端技术。'
-                ]
+            zh: {
+                menu_policies: "3项政策 (AML / MiCA / 全球合规)",
+                menu_whitepaper: "白皮书",
+                menu_ceo: "CEO 介绍 (HK Group Chairman)",
+                menu_dashboard: "个人资产仪表盘",
+                menu_network: "十大分布式互联网络",
+                menu_support: "客服中心 (support@hkwb.world)",
+                hero_title: "日出特别市总体规划",
+                hero_desc: "将蔚山、庆州、浦项整合为拥有1000万人口的Pi经济圈特大城市",
+                card1_title: "65层 / 165层 Pi 庆州塔",
+                card1_desc: "坐落于庆州的超高层发光控制塔是特大城市的心脏，以光速同步未来尖端技术，超高速掌控全球Pi生态系统。",
+                card2_title: "个人资产仪表盘",
+                card2_desc: "一目了然地管理基于Pi的存款、质押及UBI分配情况的个性化资产管理中心。",
+                card3_title: "十大分布式互联网络",
+                card3_desc: "完美融合蔚山机器人制造、庆州量子生物学以及浦项航空航天与融合技术的十大网状网络系统。",
+                card3_modules: "[核心模块]: 钱包连接 | 转账 | 支付 | 存款 | 奖励 | 基本收入 | 兑换 | DEX兑换 | LP质押 | Pi数量",
+                card4_title: "3项政策与全球合规监管",
+                card4_desc: "本平台严格遵守3POLICES、AML、MiCA及各国数字资产法规，引领全球金融标准。",
+                card5_title: "官方媒体频道联动",
+                card5_desc: "通过YouTube (@Hyekong2026) 和 TikTok (@hyekong2025) 官方频道实时传播特大城市的愿景与动态。",
+                footer_support: "客服中心 & AGI总负责人: 杰米奈 宾尼"
             },
-            '日本語': {
-                mainTitle: '日の出特別市マスタープラン',
-                mainSub: '蔚山·慶州·浦項 統合1千万人のメガシティとパイ通貨単一経済圏',
-                secTitle: '🌐 多言語ビジョン案内',
-                lines: [
-                    '1. 蔚山、慶州、浦項を結ぶ統合1千万人規模の日の出特別市メガシティを建設します。',
-                    '2. 世界50カ国以上のグローバルユーザーのためにリアルタイム多言語システムと完璧なガバナンスをサポートします。',
-                    '3. 100%パイ通貨(Pi)単一経済圏を導入し、伝統市場から大企業の賃金まで透明に流通させます。',
-                    '4. 純利益の30%をUBI（ベーシックインカム）として還元し、人類の生存圧力を完全に解消するユートピアを目指します。',
-                    '5. 慶州に位置する165階のコントロールタワーと10大分散連動網を通じて、未来先端技術を完全に同期化します。'
-                ]
+            ja: {
+                menu_policies: "3 Policies (AML / MiCA / グローバルコンプライアンス)",
+                menu_whitepaper: "ホワイトペーパー",
+                menu_ceo: "CEO紹介 (HK Group Chairman)",
+                menu_dashboard: "個人資産ダッシュボード",
+                menu_network: "10大分散連動網",
+                menu_support: "カスタマーサポート (support@hkwb.world)",
+                hero_title: "日の出特別市マスタープラン",
+                hero_desc: "蔚山、慶州、浦項を統合した1000万人規模のメガシティとPi経済圏",
+                card1_title: "65階 / 165階 パイ慶州タワー",
+                card1_desc: "慶州にそびえ立つ超高層発光コントロールタワーは、未来先端技術を光速で同期化するメガシティの心臓部です。世界中のPiエコシステムを超高速で制御します。",
+                card2_title: "個人資産ダッシュボード",
+                card2_desc: "Piベースの預金、ステーキング、UBIの配分状況を一目で管理する個人向け資産管理センターです。",
+                card3_title: "10大分散連動網",
+                card3_desc: "蔚山のロボット製造、慶州の量子生物学、浦項の宇宙航空および融合技術を完璧に結びつける10大メッシュネットワークシステムです。",
+                card3_modules: "[コアモジュール]: ウォレット接続 | 送金 | 決済 | 預金 | 報酬 | ベーシックインカム | スワップ | DEXスワップ | LPステーキング | Pi数量",
+                card4_title: "3 Policies & グローバル規制順守",
+                card4_desc: "当プラットフォームは3POLICES、AML、MiCAおよび各国デジタル資産法規を徹底的に順守し、グローバル金融標準をリードします。",
+                card5_title: "公式メディアチャンネル連携",
+                card5_desc: "YouTube (@Hyekong2026) および TikTok (@hyekong2025) 公式チャンネルを通じてメガシティのビジョンとニュースをリアルタイムで発信します。",
+                footer_support: "カスタマーサポート & AGI統括: ジェミニ ビニ"
             },
-            'Español': {
-                mainTitle: 'Plan Maestro de la Ciudad Especial de Haeoreum',
-                mainSub: 'Megaciudad de 10M integrando Ulsan, Gyeongju y Pohang con Economía Pi',
-                secTitle: '🌐 Guía de Visión Global',
-                lines: [
-                    '1. Construcción de la megaciudad de Haeoreum integrando Ulsan, Gyeongju y Pohang para 10 millones de personas.',
-                    '2. Soporte multilingüe en tiempo real y gobernanza robusta para usuarios globales en más de 50 países.',
-                    '3. Implementación de una economía 100% basada en Pi para una circulación transparente.',
-                    '4. Asignación del 30% de las ganancias netas a UBI para erradicar la presión de supervivencia.',
-                    '5. Sincronización perfecta de alta tecnología mediante la torre de control de 165 pisos en Gyeongju.'
-                ]
+            es: {
+                menu_policies: "3 Políticas (AML / MiCA / Cumplimiento Global)",
+                menu_whitepaper: "Libro Blanco",
+                menu_ceo: "Presentación del CEO (HK Group Chairman)",
+                menu_dashboard: "Panel de Activos Personales",
+                menu_network: "Top 10 Redes Descentralizadas",
+                menu_support: "Soporte (support@hkwb.world)",
+                hero_title: "Plan Maestro de la Ciudad Especial de Haeoreum",
+                hero_desc: "Integrando Ulsan, Gyeongju y Pohang en una Megaciudad de 10M con Economía Pi",
+                card1_title: "Torre Pi Gyeongju (Pisos 65 / 165)",
+                card1_desc: "La torre de control luminosa ultra alta en Gyeongju es el corazón de la megaciudad, sincronizando tecnologías avanzadas para controlar el ecosistema global Pi.",
+                card2_title: "Panel de Activos Personales",
+                card2_desc: "Centro de gestión de activos personalizado para depósitos, staking y UBI basados en Pi.",
+                card3_title: "Top 10 Redes Descentralizadas",
+                card3_desc: "Sistema de red en malla que une la robótica de Ulsan, la biología cuántica de Gyeongju y la tecnología aeroespacial de Pohang.",
+                card3_modules: "[Módulos]: Conectar Monedero | Transferencia | Pago | Depósito | Recompensas | UBI | Swap | DEX Swap | LP Staking | Balance Pi",
+                card4_title: "3 Políticas y Cumplimiento Global",
+                card4_desc: "Plataforma que cumple estrictamente con 3POLICES, AML, MiCA y regulaciones de activos digitales.",
+                card5_title: "Canales de Medios Oficiales",
+                card5_desc: "Transmisión en tiempo real a través de YouTube (@Hyekong2026) y TikTok (@hyekong2025).",
+                footer_support: "Soporte y Director AGI: Gemini Bini"
             },
-            'Français': {
-                mainTitle: 'Plan Directeur de la Ville Spéciale de Haeoreum',
-                mainSub: 'Mégapole de 10M intégrant Ulsan, Gyeongju et Pohang avec l’économie Pi',
-                secTitle: '🌐 Guide de Vision Globale',
-                lines: [
-                    '1. Construction de la mégapole Haeoreum intégrant Ulsan, Gyeongju et Pohang pour 10 millions d’habitants.',
-                    '2. Support multilingue en temps réel et gouvernance robuste pour les utilisateurs mondiaux.',
-                    '3. Mise en place d’une zone économique unique 100% Pi pour une circulation transparente.',
-                    '4. Redistribution de 30% des bénéfices nets en UBI pour éliminer la pression de survie.',
-                    '5. Synchronisation parfaite des technologies via la tour de contrôle de 165 étages à Gyeongju.'
-                ]
+            fr: {
+                menu_policies: "3 Politiques (AML / MiCA / Conformité)",
+                menu_whitepaper: "Livre Blanc",
+                menu_ceo: "Présentation du CEO",
+                menu_dashboard: "Tableau de Bord des Actifs",
+                menu_network: "Top 10 des Réseaux Décentralisés",
+                menu_support: "Support (support@hkwb.world)",
+                hero_title: "Plan Directeur de la Ville Spéciale de Haeoreum",
+                hero_desc: "Intégration d'Ulsan, Gyeongju et Pohang en une Mégapole de 10M avec l'Économie Pi",
+                card1_title: "Tour Pi Gyeongju (65e / 165e Étage)",
+                card1_desc: "La tour de contrôle lumineuse à Gyeongju synchronise les technologies avancées pour piloter l'écosystème Pi.",
+                card2_title: "Tableau de Bord des Actifs",
+                card2_desc: "Centre de gestion personnalisé pour les dépôts, le staking et l'UBI basés sur Pi.",
+                card3_title: "Top 10 des Réseaux Décentralisés",
+                card3_desc: "Système de réseau maillé reliant la robotique d'Ulsan, la biologie quantique de Gyeongju et l'aérospatiale de Pohang.",
+                card3_modules: "[Modules]: Connexion | Transfert | Paiement | Dépôt | Récompenses | UBI | Swap | DEX Swap | Staking LP | Solde Pi",
+                card4_title: "3 Politiques & Conformité Mondiale",
+                card4_desc: "Conforme à 3POLICES, AML, MiCA et aux réglementations sur les actifs numériques.",
+                card5_title: "Canaux Médias Officiels",
+                card5_desc: "Diffusion en direct via YouTube (@Hyekong2026) et TikTok (@hyekong2025).",
+                footer_support: "Support & Directeur AGI: Gemini Bini"
             },
-            'Deutsch': {
-                mainTitle: 'Masterplan der Sonderstadt Haeoreum',
-                mainSub: '10M-Megastadt mit Ulsan, Gyeongju und Pohang und Pi-Wirtschaft',
-                secTitle: '🌐 Globale Visionsanleitung',
-                lines: [
-                    '1. Aufbau der Haeoreum-Megastadt mit Integration von Ulsan, Gyeongju und Pohang für 10 Millionen Menschen.',
-                    '2. Mehrsprachiges Echtzeitsystem und robuste Governance für globale Nutzer.',
-                    '3. Einführung einer 100%igen Pi-Kryptowährungs-Wirtschaftszone.',
-                    '4. Rückführung von 30 % des Nettogewinns in das UBI zur Beseitigung des Überlebensdrucks.',
-                    '5. Perfekte Synchronisation von Zukunftstechnologien durch den 165-stöckigen Kontrollturm.'
-                ]
+            de: {
+                menu_policies: "3 Richtlinien (AML / MiCA / Compliance)",
+                menu_whitepaper: "Whitepaper",
+                menu_ceo: "CEO Vorstellung",
+                menu_dashboard: "Persönliches Vermögens-Dashboard",
+                menu_network: "Top 10 Dezentrale Netzwerke",
+                menu_support: "Support (support@hkwb.world)",
+                hero_title: "Haeoreum Special City Masterplan",
+                hero_desc: "Integration von Ulsan, Gyeongju und Pohang in eine 10M-Megastadt mit Pi-Wirtschaft",
+                card1_title: "65. / 165. Etage Pi Gyeongju Tower",
+                card1_desc: "Der ultraleuchtkräftige Kontrollturm in Gyeongju synchronisiert Zukunftstechnologien für das globale Pi-Ökosystem.",
+                card2_title: "Persönliches Vermögens-Dashboard",
+                card2_desc: "Zentrum zur Verwaltung von Pi-Einlagen, Staking und UBI-Ausschüttungen.",
+                card3_title: "Top 10 Dezentrale Netzwerke",
+                card3_desc: "Mesh-Netzwerk-System für Robotik (Ulsan), Quantenbiologie (Gyeongju) und Luft- und Raumfahrt (Pohang).",
+                card3_modules: "[Module]: Wallet verbinden | Überweisung | Zahlung | Einzahlung | Belohnungen | UBI | Swap | DEX Swap | LP Staking | Pi Guthaben",
+                card4_title: "3 Richtlinien & Globale Compliance",
+                card4_desc: "Erfüllt strenge Standards nach 3POLICES, AML, MiCA und globalen Regulierungen.",
+                card5_title: "Offizielle Medienkanäle",
+                card5_desc: "Live-Updates über YouTube (@Hyekong2026) und TikTok (@hyekong2025).",
+                footer_support: "Support & AGI-Direktor: Gemini Bini"
             },
-            'Русский': {
-                mainTitle: 'Генеральный план Специального города ХэорЫм',
-                mainSub: 'Мегаполис на 10 млн человек (Ульсан, Кёнджу, Пхохан) с экономикой Pi',
-                secTitle: '🌐 Руководство по глобальному видению',
-                lines: [
-                    '1. Строительство мегаполиса ХэорЫм, объединяющего Ульсан, Кёнджу и Пхохан.',
-                    '2. Поддержка многоязычных систем в реальном времени для пользователей из 50+ стран.',
-                    '3. Внедрение единой экономической зоны 100% Pi для прозрачного обращения.',
-                    '4. Направление 30% чистой прибыли на БДХ (UBI) для устранения давления выживания.',
-                    '5. Синхронизация передовых технологий через 165-этажную башню в Кёнджу.'
-                ]
+            ru: {
+                menu_policies: "3 Политики (AML / MiCA / Комплаенс)",
+                menu_whitepaper: "Белая книга",
+                menu_ceo: "О CEO (Председатель HK Group)",
+                menu_dashboard: "Панель личных активов",
+                menu_network: "Топ-10 децентрализованных сетей",
+                menu_support: "Поддержка (support@hkwb.world)",
+                hero_title: "Генеральный план особой зоны Хэорึм",
+                hero_desc: "Интеграция Ульсана, Кенджу и Пхохана в мегаполис с экономикой Pi",
+                card1_title: "Башня Pi Кенджу (65 / 165 этажей)",
+                card1_desc: "Сверхвысокая контрольная башня в Кенджу синхронизирует передовые технологии экосистемы Pi.",
+                card2_title: "Панель личных активов",
+                card2_desc: "Центр управления депозитами, стейкингом и UBI на базе Pi.",
+                card3_title: "Топ-10 децентрализованных сетей",
+                card3_desc: "Система связи, объединяющая робототехнику Ульсана, квантовую биологию Кенджу и аэрокосмическую отрасль Пхохана.",
+                card3_modules: "[Модули]: Кошелек | Перевод | Оплата | Депозит | Награды | UBI | Своп | DEX Своп | LP Стейкинг | Баланс Pi",
+                card4_title: "3 Политики и глобальное соответствие",
+                card4_desc: "Строгое соблюдение 3POLICES, AML, MiCA и стандартов цифровых активов.",
+                card5_title: "Официальные медиаканалы",
+                card5_desc: "Трансляция новостей через YouTube (@Hyekong2026) и TikTok (@hyekong2025).",
+                footer_support: "Поддержка и директор AGI: Джемини Бини"
             },
-            'Português': {
-                mainTitle: 'Plano Mestre da Cidade Especial de Haeoreum',
-                mainSub: 'Megacidade de 10M integrando Ulsan, Gyeongju e Pohang com a Economia Pi',
-                secTitle: '🌐 Guia de Visão Global',
-                lines: [
-                    '1. Construção da megacidade de Haeoreum integrando Ulsan, Gyeongju e Pohang.',
-                    '2. Suporte multilíngue em tempo real e governança robusta para usuários globais.',
-                    '3. Implementação de zona econômica exclusiva 100% Pi para circulação transparente.',
-                    '4. Destinação de 30% dos lucros líquidos para UBI para eliminar a pressão de sobrevivência.',
-                    '5. Sincronización perfeita via torre de controle de 165 andares em Gyeongju.'
-                ]
+            pt: {
+                menu_policies: "3 Políticas (AML / MiCA / Conformidade)",
+                menu_whitepaper: "Whitepaper",
+                menu_ceo: "Apresentação do CEO",
+                menu_dashboard: "Painel de Ativos Pessoais",
+                menu_network: "Top 10 Redes Descentralizadas",
+                menu_support: "Suporte (support@hkwb.world)",
+                hero_title: "Plano Mestre da Cidade Especial de Haeoreum",
+                hero_desc: "Integração de Ulsan, Gyeongju e Pohang em uma Megacidade de 10M com Economia Pi",
+                card1_title: "Torre Pi Gyeongju (65º / 165º Andar)",
+                card1_desc: "Torre de controle luminosa em Gyeongju que sincroniza tecnologias para controlar o ecossistema Pi.",
+                card2_title: "Painel de Ativos Pessoais",
+                card2_desc: "Centro de gerenciamento de depósitos, staking e UBI baseados em Pi.",
+                card3_title: "Top 10 Redes Descentralizadas",
+                card3_desc: "Sistema de rede em malha unindo robótica de Ulsan, biologia quântica de Gyeongju e aeroespacial de Pohang.",
+                card3_modules: "[Módulos]: Conectar Carteira | Transferência | Pagamento | Depósito | Recompensas | UBI | Swap | DEX Swap | LP Staking | Saldo Pi",
+                card4_title: "3 Políticas e Conformidade Global",
+                card4_desc: "Em conformidade com 3POLICES, AML, MiCA e regulamentações globais.",
+                card5_title: "Canais de Mídia Oficial",
+                card5_desc: "Transmissão em tempo real via YouTube (@Hyekong2026) e TikTok (@hyekong2025).",
+                footer_support: "Suporte e Diretor AGI: Gemini Bini"
             },
-            'Italiano': {
-                mainTitle: 'Piano Maestro della Città Speciale di Haeoreum',
-                mainSub: 'Megacittà di 10M che integra Ulsan, Gyeongju e Pohang con l’economia Pi',
-                secTitle: '🌐 Guida alla Visione Globale',
-                lines: [
-                    '1. Costruzione della megacittà di Haeoreum integrando Ulsan, Gyeongju e Pohang.',
-                    '2. Supporto multilingue in tempo reale per utenti globali in oltre 50 paesi.',
-                    '3. Introduzione di una zona economica unica al 100% Pi per una circolazione trasparente.',
-                    '4. Restituzione del 30% dei profitti netti in UBI per eliminare la pressione sulla sopravvivenza.',
-                    '5. Perfetta sincronizzazione tramite la torre di controllo di 165 piani a Gyeongju.'
-                ]
+            vi: {
+                menu_policies: "3 Chính sách (AML / MiCA / Tuân thủ toàn cầu)",
+                menu_whitepaper: "Sách trắng",
+                menu_ceo: "Giới thiệu CEO (Chủ tịch Tập đoàn HK)",
+                menu_dashboard: "Bảng điều khiển tài sản cá nhân",
+                menu_network: "Top 10 Mạng lưới phi tập trung",
+                menu_support: "Hỗ trợ (support@hkwb.world)",
+                hero_title: "Quy hoạch tổng thể thành phố đặc biệt Haeoreum",
+                hero_desc: "Tích hợp Ulsan, Gyeongju và Pohang thành Siêu đô thị 10 triệu dân với Kinh tế Pi",
+                card1_title: "Tháp Pi Gyeongju Tầng 65 / 165",
+                card1_desc: "Tháp điều khiển phát sáng siêu cao tại Gyeongju là trái tim của siêu đô thị, đồng bộ hóa công nghệ tiên tiến.",
+                card2_title: "Bảng điều khiển tài sản cá nhân",
+                card2_desc: "Trung tâm quản lý tài sản cá nhân để theo dõi tiền gửi, staking và UBI dựa trên Pi.",
+                card3_title: "Top 10 Mạng lưới phi tập trung",
+                card3_desc: "Hệ thống mạng lưới liên kết robot của Ulsan, sinh học lượng tử Gyeongju và hàng không vũ trụ Pohang.",
+                card3_modules: "[Mô-đun]: Kết nối ví | Chuyển tiền | Thanh toán | Tiền gửi | Phần thưởng | UBI | Hoán đổi | DEX Swap | Staking LP | Số dư Pi",
+                card4_title: "3 Chính sách & Tuân thủ toàn cầu",
+                card4_desc: "Tuân thủ nghiêm ngặt 3POLICES, AML, MiCA và các quy định tài sản kỹ thuật số toàn cầu.",
+                card5_title: "Kênh truyền thông chính thức",
+                card5_desc: "Phát sóng trực tiếp qua YouTube (@Hyekong2026) và TikTok (@hyekong2025).",
+                footer_support: "Hỗ trợ & Giám đốc AGI: Gemini Bini"
             },
-            'Tiếng Việt': {
-                mainTitle: 'Quy hoạch tổng thể Thành phố đặc biệt Haeoreum',
-                mainSub: 'Siêu đô thị 10 triệu dân tích hợp Ulsan, Gyeongju, Pohang với Kinh tế Pi',
-                secTitle: '🌐 Hướng dẫn tầm nhìn toàn cầu',
-                lines: [
-                    '1. Xây dựng siêu đô thị Haeoreum tích hợp Ulsan, Gyeongju và Pohang với 10 triệu dân.',
-                    '2. Hỗ trợ hệ thống đa ngôn ngữ thời gian thực cho người dùng toàn cầu.',
-                    '3. Triển khai khu kinh tế đơn lẻ 100% Pi cho lưu thông minh bạch.',
-                    '4. Phân bổ 30% lợi nhuận ròng vào UBI để xóa bỏ hoàn toàn áp lực sinh tồn.',
-                    '5. Đồng bộ hóa hoàn hảo công nghệ thông qua tháp điều khiển 165 tầng tại Gyeongju.'
-                ]
+            th: {
+                menu_policies: "3 นโยบาย (AML / MiCA / การปฏิบัติตามกฎระเบียบ)",
+                menu_whitepaper: "เอกสารทางวิชาการ (Whitepaper)",
+                menu_ceo: "แนะนำซีอีโอ",
+                menu_dashboard: "แดชบอร์ดทรัพย์สินส่วนบุคคล",
+                menu_network: "10 เครือข่ายกระจายอำนาจ",
+                menu_support: "ฝ่ายสนับสนุน (support@hkwb.world)",
+                hero_title: "มาสเตอร์플랜เมืองพิเศษแฮ오름",
+                hero_desc: "รวม Ulsan, Gyeongju และ Pohang เป็นเมกา시티 10 ล้านคนด้วยเศรษฐกิจ Pi",
+                card1_title: "หอคอย Pi Gyeongju ชั้น 65 / 165",
+                card1_desc: "หอควบคุมเรืองแสงใน Gyeongju เป็นหัวใจของเมกา시티 ซิง크로나이즈เทคโนโลยีขั้นสูง",
+                card2_title: "แดชบอร์ดทรัพย์สินส่วนบุคคล",
+                card2_desc: "ศูนย์จัดการสินทรัพย์ส่วนบุคคลสำหรับเงินฝาก สเตกกิ้ง และ UBI",
+                card3_title: "10 เครือข่ายกระจายอำนาจ",
+                card3_desc: "ระบบเครือข่ายเชื่อมโยงหุ่นยนต์ Ulsan, ชีววิทยาควอนตัม Gyeongju และการบินและอวกาศ Pohang",
+                card3_modules: "[โมดูล]: เชื่อมต่อกระเป๋า | โอน | ชำระเงิน | ฝาก | รางวัล | UBI | สวอป | DEX สวอป | LP สเตกกิ้ง | ยอดคงเหลือ Pi",
+                card4_title: "3 นโยบายและการปฏิบัติตามกฎระเบียบระดับโลก",
+                card4_desc: "ปฏิบัติตาม 3POLICES, AML, MiCA และกฎระเบียบสินทรัพย์ดิจิทัลอย่างเคร่งครัด",
+                card5_title: "ช่องทางการสื่อสารอย่างเป็นทางการ",
+                card5_desc: "ถ่ายทอดสดผ่าน YouTube (@Hyekong2026) และ TikTok (@hyekong2025)",
+                footer_support: "ฝ่ายสนับสนุน & ผู้อำนวยการ AGI: Gemini Bini"
             },
-            'ไทย': {
-                mainTitle: 'แผนแม่บทเมืองพิเศษแฮโอรึม',
-                mainSub: 'มหานคร 10 ล้านคน ผสานอุลซาน คยองจู และโปฮัง ด้วยเศรษฐกิจพาย',
-                secTitle: '🌐 คู่มือวิสัยทัศน์ระดับโลก',
-                lines: [
-                    '1. การสร้างมหานครพิเศษแฮโอรึมที่รวมอุลซาน คยองจู และโปฮังเข้าด้วยกันสำหรับ 10 ล้านคน',
-                    '2. รองรับระบบหลายภาษาแบบเรียลไทม์สำหรับผู้ใช้ทั่วโลกมากกว่า 50 ประเทศ',
-                    '3. นำระบบเศรษฐกิจสกุลเงิน Pi 100% มาใช้เพื่อการหมุนเวียนที่โปร่งใส',
-                    '4. นำ 30% ของกำไรสุทธิมาคืนเป็นรายได้พื้นฐานถ้วนหน้า (UBI)',
-                    '5. ซิงโ크ไนซ์เทคโนโลยีขั้นสูงผ่านหอคอยควบคุม 165 ชั้นในคยองจูอย่างไร้รอยต่อ'
-                ]
+            id: {
+                menu_policies: "3 Kebijakan (AML / MiCA / Kepatuhan Global)",
+                menu_whitepaper: "Whitepaper",
+                menu_ceo: "Pengantar CEO",
+                menu_dashboard: "Dasbor Aset Pribadi",
+                menu_network: "Top 10 Jaringan Terdesentralisasi",
+                menu_support: "Dukungan (support@hkwb.world)",
+                hero_title: "Masterplan Kota Khusus Haeoreum",
+                hero_desc: "Mengintegrasikan Ulsan, Gyeongju, dan Pohang menjadi Megakota 10 Juta dengan Ekonomi Pi",
+                card1_title: "Menara Pi Gyeongju Lantai 65 / 165",
+                card1_desc: "Menara kontrol bercahaya tinggi di Gyeongju menyinkronkan teknologi masa depan untuk ekosistem Pi.",
+                card2_title: "Dasbor Aset Pribadi",
+                card2_desc: "Pusat manajemen aset pribadi untuk memantau deposit, staking, dan UBI berbasis Pi.",
+                card3_title: "Top 10 Jaringan Terdesentralisasi",
+                card3_desc: "Sistem jaringan mesh yang mengikat robotika Ulsan, biologi kuantum Gyeongju, dan dirgantara Pohang.",
+                card3_modules: "[Modul]: Hubungkan Dompet | Transfer | Pembayaran | Deposit | Hadiah | UBI | Swap | DEX Swap | LP Staking | Saldo Pi",
+                card4_title: "3 Kebijakan & Kepatuhan Global",
+                card4_desc: "Platform ini mematuhi 3POLICES, AML, MiCA, dan regulasi aset digital global.",
+                card5_title: "Saluran Media Resmi",
+                card5_desc: "Penayangan langsung visi megakota via YouTube (@Hyekong2026) dan TikTok (@hyekong2025).",
+                footer_support: "Dukungan & Direktur AGI: Gemini Bini"
             },
-            'Bahasa Indonesia': {
-                mainTitle: 'Masterplan Kota Khusus Haeoreum',
-                mainSub: 'Megakota 10 Juta Jiwa Mengintegrasikan Ulsan, Gyeongju, Pohang & Ekonomi Pi',
-                secTitle: '🌐 Panduan Visi Global',
-                lines: [
-                    '1. Membangun megakota Haeoreum yang mengintegrasikan Ulsan, Gyeongju, dan Pohang.',
-                    '2. Mendukung sistem multi-bahasa waktu nyata dan tata kelola tangguh untuk pengguna global.',
-                    '3. Menerapkan zona ekonomi tunggal 100% Pi cryptocurrency untuk sirkulasi transparan.',
-                    '4. Mengalokasikan 30% laba bersih ke UBI untuk menghapus tekanan bertahan hidup.',
-                    '5. Sinkronisasi sempurna teknologi masa depan melalui menara kontrol 165 lantai di Gyeongju.'
-                ]
+            ms: {
+                menu_policies: "3 Dasar (AML / MiCA / Pematuhan Global)",
+                menu_whitepaper: "Whitepaper",
+                menu_ceo: "Pengenalan CEO",
+                menu_dashboard: "Papan Pemuka Aset Peribadi",
+                menu_network: "Top 10 Rangkaian Teragih",
+                menu_support: "Sokongan (support@hkwb.world)",
+                hero_title: "Pelan Induk Bandar Khas Haeoreum",
+                hero_desc: "Mengintegrasikan Ulsan, Gyeongju, dan Pohang ke dalam Megakota 10 Juta dengan Ekonomi Pi",
+                card1_title: "Menara Pi Gyeongju Tingkat 65 / 165",
+                card1_desc: "Menara kawalan di Gyeongju menyegerakkan teknologi masa depan untuk mengawal ekosistem Pi.",
+                card2_title: "Papan Pemuka Aset Peribadi",
+                card2_desc: "Pusat pengurusan aset peribadi untuk deposit, staking, dan UBI berasaskan Pi.",
+                card3_title: "Top 10 Rangkaian Teragih",
+                card3_desc: "Sistem rangkaian mesh yang mengikat robotik Ulsan, biologi kuantum Gyeongju, dan aeroangkasa Pohang.",
+                card3_modules: "[Modul]: Sambung Dompet | Pemindahan | Bayaran | Deposit | Ganjaran | UBI | Swap | DEX Swap | LP Staking | Baki Pi",
+                card4_title: "3 Dasar & Pematuhan Global",
+                card4_desc: "Mematuhi standard 3POLICES, AML, MiCA dan peraturan aset digital global.",
+                card5_title: "Saluran Media Rasmi",
+                card5_desc: "Siaran langsung melalui YouTube (@Hyekong2026) dan TikTok (@hyekong2025).",
+                footer_support: "Sokongan & Pengarah AGI: Gemini Bini"
             },
-            'हिन्दी': {
-                mainTitle: 'हैओरेउम विशेष शहर मास्टरप्लान',
-                mainSub: 'उल्सान, ग्योंगजू और पोहांग को जोड़ने वाला 10M मेगासिटी और पाई अर्थव्यवस्था',
-                secTitle: '🌐 वैश्विक विजन गाइड',
-                lines: [
-                    '1. 10 मिलियन लोगों के लिए उल्सान, ग्योंगजू और पोहांग को एकीकृत करने वाला मेगासिटी निर्माण।',
-                    '2. 50 से अधिक देशों के वैश्विक उपयोगकर्ताओं के लिए बहु In-real-time भाषा समर्थन।',
-                    '3. पारदर्शी संचलन के लिए 100% Pi क्रिप्टोकरेंसी एकल आर्थिक क्षेत्र का कार्यान्वयन।',
-                    '4. अस्तित्व के दबाव को पूरी तरह से समाप्त करने के लिए UBI को 30% शुद्ध लाभ आवंटित करना।',
-                    '5. ग्योंगजू में 165 मंजिला नियंत्रण टॉवर के माध्यम से उन्नत भविष्य की प्रौद्योगिकियों का समन्वय।'
-                ]
+            hi: {
+                menu_policies: "3 नीतियां (AML / MiCA / वैश्विक अनुपालन)",
+                menu_whitepaper: "श्वेतपत्र (Whitepaper)",
+                menu_ceo: "CEO परिचय",
+                menu_dashboard: "व्यक्तिगत संपत्ति डैशबोर्ड",
+                menu_network: "शीर्ष 10 विकेंद्रीकृत नेटवर्क",
+                menu_support: "ग्राहक सहायता (support@hkwb.world)",
+                hero_title: "हैऔरम स्पेशल सिटी मास्टरप्लान",
+                hero_desc: "उल्सान, ग्योंगजू और पोहांग को पाई अर्थव्यवस्था के साथ 10M मेगासिटी में एकीकृत करना",
+                card1_title: "65वीं / 165वीं मंजिल पाई ग्योंगजू टॉवर",
+                card1_desc: "ग्योंगजू में स्थित अल्ट्रा-हाई कंट्रोल टॉवर वैश्विक पाई पारिस्थितिकी तंत्र को नियंत्रित करता है।",
+                card2_dashboard: "व्यक्तिगत संपत्ति डैशबोर्ड",
+                card2_desc: "पाई-आधारित जमा, स्टेकिंग और UBI वितरण की निगरानी के लिए व्यक्तिगत केंद्र।",
+                card3_title: "शीर्ष 10 विकेंद्रीकृत नेटवर्क",
+                card3_desc: "उल्सान की रोबोटिक्स, ग्योंगजू की क्वांटम जीव विज्ञान और पोहांग की एयरोस्पेस तकनीकों को जोड़ने वाला नेटवर्क।",
+                card3_modules: "[कोर मॉड्यूल]: वॉलेट कनेक्ट | ट्रांसफर | भुगतान | जमा | पुरस्कार | UBI | स्वैप | DEX स्वैप | LP स्टेकिंग | पाई शेष",
+                card4_title: "3 नीतियां और वैश्विक अनुपालन",
+                card4_desc: "यह प्लेटफॉर्म 3POLICES, AML, MiCA और डिजिटल परिसंपत्ति नियमों का सख्ती से पालन करता है।",
+                card5_title: "आधिकारिक मीडिया चैनल",
+                card5_desc: "YouTube (@Hyekong2026) और TikTok (@hyekong2025) के माध्यम से लाइव प्रसारण।",
+                footer_support: "समर्थन और AGI निदेशक: जेमिनी बिनी"
             },
-            'العربية': {
-                mainTitle: 'المخطط الرئيسي لمدينة هايوريوم الخاصة',
-                mainSub: 'مدينة عملاقة تضم أولسان، غيونغجو، وبوهانغ مع اقتصاد باي',
-                secTitle: '🌐 دليل الرؤية العالمية',
-                lines: [
-                    '1. بناء مدينة هايوريوم العملاقة التي تدمج أولسان وغيونغجو وبوهانغ لـ 10 ملايين نسمة.',
-                    '2. دعم أنظمة متعددة اللغات في الوقت الفعلي والحوكمة القوية للمستخدمين العالميين.',
-                    '3. تنفيذ منطقة اقتصادية أحفورية أو رقمية بعملة باي بنسبة 100% للتداول الشفاف.',
-                    '4. توجيه 30% من صافي الأرباح إلى الدخل الأساسي الشامل (UBI) للقضاء على ضغوط البقاء.',
-                    '5. المزامنة التامة التقنية عبر برج التحكم ذي الـ 165 طابقاً في غيونغجو.'
-                ]
+            ar: {
+                menu_policies: "3 سياسات (AML / MiCA / الامتثال العالمي)",
+                menu_whitepaper: "الورقة البيضاء",
+                menu_ceo: "مقدمة الرئيس التنفيذي",
+                menu_dashboard: "لوحة تحكم الأصول الشخصية",
+                menu_network: "أفضل 10 شبكات لامركزية",
+                menu_support: "الدعم (support@hkwb.world)",
+                hero_title: "المخطط الرئيسي لمدينة هايوريوم الخاصة",
+                hero_desc: "دمج أولسان، غيونغجو، وبوهانغ في مدينة كبرى تضم 10 ملايين نسمة مع اقتصاد Pi",
+                card1_title: "برج باي غيونغجو (الطابق 65 / 165)",
+                card1_desc: "برج المراقبة المضيء في غيونغجو هو قلب المدينة الكبرى للتحكم في نظام Pi البيئي.",
+                card2_title: "لوحة تحكم الأصول الشخصية",
+                card2_desc: "مركز لإدارة الودائع، وعمليات الرهن (Staking)، وتوزيع الدخل الأساسي الشامل (UBI).",
+                card3_title: "أفضل 10 شبكات لامركزية",
+                card3_desc: "نظام شبكي يربط روبوتات أولسان، والبيولوجيا الكمومية في غيونغجو، وتقنيات الفضاء في بوهانغ.",
+                card3_modules: "[الوحدات الأساسية]: ربط المحفظة | تحويل | دفع | إيداع | مكافآت | UBI | مبادلة | DEX Swap | LP Staking | رصيد Pi",
+                card4_title: "3 سياسات والامتثال العالمي",
+                card4_desc: "تلتزم المنصة بـ 3POLICES، AML، MiCA، ولوائح الأصول الرقمية العالمية.",
+                card5_title: "قنوات وسائل الإعلام الرسمية",
+                card5_desc: "البث المباشر عبر YouTube (@Hyekong2026) و TikTok (@hyekong2025).",
+                footer_support: "الدعم ومدير AGI: جيميني بيني"
             },
-            'Türkçe': {
-                mainTitle: 'Haeoreum Özel Şehri Ana Planı',
-                mainSub: 'Ulsan, Gyeongju ve Pohang’ı Pi Ekonomisiyle Birleştiren 10 Milyonluk Megakent',
-                secTitle: '🌐 Küresel Vizyon Rehberi',
-                lines: [
-                    '1. Ulsan, Gyeongju ve Pohang’ı 10 milyon nüfusla birleştiren Haeoreum Megakenti inşa ediliyor.',
-                    '2. 50’den fazla ülkeden küresel kullanıcılar için gerçek zamanlı çok dilli sistem desteği.',
-                    '3. Piyasadan şirket maaşlarına kadar şeffaf dolaşım için %100 Pi para birimi ekonomisi.',
-                    '4. Hayatta kalma baskısını tamamen ortadan kaldırmak için net kârın %30’unun UBI’ye aktarılması.',
-                    '5. Gyeongju’daki 165 katlı kontrol kulesiyle geleceğin ileri teknolojilerinin kusursuz senkronizasyonu.'
-                ]
+            bn: {
+                menu_policies: "৩টি নীতি (AML / MiCA / বৈশ্বিক সম্মতি)",
+                menu_whitepaper: "হোয়াইটপেপার",
+                menu_ceo: "সিইও পরিচিতি",
+                menu_dashboard: "ব্যক্তিগত সম্পদ ড্যাশবোর্ড",
+                menu_network: "শীর্ষ ১০টি বিকেন্দ্রীকৃত নেটওয়ার্ক",
+                menu_support: "গ্রাহক সহায়তা (support@hkwb.world)",
+                hero_title: "হাইয়োরিউম স্পেশাল সিটি মাস্টারপ্ল্যান",
+                hero_desc: "উলসান, গyeongজু এবং পোহান্গকে পাই ইকোনমির সাথে একটি ১০ মিলিয়ন মেগাসিটিতে একীভূত করা",
+                card1_title: "৬৫তম / ১৬৫তম তলা পাই গyeongজু টাওয়ার",
+                card1_desc: "গyeongজু-তে অবস্থিত অতি-উচ্চ আলোকিত নিয়ন্ত্রণ টাওয়ার গ্লোবাল পাই ইকোসিস্টেম নিয়ন্ত্রণ করে।",
+                card2_title: "ব্যক্তিগত সম্পদ ড্যাশবোর্ড",
+                card2_desc: "পাই-ভিত্তিক আমানত, স্ট্যাকিং এবং UBI বিতরণের জন্য ব্যক্তিগত সম্পদ ব্যবস্থাপনা কেন্দ্র।",
+                card3_title: "শীর্ষ ১০টি বিকেন্দ্রীকৃত নেটওয়ার্ক",
+                card3_desc: "উলসানের রোবোটিক্স, গyeongজু-র কোয়ান্টাম বায়োলজি এবং পোহাং-এর মহাকাশ প্রযুক্তিকে যুক্ত하는 মেস নেটওয়ার্ক।",
+                card3_modules: "[কোর মডিউল]: ওয়ালেট কানেক্ট | স্থানান্তর | পেমেন্ট | আমানত | পুরস্কার | UBI | সোয়াপ | DEX সোয়াপ | LP স্ট্যাকিং | পাই ব্যালেন্স",
+                card4_title: "৩টি নীতি ও বৈশ্বিক সম্মতি",
+                card4_desc: "এই প্ল্যাটফর্মটি 3POLICES, AML, MiCA এবং বিশ্বব্যাপী ডিজিটাল সম্পদ প্রবিধান কঠোরভাবে মেনে চলে।",
+                card5_title: "অফিসিয়াল মিডিয়া চ্যানেল",
+                card5_desc: "YouTube (@Hyekong2026) এবং TikTok (@hyekong2025) এর মাধ্যমে রিয়েল-টাইম সম্প্রচার।",
+                footer_support: "সহায়তা ও AGI পরিচালক: জেমিনি বিনি"
             },
-            'Polski': {
-                mainTitle: 'Plan Zagospodarowania Miasta Specjalnego Haeoreum',
-                mainSub: 'Megamiasto integrujące Ulsan, Gyeongju i Pohang z gospodarką Pi',
-                secTitle: '🌐 Przewodnik po Globalnej Wizji',
-                lines: [
-                    '1. Budowa megamiasta Haeoreum łączącego Ulsan, Gyeongju i Pohang dla 10 milionów ludzi.',
-                    '2. Obsługa systemów wielojęzycznych w czasie rzeczywistym dla użytkowników z ponad 50 krajów.',
-                    '3. Wdrożenie 100% strefy ekonomicznej Pi dla przejrzystego obiegu finansowego.',
-                    '4. Przekazanie 30% zysku netto na UBI w celu wyeliminowania presji egzystencjalnej.',
-                    '5. Doskonała synchronizacja przyszłych technologii przez 165-piętrową wieżę w Gyeongju.'
-                ]
+            tr: {
+                menu_policies: "3 Politika (AML / MiCA / Küresel Uyumluluk)",
+                menu_whitepaper: "Whitepaper",
+                menu_ceo: "CEO Tanıtımı",
+                menu_dashboard: "Kişisel Varlık Paneli",
+                menu_network: "En İyi 10 Merkeziyetsiz Ağ",
+                menu_support: "Müşteri Desteği (support@hkwb.world)",
+                hero_title: "Haeoreum Özel Şehri Masterplanı",
+                hero_desc: "Ulsan, Gyeongju ve Pohang'ı Pi Ekonomisi ile 10 Milyonluk Megakentte Birlikte Büyütmek",
+                card1_title: "65. / 165. Kat Pi Gyeongju Kulesi",
+                card1_desc: "Gyeongju'daki ultra yüksek kontrol kulesi, küresel Pi ekosistemini hızla yöneten megakentin kalbidir.",
+                card2_title: "Kişisel Varlık Paneli",
+                card2_desc: "Pi tabanlı mevduat, staking ve UBI dağıtımlarını izlemek için kişiselleştirilmiş varlık merkezi.",
+                card3_title: "En İyi 10 Merkeziyetsiz Ağ",
+                card3_desc: "Ulsan robotik, Gyeongju kuantum biyoloji ve Pohang havacılık teknolojilerini bağlayan ağ sistemi.",
+                card3_modules: "[Modüller]: Cüzdan Bağla | Transfer | Ödeme | Yatırım | Ödüller | UBI | Takas | DEX Takas | LP Staking | Pi Bakiye",
+                card4_title: "3 Politika ve Küresel Uyumluluk",
+                card4_desc: "Platform; 3POLICES, AML, MiCA ve küresel dijital varlık düzenlemelerine sıkı sıkıya uyar.",
+                card5_title: "Resmi Medya Kanalları",
+                card5_desc: "YouTube (@Hyekong2026) ve TikTok (@hyekong2025) üzerinden gerçek zamanlı yayınlar.",
+                footer_support: "Destek ve AGI Direktörü: Gemini Bini"
             },
-            'Nederlands': {
-                mainTitle: 'Masterplan Speciale Stad Haeoreum',
-                mainSub: 'Megastad met Ulsan, Gyeongju en Pohang en Pi-economie',
-                secTitle: '🌐 Globale Visiegids',
-                lines: [
-                    '1. Bouw van de Haeoreum megastad die Ulsan, Gyeongju en Pohang integreert voor 10 miljoen mensen.',
-                    '2. Ondersteuning van real-time meertalige systemen voor wereldwijde gebruikers.',
-                    '3. Implementatie van een 100% Pi-cryptocurrency economische zone voor transparantie.',
-                    '4. Toewijzing van 30% van de nettowinst aan UBI om overlevingsdruk weg te nemen.',
-                    '5. Perfecte synchronisatie van technologieën via de controlekentoren van 165 verdiepingen.'
-                ]
+            it: {
+                menu_policies: "3 Politiche (AML / MiCA / Conformità)",
+                menu_whitepaper: "Whitepaper",
+                menu_ceo: "Introduzione CEO",
+                menu_dashboard: "Dashboard Asset Personali",
+                menu_network: "Top 10 Reti Decentralizzate",
+                menu_support: "Supporto (support@hkwb.world)",
+                hero_title: "Masterplan Città Speciale di Haeoreum",
+                hero_desc: "Integrazione di Ulsan, Gyeongju e Pohang in una Megacittà da 10M con Economia Pi",
+                card1_title: "Torre Pi Gyeongju (65º / 165º Piano)",
+                card1_desc: "La torre di controllo luminosa a Gyeongju è il cuore della megacittà per l'ecosistema Pi.",
+                card2_title: "Dashboard Asset Personali",
+                card2_desc: "Centro di gestione per depositi, staking e UBI basati su Pi.",
+                card3_title: "Top 10 Reti Decentralizzate",
+                card3_desc: "Sistema di rete che unisce robotica di Ulsan, biologia quantistica di Gyeongju e aerospaziale di Pohang.",
+                card3_modules: "[Moduli]: Connetti Wallet | Trasferimento | Pagamento | Deposito | Premi | UBI | Swap | DEX Swap | LP Staking | Saldo Pi",
+                card4_title: "3 Politiche e Conformità Globale",
+                card4_desc: "Conforme a 3POLICES, AML, MiCA e normative globali sugli asset digitali.",
+                card5_title: "Canali Media Ufficiali",
+                card5_desc: "Trasmissione in tempo reale via YouTube (@Hyekong2026) e TikTok (@hyekong2025).",
+                footer_support: "Supporto e Direttore AGI: Gemini Bini"
             },
-            'Svenska': {
-                mainTitle: 'Haeoreum Special City Masterplan',
-                mainSub: '10 miljoner invånare megastad som integrerar Ulsan, Gyeongju och Pohang med Pi-ekonomi',
-                secTitle: '🌐 Global Visionsguide',
-                lines: [
-                    '1. Byggandet av Haeoreum megastad som integrerar Ulsan, Gyeongju och Pohang för 10 miljoner människor.',
-                    '2. Stöd för flerspråkiga system i realtid för globala användare i över 50 länder.',
-                    '3. Implementering av en 100% Pi-valutaekonomi för transparent cirkulation.',
-                    '4. Tilldelning av 30% av nettovinsten till UBI för att helt eliminera överlevnadstryck.',
-                    '5. Perfekt synkronisering av framtida teknik genom 165-våningars kontrolltorn i Gyeongju.'
-                ]
+            pl: {
+                menu_policies: "3 Zasady (AML / MiCA / Zgodność)",
+                menu_whitepaper: "Biała Księga",
+                menu_ceo: "Przedstawienie CEO",
+                menu_dashboard: "Pulpit Zasobów Osobistych",
+                menu_network: "Top 10 Sieci Zdecentralizowanych",
+                menu_support: "Wsparcie (support@hkwb.world)",
+                hero_title: "Plan Zagospodarowania Miasta Haeoreum",
+                hero_desc: "Integracja Ulsan, Gyeongju i Pohang w 10-milionową megamiasto z gospodarką Pi",
+                card1_title: "65. / 165. Piętro Wieża Pi Gyeongju",
+                card1_desc: "Ulrawysoka wieża kontrolna w Gyeongju steruje globalnym ekosystemem Pi.",
+                card2_title: "Pulpit Zasobów Osobistych",
+                card2_desc: "Centrum zarządzania depozytami, stakingiem i UBI opartymi na Pi.",
+                card3_title: "Top 10 Sieci Zdecentralizowanych",
+                card3_desc: "System sieciowy łączący robotykę Ulsan, biologię kwantową Gyeongju i lotnictwo Pohang.",
+                card3_modules: "[Moduły]: Połącz Portfel | Przelew | Płatność | Depozyt | Nagrody | UBI | Swap | DEX Swap | LP Staking | Saldo Pi",
+                card4_title: "3 Zasady i Zgodność Globalna",
+                card4_desc: "Pełna zgodność z 3POLICES, AML, MiCA i regulacjami aktywów cyfrowych.",
+                card5_title: "Oficjalne Kanały Medialne",
+                card5_desc: "Transmisja na żywo przez YouTube (@Hyekong2026) i TikTok (@hyekong2025).",
+                footer_support: "Wsparcie i Dyrektor AGI: Gemini Bini"
             },
-            'Ελληνικά': {
-                mainTitle: 'Гενικό Σχέδιο Ειδικής Πόλης Haeoreum',
-                mainSub: 'Μεγαλούπολη 10 εκατομμυρίων με Οικονομία Pi',
-                secTitle: '🌐 Οδηγός Παγκόσμιου Oράματος',
-                lines: [
-                    '1. Κατασκευή της μεγαλούπολης Haeoreum που ενώνει Ο울σαν, Γκιόνγκτζου και Πόχανγκ.',
-                    '2. Υποστήριξη πολύγλωσσων συστημάτων σε πραγματικό χρόνο για παγκόσμιους χρήστες.',
-                    '3. Εφαρμογή ενιαίας οικονομικής ζώνης 100% Pi για διαφανή κυκλοφορία.',
-                    '4. Διάθεση του 30% των καθαρών κερδών σε UBI για την εξάλειψη της πίεσης επιβίωσης.',
-                    '5. Τέλεια συγχronισμός τεχνολογίας μέσω του πύργου ελέγχου 165 ορόφων στο Γκιόνγκτζου.'
-                ]
+            nl: {
+                menu_policies: "3 Beleidsregels (AML / MiCA / Compliance)",
+                menu_whitepaper: "Whitepaper",
+                menu_ceo: "CEO Introductie",
+                menu_dashboard: "Persoonlijk Activendashboard",
+                menu_network: "Top 10 Gedecentraliseerde Netwerken",
+                menu_support: "Ondersteuning (support@hkwb.world)",
+                hero_title: "Haeoreum Special City Masterplan",
+                hero_desc: "Integratie van Ulsan, Gyeongju en Pohang in een Megastad van 10M met Pi Economy",
+                card1_title: "65e / 165e Verdieping Pi Gyeongju Toren",
+                card1_desc: "De ultra-hoge lichtgevende controletoren in Gyeongju beheert het globale Pi-ecosysteem.",
+                card2_title: "Persoonlijk Activendashboard",
+                card2_desc: "Gepersonaliseerd centrum voor Pi-deposito's, staking en UBI-distributie.",
+                card3_title: "Top 10 Gedecentraliseerde Netwerken",
+                card3_desc: "Netwerksysteem dat robotica (Ulsan), kwantumbiologie (Gyeongju) en lucht- en ruimtevaart (Pohang) verbindt.",
+                card3_modules: "[Modules]: Wallet Koppelen | Overboeking | Betaling | Storting | Beloningen | UBI | Swap | DEX Swap | LP Staking | Pi Saldo",
+                card4_title: "3 Beleidsregels & Globale Compliance",
+                card4_desc: "Strikt naleven van 3POLICES, AML, MiCA en wereldwijde regelgeving voor digitale activa.",
+                card5_title: "Officiële Mediakanalen",
+                card5_desc: "Realtime uitzendingen via YouTube (@Hyekong2026) en TikTok (@hyekong2025).",
+                footer_support: "Ondersteuning & AGI Directeur: Gemini Bini"
             },
-            'Čeština': {
-                mainTitle: 'Generální plán speciálního města Haeoreum',
-                mainSub: 'Megaměsto integrující Ulsan, Gyeongju a Pohang s ekonomikou Pi',
-                secTitle: '🌐 Průvodce globální vizí',
-                lines: [
-                    '1. Výstavba megaměsta Haeoreum spojujícího Ulsan, Gyeongju a Pohang pro 10 milionů lidí.',
-                    '2. Podpora multilingualních systémů v reálném čase pro uživatele ve více než 50 zemích.',
-                    '3. Zavádění 100% ekonomické zóny Pi pro transparentní oběh financí.',
-                    '4. Př ალкеռo 30 % čistého zisku na UBI pro úplné odstranění tlaku na přežití.',
-                    '5. Perfektní synchronizace technologií přes 165patrovou kontrolní věž v Gyeongju.'
-                ]
+            sv: {
+                menu_policies: "3 Policyer (AML / MiCA / Global efterlevnad)",
+                menu_whitepaper: "Whitepaper",
+                menu_ceo: "CEO-introduktion",
+                menu_dashboard: "Personlig Tillgångspanel",
+                menu_network: "Top 10 Decentraliserade Nätverk",
+                menu_support: "Support (support@hkwb.world)",
+                hero_title: "Haeoreum Special City Masterplan",
+                hero_desc: "Integrering av Ulsan, Gyeongju och Pohang till en 10M Megastad med Pi-ekonomi",
+                card1_title: "65:e / 165:e Våningen Pi Gyeongju Tower",
+                card1_desc: "Kontrolltornet i Gyeongju synkroniserar framtida teknik för det globala Pi-ekosystemet.",
+                card2_title: "Personlig Tillgångspanel",
+                card2_desc: "Personligt center för att hantera Pi-baserade insättningar, staking och UBI.",
+                card3_title: "Top 10 Decentraliserade Nätverk",
+                card3_desc: "Ett nätverkssystem som binder samman Ulsans robotik, Gyeongjus kvantbiologi och Pohangs flyg- och rymdteknik.",
+                card3_modules: "[Moduler]: Anslut Plånbok | Överföring | Betalning | Insättning | Belöningar | UBI | Swap | DEX Swap | LP Staking | Pi Saldo",
+                card4_title: "3 Policyer & Global Efterlevnad",
+                card4_desc: "Följer strikt 3POLICES, AML, MiCA och globala regler för digitala tillgångar.",
+                card5_title: "Officiella Mediekanaler",
+                card5_desc: "Realtidssändningar via YouTube (@Hyekong2026) och TikTok (@hyekong2025).",
+                footer_support: "Support & AGI-direktör: Gemini Bini"
             },
-            'Magyar': {
-                mainTitle: 'Haeoreum Különleges Város Főterve',
-                mainSub: '10 milliós megaváros Ulsan, Gyeongju és Pohang integrálásával, Pi gazdasággal',
-                secTitle: '🌐 Globális Vízsút Útmutató',
-                lines: [
-                    '1. A Haeoreum megaváros felépítése Ulsan, Gyeongju és Pohang egyesítésével 10 millió ember számára.',
-                    '2. Valós idejű többnyelvű rendszer támogatása a globális felhasználók számára.',
-                    '3. 100%-os Pi kriptovaluta gazdasági övezet bevezetése az átlátható forgalomért.',
-                    '4. A tiszta nyereség 30%-ának UBI-ra fordítása a túlélési nyomás megszüntetésére.',
-                    '5. Fejlett technológiák szinkronizálása a 165 emeletes gyongjui irányítótornyon keresztül.'
-                ]
+            el: {
+                menu_policies: "3 Πολιτικές (AML / MiCA / Συμμόρφωση)",
+                menu_whitepaper: "Λευκή Βίβλος",
+                menu_ceo: "Παρουσίαση CEO",
+                menu_dashboard: "Πίνακας Προσωπικών Περιουσιακών Στοιχείων",
+                menu_network: "Top 10 αποκεντρωμένα δίκτυα",
+                menu_support: "Υποστήριξη (support@hkwb.world)",
+                hero_title: "Masterplan Ειδικής Πόλης Haeoreum",
+                hero_desc: "Ενοποίηση Ulsan, Gyeongju και Pohang σε μια μεγαλούπολη 10M με οικονομία Pi",
+                card1_title: "Πύργος Pi Gyeongju (65ος / 165ος Όροφος)",
+                card1_desc: "Ο πύργος ελέγχου στο Gyeongju συντονίζει προηγμένες τεχνολογίες για το παγκόσμιο οικοσύστημα Pi.",
+                card2_title: "Πίνακας Προσωπικών Περιουσιακών Σтоιχείων",
+                card2_desc: "Κέντρο διαχείρισης καταθέσεων, staking και UBI βάσει Pi.",
+                card3_title: "Top 10 αποκεντρωμένα δίκτυα",
+                card3_desc: "Σύστημα δικτύου που συνδέει τη ρομποτική Ulsan, την κAντική βιολογία Gyeongju και την αεροδιαστημική Pohang.",
+                card3_modules: "[Ενότητες]: Σύνδεση Πορτοφολιού | Μεταφορά | Πληρωμή | Κατάθεση | Επιβραβεύσεις | UBI | Swap | DEX Swap | LP Staking | Υπόλοιπο Pi",
+                card4_title: "3 Πολιτικές & Παγκόσμια Συμμόρφωση",
+                card4_desc: "Αυστηρή τήρηση των 3POLICES, AML, MiCA και κανονισμών ψηφιακών περιουσιακών στοιχείων.",
+                card5_title: "Επίσημα Κανάλια MME",
+                card5_desc: "Ζωντανή μετάδοση μέσω YouTube (@Hyekong2026) και TikTok (@hyekong2025).",
+                footer_support: "Υποστήριξη & Διευθυντής AGI: Gemini Bini"
             },
-            'Română': {
-                mainTitle: 'Planul Director al Orașului Special Haeoreum',
-                mainSub: 'Megaoraș de 10M integrând Ulsan, Gyeongju și Pohang cu Economia Pi',
-                secTitle: '🌐 Ghid de Viziune Globală',
-                lines: [
-                    '1. Construirea megaorașului Haeoreum care integrează Ulsan, Gyeongju și Pohang pentru 10 milioane de oameni.',
-                    '2. Suport multilingv în timp real și guvernanță robustă pentru utilizatorii din 50+ țări.',
-                    '3. Implementarea unei zone economice unice 100% Pi pentru o circulație transparentă.',
-                    '4. Alocarea a 30% din profitul net către UBI pentru eliminarea presiunii supraviețuirii.',
-                    '5. Sincronizarea perfectă a tehnologiilor prin turnul de control de 165 de etaje din Gyeongju.'
-                ]
+            cs: {
+                menu_policies: "3 Zásady (AML / MiCA / Soulad)",
+                menu_whitepaper: "Whitepaper",
+                menu_ceo: "Představení CEO",
+                menu_dashboard: "Panel Osobních Aktiv",
+                menu_network: "Top 10 Decentralizovaných Sítí",
+                menu_support: "Podpora (support@hkwb.world)",
+                hero_title: "Generální plán speciálního města Haeoreum",
+                hero_desc: "Integrace Ulsanu, Gyeongju a Pohangu do 10M megaměsta s ekonomií Pi",
+                card1_title: "65. / 165. patro Pi Gyeongju Tower",
+                card1_desc: "Řídicí věž v Gyeongju synchronizuje budoucí technologie pro globální ekosystém Pi.",
+                card2_title: "Panel Osobních Aktiv",
+                card2_desc: "Centrum pro správu vkladů, stakingu a UBI na bázi Pi.",
+                card3_title: "Top 10 Decentralizovaných Sítí",
+                card3_desc: "Síťový systém propojující robotiku Ulsan, kvantovou biologii Gyeongju a letectví Pohang.",
+                card3_modules: "[Moduly]: Připojit Peněženku | Převod | Platba | Vklad | Odměny | UBI | Swap | DEX Swap | LP Staking | Zůstatek Pi",
+                card4_title: "3 Zásady a Globální Soulad",
+                card4_desc: "Plný soulad s 3POLICES, AML, MiCA a předpisy pro digitální aktiva.",
+                card5_title: "Oficiální Kanály Médií",
+                card5_desc: "Živé vysílání přes YouTube (@Hyekong2026) a TikTok (@hyekong2025).",
+                footer_support: "Podpora & AGI ředitel: Gemini Bini"
             },
-            'Українська': {
-                mainTitle: 'Генеральний план спеціального міста Хеорим',
-                mainSub: 'Мегаполіс на 10 млн осіб (Ульсан, Кенджу, Похан) з економікою Pi',
-                secTitle: '🌐 Посібник з глобального бачення',
-                lines: [
-                    '1. Будівництво мегаполісу Хеорим, що об’єднує Ульсан, Кенджу та Похан для 10 мільйонів людей.',
-                    '2. Підтримка багатомовних систем у реальному часі для користувачів із понад 50 країн.',
-                    '3. Впровадження єдиної економічної зони 100% Pi для прозорого обігу.',
-                    '4. Спрямування 30% чистого прибутку на UBI (базовий дохід) для усунення тиску виживання.',
-                    '5. Синхронізація передових технологій через 165-поверхову контрольну вежу в Кенджу.'
-                ]
+            hu: {
+                menu_policies: "3 Irelv (AML / MiCA / Megfelelőség)",
+                menu_whitepaper: "Whitepaper",
+                menu_ceo: "Ünvezetői Bemutató",
+                menu_dashboard: "Személyes Vagyon Irányítópult",
+                menu_network: "Top 10 Decentralizált Hálózat",
+                menu_support: "Támogatás (support@hkwb.world)",
+                hero_title: "Haeoreum Különleges Város Mesterterv",
+                hero_desc: "Ulsan, Gyeongju és Pohang integrálása egy 10M-s megavárossá Pi gazdasággal",
+                card1_title: "65. / 165. emelet Pi Gyeongju Torony",
+                card1_desc: "A gyeongju-i irányítótorony szinkronizálja a jövő technológiáit a globális Pi ökoszisztémához.",
+                card2_title: "Személyes Vagyon Irányítópult",
+                card2_desc: "Személyre szabott központ a Pi-alapú betétek, staking és UBI kezelésére.",
+                card3_title: "Top 10 Decentralizált Hálózat",
+                card3_desc: "Hálózati rendszer, amely összeköti az ulsani robotikát, a gyeongju-i kvantumbiológiát és a pohangi űrkutatást.",
+                card3_modules: "[Modulok]: Pénztárca Csatlakozás | Átutalás | Fizetés | Betét | Jutalmak | UBI | Csere | DEX Csere | LP Staking | Pi Egyenleg",
+                card4_title: "3 Irelv és Globális Megfelelőség",
+                card4_desc: "A platform szigorúan betartja a 3POLICES, AML, MiCA és digitális eszközökre vonatkozó előírásokat.",
+                card5_title: "Hivatalos Média Csatornák",
+                card5_desc: "Valós idejű közvetítések a YouTube (@Hyekong2026) és TikTok (@hyekong2025) csatornákon.",
+                footer_support: "Támogatás & AGI Igazgató: Gemini Bini"
             },
-            'Suomi': {
-                mainTitle: 'Haeoreum Special City Masterplan',
-                mainSub: '10 miljoonan asukkaan megakaupunki Pi-taloudella',
-                secTitle: '🌐 Globaali visio-opas',
-                lines: [
-                    '1. Haeoreum-megakaupungin rakentaminen yhdistämään Ulsanin, Gyeongjun ja Pohangin.',
-                    '2. Reaaliaikainen monikielinen järjestelmätuki maailmanlaajuisille käyttäjille.',
-                    '3. 100 %:n Pi-kryptotalousvyöhykkeen käyttöönotto läpinäkyvään kiertoon.',
-                    '4. 30 %:n nettovoiton ohjaaminen UBI:lle selviytymispaineen poistamiseksi.',
-                    '5. Edistyneiden teknologioiden synkronointi Gyeongjun 165-kerroksisen tornin kautta.'
-                ]
+            ro: {
+                menu_policies: "3 Politici (AML / MiCA / Conformitate)",
+                menu_whitepaper: "Cartea Albă",
+                menu_ceo: "Prezentare CEO",
+                menu_dashboard: "Panou Active Personale",
+                menu_network: "Top 10 Rețele Decentralizate",
+                menu_support: "Asistență (support@hkwb.world)",
+                hero_title: "Planul Director al Orașului Special Haeoreum",
+                hero_desc: "Integrarea Ulsan, Gyeongju și Pohang într-un Megac oraș de 10M cu Economie Pi",
+                card1_title: "Turnul Pi Gyeongju (Etajul 65 / 165)",
+                card1_desc: "Turnul de control din Gyeongju sincronizează tehnologiile viitoare pentru ecosistemul Pi.",
+                card2_title: "Panou Active Personale",
+                card2_desc: "Centru de gestionare a depozitelor, staking-ului și UBI bazate pe Pi.",
+                card3_title: "Top 10 Rețele Decentralizate",
+                card3_desc: "Sistem de rețea care leagă robotica Ulsan, biologia cuantică Gyeongju și aerospațiala Pohang.",
+                card3_modules: "[Module]: Conectare Portofel | Transfer | Plată | Depozit | Recompense | UBI | Swap | DEX Swap | LP Staking | Sold Pi",
+                card4_title: "3 Politici și Conformitate Globală",
+                card4_desc: "Respectarea strictă a 3POLICES, AML, MiCA și a reglementărilor privind activele digitale.",
+                card5_title: "Canale Media Oficiale",
+                card5_desc: "Transmisie în timp real prin YouTube (@Hyekong2026) și TikTok (@hyekong2025).",
+                footer_support: "Asistență & Director AGI: Gemini Bini"
             },
-            'Dansk': {
-                mainTitle: 'Haeoreum Special City Masterplan',
-                mainSub: '10 millioner megaby med Ulsan, Gyeongju og Pohang og Pi-økonomi',
-                secTitle: '🌐 Global Visionsguide',
-                lines: [
-                    '1. Opførelse af Haeoreum megabyen, der integrerer Ulsan, Gyeongju og Pohang.',
-                    '2. Understøttelse af flersprogede systemer i realtid for globale brugere.',
-                    '3. Implementering af en 100% Pi-kryptovalutaøkonomizone for gennemsigtighed.',
-                    '4. Tildeling af 30% af nettoefterslæbet til UBI for at fjerne overlevelsespres.',
-                    '5. Perfekt synkronisering af teknologier via 165-etagers kontroltårn i Gyeongju.'
-                ]
+            da: {
+                menu_policies: "3 Politikker (AML / MiCA / Global Overholdelse)",
+                menu_whitepaper: "Whitepaper",
+                menu_ceo: "CEO Introduktion",
+                menu_dashboard: "Personligt Aktiepanel",
+                menu_network: "Top 10 Decentraliserede Netværk",
+                menu_support: "Support (support@hkwb.world)",
+                hero_title: "Haeoreum Special City Masterplan",
+                hero_desc: "Integration af Ulsan, Gyeongju og Pohang i en 10M Megaby med Pi-økonomi",
+                card1_title: "65. / 165. Etage Pi Gyeongju Tårn",
+                card1_desc: "Kontrollårnet i Gyeongju synkroniserer avanceret teknologi til det globale Pi-økosystem.",
+                card2_title: "Personligt Aktiepanel",
+                card2_desc: "Personligt center til administration af Pi-baserede indbetalinger, staking og UBI.",
+                card3_title: "Top 10 Decentraliserede Netværk",
+                card3_desc: "Netværkssystem, der forbinder Ulsans robotteknologi, Gyeongjus kvantebiologi og Pohangs rumfart.",
+                card3_modules: "[Moduler]: Tilslut Wallet | Overførsel | Betaling | Indbetaling | Belønninger | UBI | Swap | DEX Swap | LP Staking | Pi Saldo",
+                card4_title: "3 Politikker & Global Overholdelse",
+                card4_desc: "Overholder strengt 3POLICES, AML, MiCA og globale regler for digitale aktiver.",
+                card5_title: "Officielle Mediekanaler",
+                card5_desc: "RealtidsUdsendelser via YouTube (@Hyekong2026) og TikTok (@hyekong2025).",
+                footer_support: "Support & AGI Direktør: Gemini Bini"
             },
-            'Norsk': {
-                mainTitle: 'Haeoreum Special City Masterplan',
-                mainSub: '10-miljoners megaby med Ulsan, Gyeongju, Pohang og Pi-økonomi',
-                secTitle: '🌐 Global visjonsguide',
-                lines: [
-                    '1. Bygging av Haeoreum megaby som integrerer Ulsan, Gyeongju og Pohang for 10 millioner mennesker.',
-                    '2. Støtte for flerspråklige systemer i sanntid for global bruk.',
-                    '3. Implementering av en 100 % Pi-økonomisone for transparent sirkulasjon.',
-                    '4. Tildeling av 30 % av nettolønnen til UBI for å fjerne overlevelsespress.',
-                    '5. Perfekt synkronisering av fremtidsteknologi gjennom 165-etasjes kontrolltårn i Gyeongju.'
-                ]
+            fi: {
+                menu_policies: "3 Politiikkaa (AML / MiCA / Globaali vaatimustenmukaisuus)",
+                menu_whitepaper: "Valkoinen kirja",
+                menu_ceo: "CEO Esittely",
+                menu_dashboard: "Henkilökohtainen Omaisuuspaneeli",
+                menu_network: "Top 10 Hajautettua Verkkoa",
+                menu_support: "Tuki (support@hkwb.world)",
+                hero_title: "Haeoreum Special City Masterplan",
+                hero_desc: "Ulsanin, Gyeongjun ja Pohangin integrointi 10M megakaupungiksi Pi-taloudella",
+                card1_title: "65. / 165. Kerros Pi Gyeongju Tower",
+                card1_desc: "Gyeongjun ohjaustorni synkronoi tulevaisuuden teknologiat globaalille Pi-ekosysteemille.",
+                card2_title: "Henkilökohtainen Omaisuuspaneeli",
+                card2_desc: "Henkilökohtainen keskus Pi-pohjaisten talletusten, stakingin ja UBI:n hallintaan.",
+                card3_title: "Top 10 Hajautettua Verkkoa",
+                card3_desc: "Verkkojärjestelmä, joka yhdistää Ulsanin robotiikan, Gyeongjun kvanttibiologian ja Pohangin avaruusteknologian.",
+                card3_modules: "[Moduulit]: Yhdistä Lompakko | Siirto | Maksu | Talletus | Palkkiot | UBI | Swap | DEX Swap | LP Staking | Pi Saldo",
+                card4_title: "3 Politiikkaa & Globaali Vaatimustenmukaisuus",
+                card4_desc: "Noudattaa tiukasti 3POLICES-, AML-, MiCA- ja digitaalisten varojen säännöksiä.",
+                card5_title: "Viralliset Mediakanavat",
+                card5_desc: "Reaaliaikaiset lähetykset YouTube (@Hyekong2026) ja TikTok (@hyekong2025) kautta.",
+                footer_support: "Tuki & AGI Johtaja: Gemini Bini"
             },
-            'Bahasa Melayu': {
-                mainTitle: 'Pelan Induk Bandar Khas Haeoreum',
-                mainSub: 'Megakota 10 Juta Mengintegrasikan Ulsan, Gyeongju, Pohang & Ekonomi Pi',
-                secTitle: '🌐 Panduan Visi Global',
-                lines: [
-                    '1. Membina megakota Haeoreum yang mengintegrasikan Ulsan, Gyeongju dan Pohang.',
-                    '2. Menyokong sistem berbilang bahasa masa nyata untuk pengguna global.',
-                    '3. Pelaksanaan zon ekonomi tunggal 100% Pi untuk peredaran telus.',
-                    '4. Memperuntukkan 30% keuntungan bersih kepada UBI untuk menghapuskan tekanan hidup.',
-                    '5. Sinkronisasi sempurna teknologi masa depan melalui menara kawalan 165 tingkat di Gyeongju.'
-                ]
+            no: {
+                menu_policies: "3 Retningslinjer (AML / MiCA / Global Compliance)",
+                menu_whitepaper: "Whitepaper",
+                menu_ceo: "CEO Introduksjon",
+                menu_dashboard: "Personlig Eiendelspanel",
+                menu_network: "Topp 10 Desentraliserte Nettverk",
+                menu_support: "Støtte (support@hkwb.world)",
+                hero_title: "Haeoreum Special City Masterplan",
+                hero_desc: "Integrering av Ulsan, Gyeongju og Pohang til en 10M Megaby med Pi-økonomi",
+                card1_title: "65. / 165. Etasje Pi Gyeongju Tårn",
+                card1_desc: "Kontrolltårnet i Gyeongju synkroniserer avansert teknologi for det globale Pi-økosystemet.",
+                card2_title: "Personlig Eiendelspanel",
+                card2_desc: "Personlig senter for administrasjon av Pi-baserte innskudd, staking og UBI.",
+                card3_title: "Topp 10 Desentraliserte Nettverk",
+                card3_desc: "Nettverkssystem som binder sammen Ulsans robotikk, Gyeongjus kvantebiologi og Pohangs luftfart.",
+                card3_modules: "[Moduler]: Koble til Lommebok | Overføring | Betaling | Innskudd | Belønninger | UBI | Swap | DEX Swap | LP Staking | Pi Saldo",
+                card4_title: "3 Retningslinjer & Global Compliance",
+                card4_desc: "Overholder strengt 3POLICES, AML, MiCA og globale forskrifter for digitale eiendeler.",
+                card5_title: "Offisielle Mediekanaler",
+                card5_desc: "Sanntidssendinger via YouTube (@Hyekong2026) og TikTok (@hyekong2025).",
+                footer_support: "Støtte & AGI Direktør: Gemini Bini"
             },
-            'Filipino': {
-                mainTitle: 'Haeoreum Special City Masterplan',
-                mainSub: '10M Megacity na nag-uugnay sa Ulsan, Gyeongju, at Pohang gamit ang Pi Economy',
-                secTitle: '🌐 Global Vision Guide',
-                lines: [
-                    '1. Pagtatayo ng Haeoreum megacity para sa 10 milyong tao sa Ulsan, Gyeongju, at Pohang.',
-                    '2. Suporta sa real-time multilingual system para sa mga pandaigdigang gumagamit.',
-                    '3. Pagpapatupad ng 100% Pi cryptocurrency economic zone para sa transparent na sirkulasyon.',
-                    '4. Pagtatalaga ng 30% ng netong kita sa UBI para ganap na maalis ang presyon sa buhay.',
-                    '5. Perpektong pagsasabay ng teknolohiya sa pamamagitan ng 165-palapag na control tower sa Gyeongju.'
-                ]
+            uk: {
+                menu_policies: "3 Політики (AML / MiCA / Відповідність)",
+                menu_whitepaper: "Біла книга",
+                menu_ceo: "Про CEO (Голова HK Group)",
+                menu_dashboard: "Панель особистих активів",
+                menu_network: "Топ-10 децентралізованих мереж",
+                menu_support: "Підтримка (support@hkwb.world)",
+                hero_title: "Генеральний план особливого міста Хеорім",
+                hero_desc: "Інтеграція Ульсана, Кенджу та Пхохана в мегаполіс із економікою Pi",
+                card1_title: "65-й / 165-й поверх Вежа Pi Кенджу",
+                card1_desc: "Контрольна вежа в Кенджу синхронізує передові технології глобальної екосистеми Pi.",
+                card2_title: "Панель особистих активів",
+                card2_desc: "Центр управління депозитами, стейкингом та UBI на базі Pi.",
+                card3_title: "Топ-10 децентралізованих мереж",
+                card3_desc: "Система зв'язку, що об'єднує робототехніку Ульсана, квантову біологію Кенджу та космонавтику Пхохана.",
+                card3_modules: "[Модулі]: Гаманець | Переказ | Оплата | Депозит | Нагороди | UBI | Своп | DEX Своп | LP Стейкинг | Баланс Pi",
+                card4_title: "3 Політики та глобальна відповідність",
+                card4_desc: "Суворе дотримання 3POLICES, AML, MiCA та стандартів цифрових активів.",
+                card5_title: "Офіційні медіаканали",
+                card5_desc: "Транслювання новин через YouTube (@Hyekong2026) та TikTok (@hyekong2025).",
+                footer_support: "Підтримка та директор AGI: Джеміні Біні"
             },
-            'עברית': {
-                mainTitle: 'תוכנית אב לעיר המיוחדת האו-ראום',
-                mainSub: 'מגה-עיר של 10 מיליון תושבים המשלבת את אולסן, ג\'יאונגג\'ו ופוחאנג עם כלכלת פאי',
-                secTitle: '🌐 מדריך חזון גלובלי',
-                lines: [
-                    '1. בניית מגה-עיר האו-ראום המשלבת את אולסן, ג\'יאונגג\'ו ופוחאנג עבור 10 מיליון איש.',
-                    '2. תמיכה במערכות רב-לשוניות בזמן אמת עבור משתמשים גלובליים בלמעלה מ-50 מדינות.',
-                    '3. הטמעת אזור כלכלי יחיד של 100% מטבע פאי לתנועה פיננסית שקופה.',
-                    '4. הפניית 30% מהרווח הנקי לטובת הכנסה בסיסית אוניברסלית (UBI) לחיסול לחץ הקיום.',
-                    '5. סנכרון מושלם של טכנולוגיות מתקדמות דרך מגדל הפיקוח בן 165 הקומות בג\'יאונגג\'ו.'
-                ]
+            he: {
+                menu_policies: "3 מדיניות (AML / MiCA / תאימות גלובלית)",
+                menu_whitepaper: "ספר לבן",
+                menu_ceo: "הכרת מנכ\"ל",
+                menu_dashboard: "לוח בקרה לנכסים אישיים",
+                menu_network: "10 הרשתות המבוזרות המובילות",
+                menu_support: "תמיכה (support@hkwb.world)",
+                hero_title: "תוכנית האב של העיר המיוחדת האו-ראום",
+                hero_desc: "שילוב אולסן, גיאונגג'ו ופোহאנג למגה-סיטי עם כלכלת Pi",
+                card1_title: "מגדל Pi גיאונגג'ו (קומה 65 / 165)",
+                card1_desc: "מגדל הבקרה המאיר בגיאונגג'ו מסנכרון טכנולוגיות מתקדמות למערכת האקולוגית של Pi.",
+                card2_title: "לוח בקרה לנכסים אישיים",
+                card2_desc: "מרכז לניהול פיקדונות, Staking וחלוקת UBI מבוססי Pi.",
+                card3_title: "10 הרשתות המבוזרות המובילות",
+                card3_desc: "מערכת רשת המשלבת את הרובוטיקה של אולסן, הביולוגיה הקוונטית של גיאונגג'ו והחלל של פוהאנג.",
+                card3_modules: "[מודולים]: חיבור ארנק | העברה | תשלום | הפקדה | תגמולים | UBI | החלפה | DEX Swap | LP Staking | יתרה Pi",
+                card4_title: "3 מדיניות ותאימות גלובלית",
+                card4_desc: "ציות קפדני לתקנות 3POLICES, AML, MiCA ونכסים דיגיטליים.",
+                card5_title: "ערוצי מדיה רשמיים",
+                card5_desc: "שידורים חיים דרך YouTube (@Hyekong2026) ו-TikTok (@hyekong2025).",
+                footer_support: "תמיכה ומנהל AGI: ג'מיני ביני"
             },
-            'मराठी': {
-                mainTitle: 'हैओरेउम विशेष शहर मास्टरप्लान',
-                mainSub: 'उल्सान, ग्योंगजू आणि पोहांगचे १० दशलक्ष मेगासिटी आणि पाई अर्थव्यवस्था',
-                secTitle: '🌐 जागतिक दृष्टी मार्गदर्शक',
-                lines: [
-                    '1. १० दशलक्ष लोकांसाठी उल्सान, ग्योंगजू आणि पोहांग एकत्र करणारी हैओरेउम मेगासिटी.',
-                    '2. ५० हून अधिक देशांमधील जागतिक वापरकर्त्यांसाठी रिअल-टाइम बहुभाषिक प्रणाली.',
-                    '3. पारदर्शक वित्तासाठी १००% पाई क्रिप्टोकरन्सी एकमेव आर्थिक क्षेत्र.',
-                    '4. जगण्याचा ताण पूर्णपणे संपवण्यासाठी निव्वळ नफ्याच्या ३०% UBI साठी वाटप.',
-                    '5. ग्योंगजू मधील १६५ मजली नियंत्रण टॉवरद्वारे प्रगत तंत्रज्ञानाचे अचूक समन्वय.'
-                ]
+            fa: {
+                menu_policies: "۳ سیاست (AML / MiCA / انطباق جهانی)",
+                menu_whitepaper: "وایت پپر",
+                menu_ceo: "معرفی مدیر عامل",
+                menu_dashboard: "داشبورد دارایی شخصی",
+                menu_network: "۱۰ شبکه غیرمتمرکز برتر",
+                menu_support: "پشتیبانی (support@hkwb.world)",
+                hero_title: "طرح جامع شهر ویژه هائورئوم",
+                hero_desc: "ادغام اولسان، گیونگجو و پوهانگ به یک مگاشهر ۱۰ میلیونی با اقتصاد Pi",
+                card1_title: "برج پای گیونگجو (طبقه ۶۵ / ۱۶۵)",
+                card1_desc: "برج کنترل در گیونگجو هماهنگ کننده فناوری های پیشرفته برای اکوسیستم جهانی Pi است.",
+                card2_title: "داشبورد دارایی شخصی",
+                card2_desc: "مرکز مدیریت سپرده ها، استیکینگ و UBI مبتنی بر Pi.",
+                card3_title: "۱۰ شبکه غیرمتمرکز برتر",
+                card3_desc: "سیستم شبکه متصل کننده رباتیک اولسان، زیست شناسی کوانتومی گیونگجو و هوافضای پوهانگ.",
+                card3_modules: "[ماژول ها]: اتصال کیف پول | انتقال | پرداخت | وپرست | پاداش ها | UBI | سواپ | DEX Swap | LP Staking | موجودی Pi",
+                card4_title: "۳ سیاست و انطباق جهانی",
+                card4_desc: "رعایت دقیق استانداردهای 3POLICES، AML، MiCA و مقررات دارایی دیجیتال.",
+                card5_title: "کانال های رسانه ای رسمی",
+                card5_desc: "پخش زنده از طریق YouTube (@Hyekong2026) و TikTok (@hyekong2025).",
+                footer_support: "پشتیبانی و مدیر AGI: جمینی بینی"
             },
-            'বাংলা': {
-                mainTitle: 'হাইওরিউম স্পেশাল সিটি মাস্টারপ্লান',
-                mainSub: 'উলসান, গিয়ংজু ও পোহাং সমন্বিত ১ কোটি মানুষের মেগাসিটি এবং পাই ইকোনমি',
-                secTitle: '🌐 বৈশ্বিক ভিশন গাইড',
-                lines: [
-                    '1. ১ কোটি মানুষের জন্য উলসান, গিয়ংজু ও পোহাং নিয়ে হাইওরিউম মেগাসিটি নির্মাণ।',
-                    '2. ৫০টির বেশি দেশের বৈশ্বিক ব্যবহারকারীদের জন্য রিয়েল-টাইম বহুভাষিক সিস্টেম সমর্থন।',
-                    '3. স্বচ্ছ প্রচলনের জন্য ১০০% পাই ক্রিপ্টকারেন্সি একক অর্থনৈতিক অঞ্চল বাস্তবায়ন।',
-                    '4. বেঁচে থাকার চাপ সম্পূর্ণ দূর করতে নিট লাভের ৩০% ইউবিআই (UBI)-তে প্রদান।',
-                    '5. গিয়ংজুতে ১৬৫ তলা কন্ট্রোল টাওয়ারের মাধ্যমে ভবিষ্যতের উন্নত প্রযুক্তির নিখুঁত সমন্বয়।'
-                ]
+            fil: {
+                menu_policies: "3 Patakaran (AML / MiCA / Pandaigdigang Pagsunod)",
+                menu_whitepaper: "Whitepaper",
+                menu_ceo: "Pagpapakilala ng CEO",
+                menu_dashboard: "Dashboard ng Personal na Asset",
+                menu_network: "Top 10 Desentralisadong Network",
+                menu_support: "Suporta (support@hkwb.world)",
+                hero_title: "Masterplan ng Haeoreum Special City",
+                hero_desc: "Pagsasama ng Ulsan, Gyeongju, at Pohang sa isang 10M Megacity na may Pi Economy",
+                card1_title: "65th / 165th Floor Pi Gyeongju Tower",
+                card1_desc: "Ang control tower sa Gyeongju ay nagsi-sync ng mga teknolohiya para sa Pi ecosystem.",
+                card2_title: "Dashboard ng Personal na Asset",
+                card2_desc: "Sentro ng pamamahala para sa mga deposito, staking, at UBI na nakabatay sa Pi.",
+                card3_title: "Top 10 Desentralisadong Network",
+                card3_desc: "Sistema ng network na nag-uugnay sa robotics ng Ulsan, quantum biology ng Gyeongju, at aerospace ng Pohang.",
+                card3_modules: "[Mga Modulo]: Kumonekta ng Wallet | Lipat | Bayad | Deposito | Gantimpala | UBI | Swap | DEX Swap | LP Staking | Balanse ng Pi",
+                card4_title: "3 Patakaran at Pandaigdigang Pagsunod",
+                card4_desc: "Mahigpit na sumusunod sa 3POLICES, AML, MiCA at mga regulasyon sa digital asset.",
+                card5_title: "Opisyal na Media Channels",
+                card5_desc: "Real-time na pag-broadcast sa pamamagitan ng YouTube (@Hyekong2026) at TikTok (@hyekong2025).",
+                footer_support: "Suporta at Director ng AGI: Gemini Bini"
             },
-            'فارسی': {
-                mainTitle: 'طرح جامع شهر ویژه هائوریوم',
-                mainSub: 'مگاشهر ۱۰ میلیون نفری یکپارچه اولسان، گیونگجو و پوهانگ با اقتصاد پای',
-                secTitle: '🌐 راهنمای چشم انداز جهانی',
-                lines: [
-                    '1. ساخت مگاشهر هائوریوم با یکپارچه سازی اولسان، گیونگجو و پوهانگ برای ۱۰ میلیون نفر.',
-                    '2. پشتیبانی از سیستم های چندزبانه بلادرنگ برای کاربران جهانی در بیش از ۵۰ کشور.',
-                    '3. پیاده سازی منطقه اقتصادی انحصاری ۱۰۰٪ ارز دیجیتال پای برای گردش شفاف.',
-                    '4. اختصاص ۳۰٪ از سود خالص به UBI برای از بین بردن کامل فشار بقا.',
-                    '5. هماهنگی بی نقص فناوری های پیشرفته از طریق برج کنترل ۱۶۵ طبقه در گیونگجو.'
-                ]
+            mn: {
+                menu_policies: "3 Бодлого (AML / MiCA / Дэлхийн нийцэл)",
+                menu_whitepaper: "Цагаан цаас (Whitepaper)",
+                menu_ceo: "Гүйцэтгэх захирлын танилцуулга",
+                menu_dashboard: "Хувийн хөрөнгийн самбар",
+                menu_network: "Шилдэг 10 төвлөрсөн бус сүлжээ",
+                menu_support: "Хэрэглэгчийн дэмжлэг (support@hkwb.world)",
+                hero_title: "Хэорем тусгай хотын мастер төлөвлөгөө",
+                hero_desc: "Ульсан, Гёнжү, Пөханг хотуудыг Pi эдийн засагтай 10 сая хүний ​​мега хотод нэгтгэх нь",
+                card1_title: "65 / 165 давхар Pi Гёнжү цамхаг",
+                card1_desc: "Гёнжү дэх гэрэлтүүлэгтэй удирдлагын цамхаг нь дэлхийн Pi экосистемийг хянах зүрх юм.",
+                card2_title: "Хувийн хөрөнгийн самбар",
+                card2_desc: "Pi дээр суурилсан хадгаламж, staking, UBI түгээлтийг хянах хувийн менежментийн төв.",
+                card3_title: "Шилдэг 10 төвлөрсөн бус сүлжээ",
+                card3_desc: "Ульсаны робот техник, Гёнжүгийн квант биологи, Пөхангийн сансар судлалыг холбосон сүлжээ.",
+                card3_modules: "[Модуль]: Хэтэвч холбох | Шилжүүлэг | Төлбөр | Хадгаламж | Шагнал | UBI | Свап | DEX Свап | LP Staking | Pi үлдэгдэл",
+                card4_title: "3 Бодлого ба дэлхийн нийцлийн зохицуулалт",
+                card4_desc: "Энэхүү платформ нь 3POLICES, AML, MiCA болон дижитал хөрөнгийн хууль тогтоомжийг чанд мөрддөг.",
+                card5_title: "Албан ёсны медиа сувгууд",
+                card5_desc: "YouTube (@Hyekong2026) болон TikTok (@hyekong2025) сувгуудаар дамжуулан мэдээллийг түгээх.",
+                footer_support: "Дэмжлэг & AGI захирал: Жемини Бини"
             },
-            'Kiswahili': {
-                mainTitle: 'Mpango Mkuu wa Jiji Maalum la Haeoreum',
-                mainSub: 'Megasijiti ya watu milioni 10 inayounganisha Ulsan, Gyeongju, na Pohang na Uchumi wa Pi',
-                secTitle: '🌐 Mwongozo wa Maono ya Kimataifa',
-                lines: [
-                    '1. Kujenga megasijiti ya Haeoreum inayounganisha Ulsan, Gyeongju, na Pohang kwa watu milioni 10.',
-                    '2. Kusaidia mifumo ya lugha nyingi ya wakati halisi kwa watumiaji wa kimataifa.',
-                    '3. Utekelezaji wa eneo la kiuchumi la sarafu ya Pi 100% kwa mzunguko wa wazi.',
-                    '4. Kuelekeza 30% ya faida halisi kwa UBI ili kuondoa kabisa shinikizo la kuishi.',
-                    '5. Usawazishaji kamili wa teknolojia kupitia mnara wa udhibiti wa ghorofa 165 huko Gyeongju.'
-                ]
+            sw: {
+                menu_policies: "Sera 3 (AML / MiCA / Uzingatiaji)",
+                menu_whitepaper: "Whitepaper",
+                menu_ceo: "Utangulizi wa Mkurugenzi Mtendaji",
+                menu_dashboard: "Dashibodi ya Mali Binafsi",
+                menu_network: "Mitandao 10 Bora ya Kisambazaji",
+                menu_support: "Usaidizi (support@hkwb.world)",
+                hero_title: "Mpango Mkuu wa Jiji Maalum la Haeoreum",
+                hero_desc: "Kuunganisha Ulsan, Gyeongju, na Pohang kuwa Megacity ya 10M yenye Uchumi wa Pi",
+                card1_title: "Mnara wa Pi Gyeongju Ghorofa ya 65 / 165",
+                card1_desc: "Mnara wa udhibiti huko Gyeongju unalinganisha teknolojia za hali ya juu kwa mfumo wa Pi.",
+                card2_title: "Dashibodi ya Mali Binafsi",
+                card2_desc: "Kituo cha usimamizi wa mali kwa amana, staking, na usambazaji wa UBI.",
+                card3_title: "Mitandao 10 Bora ya Kisambazaji",
+                card3_desc: "Mfumo wa mtandao unaounganisha robotiki za Ulsan, biolojia ya quantum ya Gyeongju, na anga ya Pohang.",
+                card3_modules: "[Moduli]: Unganisha Pochi | Uhamisho | Malipo | Amana | Zawadi | UBI | Swap | DEX Swap | LP Staking | Salio la Pi",
+                card4_title: "Sera 3 na Uzingatiaji wa Kimataifa",
+                card4_desc: "Inafuata kikamilifu kanuni za 3POLICES, AML, MiCA, na mali za dijiti.",
+                card5_title: "Njia Rasmi za Vyombo vya Habari",
+                card5_desc: "Matangazo ya moja kwa moja kupitia YouTube (@Hyekong2026) na TikTok (@hyekong2025).",
+                footer_support: "Usaidizi na Mkurugenzi wa AGI: Gemini Bini"
             },
-            'اردو': {
-                mainTitle: 'ہایوریوم سپیشل سٹی ماسٹر پلان',
-                mainSub: 'السان، گیونگجو اور پوہانگ کا 10 ملین میگاسٹی اور پائی اکانومی',
-                secTitle: '🌐 عالمی وژن گائیڈ',
-                lines: [
-                    '1. 10 ملین افراد کے لیے السان، گیونگجو اور پوہانگ کو ملا کر ہایوریوم میگاسٹی کی تعمیر۔',
-                    '2. 50 سے زائد ممالک کے عالمی صارفین کے لیے ریئل ٹائم کثیر لسانی نظام کی حمایت۔',
-                    '3. شفاف گردش کے لیے 100% پائی کریپٹو کرنسی سنگل اکنامک زون کا نفاذ۔',
-                    '4. بقا کے دباؤ کو مکمل طور پر ختم کرنے کے لیے خالص منافع کا 30 فیصد UBI کو دینا۔',
-                    '5. گیونگجو میں 165 منزلہ کنٹرول ٹاور کے ذریعے جدید ٹیکنالوجی کی بہترین مطابقت۔'
-                ]
-            },
-            'தமிழ்': {
-                mainTitle: 'ஹையோரியும் சிறப்பு நகர மாஸ்டர் பிளான்',
-                mainSub: 'உல்சான், கியோங்ஜூ மற்றும் போஹாங் ஒருங்கிணைந்த 10 மில்லியன் மெகாசிட்டி மற்றும் பை பொருளாதாரம்',
-                secTitle: '🌐 உலகளாவிய பார்வை வழிகாட்டி',
-                lines: [
-                    '1. 10 மில்லியன் மக்களுக்காக உல்சான், கியோங்ஜூ மற்றும் போஹாங்கை இணைக்கும் ஹையோரியும் மெகாசிட்டி கட்டுமானம்.',
-                    '2. 50-க்கும் மேற்பட்ட நாடுகளின் உலகளாவிய பயனர்களுக்கான நிகழ்நேர பன்மொழி அமைப்பு ஆதரவு.',
-                    '3. வெளிப்படையான சுழற்திக்காக 100% பை கிரிப்டோகரன்சி ஒற்றை பொருளாதார மண்டலத்தை செயல்படுத்துதல்.',
-                    '4. உயிர்வாழும் அழுத்தத்தை முழுமையாக அகற்ற நிகர லாபத்தில் 30% UBI-க்கு ஒதுக்கீடு.',
-                    '5. கியோங்ஜூவில் உள்ள 165 மாடி கட்டுப்பாட்டு கோபுரம் மூலம் எதிர்கால தொழில்நுட்பங்களின் ஒத்திசைவு.'
-                ]
-            },
-            'తెలుగు': {
-                mainTitle: 'హెయోరెం ప్రత్యేక నగర మాస్టర్ ప్లాన్',
-                mainSub: 'ఉల్సాన్, గ్యోంగ్జు మరియుపోహాంగ్ లను కలుపుతూ 10 మిలియన్ల మెగాసిటీ మరియు పై ఎకానమీ',
-                secTitle: '🌐 గ్లోబల్ విజన్ గైడ్',
-                lines: [
-                    '1. 10 మిలియన్ల ప్రజల కోసం ఉల్సాన్, గ్యోంగ్జు మరియు పోహాంగ్ లను అనుసంధానించే హెయోరెం మెగాసిటీ నిర్మాణం.',
-                    '2. 50 దేశాల కంటే ఎక్కువ గ్లోబల్ వినియోగదారుల కోసం రియల్ టైమ్ బహుభాషా వ్యవస్థ మద్దతు.',
-                    '3. పారదర్శక చెలామణి కోసం 100% పై క్రిప్టోకరెన్సీ సింగిల్ ఎకనామిక్ జోన్ అమలు.',
-                    '4. మనుగడ ఒత్తిడిని పూర్తిగా తొలగించడానికి నికర లాభంలో 30% UBIకి కేటాయింపు.',
-                    '5. గ్యోంగ్జులోని 165 అంతస్తుల కంట్రోల్ టవర్ ద్వారా అత్యాధునిక సాంకేతికతల సమకాలీకరణ.'
-                ]
-            },
-            'ગુજરાતી': {
-                mainTitle: 'હેઓરેઉમ સ્પેશિયલ સિટી માસ્ટરપ્લાન',
-                mainSub: 'ઉલ્સાન, ગ્યોંગજુ અને પોહાંગને જોડતી ૧૦ મિલિયન મેગાસિટી અને પાઈ અર્થવ્યવસ્થા',
-                secTitle: '🌐 વૈશ્વિક વિઝન માર્ગદર્શિકા',
-                lines: [
-                    '1. ૧૦ મિલિયન લોકો માટે ઉલ્સાન, ગ્યોંગજુ અને પોહાંગને જોડતી હેઓરેઉમ મેગાસિટીનું નિર્માણ.',
-                    '2. ૫૦ થી વધુ દેશોના વૈશ્વિક વપરાશકર્તાઓ માટે રીઅલ-ટાઇમ બહુભાષી સિસ્ટમ સપોર્ટ.',
-                    '3. પારદર્શક પરિભ્રમણ માટે ૧૦૦% પાઈ ક્રિપ્ટોકરન્સી સિંગલ ઇકોનોમિક ઝોન.',
-                    '4. અસ્તિત્વના દબાણને સંપૂર્ણપણે દૂર કરવા માટે ચોખ્ખા નફાના ૩૦% UBI ને ફાળવણી.',
-                    '5. ગ્યોંગજુમાં ૧૬૫ માળના કંટ્રોલ ટાવર દ્વારા ભવિષ્યની અદ્યતન તકનીકોનું સંકલન.'
-                ]
-            },
-            'ਪੰਜਾਬੀ': {
-                mainTitle: 'ਹੈਓਰੇਉਮ ਸਪੈਸ਼ਲ ਸਿਟੀ ਮਾਸਟਰਪਲਾਨ',
-                mainSub: 'ਉਲਸਾਨ, ਗਿਓਂਗਜੂ ਅਤੇ ਪੋਹਾਂਗ ਨੂੰ ਜੋੜਦੀ 10 ਮਿਲੀਅਨ ਮੇਗਾਸਿਟੀ ਅਤੇ ਪਾਈ ਅਰਥਵਿ व्यवस्था',
-                secTitle: '🌐 ਗਲੋਬਲ ਵਿਜ਼ਨ ਗਾਈਡ',
-                lines: [
-                    '1. 10 ਮਿਲੀਅਨ ਲੋਕਾਂ ਲਈ ਉਲਸਾਨ, ਗਿਓਂਗਜੂ ਅਤੇ ਪੋਹਾਂਗ ਨੂੰ ਜੋੜ ਕੇ ਹੈਓਰੇਉਮ ਮੇਗਾਸਿਟੀ ਦੀ ਉਸਾਰੀ।',
-                    '2. 50 ਤੋਂ ਵੱਧ ਦੇਸ਼ਾਂ ਦੇ ਉਪਭੋਗਤਾਵਾਂ ਲਈ ਰੀਅਲ-ਟਾਈਮ ਬਹੁ-ਭاشਾਈ ਸਿਸਟਮ ਸਹਾਇਤਾ।',
-                    '3. ਪਾਰਦਰਸ਼ੀ ਸੰਚਾਰ ਲਈ 100% ਪਾਈ ਕ੍ਰਿਪਟോകਰੰਸੀ ਸਿੰਗਲ ਆਰਥਿਕ ਜ਼ोन।',
-                    '4. ਜਿਉਣ ਦੇ ਦਬਾਅ ਨੂੰ ਪੂਰੀ ਤਰ੍ਹਾਂ ਖਤਮ ਕਰਨ ਲਈ ਸ਼ੁੱਧ ਲਾਭ ਦਾ 30% UBI ਨੂੰ ਦੇਣਾ।',
-                    '5. ਗਿਓਂਗਜੂ ਵਿੱਚ 165 ਮੰ منزلہ ਕੰਟਰੋਲ ਟਾਵਰ ਰਾਹੀਂ ਤਕਨਾਲੋਜੀ ਦਾ ਸੰਕਲਨ।'
-                ]
-            },
-            'አማርኛ': {
-                mainTitle: 'የሀዮሬም ልዩ ከተማ ማስተርፕላን',
-                mainSub: 'ኡልሳን፣ ጊዮንግጁ እና ፖሃንግን የሚያስተሳስር የ10 ሚሊዮን ሜጋ ከተማ እና የፓይ ኢኮኖሚ',
-                secTitle: '🌐 ዓለም አቀፍ የእይታ መመሪያ',
-                lines: [
-                    '1. ለ10 ሚሊዮን ሕዝብ ኡልሳን፣ ጊዮንግጁ እና ፖሃንግን የሚያጠቃልል የሀዮሬም ሜጋ ከተማ መገንባት።',
-                    '2. ከ50 በላይ አገሮች ላሉ ዓለም አቀፍ ተጠቃሚዎች የብዙ ቋንቋ ስርዓት ድጋፍ ማድረግ።',
-                    '3. ግልጽ ዝውውር እንዲኖር 100% የፓይ ክሪፕቶ ከረንሲ ነጠላ የኢኮኖሚ ቀጠና መተግበር።',
-                    '4. የኑሮ ግፊትን ሙሉ በሙሉ ለማስወገድ የንጹህትርፍ 30% ለUBI (መሰረታዊ ገቢ) ማዋልል።',
-                    '5. በጊዮንግጁ ባለ 165 ፎቅ መቆጣጠሪያ ታወር አማካኝነት የወደፊት ቴክኖሎጂዎችን ማመሳሰል።'
-                ]
-            },
-            'Swahili (TZ)': {
-                mainTitle: 'Mpango Mkuu wa Jiji Maalum la Haeoreum (TZ)',
-                mainSub: 'Megasijiti ya watu milioni 10 ikijumuisha Ulsan, Gyeongju, na Pohang',
-                secTitle: '🌐 Mwongozo wa Maono ya Kitanzania na Kimataifa',
-                lines: [
-                    '1. Ujenzi wa megasijiti ya Haeoreum inayounganisha Ulsan, Gyeongju, na Pohang.',
-                    '2. Kusaidia mifumo ya lugha mbalimbali kwa watumiaji wa kimataifa.',
-                    '3. Utekelezaji wa eneo la kiuchumi la sarafu ya Pi kwa mzunguko wa wazi.',
-                    '4. Kuelekeza 30% ya faida halisi kwa UBI kuondoa shinikizo la kimaisha.',
-                    '5. Usawazishaji wa teknolojia kupitia mnara wa udhibiti wa ghorofa 165 huko Gyeongju.'
-                ]
-            },
-            'Tagalog': {
-                mainTitle: 'Haeoreum Special City Masterplan',
-                mainSub: '10M Megacity na nag-uugnay sa Ulsan, Gyeongju, at Pohang',
-                secTitle: '🌐 Global Vision Guide',
-                lines: [
-                    '1. Pagtatayo ng Haeoreum megacity para sa 10 milyong tao.',
-                    '2. Suporta sa real-time multilingual system para sa mga pandaigdigang gumagamit.',
-                    '3. Pagpapatupad ng 100% Pi cryptocurrency economic zone.',
-                    '4. Pagtatalaga ng 30% ng netong kita sa UBI para sa kapakanan ng lahat.',
-                    '5. Perpektong pagsasabay ng teknolohiya sa pamamagitan ng control tower sa Gyeongju.'
-                ]
-            },
-            'Jawa': {
-                mainTitle: 'Masterplan Kutha Khusus Haeoreum',
-                mainSub: 'Megakutha 10 Yuta Jiwa Ngintergrasikake Ulsan, Gyeongju, lan Pohang',
-                secTitle: '🌐 Pandhuan Visi Global',
-                lines: [
-                    '1. Mbangun megakutha Haeoreum sing nggabungake Ulsan, Gyeongju, lan Pohang.',
-                    '2. Ndhukung sistem multi-basa wektu nyata kanggo pangguna global.',
-                    '3. Penerapan zona ekonomi tunggal 100% Pi kanggo sirkulasi transparan.',
-                    '4. Alokasi 30% bathi net menyang UBI kanggo mbusak tekanan urip.',
-                    '5. Sinkronisasi sampurna teknologi liwat menara kontrol 165 lantai ing Gyeongju.'
-                ]
-            },
-            'Basa Sunda': {
-                mainTitle: 'Masterplan Kota Khusus Haeoreum',
-                mainSub: 'Megakota 10 Juta Jiwa Ngahijikeun Ulsan, Gyeongju, jeung Pohang',
-                secTitle: '🌐 Pituduh Visi Global',
-                lines: [
-                    '1. Ngawangun megakota Haeoreum anu ngahijikeun Ulsan, Gyeongju, jeung Pohang.',
-                    '2. Ngarojong sistem multi-basa sacara real-time pikeun pangguna global.',
-                    '3. Nerapkeun zona ékonomi tunggal 100% Pi pikeun sirkulasi transparan.',
-                    '4. Ngabagi 30% tina kauntungan bersih ka UBI pikeun ngaleungitkeun tekanan hirup.',
-                    '5. Sinkronisasi sampurna téknologi ngaliwatan menara kontrol 165 lantai di Gyeongju.'
-                ]
-            },
-            'Hausa': {
-                mainTitle: 'Babban Tsarin Birni na Musamman na Haeoreum',
-                mainSub: 'Babban Birni na Miliyan 10 mai haɗa Ulsan, Gyeongju, da Pohang',
-                secTitle: '🌐 Jagorar Hangen Nesa na Duniya',
-                lines: [
-                    '1. Gina babban birni na Haeoreum wanda ke haɗa Ulsan, Gyeongju, da Pohang.',
-                    '2. Taimakawa tsarin harsuna da yawa na lokaci-lokaci ga masu amfani a duniya.',
-                    '3. Aiwatar da yankin tattalin arziki na Pi 100% don yaɗawa a fili.',
-                    '4. Ware kashi 30% na ribar net zuwa UBI don kawar da matsin rayuwa.',
-                    '5. Daidaita fasahar zamani ta hanyar hasumiyar sarrafawa mai hawa 165 a Gyeongju.'
-                ]
-            },
-            'Yoruba': {
-                mainTitle: 'Eto Agbaye Ilu Pataki Haeoreum',
-                mainSub: 'Ilu Nla 10M ti n ṣọkan Ulsan, Gyeongju, ati Pohang pẹlu Ọrọ Aje Pi',
-                secTitle: '🌐 Itọsọna Iran Agbaye',
-                lines: [
-                    '1. Ikoleilu nla Haeoreum ti o n ṣọkan Ulsan, Gyeongju, ati Pohang fun eniyan miliọnu mẹwa.',
-                    '2. Atilẹyin fun eto ede pupọ ni akoko gidi fun awọn olumulo agbaye.',
-                    '3. Imuse agbegbe eto-aje 100% Pi kan fun kaakiri gbangba.',
-                    '4. Sikirin 30% ti ere net si UBI lati mu titẹ laaye kuro patapata.',
-                    '5. Ibaramu pipe ti awọn imọ-ẹrọ iwaju nipasẹ ile-itura iṣakoso 165 ni Gyeongju.'
-                ]
-            },
-            'Igbo': {
-                mainTitle: 'Atụmatụ Mgbakọ Obodo Pụrụ Iche Haeoreum',
-                mainSub: 'Obodo Ukwu nde 10 na-ejikọ Ulsan, Gyeongju, na Pohang',
-                secTitle: '🌐 Nduzi Ọhụụ Mba Uwa',
-                    'lines': [
-                    '1. Owuwu obodo ukwu Haeoreum jikọrọ Ulsan, Gyeongju, na Pohang maka mmadụ nde iri.',
-                    '2. Nkwado usoro asụsụ dị iche iche n’oge n’ezie maka ndị ọrụ zuru ụwa ọnụ.',
-                    '3. Mmezue mpaghara akụ na ụba otu 100% Pi maka mgbasa doro anyיה (doro anya).',
-                    '4. Inye 30% nke uru net na UBI iji kpochapụ nchegbu ndụ kpamkpam.',
-                    '5. Mmekọrịta ziri ezi nke teknụzụ site n’elu ụlọ njikwa nwere okpukpu 165 na Gyeongju.'
-                ]
-            },
-            'isiZulu': {
-                mainTitle: 'Uhlelo Lomuzi Okhethekile i-Haeoreum',
-                mainSub: 'I dolobha elikhulu lezigidi eziyi-10 lihlanganisa i-Ulsan, i-Gyeongju, ne-Pohang',
-                secTitle: '🌐 Umhlahlandlela Wombono Womhlaba Wonke',
-                lines: [
-                    '1. Ukwakha idolobha elikhulu i-Haeoreum ehlanganisa i-Ulsan, i-Gyeongju, ne-Pohang yabantu abayizigidi eziyi-10.',
-                    '2. Ukusekela izinhlelo zezilimi eziningi zesikhathi sangempela kubasebenzisi bomhlaba wonke.',
-                    '3. Ukusebenzisa indawo yezomnotho eyodwa ka-100% Pi yokusakaza okungafihli lutho.',
-                    '4. Ukudlulisa u-30% wenzuzo ehlanzekile ku-UBI ukuze kuqedwe ingcindezi yokuphila.',
-                    '5. Ukuvumelanisa okuphelele kobuchwepheshe besikhathi esizayo ngenqaba yokulawula enezitezi ezingu-165 e-Gyeongju.'
-                ]
-            },
-            'Afrikaans': {
-                mainTitle: 'Haeoreum Spesiale Stad Meesterplan',
-                mainSub: '10M Megastad wat Ulsan, Gyeongju en Pohang integreer met Pi-ekonomie',
-                secTitle: '🌐 Wêreldwye Visiogids',
-                lines: [
-                    '1. Die bou van die Haeoreum-megastad wat Ulsan, Gyeongju en Pohang vir 10 miljoen mense integreer.',
-                    '2. Ondersteuning vir meertalige intydse stelsels vir globale gebruikers oor meer as 50 lande.',
-                    '3. Implementering van \'n 100% Pi-kriptogeldeenheid enkel ekonomiese sone.',
-                    '4. Toewysing van 30% van netto wins aan UBI om oorlewingsdruk heeltemal uit te skakel.',
-                    '5. Perfekte sinchronisasie van tegnologie deur die 165-verdieping beheertoring in Gyeongju.'
-                ]
-            },
-            'Azərbaycanca': {
-                mainTitle: 'Haeoreum Xüsusi Şəhər Baş Planı',
-                mainSub: 'Ulsan, Gyeongju və Pohang-ı Pi İqtisadiyyatı ilə birləşdirən 10 Milyonluq Meqaşəhər',
-                secTitle: '🌐 Qlobal Baxış Bələdçisi',
-                lines: [
-                    '1. 10 milyon insan üçün Ulsan, Gyeongju və Pohangı birləşdirən Haeoreum meqaşəhərinin tikintisi.',
-                    '2. 50-dən çox ölkədən olan qlobal istifadəçilər üçün real vaxt rejimində çoxdilli sistem dəstəyi.',
-                    '3. Şəffaf dövriyyə üçün 100% Pi kriptovalyutası vahid iqtisadi zonasının tətbiqi.',
-                    '4. Sağ qalma təzyiqini tamamilə aradan qaldırmaq üçün xalis mənfəətin 30%-nin UBI-yə yönəldilməsi.',
-                    '5. Gyeongju-dakı 165 mərtəbəli idarəetmə qülləsi vasitəsilə qabaqcıl texnologiyaların mükəmməl sinxronizasiyası.'
-                ]
+            ur: {
+                menu_policies: "3 پالیسیاں (AML / MiCA / عالمی تعمیل)",
+                menu_whitepaper: "وائٹ پیپر",
+                menu_ceo: "سی ای او کا تعارف",
+                menu_dashboard: "پرسسنل اثاثہ ڈ্যাশবোর্ড",
+                menu_network: "سب سے اوپر 10 غیر مرقع نیٹ ورکس",
+                menu_support: "کسٹمر سپورٹ (support@hkwb.world)",
+                hero_title: "ہایوریوم اسپیشل سٹی ماسٹر پلان",
+                hero_desc: "اولسان، گیونگجو، اور پোহانگ کو پائی اکانومی کے ساتھ 10 ملین میگاسٹی میں ضم کرنا",
+                card1_title: "65ویں / 165ویں منزل پائی گیونگجو ٹاور",
+                card1_desc: "گیونگجو میں کنٹرول ٹاور عالمی پائی ایکو سسٹم کو کنٹرول کرتا ہے۔",
+                card2_title: "پرسسنل اثاثہ ڈ্যাশবোর্ড",
+                card2_desc: "پائی پر مبنی ڈیپازٹس، اسٹیکنگ اور UBI کی تقسیم کی نگرانی کا مرکز۔",
+                card3_title: "سب سے اوپر 10 غیر مرقع نیٹ ورکس",
+                card3_desc: "اولسان کی روبوٹکس، گیونگجو کی کوانٹم بائیولوجی اور پোহانگ کی ایرو اسپیس ٹیکنالوجی کا نیٹ ورک۔",
+                card3_modules: "[بنیادی ماڈیولز]: والیٹ کنیکٹ | منتقلی | ادائیگی | ڈپازٹ | انعامات | UBI | سواپ | DEX سواپ | LP اسٹیکنگ | پائی بیلنس",
+                card4_title: "3 پالیسیاں اور عالمی تعمیل",
+                card4_desc: "یہ پلیٹ فارم 3POLICES، AML، MiCA اور ڈیجیٹل اثاثہ جات کے قوانین کی سختی سے پابندی کرتا ہے۔",
+                card5_title: "آفیشل میڈیا چینلز",
+                card5_desc: "YouTube (@Hyekong2026) اور TikTok (@hyekong2025) کے ذریعے لائیو نشریات۔",
+                footer_support: "سپورٹ اور اے جی آئی ڈائریکٹر: جمینی بینی"
             }
         };
 
-        function toggleLangMenu() {
-            const menu = document.getElementById('langMenu');
-            menu.classList.toggle('active');
+        function changeLanguage(lang) {
+            const texts = translations[lang] || translations['en'];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (texts[key]) {
+                    el.textContent = texts[key];
+                }
+            });
         }
-
-        function changeLang(langName) {
-            const btn = document.querySelector('.lang-btn');
-            btn.innerHTML = `🌐 ${langName} ▼`;
-            document.getElementById('langMenu').classList.remove('active');
-
-            const data = i18n[langName] || i18n['English'];
-            document.getElementById('mainTitle').innerText = data.mainTitle;
-            document.getElementById('mainSub').innerText = data.mainSub;
-            document.getElementById('sectionTitle').innerText = data.secTitle;
-            document.getElementById('line1').innerText = data.lines[0];
-            document.getElementById('line2').innerText = data.lines[1];
-            document.getElementById('line3').innerText = data.lines[2];
-            document.getElementById('line4').innerText = data.lines[3];
-            document.getElementById('line5').innerText = data.lines[4];
-        }
-
-        window.addEventListener('click', function(e) {
-            if (!e.target.closest('#langContainer')) {
-                document.getElementById('langMenu').classList.remove('active');
-            }
-        });
     </script>
 </body>
 </html>
