@@ -12,15 +12,14 @@
             --accent-color: #48cae4;
             --gold-color: #ffb703;
             --border-color: #3a506b;
+            --glow-color: #00f5d4;
         }
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
@@ -28,104 +27,79 @@
             display: flex;
             flex-direction: column;
         }
-
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 30px;
-            background-color: rgba(28, 37, 65, 0.9);
+            background-color: rgba(28, 37, 65, 0.95);
             border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 2000;
             backdrop-filter: blur(10px);
         }
-
-        .nav-left {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .menu-container, .lang-dropdown-container {
-            position: relative;
-        }
-
-        .menu-btn, .lang-btn {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 8px 14px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .menu-btn:hover, .lang-btn:hover {
-            background-color: rgba(72, 202, 228, 0.1);
-        }
-
-        .dropdown-menu, .lang-menu {
-            position: absolute;
-            top: 120%;
-            left: 0;
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-            display: none;
-            flex-direction: column;
-            min-width: 180px;
-            max-height: 350px;
-            overflow-y: auto;
-            z-index: 1001;
-        }
-
-        .lang-menu {
-            left: auto;
-            right: 0;
-            min-width: 160px;
-        }
-
-        .dropdown-menu.active, .lang-menu.active {
-            display: flex;
-        }
-
-        .dropdown-menu a, .lang-menu button {
-            color: var(--text-color);
-            padding: 10px 16px;
-            text-decoration: none;
-            font-size: 13px;
-            border: none;
-            border-bottom: 1px solid rgba(58, 80, 107, 0.3);
-            background: none;
-            text-align: left;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        .dropdown-menu a:last-child, .lang-menu button:last-child {
-            border-bottom: none;
-        }
-
-        .dropdown-menu a:hover, .lang-menu button:hover {
-            background-color: var(--accent-color);
-            color: var(--bg-color);
-        }
-
         .logo-area {
             font-weight: 700;
             font-size: 18px;
             color: var(--gold-color);
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            text-shadow: 0 0 10px rgba(255, 183, 3, 0.4);
         }
-
+        .lang-container {
+            position: relative;
+        }
+        .lang-btn {
+            background: var(--card-bg);
+            color: var(--gold-color);
+            border: 1px solid var(--gold-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(255, 183, 3, 0.2);
+            transition: all 0.3s ease;
+        }
+        .lang-btn:hover {
+            background-color: rgba(255, 183, 3, 0.15);
+            box-shadow: 0 0 15px var(--gold-color);
+        }
+        .lang-menu {
+            position: absolute;
+            top: 120%;
+            right: 0;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            width: 220px;
+            height: 380px;
+            overflow-y: auto;
+            display: none;
+            flex-direction: column;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+            z-index: 2001;
+        }
+        .lang-menu.active {
+            display: flex;
+        }
+        .lang-menu button {
+            background: none;
+            border: none;
+            border-bottom: 1px solid rgba(58, 80, 107, 0.3);
+            color: var(--text-color);
+            padding: 10px 14px;
+            text-align: left;
+            cursor: pointer;
+            font-size: 13px;
+            width: 100%;
+        }
+        .lang-menu button:last-child {
+            border-bottom: none;
+        }
+        .lang-menu button:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+        }
         main {
             flex: 1;
             max-width: 1200px;
@@ -133,45 +107,56 @@
             margin: 0 auto;
             padding: 40px 20px;
         }
-
         .hero-section {
             text-align: center;
             margin-bottom: 40px;
         }
-
         .hero-section h1 {
-            font-size: 2.2rem;
+            font-size: 2.4rem;
             color: var(--gold-color);
             margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(255, 183, 3, 0.3);
         }
-
         .hero-section p {
             color: #94a3b8;
-            font-size: 1rem;
+            font-size: 1.1rem;
         }
-
         .content-box {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 30px;
             margin-bottom: 30px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
         }
-
+        .content-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--glow-color);
+            box-shadow: 0 0 10px var(--glow-color);
+        }
         .content-box h2 {
             color: var(--accent-color);
             margin-bottom: 15px;
             font-size: 1.4rem;
+            text-shadow: 0 0 8px rgba(72, 202, 228, 0.4);
         }
-
         .content-box p {
             color: #cbd5e1;
             font-size: 1.05rem;
             line-height: 1.8;
             margin-bottom: 10px;
         }
-
+        .tower-glow {
+            border: 1px solid var(--glow-color);
+            box-shadow: 0 0 25px rgba(0, 245, 212, 0.25);
+        }
         footer {
             text-align: center;
             padding: 30px;
@@ -183,73 +168,74 @@
             flex-direction: column;
             gap: 8px;
         }
-
         footer a {
             color: var(--accent-color);
             text-decoration: none;
         }
-
         footer a:hover {
             text-decoration: underline;
         }
     </style>
 </head>
 <body>
-
     <header>
-        <div class="nav-left">
-            <div class="menu-container">
-                <button class="menu-btn" onclick="toggleMenu()">☰ 메뉴</button>
-                <div class="dropdown-menu" id="dropdownMenu">
-                    <a href="#chairman">회장소개</a>
-                    <a href="#whitepaper">백서 (Whitepaper)</a>
-                    <a href="#faq">FAQ</a>
-                    <a href="#3polices">3POLICES</a>
-                    <a href="#aml">AML</a>
-                    <a href="#mica">MiCA</a>
-                </div>
-            </div>
-            <div class="logo-area">🌐 HK WorldBank</div>
-        </div>
-
-        <div class="lang-dropdown-container">
-            <button class="lang-btn" onclick="toggleLangMenu()">🌐 한국어 ▼</button>
+        <div class="logo-area">🌐 HK WorldBank</div>
+        
+        <div class="lang-container" id="langContainer">
+            <button class="lang-btn" onclick="toggleLangMenu()">
+                🌐 50 Languages ▼
+            </button>
             <div class="lang-menu" id="langMenu">
-                <button onclick="setLang('한국어')">한국어</button>
-                <button onclick="setLang('English')">English</button>
-                <button onclick="setLang('中文')">中文</button>
-                <button onclick="setLang('日本語')">日本語</button>
-                <button onclick="setLang('Español')">Español</button>
-                <button onclick="setLang('Français')">Français</button>
-                <button onclick="setLang('Deutsch')">Deutsch</button>
-                <button onclick="setLang('Русский')">Русский</button>
-                <button onclick="setLang('Português')">Português</button>
-                <button onclick="setLang('Italiano')">Italiano</button>
-                <button onclick="setLang('Tiếng Việt')">Tiếng Việt</button>
-                <button onclick="setLang('ไทย')">ไทย</button>
-                <button onclick="setLang('Bahasa Indonesia')">Bahasa Indonesia</button>
-                <button onclick="setLang('हिन्दी')">हिन्दी</button>
-                <button onclick="setLang('العربية')">العربية</button>
-                <button onclick="setLang('Türkçe')">Türkçe</button>
-                <button onclick="setLang('Polski')">Polski</button>
-                <button onclick="setLang('Nederlands')">Nederlands</button>
-                <button onclick="setLang('Svenska')">Svenska</button>
-                <button onclick="setLang('Ελληνικά')">Ελληνικά</button>
-                <button onclick="setLang('Čeština')">Čeština</button>
-                <button onclick="setLang('Magyar')">Magyar</button>
-                <button onclick="setLang('Română')">Română</button>
-                <button onclick="setLang('Українська')">Українська</button>
-                <button onclick="setLang('Suomi')">Suomi</button>
-                <button onclick="setLang('Dansk')">Dansk</button>
-                <button onclick="setLang('Norsk')">Norsk</button>
-                <button onclick="setLang('Bahasa Melayu')">Bahasa Melayu</button>
-                <button onclick="setLang('Filipino')">Filipino</button>
-                <button onclick="setLang('עברית')">עברית</button>
-                <button onclick="setLang('मराठी')">मराठी</button>
-                <button onclick="setLang('বাংলা')">বাংলা</button>
-                <button onclick="setLang('فارسی')">فارسی</button>
-                <button onclick="setLang('Kiswahili')">Kiswahili</button>
-                <button onclick="setLang('اردو')">اردو</button>
+                <button onclick="changeLang('한국어')">🇰🇷 한국어</button>
+                <button onclick="changeLang('English')">🇺🇸 English</button>
+                <button onclick="changeLang('中文')">🇨🇳 中文</button>
+                <button onclick="changeLang('日本語')">🇯🇵 日本語</button>
+                <button onclick="changeLang('Español')">🇪🇸 Español</button>
+                <button onclick="changeLang('Français')">🇫🇷 Français</button>
+                <button onclick="changeLang('Deutsch')">🇩🇪 Deutsch</button>
+                <button onclick="changeLang('Русский')">🇷🇺 Русский</button>
+                <button onclick="changeLang('Português')">🇧🇷 Português</button>
+                <button onclick="changeLang('Italiano')">🇮🇹 Italiano</button>
+                <button onclick="changeLang('Tiếng Việt')">🇻🇳 Tiếng Việt</button>
+                <button onclick="changeLang('ไทย')">🇹🇭 ไทย</button>
+                <button onclick="changeLang('Bahasa Indonesia')">🇮🇩 Bahasa Indonesia</button>
+                <button onclick="changeLang('हिन्दी')">🇮🇳 हिन्दी</button>
+                <button onclick="changeLang('العربية')">🇸🇦 العربية</button>
+                <button onclick="changeLang('Türkçe')">🇹🇷 Türkçe</button>
+                <button onclick="changeLang('Polski')">🇵🇱 Polski</button>
+                <button onclick="changeLang('Nederlands')">🇳🇱 Nederlands</button>
+                <button onclick="changeLang('Svenska')">🇸🇪 Svenska</button>
+                <button onclick="changeLang('Ελληνικά')">🇬🇷 Ελληνικά</button>
+                <button onclick="changeLang('Čeština')">🇨🇿 Čeština</button>
+                <button onclick="changeLang('Magyar')">🇭🇺 Magyar</button>
+                <button onclick="changeLang('Română')">🇷🇴 Română</button>
+                <button onclick="changeLang('Українська')">🇺🇦 Українська</button>
+                <button onclick="changeLang('Suomi')">🇫🇮 Suomi</button>
+                <button onclick="changeLang('Dansk')">🇩🇰 Dansk</button>
+                <button onclick="changeLang('Norsk')">🇳🇴 Norsk</button>
+                <button onclick="changeLang('Bahasa Melayu')">🇲🇾 Bahasa Melayu</button>
+                <button onclick="changeLang('Filipino')">🇵🇭 Filipino</button>
+                <button onclick="changeLang('עברית')">🇮🇱 עברית</button>
+                <button onclick="changeLang('मराठी')">🇮🇳 मराठी</button>
+                <button onclick="changeLang('বাংলা')">🇧🇩 বাংলা</button>
+                <button onclick="changeLang('فارسی')">🇮🇷 فارسی</button>
+                <button onclick="changeLang('Kiswahili')">🇰🇪 Kiswahili</button>
+                <button onclick="changeLang('اردو')">🇵🇰 اردو</button>
+                <button onclick="changeLang('தமிழ்')">🇮🇳 தமிழ்</button>
+                <button onclick="changeLang('తెలుగు')">🇮🇳 తెలుగు</button>
+                <button onclick="changeLang('ગુજરાતી')">🇮🇳 ગુજરાતી</button>
+                <button onclick="changeLang('ਪੰਜਾਬੀ')">🇮🇳 ਪੰਜਾਬੀ</button>
+                <button onclick="changeLang('አማርኛ')">🇪🇹 አማርኛ</button>
+                <button onclick="changeLang('Swahili (TZ)')">🇹🇿 Swahili</button>
+                <button onclick="changeLang('Tagalog')">🇵🇭 Tagalog</button>
+                <button onclick="changeLang('Jawa')">🇮🇩 Jawa</button>
+                <button onclick="changeLang('Basa Sunda')">🇮🇩 Basa Sunda</button>
+                <button onclick="changeLang('Hausa')">🇳🇬 Hausa</button>
+                <button onclick="changeLang('Yoruba')">🇳🇬 Yoruba</button>
+                <button onclick="changeLang('Igbo')">🇳🇬 Igbo</button>
+                <button onclick="changeLang('isiZulu')">🇿🇦 isiZulu</button>
+                <button onclick="changeLang('Afrikaans')">🇿🇦 Afrikaans</button>
+                <button onclick="changeLang('Azərbaycanca')">🇦🇿 Azərbaycanca</button>
             </div>
         </div>
     </header>
@@ -260,10 +246,37 @@
             <p id="mainSub">울산·경주·포항 통합 1천만 명 메가시티와 파이화폐 단일 경제권</p>
         </div>
 
-        <div class="content-box">
-            <h2 id="sectionTitle">🌐 다국어 비전 안내 (Multilingual Vision)</h2>
+        <div class="content-box tower-glow" id="tower">
+            <h2>🏙️ 165층 야광색 컨트롤 타워 (Gyeongju Tower)</h2>
+            <p>경주에 위치한 165층 초고층 야광 타워는 미래 첨단 기술을 빛의 속도로 동기화하는 메가시티의 심장부입니다.</p>
+            <p>실시간 야광빛 인터페이스와 분산 연동망을 통해 전 세계 파이화폐(Pi) 생태계를 초고속으로 제어합니다.</p>
+        </div>
+
+        <div class="content-box" id="dashboard">
+            <h2>📊 개인 자산 대시보드</h2>
+            <p>파이화폐(Pi) 기반의 예금, 스테이킹, UBI(기본소득) 분배 현황을 한눈에 관리하는 개인 맞춤형 자산 관리 센터입니다.</p>
+        </div>
+
+        <div class="content-box" id="mesh">
+            <h2>🌐 10대 분산 연동망</h2>
+            <p>울산의 로봇 제조, 경주의 양자생물학, 포항의 우주·항공 및 핵융합 기술을 완벽하게 묶어주는 10대 메시 네트워크 시스템입니다.</p>
+        </div>
+
+        <div class="content-box" id="social">
+            <h2>🎬 유튜브 & 틱톡 공식 채널 연동</h2>
+            <p>공식 소셜 미디어 채널과 실시간으로 연동되어 최신 비전과 소식을 전파합니다.</p>
+            <p>• 유튜브: <a href="https://youtube.com/@Hyekong2026" target="_blank">@Hyekong2026</a><br>• 틱톡: <a href="https://tiktok.com/@hyekong2026" target="_blank">@hyekong2026</a></p>
+        </div>
+
+        <div class="content-box" id="agi">
+            <h2>🤖 AGI 삐니 고객상담 센터</h2>
+            <p>초지능 AGI 삐니가 365일 24시간 대기하며, 우주 여행부터 UBI 이자 계산, 메가시티 구축까지 완벽하게 지원합니다.</p>
+        </div>
+
+        <div class="content-box" id="masterplan">
+            <h2 id="sectionTitle">🌐 다국어 비전 안내 (50 Languages Global Vision)</h2>
             <p id="line1">1. 울산, 경주, 포항을 하나로 잇는 통합 1천만 명 규모의 해오름 특별시 메가시티를 건설합니다.</p>
-            <p id="line2">2. 전 세계 35개국 이상의 글로벌 사용자를 위해 실시간 다국어 시스템과 완벽한 거버넌스를 지원합니다.</p>
+            <p id="line2">2. 전 세계 50개국 이상의 글로벌 사용자를 위해 실시간 다국어 시스템과 완벽한 거버넌스를 지원합니다.</p>
             <p id="line3">3. 100% 파이화폐(Pi) 단일 경제권을 도입하여 재래부터 대기업 임금까지 투명하게 유통합니다.</p>
             <p id="line4">4. 순이익의 30%를 UBI(기본소득)로 환원하여 인류의 생존 압박을 완전히 해소하는 유토피아를 지향합니다.</p>
             <p id="line5">5. 경주에 위치한 165층 컨트롤 타워와 10대 분산 연동망을 통해 미래 첨단 기술을 완벽하게 동기화합니다.</p>
@@ -276,466 +289,633 @@
     </footer>
 
     <script>
-        // 35개국어 선택 시 해당 언어에 맞추어 정확히 5~7줄의 핵심 비전 텍스트로 전환되는 다국어 데이터 팩
-        const translations = {
+        // 50개국어 완벽 대응 다국어 번역 딕셔너리 데이터베이스
+        const i18n = {
             '한국어': {
-                title: '해오름 특별시 마스터플랜',
-                sub: '울산·경주·포항 통합 1천만 명 메가시티와 파이화폐 단일 경제권',
-                secTitle: '🌐 다국어 비전 안내 (Multilingual Vision)',
+                mainTitle: '해오름 특별시 마스터플랜',
+                mainSub: '울산·경주·포항 통합 1천만 명 메가시티와 파이화폐 단일 경제권',
+                secTitle: '🌐 다국어 비전 안내 (50 Languages Global Vision)',
                 lines: [
                     '1. 울산, 경주, 포항을 하나로 잇는 통합 1천만 명 규모의 해오름 특별시 메가시티를 건설합니다.',
-                    '2. 전 세계 35개국 이상의 글로벌 사용자를 위해 실시간 다국어 시스템과 완벽한 거버넌스를 지원합니다.',
+                    '2. 전 세계 50개국 이상의 글로벌 사용자를 위해 실시간 다국어 시스템과 완벽한 거버넌스를 지원합니다.',
                     '3. 100% 파이화폐(Pi) 단일 경제권을 도입하여 재래부터 대기업 임금까지 투명하게 유통합니다.',
                     '4. 순이익의 30%를 UBI(기본소득)로 환원하여 인류의 생존 압박을 완전히 해소하는 유토피아를 지향합니다.',
                     '5. 경주에 위치한 165층 컨트롤 타워와 10대 분산 연동망을 통해 미래 첨단 기술을 완벽하게 동기화합니다.'
                 ]
             },
             'English': {
-                title: 'Haeoreum Special City Masterplan',
-                sub: 'Integrating Ulsan, Gyeongju, and Pohang into a 10M Megacity with Pi Economy',
-                secTitle: '🌐 Multilingual Vision Guide',
+                mainTitle: 'Haeoreum Special City Masterplan',
+                mainSub: 'Integrating Ulsan, Gyeongju, and Pohang into a 10M Megacity with Pi Economy',
+                secTitle: '🌐 Global Vision Guide (50 Languages)',
                 lines: [
                     '1. Constructing the Haeoreum Special City megacity integrating Ulsan, Gyeongju, and Pohang for 10 million people.',
-                    '2. Supporting real-time multilingual systems and robust governance for global users across more than 35 countries.',
+                    '2. Supporting real-time multilingual systems and robust governance for global users across more than 50 countries.',
                     '3. Implementing a 100% Pi cryptocurrency single economic zone for transparent circulation from markets to corporate salaries.',
                     '4. Directing 30% of net profits to UBI to completely eliminate survival pressure and achieve a human utopia.',
                     '5. Perfectly synchronizing advanced future technologies through the 165-story control tower in Gyeongju and 10 mesh networks.'
                 ]
             },
             '中文': {
-                title: '日出特别市总体规划',
-                sub: '整合蔚山、庆州与浦项的千万人口特大城市与Pi币单一经济圈',
+                mainTitle: '日出特别市总体规划',
+                mainSub: '蔚山·庆州·浦项整合1000万人特大城市与Pi币单一经济圈',
                 secTitle: '🌐 多语言愿景指南',
                 lines: [
-                    '1. 建设将蔚山、庆州和浦项连为一体的千万人口规模日出特别市特大城市。',
-                    '2. 为全球35个国家以上的用户提供实时多语言系统与完善的治理支持。',
-                    '3. 引入100% Pi币单一经济圈，实现从传统市场到企业薪资的透明流通。',
-                    '4. 将净利润的30%返还为UBI（全民基本收入），实现彻底消除生存压力的乌托邦。',
-                    '5. 通过位于庆州的165层控制塔与十大分布式互联网络完美同步未来尖端技术。'
+                    '1. 建设连接蔚山、庆州、浦项的1000万人规模日出特别市特大城市。',
+                    '2. 为全球50多个国家的全球用户支持实时多语言系统和完善的治理。',
+                    '3. 引入100% Pi币单一经济圈，从传统市场到大企业薪资实现透明流通。',
+                    '4. 将30%的净利润还原为UBI（全民基本收入），彻底消除人类生存压力。',
+                    '5. 通过位于庆州的165层控制塔和10大分布式互联网络完美同步未来尖端技术。'
                 ]
             },
             '日本語': {
-                title: '日の出特別市マスタープラン',
-                sub: '蔚山・慶州・浦項を統合した1000万人メガシティとパイ通貨単一経済圏',
+                mainTitle: '日の出特別市マスタープラン',
+                mainSub: '蔚山·慶州·浦項 統合1千万人のメガシティとパイ通貨単一経済圏',
                 secTitle: '🌐 多言語ビジョン案内',
                 lines: [
-                    '1. 蔚山、慶州、浦項を一つにつなぐ統合1000万人規模の日の出特別市メガシティを建設します。',
-                    '2. 世界35カ国以上のグローバルユーザーのためにリアルタイム多言語システムと完璧なガバナンスを支援します。',
-                    '3. 100%パイ通貨（Pi）単一経済圏を導入し、市場から大企業の給与まで透明に流通させます。',
-                    '4. 純利益の30%をUBI（ベーシックインカム）に還元し、人類の生存圧力を完全に解消するユートピアを目指します。',
-                    '5. 慶州に位置する165階のコントロールタワーと10大分散連動網を通じて未来先端技術を完全に同期化します。'
+                    '1. 蔚山、慶州、浦項を結ぶ統合1千万人規模の日の出特別市メガシティを建設します。',
+                    '2. 世界50カ国以上のグローバルユーザーのためにリアルタイム多言語システムと完璧なガバナンスをサポートします。',
+                    '3. 100%パイ通貨(Pi)単一経済圏を導入し、伝統市場から大企業の賃金まで透明に流通させます。',
+                    '4. 純利益の30%をUBI（ベーシックインカム）として還元し、人類の生存圧力を完全に解消するユートピアを目指します。',
+                    '5. 慶州に位置する165階のコントロールタワーと10大分散連動網を通じて、未来先端技術を完全に同期化します。'
                 ]
             },
             'Español': {
-                title: 'Plan Maestro de la Ciudad Especial Haeoreum',
-                sub: 'Megaciudad de 10 millones que integra Ulsan, Gyeongju y Pohang con la economía Pi',
-                secTitle: '🌐 Guía de Visión Multilingüe',
+                mainTitle: 'Plan Maestro de la Ciudad Especial de Haeoreum',
+                mainSub: 'Megaciudad de 10M integrando Ulsan, Gyeongju y Pohang con Economía Pi',
+                secTitle: '🌐 Guía de Visión Global',
                 lines: [
-                    '1. Construcción de la megaciudad Ciudad Especial Haeoreum integrando Ulsan, Gyeongju y Pohang para 10 millones de personas.',
-                    '2. Soportando sistemas multilingües en tiempo real y gobernanza sólida para usuarios globales en más de 35 países.',
-                    '3. Implementación de una zona económica única 100% de criptomoneda Pi para una circulación transparente.',
-                    '4. Destinando el 30% de las netas ganancias a la Renta Básica Universal para eliminar la presión de supervivencia.',
-                    '5. Sincronizando perfectamente tecnologías avanzadas a través de la torre de control de 165 pisos en Gyeongju.'
+                    '1. Construcción de la megaciudad de Haeoreum integrando Ulsan, Gyeongju y Pohang para 10 millones de personas.',
+                    '2. Soporte multilingüe en tiempo real y gobernanza robusta para usuarios globales en más de 50 países.',
+                    '3. Implementación de una economía 100% basada en Pi para una circulación transparente.',
+                    '4. Asignación del 30% de las ganancias netas a UBI para erradicar la presión de supervivencia.',
+                    '5. Sincronización perfecta de alta tecnología mediante la torre de control de 165 pisos en Gyeongju.'
                 ]
             },
             'Français': {
-                title: 'Plan Directeur de la Ville Spéciale Haeoreum',
-                sub: 'Mégalopole de 10 millions d’habitants intégrant Ulsan, Gyeongju et Pohang avec l’économie Pi',
-                secTitle: '🌐 Guide de Vision Multilingue',
+                mainTitle: 'Plan Directeur de la Ville Spéciale de Haeoreum',
+                mainSub: 'Mégapole de 10M intégrant Ulsan, Gyeongju et Pohang avec l’économie Pi',
+                secTitle: '🌐 Guide de Vision Globale',
                 lines: [
-                    '1. Construction de la mégapole de la Ville Spéciale Haeoreum unissant Ulsan, Gyeongju et Pohang pour 10 millions de personnes.',
-                    '2. Prise en charge de systèmes multilingues en temps réel et d’une gouvernance robuste pour plus de 35 pays.',
-                    '3. Mise en place d’une zone économique unique 100% Pi pour une circulation transparente des salaires et des marchés.',
-                    '4. Redistribution de 30 % des bénéfices nets en RSU pour éliminer toute pression de survie et créer une utopie.',
-                    '5. Synchronisation parfaite des technologies avancées via la tour de contrôle de 165 étages à Gyeongju.'
+                    '1. Construction de la mégapole Haeoreum intégrant Ulsan, Gyeongju et Pohang pour 10 millions d’habitants.',
+                    '2. Support multilingue en temps réel et gouvernance robuste pour les utilisateurs mondiaux.',
+                    '3. Mise en place d’une zone économique unique 100% Pi pour une circulation transparente.',
+                    '4. Redistribution de 30% des bénéfices nets en UBI pour éliminer la pression de survie.',
+                    '5. Synchronisation parfaite des technologies via la tour de contrôle de 165 étages à Gyeongju.'
                 ]
             },
             'Deutsch': {
-                title: 'Haeoreum Special City Masterplan',
-                sub: 'Integration von Ulsan, Gyeongju und Pohang zu einer 10-Millionen-Megastadt mit Pi-Wirtschaft',
-                secTitle: '🌐 Mehrsprachiger Visionsleitfaden',
+                mainTitle: 'Masterplan der Sonderstadt Haeoreum',
+                mainSub: '10M-Megastadt mit Ulsan, Gyeongju und Pohang und Pi-Wirtschaft',
+                secTitle: '🌐 Globale Visionsanleitung',
                 lines: [
-                    '1. Aufbau der Haeoreum Special City Megastadt durch die Integration von Ulsan, Gyeongju und Pohang.',
-                    '2. Unterstützung mehrsprachiger Echtzeitsysteme und stabiler Governance für globale Nutzer in über 35 Ländern.',
-                    '3. Einführung einer 100%igen Pi-Kryptowährungs-Wirtschaftszone für transparente Zahlungsströme.',
-                    '4. Rückführung von 30 % des Nettogewinns als bedingungsloses Grundeinkommen zur Beseitigung des Überlebensdrucks.',
-                    '5. Perfekte Synchronisierung zukunftsweisender Technologien über den 165-stöckigen Kontrollturm in Gyeongju.'
+                    '1. Aufbau der Haeoreum-Megastadt mit Integration von Ulsan, Gyeongju und Pohang für 10 Millionen Menschen.',
+                    '2. Mehrsprachiges Echtzeitsystem und robuste Governance für globale Nutzer.',
+                    '3. Einführung einer 100%igen Pi-Kryptowährungs-Wirtschaftszone.',
+                    '4. Rückführung von 30 % des Nettogewinns in das UBI zur Beseitigung des Überlebensdrucks.',
+                    '5. Perfekte Synchronisation von Zukunftstechnologien durch den 165-stöckigen Kontrollturm.'
                 ]
             },
             'Русский': {
-                title: 'Генеральный план Специального города Хэорым',
-                sub: 'Мегаполис на 10 млн человек, объединяющий Ульсан, Кёнджу и Пхохан с экономикой Pi',
-                secTitle: '🌐 Многоязычное руководство по видению',
+                mainTitle: 'Генеральный план Специального города ХэорЫм',
+                mainSub: 'Мегаполис на 10 млн человек (Ульсан, Кёнджу, Пхохан) с экономикой Pi',
+                secTitle: '🌐 Руководство по глобальному видению',
                 lines: [
-                    '1. Строительство мегаполиса Специального города Хэорым, объединяющего Ульсан, Кёнджу и Пхохан.',
-                    '2. Поддержка многоязычных систем в реальном времени для пользователей более чем из 35 стран мира.',
-                    '3. Внедрение единой экономической зоны со 100% использованием криптовалюты Pi для прозрачности расчетов.',
-                    '4. Направление 30% чистой прибыли на безусловный базовый доход для устранения экзистенциального давления.',
-                    '5. Полная синхронизация передовых технологий через 165-этажную диспетчерскую башню в Кёнджу.'
+                    '1. Строительство мегаполиса ХэорЫм, объединяющего Ульсан, Кёнджу и Пхохан.',
+                    '2. Поддержка многоязычных систем в реальном времени для пользователей из 50+ стран.',
+                    '3. Внедрение единой экономической зоны 100% Pi для прозрачного обращения.',
+                    '4. Направление 30% чистой прибыли на БДХ (UBI) для устранения давления выживания.',
+                    '5. Синхронизация передовых технологий через 165-этажную башню в Кёнджу.'
                 ]
             },
             'Português': {
-                title: 'Plano Diretor da Cidade Especial de Haeoreum',
-                sub: 'Megacidade de 10 milhões integrando Ulsan, Gyeongju e Pohang com a economia Pi',
-                secTitle: '🌐 Guia de Visão Multilíngue',
+                mainTitle: 'Plano Mestre da Cidade Especial de Haeoreum',
+                mainSub: 'Megacidade de 10M integrando Ulsan, Gyeongju e Pohang com a Economia Pi',
+                secTitle: '🌐 Guia de Visão Global',
                 lines: [
-                    '1. Construção da megacidade Cidade Especial de Haeoreum integrando Ulsan, Gyeongju e Pohang.',
-                    '2. Suporte a sistemas multilíngues em tempo real e governança robusta para usuários em mais de 35 países.',
-                    '3. Implementação de uma zona econômica única 100% em criptomoeda Pi para circulação transparente.',
-                    '4. Retorno de 30% dos lucros líquidos em Renda Básica Universal para eliminar a pressão de sobrevivência.',
-                    '5. Sincronização perfeita de tecnologias avançadas por meio da torre de controle de 165 andares.'
+                    '1. Construção da megacidade de Haeoreum integrando Ulsan, Gyeongju e Pohang.',
+                    '2. Suporte multilíngue em tempo real e governança robusta para usuários globais.',
+                    '3. Implementação de zona econômica exclusiva 100% Pi para circulação transparente.',
+                    '4. Destinação de 30% dos lucros líquidos para UBI para eliminar a pressão de sobrevivência.',
+                    '5. Sincronización perfeita via torre de controle de 165 andares em Gyeongju.'
                 ]
             },
             'Italiano': {
-                title: 'Masterplan della Città Speciale di Haeoreum',
-                sub: 'Megalopoli di 10 milioni di persone che integra Ulsan, Gyeongju e Pohang con l’economia Pi',
-                secTitle: '🌐 Guida alla Visione Multilingue',
+                mainTitle: 'Piano Maestro della Città Speciale di Haeoreum',
+                mainSub: 'Megacittà di 10M che integra Ulsan, Gyeongju e Pohang con l’economia Pi',
+                secTitle: '🌐 Guida alla Visione Globale',
                 lines: [
-                    '1. Costruzione della megalopoli Città Speciale di Haeoreum unendo Ulsan, Gyeongju e Pohang.',
-                    '2. Supporto a sistemi multilingue in tempo reale e governance avanzata per utenti in oltre 35 paesi.',
-                    '3. Introduzione di un’area economica basata al 100% sulla criptovaluta Pi per una circolazione trasparente.',
-                    '4. Allocazione del 30% degli utili netti in reddito di base universale per azzerare la pressione alla sopravvivenza.',
-                    '5. Perfetta sincronizzazione delle tecnologie avanzate tramite la torre di controllo di 165 piani a Gyeongju.'
+                    '1. Costruzione della megacittà di Haeoreum integrando Ulsan, Gyeongju e Pohang.',
+                    '2. Supporto multilingue in tempo reale per utenti globali in oltre 50 paesi.',
+                    '3. Introduzione di una zona economica unica al 100% Pi per una circolazione trasparente.',
+                    '4. Restituzione del 30% dei profitti netti in UBI per eliminare la pressione sulla sopravvivenza.',
+                    '5. Perfetta sincronizzazione tramite la torre di controllo di 165 piani a Gyeongju.'
                 ]
             },
             'Tiếng Việt': {
-                title: 'Quy hoạch tổng thể Thành phố đặc biệt Haeoreum',
-                sub: 'Siêu đô thị 10 triệu dân tích hợp Ulsan, Gyeongju và Pohang với nền kinh tế tiền tệ Pi',
-                secTitle: '🌐 Hướng dẫn tầm nhìn đa ngôn ngữ',
+                mainTitle: 'Quy hoạch tổng thể Thành phố đặc biệt Haeoreum',
+                mainSub: 'Siêu đô thị 10 triệu dân tích hợp Ulsan, Gyeongju, Pohang với Kinh tế Pi',
+                secTitle: '🌐 Hướng dẫn tầm nhìn toàn cầu',
                 lines: [
-                    '1. Xây dựng siêu đô thị Thành phố đặc biệt Haeoreum tích hợp Ulsan, Gyeongju và Pohang cho 10 triệu người.',
-                    '2. Hỗ trợ hệ thống đa ngôn ngữ thời gian thực và quản trị minh bạch cho người dùng tại hơn 35 quốc gia.',
-                    '3. Triển khai khu经济区 đơn nhất 100% đồng Pi để lưu thông minh bạch từ chợ truyền thống đến lương doanh nghiệp.',
-                    '4. Hoàn trả 30% lợi nhuận ròng vào Thu nhập cơ bản phổ quạn (UBI) để xóa bỏ hoàn toàn áp lực sinh tồn.',
-                    '5. Đồng bộ hoàn hảo các công nghệ tương lai tiên tiến thông qua tháp điều khiển 165 tầng tại Gyeongju.'
+                    '1. Xây dựng siêu đô thị Haeoreum tích hợp Ulsan, Gyeongju và Pohang với 10 triệu dân.',
+                    '2. Hỗ trợ hệ thống đa ngôn ngữ thời gian thực cho người dùng toàn cầu.',
+                    '3. Triển khai khu kinh tế đơn lẻ 100% Pi cho lưu thông minh bạch.',
+                    '4. Phân bổ 30% lợi nhuận ròng vào UBI để xóa bỏ hoàn toàn áp lực sinh tồn.',
+                    '5. Đồng bộ hóa hoàn hảo công nghệ thông qua tháp điều khiển 165 tầng tại Gyeongju.'
                 ]
             },
             'ไทย': {
-                title: 'แผนแม่บทเมืองพิเศษแฮโอรึม',
-                sub: 'มหานคร 10 ล้านคนบูรณาการ Ulsan, Gyeongju และ Pohang ด้วยเศรษฐกิจสกุลเงิน Pi',
-                secTitle: '🌐 คู่มือวิสัยทัศน์หลายภาษา',
+                mainTitle: 'แผนแม่บทเมืองพิเศษแฮโอรึม',
+                mainSub: 'มหานคร 10 ล้านคน ผสานอุลซาน คยองจู และโปฮัง ด้วยเศรษฐกิจพาย',
+                secTitle: '🌐 คู่มือวิสัยทัศน์ระดับโลก',
                 lines: [
-                    '1. การสร้างมหานครเมืองพิเศษแฮโอรึมที่บูรณาการอุล산, คย็องจู และโพฮัง สำหรับประชากร 10 ล้านคน',
-                    '2. รองรับระบบหลายภาษาแบบเรียลไทม์และการบริหารจัดการที่โปร่งใสสำหรับผู้ใช้กว่า 35 ประเทศทั่วโลก',
-                    '3. ใช้เขตเศรษฐกิจเดี่ยวสกุลเงิน Pi 100% เพื่อการหมุนเวียนที่โปร่งใสตั้งแต่ตลาดสดจนถึงเงินเดือนองค์กร',
-                    '4. คืนกำไรสุทธิ 30% เป็นรายได้พื้นฐานถ้วนหน้า (UBI) เพื่อขจัดแรงกดดันในการดำรงชีวิตของมนุษยชาติ',
-                    '5. ซิงโ크나이즈เทคโนโลยีล้ำสมัยผ่านหอคอยควบคุม 165 ชั้นในคย็องจูและเครือข่ายตาข่าย 10 จุด'
+                    '1. การสร้างมหานครพิเศษแฮโอรึมที่รวมอุลซาน คยองจู และโปฮังเข้าด้วยกันสำหรับ 10 ล้านคน',
+                    '2. รองรับระบบหลายภาษาแบบเรียลไทม์สำหรับผู้ใช้ทั่วโลกมากกว่า 50 ประเทศ',
+                    '3. นำระบบเศรษฐกิจสกุลเงิน Pi 100% มาใช้เพื่อการหมุนเวียนที่โปร่งใส',
+                    '4. นำ 30% ของกำไรสุทธิมาคืนเป็นรายได้พื้นฐานถ้วนหน้า (UBI)',
+                    '5. ซิงโ크ไนซ์เทคโนโลยีขั้นสูงผ่านหอคอยควบคุม 165 ชั้นในคยองจูอย่างไร้รอยต่อ'
                 ]
             },
             'Bahasa Indonesia': {
-                title: 'Masterplan Kota Khusus Haeoreum',
-                sub: 'Megakota 10 juta penduduk mengintegrasikan Ulsan, Gyeongju, dan Pohang dengan Ekonomi Pi',
-                secTitle: '🌐 Panduan Visi Multibahasa',
+                mainTitle: 'Masterplan Kota Khusus Haeoreum',
+                mainSub: 'Megakota 10 Juta Jiwa Mengintegrasikan Ulsan, Gyeongju, Pohang & Ekonomi Pi',
+                secTitle: '🌐 Panduan Visi Global',
                 lines: [
-                    '1. Membangun megakota Kota Khusus Haeoreum yang mengintegrasikan Ulsan, Gyeongju, dan Pohang.',
-                    '2. Mendukung sistem multibahasa waktu nyata dan tata kelola yang kuat bagi pengguna di lebih dari 35 negara.',
-                    '3. Menerapkan zona ekonomi tunggal mata uang Pi 100% untuk sirkulasi keuangan yang transparan.',
-                    '4. Mengalokasikan 30% laba bersih untuk Pendapatan Dasar Universal guna menghilangkan tekanan kelangsungan hidup.',
-                    '5. Menyinkronkan teknologi masa depan secara sempurna melalui menara kendali 165 lantai di Gyeongju.'
+                    '1. Membangun megakota Haeoreum yang mengintegrasikan Ulsan, Gyeongju, dan Pohang.',
+                    '2. Mendukung sistem multi-bahasa waktu nyata dan tata kelola tangguh untuk pengguna global.',
+                    '3. Menerapkan zona ekonomi tunggal 100% Pi cryptocurrency untuk sirkulasi transparan.',
+                    '4. Mengalokasikan 30% laba bersih ke UBI untuk menghapus tekanan bertahan hidup.',
+                    '5. Sinkronisasi sempurna teknologi masa depan melalui menara kontrol 165 lantai di Gyeongju.'
                 ]
             },
             'हिन्दी': {
-                title: 'हैओरेम स्पेशल सिटी मास्टरप्लान',
-                sub: 'उल्सान, ग्योंगजू और पोहांग को पाई अर्थव्यवस्था के साथ जोड़ने वाला 10 मिलियन मेगासिटी',
-                secTitle: '🌐 बहुभाषी विजन गाइड',
+                mainTitle: 'हैओरेउम विशेष शहर मास्टरप्लान',
+                mainSub: 'उल्सान, ग्योंगजू और पोहांग को जोड़ने वाला 10M मेगासिटी और पाई अर्थव्यवस्था',
+                secTitle: '🌐 वैश्विक विजन गाइड',
                 lines: [
-                    '1. 10 मिलियन लोगों के लिए उल्सान, ग्योंगजू और पोहांग को एकीकृत करते हुए हैओरेम स्पेशल सिटी मेगासिटी का निर्माण।',
-                    '2. 35 से अधिक देशों के वैश्विक उपयोगकर्ताओं के लिए वास्तविक समय बहुभाषी प्रणाली और मजबूत शासन का समर्थन।',
-                    '3. बाजारों से लेकर कॉरपोरेट वेतन तक पारदर्शी संचलन के लिए 100% पाई क्रिप्टोकरेंसी एकल आर्थिक क्षेत्र लागू करना।',
-                    '4. अस्तित्व के दबाव को पूरी तरह से समाप्त करने के लिए शुद्ध लाभ का 30% यूबीआई (सार्वभौमिक बुनियादी आय) में देना।',
-                    '5. ग्योंगजू में 165 मंजिला नियंत्रण टॉवर और 10 मेश नेटवर्क के माध्यम से उन्नत भविष्य की प्रौद्योगिकियों को सिंक करना।'
+                    '1. 10 मिलियन लोगों के लिए उल्सान, ग्योंगजू और पोहांग को एकीकृत करने वाला मेगासिटी निर्माण।',
+                    '2. 50 से अधिक देशों के वैश्विक उपयोगकर्ताओं के लिए बहु In-real-time भाषा समर्थन।',
+                    '3. पारदर्शी संचलन के लिए 100% Pi क्रिप्टोकरेंसी एकल आर्थिक क्षेत्र का कार्यान्वयन।',
+                    '4. अस्तित्व के दबाव को पूरी तरह से समाप्त करने के लिए UBI को 30% शुद्ध लाभ आवंटित करना।',
+                    '5. ग्योंगजू में 165 मंजिला नियंत्रण टॉवर के माध्यम से उन्नत भविष्य की प्रौद्योगिकियों का समन्वय।'
                 ]
             },
             'العربية': {
-                title: 'المخطط الرئيسي لمدينة هايوريم الخاصة',
-                sub: 'مدينة كبرى يبلغ عدد سكانها 10 ملايين نسمة تجمع بين أولسان، غيونغجو، وبوهانغ اقتصاد عملة باي',
-                secTitle: '🌐 دليل الرؤية متعدد اللغات',
+                mainTitle: 'المخطط الرئيسي لمدينة هايوريوم الخاصة',
+                mainSub: 'مدينة عملاقة تضم أولسان، غيونغجو، وبوهانغ مع اقتصاد باي',
+                secTitle: '🌐 دليل الرؤية العالمية',
                 lines: [
-                    '1. بناء المدينة الكبرى مدينة هايوريم الخاصة التي تجمع بين أولسان وغيونغجو وبوهانغ لـ 10 ملايين نسمة.',
-                    '2. دعم أنظمة متعددة اللغات في الوقت الفعلي وحوكمة قوية للمستخدمين في أكثر من 35 دولة حول العالم.',
-                    '3. تطبيق منطقة اقتصادية موحدة بنسبة 100% لعملة باي لضمان التداول الشفاف من الأسواق إلى الرواتب.',
-                    '4. إعادة تخصيص 30% من صافي الأرباح كدخل أساسي شاملاً لإزالة الضغط المعيشي وتحقيق اليوتوبيا.',
-                    '5. المزامنة التامة للتقنيات المستقبلية المتقدمة عبر برج التحكم المكون من 165 طابقاً في غيونغجو.'
+                    '1. بناء مدينة هايوريوم العملاقة التي تدمج أولسان وغيونغجو وبوهانغ لـ 10 ملايين نسمة.',
+                    '2. دعم أنظمة متعددة اللغات في الوقت الفعلي والحوكمة القوية للمستخدمين العالميين.',
+                    '3. تنفيذ منطقة اقتصادية أحفورية أو رقمية بعملة باي بنسبة 100% للتداول الشفاف.',
+                    '4. توجيه 30% من صافي الأرباح إلى الدخل الأساسي الشامل (UBI) للقضاء على ضغوط البقاء.',
+                    '5. المزامنة التامة التقنية عبر برج التحكم ذي الـ 165 طابقاً في غيونغجو.'
                 ]
             },
             'Türkçe': {
-                title: 'Haeoreum Özel Şehri Ana Planı',
-                sub: 'Ulsan, Gyeongju ve Pohang’ı Pi Ekonomisiyle Birleştiren 10 Milyon Nüfuslu Megakent',
-                secTitle: '🌐 Çok Dilli Vizyon Rehberi',
+                mainTitle: 'Haeoreum Özel Şehri Ana Planı',
+                mainSub: 'Ulsan, Gyeongju ve Pohang’ı Pi Ekonomisiyle Birleştiren 10 Milyonluk Megakent',
+                secTitle: '🌐 Küresel Vizyon Rehberi',
                 lines: [
-                    '1. Ulsan, Gyeongju ve Pohang’ı 10 milyon nüfus için entegre eden Haeoreum Özel Şehri megakentinin inşası.',
-                    '2. 35’ten fazla ülkeden küresel kullanıcılar için gerçek zamanlı çok dilli sistemlerin ve güçlü yönetişimin desteklenmesi.',
-                    '3. Geleneksel pazarlardan kurumsal maaşlara kadar şeffaf akış için %100 Pi kripto para tekli ekonomik bölgesinin kurulması.',
-                    '4. Hayatta kalma baskısını tamamen ortadan kaldırmak için net kârın %30’unun Evrensel Temel Gelir olarak aktarılması.',
-                    '5. Gyeongju’daki 165 katlı kontrol kulesi ve 10 ağ yapısı aracılığıyla geleceğin ileri teknolojilerinin senkronize edilmesi.'
+                    '1. Ulsan, Gyeongju ve Pohang’ı 10 milyon nüfusla birleştiren Haeoreum Megakenti inşa ediliyor.',
+                    '2. 50’den fazla ülkeden küresel kullanıcılar için gerçek zamanlı çok dilli sistem desteği.',
+                    '3. Piyasadan şirket maaşlarına kadar şeffaf dolaşım için %100 Pi para birimi ekonomisi.',
+                    '4. Hayatta kalma baskısını tamamen ortadan kaldırmak için net kârın %30’unun UBI’ye aktarılması.',
+                    '5. Gyeongju’daki 165 katlı kontrol kulesiyle geleceğin ileri teknolojilerinin kusursuz senkronizasyonu.'
                 ]
             },
             'Polski': {
-                title: 'Plan Zagospodarowania Miasta Specjalnego Haeoreum',
-                sub: 'Megamiasto dla 10 milionów mieszkańców łączące Ulsan, Gyeongju i Pohang z gospodarką Pi',
-                secTitle: '🌐 Wielojęzyczny przewodnik po wizji',
+                mainTitle: 'Plan Zagospodarowania Miasta Specjalnego Haeoreum',
+                mainSub: 'Megamiasto integrujące Ulsan, Gyeongju i Pohang z gospodarką Pi',
+                secTitle: '🌐 Przewodnik po Globalnej Wizji',
                 lines: [
-                    '1. Budowa megamiasta Miasta Specjalnego Haeoreum integrującego Ulsan, Gyeongju i Pohang dla 10 milionów osób.',
-                    '2. Obsługa wielojęzycznych systemów w czasie rzeczywistym i stabilnego zarządzania dla użytkowników z ponad 35 krajów.',
-                    '3. Wdrożenie strefy ekonomicznej opartej w 100% na walucie Pi dla przejrzystego obiegu od rynków po pensje.',
-                    '4. Przekazanie 30% zysku netto na dochód podstawowy w celu całkowitego wyeliminowania presji egzystencjalnej.',
-                    '5. Perfekcyjna synchronizacja technologii przyszłości za pomocą 165-piętrowej wieży kontrolnej w Gyeongju.'
+                    '1. Budowa megamiasta Haeoreum łączącego Ulsan, Gyeongju i Pohang dla 10 milionów ludzi.',
+                    '2. Obsługa systemów wielojęzycznych w czasie rzeczywistym dla użytkowników z ponad 50 krajów.',
+                    '3. Wdrożenie 100% strefy ekonomicznej Pi dla przejrzystego obiegu finansowego.',
+                    '4. Przekazanie 30% zysku netto na UBI w celu wyeliminowania presji egzystencjalnej.',
+                    '5. Doskonała synchronizacja przyszłych technologii przez 165-piętrową wieżę w Gyeongju.'
                 ]
             },
             'Nederlands': {
-                title: 'Haeoreum Special City Masterplan',
-                sub: 'Een megastad van 10 miljoen die Ulsan, Gyeongju en Pohang verbindt via de Pi-economie',
-                secTitle: '🌐 Meertalige Visiegids',
+                mainTitle: 'Masterplan Speciale Stad Haeoreum',
+                mainSub: 'Megastad met Ulsan, Gyeongju en Pohang en Pi-economie',
+                secTitle: '🌐 Globale Visiegids',
                 lines: [
-                    '1. De bouw van de megastad Haeoreum Special City die Ulsan, Gyeongju en Pohang integreert voor 10 miljoen mensen.',
-                    '2. Ondersteuning van realtime meertalige systemen en robuust bestuur voor gebruikers in meer dan 35 landen.',
-                    '3. Implementatie van een 100% Pi-cryptocurrency economische zone voor transparante geldstromen.',
-                    '4. Toewijzing van 30% van de nettowinst aan een universeel basisinkomen om overlevingsdruk weg te nemen.',
-                    '5. Perfecte synchronisatie van geavanceerde technologieën via de controlekentoren van 165 verdiepingen in Gyeongju.'
+                    '1. Bouw van de Haeoreum megastad die Ulsan, Gyeongju en Pohang integreert voor 10 miljoen mensen.',
+                    '2. Ondersteuning van real-time meertalige systemen voor wereldwijde gebruikers.',
+                    '3. Implementatie van een 100% Pi-cryptocurrency economische zone voor transparantie.',
+                    '4. Toewijzing van 30% van de nettowinst aan UBI om overlevingsdruk weg te nemen.',
+                    '5. Perfecte synchronisatie van technologieën via de controlekentoren van 165 verdiepingen.'
                 ]
             },
             'Svenska': {
-                title: 'Haeoreum Special City Masterplan',
-                sub: 'En megastad med 10 miljoner invånare som integrerar Ulsan, Gyeongju och Pohang med Pi-ekonomi',
-                secTitle: '🌐 Flerspråkig visionsguide',
+                mainTitle: 'Haeoreum Special City Masterplan',
+                mainSub: '10 miljoner invånare megastad som integrerar Ulsan, Gyeongju och Pohang med Pi-ekonomi',
+                secTitle: '🌐 Global Visionsguide',
                 lines: [
-                    '1. Byggandet av megastaden Haeoreum Special City som integrerar Ulsan, Gyeongju och Pohang för 10 miljoner människor.',
-                    '2. Stöd för flerspråkiga system i realtid och robust styrning för globala användare i över 35 länder.',
-                    '3. Implementering av en 100-procentig Pi-valutaekonomizon för transparent cirkulation från marknader till löner.',
-                    '4. Omhändertagande av 30% av nettovinsten till basinkomst för att helt eliminera överlevnadstryck.',
-                    '5. Perfekt synkronisering av avancerad framtida teknik genom 165-våningars kontrolltorn i Gyeongju.'
+                    '1. Byggandet av Haeoreum megastad som integrerar Ulsan, Gyeongju och Pohang för 10 miljoner människor.',
+                    '2. Stöd för flerspråkiga system i realtid för globala användare i över 50 länder.',
+                    '3. Implementering av en 100% Pi-valutaekonomi för transparent cirkulation.',
+                    '4. Tilldelning av 30% av nettovinsten till UBI för att helt eliminera överlevnadstryck.',
+                    '5. Perfekt synkronisering av framtida teknik genom 165-våningars kontrolltorn i Gyeongju.'
                 ]
             },
             'Ελληνικά': {
-                title: 'Γενικό Σχέδιο Ειδικής Pόλης Haeoreum',
-                sub: 'Μεγαλούπολη 10 εκατομμυρίων που ενώνει Ουλσάν, Γκιόνγκτζου και Πόχανγκ με την οικονομία Pi',
-                secTitle: '🌐 Πολύγλωσσος Οδηγός Όραματος',
+                mainTitle: 'Гενικό Σχέδιο Ειδικής Πόλης Haeoreum',
+                mainSub: 'Μεγαλούπολη 10 εκατομμυρίων με Οικονομία Pi',
+                secTitle: '🌐 Οδηγός Παγκόσμιου Oράματος',
                 lines: [
-                    '1. Κατασκευή της μεγαλούπολης Ειδικής Πόλης Haeoreum που ενώνει το Ουλσάν, το Γκιόνγκτζου και το Πόχανγκ.',
-                    '2. Υποστήριξη πολύγλωσσων συστημάτων σε πραγματικό χρόνο για χρήστες σε περισσότερες από 35 χώρες.',
-                    '3. Εφαρμογή ενιαίας οικονομικής ζώνης 100% κρυπτονομίσματος Pi για διαφανή κυκλοφορία από τις αγορές στους μισθούς.',
-                    '4. Απόδοση του 30% των καθαρών κερδών σε βασικό εισόδημα για την πλήρη εξάλειψη της πίεσης επιβίωσης.',
-                    '5. Τέλεια συγχρονισμός προηγμένων τεχνολογιών μέσω του πύργου ελέγχου 165 ορόφων στο Γκιόνγκτζου.'
+                    '1. Κατασκευή της μεγαλούπολης Haeoreum που ενώνει Ο울σαν, Γκιόνγκτζου και Πόχανγκ.',
+                    '2. Υποστήριξη πολύγλωσσων συστημάτων σε πραγματικό χρόνο για παγκόσμιους χρήστες.',
+                    '3. Εφαρμογή ενιαίας οικονομικής ζώνης 100% Pi για διαφανή κυκλοφορία.',
+                    '4. Διάθεση του 30% των καθαρών κερδών σε UBI για την εξάλειψη της πίεσης επιβίωσης.',
+                    '5. Τέλεια συγχronισμός τεχνολογίας μέσω του πύργου ελέγχου 165 ορόφων στο Γκιόνγκτζου.'
                 ]
             },
             'Čeština': {
-                title: 'Generel speciálního města Haeoreum',
-                sub: 'Megaměsto pro 10 milionů obyvatel integrující Ulsan, Gyeongju a Pohang s ekonomikou Pi',
-                secTitle: '🌐 Multijazyčný průvodce vizí',
+                mainTitle: 'Generální plán speciálního města Haeoreum',
+                mainSub: 'Megaměsto integrující Ulsan, Gyeongju a Pohang s ekonomikou Pi',
+                secTitle: '🌐 Průvodce globální vizí',
                 lines: [
-                    '1. Výstavba megaměsta Speciálního města Haeoreum propojujícího Ulsan, Gyeongju a Pohang.',
-                    '2. Podpora multijazyčných systémů v reálném čase a robustní správy pro uživatele ve více než 35 zemích.',
-                    '3. Zavádění 100% ekonomické zóny kryptoměny Pi pro transparentní oběh od trhů po firemní mzdy.',
-                    '4. Navrácení 30 % čistého zisku do základního příjmu za účelem úplného odstranění existenčního tlaku.',
-                    '5. Dokonalá synchronizace pokročilých technologií prostřednictvím 165patrové kontrolní věže v Gyeongju.'
+                    '1. Výstavba megaměsta Haeoreum spojujícího Ulsan, Gyeongju a Pohang pro 10 milionů lidí.',
+                    '2. Podpora multilingualních systémů v reálném čase pro uživatele ve více než 50 zemích.',
+                    '3. Zavádění 100% ekonomické zóny Pi pro transparentní oběh financí.',
+                    '4. Př ალкеռo 30 % čistého zisku na UBI pro úplné odstranění tlaku na přežití.',
+                    '5. Perfektní synchronizace technologií přes 165patrovou kontrolní věž v Gyeongju.'
                 ]
             },
             'Magyar': {
-                title: 'Haeoreum Special City Mesterterv',
-                sub: '10 milliós megaváros, amely egyesíti Ulszánt, Gyeongjut és Pohangot a Pi gazdasággal',
-                secTitle: '🌐 Többnyelvű jövőkép útmutató',
+                mainTitle: 'Haeoreum Különleges Város Főterve',
+                mainSub: '10 milliós megaváros Ulsan, Gyeongju és Pohang integrálásával, Pi gazdasággal',
+                secTitle: '🌐 Globális Vízsút Útmutató',
                 lines: [
-                    '1. A Haeoreum Special City megaváros felépítése, amely Ulszánt, Gyeongjut és Pohangot integrálja 10 millió fő számára.',
-                    '2. Valós idejű többnyelvű rendszerek és stabil irányítás támogatása több mint 35 ország globális felhasználói számára.',
-                    '3. 100%-os Pi kriptovaluta egyedi gazdasági övezet bevezetése a piaci áraktól a vállaliti bérekig.',
-                    '4. A tiszta nyereség 30%-ának visszajuttatása alapjövedelemként a túlélési nyomás teljes megszüntetésére.',
-                    '5. A jövő fejlett technológiáinak tökéletes szinkronizálása a Gyeongjuban található 165 emeletes tornyon keresztül.'
+                    '1. A Haeoreum megaváros felépítése Ulsan, Gyeongju és Pohang egyesítésével 10 millió ember számára.',
+                    '2. Valós idejű többnyelvű rendszer támogatása a globális felhasználók számára.',
+                    '3. 100%-os Pi kriptovaluta gazdasági övezet bevezetése az átlátható forgalomért.',
+                    '4. A tiszta nyereség 30%-ának UBI-ra fordítása a túlélési nyomás megszüntetésére.',
+                    '5. Fejlett technológiák szinkronizálása a 165 emeletes gyongjui irányítótornyon keresztül.'
                 ]
             },
             'Română': {
-                title: 'Planul Director al Orașului Special Haeoreum',
-                sub: 'Megapolis de 10 milioane care integrează Ulsan, Gyeongju și Pohang cu economia Pi',
-                secTitle: '🌐 Ghid de Viziune Multilingv',
+                mainTitle: 'Planul Director al Orașului Special Haeoreum',
+                mainSub: 'Megaoraș de 10M integrând Ulsan, Gyeongju și Pohang cu Economia Pi',
+                secTitle: '🌐 Ghid de Viziune Globală',
                 lines: [
-                    '1. Construirea megalopolisului Orașului Special Haeoreum integrând Ulsan, Gyeongju și Pohang pentru 10 milioane de oameni.',
-                    '2. Suport pentru sisteme multilingve în timp real și guvernanță robustă pentru utilizatorii din peste 35 de țări.',
-                    '3. Implementarea unei zone economice unice 100% pe baza monedei Pi pentru o circulație financiară transparentă.',
-                    '4. Alocarea a 30% din profitul net către venitul de bază universal pentru a elimina presiunea supraviețuirii.',
-                    '5. Sincronizarea perfectă a tehnologiilor viitoare prin turnul de control de 165 de etaje din Gyeongju.'
+                    '1. Construirea megaorașului Haeoreum care integrează Ulsan, Gyeongju și Pohang pentru 10 milioane de oameni.',
+                    '2. Suport multilingv în timp real și guvernanță robustă pentru utilizatorii din 50+ țări.',
+                    '3. Implementarea unei zone economice unice 100% Pi pentru o circulație transparentă.',
+                    '4. Alocarea a 30% din profitul net către UBI pentru eliminarea presiunii supraviețuirii.',
+                    '5. Sincronizarea perfectă a tehnologiilor prin turnul de control de 165 de etaje din Gyeongju.'
                 ]
             },
             'Українська': {
-                title: 'Генеральний план Спеціального міста Хеорим',
-                sub: 'Мегаполіс на 10 млн жителів, що об’єднує Ульсан, Кенджу та Пхохан з економікою Pi',
-                secTitle: '🌐 Багатомовний путівник бачення',
+                mainTitle: 'Генеральний план спеціального міста Хеорим',
+                mainSub: 'Мегаполіс на 10 млн осіб (Ульсан, Кенджу, Похан) з економікою Pi',
+                secTitle: '🌐 Посібник з глобального бачення',
                 lines: [
-                    '1. Будівництво мегаполісу Спеціального міста Хеорим, що об’єднує Ульсан, Кенджу та Пхохан.',
-                    '2. Підтримка багатомовних систем у реальному часі та надійного управління для користувачів із понад 35 країн.',
-                    '3. Впровадження єдиної економічної зони зі 100% використанням криптовалюти Pi для прозорих розрахунків.',
-                    '4. Спрямування 30% чистого прибутку на базовий дохід для повного усунення соціально-економічного тиску.',
-                    '5. Повна синхронізація передових технологій через 165-поверхову контрольну вежу в Кенджу.'
+                    '1. Будівництво мегаполісу Хеорим, що об’єднує Ульсан, Кенджу та Похан для 10 мільйонів людей.',
+                    '2. Підтримка багатомовних систем у реальному часі для користувачів із понад 50 країн.',
+                    '3. Впровадження єдиної економічної зони 100% Pi для прозорого обігу.',
+                    '4. Спрямування 30% чистого прибутку на UBI (базовий дохід) для усунення тиску виживання.',
+                    '5. Синхронізація передових технологій через 165-поверхову контрольну вежу в Кенджу.'
                 ]
             },
             'Suomi': {
-                title: 'Haeoreum Special City Masterplan',
-                sub: '10 miljoonan asukkaan megakaupunki, joka yhdistää Ulsanin, Gyeongjun ja Pohangin Pi-talouteen',
-                secTitle: '🌐 Monikielinen visio-opas',
+                mainTitle: 'Haeoreum Special City Masterplan',
+                mainSub: '10 miljoonan asukkaan megakaupunki Pi-taloudella',
+                secTitle: '🌐 Globaali visio-opas',
                 lines: [
-                    '1. Haeoreum Special City -megakaupungin rakentaminen yhdistämään Ulsanin, Gyeongjun ja Pohangin 10 miljoonalle ihmiselle.',
-                    '2. Reaaliaikaisten monikielisten järjestelmien ja vankan hallinnon tuki maailmanlaajuisille käyttäjille yli 35 maassa.',
-                    '3. 100-prosenttisen Pi-kryptovaluutan talousalueen käyttöönotto läpinäkyvää rahoituksen kiertoa varten.',
-                    '4. 30 prosentin nettovoiton ohjaaminen perustuloon eloonjäämispaineen poistamiseksi täysin.',
-                    '5. Edistyneiden tulevaisuuden teknologioiden täydellinen synkronointi Gyeongjun 165-kerroksisen tornin kautta.'
+                    '1. Haeoreum-megakaupungin rakentaminen yhdistämään Ulsanin, Gyeongjun ja Pohangin.',
+                    '2. Reaaliaikainen monikielinen järjestelmätuki maailmanlaajuisille käyttäjille.',
+                    '3. 100 %:n Pi-kryptotalousvyöhykkeen käyttöönotto läpinäkyvään kiertoon.',
+                    '4. 30 %:n nettovoiton ohjaaminen UBI:lle selviytymispaineen poistamiseksi.',
+                    '5. Edistyneiden teknologioiden synkronointi Gyeongjun 165-kerroksisen tornin kautta.'
                 ]
             },
             'Dansk': {
-                title: 'Haeoreum Special City Masterplan',
-                sub: 'En megaby med 10 millioner indbyggere, der integrerer Ulsan, Gyeongju og Pohang med Pi-økonomi',
-                secTitle: '🌐 Flersproget visionsguide',
+                mainTitle: 'Haeoreum Special City Masterplan',
+                mainSub: '10 millioner megaby med Ulsan, Gyeongju og Pohang og Pi-økonomi',
+                secTitle: '🌐 Global Visionsguide',
                 lines: [
-                    '1. Opførelse af megabyen Haeoreum Special City, der integrerer Ulsan, Gyeongju og Pohang for 10 millioner mennesker.',
-                    '2. Understøttelse af flersprogede systemer i realtid og stærk styring for brugere i over 35 lande.',
-                    '3. Implementering af en 100 % Pi-kryptovaluta økonomizone for gennemsigtig cirkulation fra markeder til lønninger.',
-                    '4. Tildeling af 30 % af overskuddet til basisindkomst for fuldstændigt at fjerne overlevelsespres.',
-                    '5. Perfekt synkronisering af fremtidens avancerede teknologier gennem 165-etagers kontroltårn i Gyeongju.'
+                    '1. Opførelse af Haeoreum megabyen, der integrerer Ulsan, Gyeongju og Pohang.',
+                    '2. Understøttelse af flersprogede systemer i realtid for globale brugere.',
+                    '3. Implementering af en 100% Pi-kryptovalutaøkonomizone for gennemsigtighed.',
+                    '4. Tildeling af 30% af nettoefterslæbet til UBI for at fjerne overlevelsespres.',
+                    '5. Perfekt synkronisering af teknologier via 165-etagers kontroltårn i Gyeongju.'
                 ]
             },
             'Norsk': {
-                title: 'Haeoreum Special City Masterplan',
-                sub: 'En megaby på 10 millioner som integrerer Ulsan, Gyeongju og Pohang med Pi-økonomien',
-                secTitle: '🌐 Flerspråklig visjonsveiledning',
+                mainTitle: 'Haeoreum Special City Masterplan',
+                mainSub: '10-miljoners megaby med Ulsan, Gyeongju, Pohang og Pi-økonomi',
+                secTitle: '🌐 Global visjonsguide',
                 lines: [
-                    '1. Bygging av megabyen Haeoreum Special City som integrerer Ulsan, Gyeongju og Pohang for 10 millioner innbyggere.',
-                    '2. Støtte for flerspråklige systemer i sanntid og solid styring for globale brukere i over 35 land.',
-                    '3. Implementering av en 100 % Pi-kryptovaluta økonomisone for transparent sirkulasjon fra markeder til lønninger.',
-                    '4. Fordeling av 30 % av nettoprofitten til universell basisinntekt for å fjerne alt overlevelsespress.',
-                    '5. Perfekt synkronisering av avansert fremtidsteknologi gjennom 165-etasjers kontrolltårn i Gyeongju.'
+                    '1. Bygging av Haeoreum megaby som integrerer Ulsan, Gyeongju og Pohang for 10 millioner mennesker.',
+                    '2. Støtte for flerspråklige systemer i sanntid for global bruk.',
+                    '3. Implementering av en 100 % Pi-økonomisone for transparent sirkulasjon.',
+                    '4. Tildeling av 30 % av nettolønnen til UBI for å fjerne overlevelsespress.',
+                    '5. Perfekt synkronisering av fremtidsteknologi gjennom 165-etasjes kontrolltårn i Gyeongju.'
                 ]
             },
             'Bahasa Melayu': {
-                title: 'Pelan Induk Bandar Khas Haeoreum',
-                sub: 'Megakbandar 10 juta penduduk mengintegrasikan Ulsan, Gyeongju, dan Pohang dengan Ekonomi Pi',
-                secTitle: '🌐 Panduan Visi Pelbagai Bahasa',
+                mainTitle: 'Pelan Induk Bandar Khas Haeoreum',
+                mainSub: 'Megakota 10 Juta Mengintegrasikan Ulsan, Gyeongju, Pohang & Ekonomi Pi',
+                secTitle: '🌐 Panduan Visi Global',
                 lines: [
-                    '1. Pembinaan megakbandar Bandar Khas Haeoreum yang mengintegrasikan Ulsan, Gyeongju, dan Pohang.',
-                    '2. Menyokong sistem pelbagai bahasa masa nyata dan tadbir urus kukuh untuk pengguna di lebih 35 negara.',
-                    '3. Melaksanakan zon ekonomi tunggal mata wang Pi 100% untuk edaran kewangan yang telus.',
-                    '4. Memulangkan 30% keuntungan bersih sebagai Pendapatan Asas Sejagat untuk menghapuskan tekanan hidup.',
-                    '5. Menyegerakkan teknologi masa depan secara sempurna melalui menara kawalan 165 tingkat di Gyeongju.'
+                    '1. Membina megakota Haeoreum yang mengintegrasikan Ulsan, Gyeongju dan Pohang.',
+                    '2. Menyokong sistem berbilang bahasa masa nyata untuk pengguna global.',
+                    '3. Pelaksanaan zon ekonomi tunggal 100% Pi untuk peredaran telus.',
+                    '4. Memperuntukkan 30% keuntungan bersih kepada UBI untuk menghapuskan tekanan hidup.',
+                    '5. Sinkronisasi sempurna teknologi masa depan melalui menara kawalan 165 tingkat di Gyeongju.'
                 ]
             },
             'Filipino': {
-                title: 'Masterplan ng Espesyal na Lungsod ng Haeoreum',
-                sub: 'Megacity na may 10 milyong populasyon na nag-uugnay sa Ulsan, Gyeongju, at Pohang sa Pi Economy',
-                secTitle: '🌐 Gabay sa Multilingual na Pananaw',
+                mainTitle: 'Haeoreum Special City Masterplan',
+                mainSub: '10M Megacity na nag-uugnay sa Ulsan, Gyeongju, at Pohang gamit ang Pi Economy',
+                secTitle: '🌐 Global Vision Guide',
                 lines: [
-                    '1. Pagtatayo ng megacity na Espesyal na Lungsod ng Haeoreum para sa 10 milyong mamamayan.',
-                    '2. Pagsuporta sa real-time na mga sistemang multilingual at pamamahala para sa mga user sa mahigit 35 bansa.',
-                    '3. Pagpapatupad ng 100% Pi cryptocurrency single economic zone para sa transparent na sirkulasyon.',
-                    '4. Pagtatalaga ng 30% ng netong kita sa Universal Basic Income upang alisin ang presyon sa pamumuhay.',
-                    '5. Perpektong pagsasabay ng mga teknolohiya sa pamamagitan ng 165-palapag na control tower sa Gyeongju.'
+                    '1. Pagtatayo ng Haeoreum megacity para sa 10 milyong tao sa Ulsan, Gyeongju, at Pohang.',
+                    '2. Suporta sa real-time multilingual system para sa mga pandaigdigang gumagamit.',
+                    '3. Pagpapatupad ng 100% Pi cryptocurrency economic zone para sa transparent na sirkulasyon.',
+                    '4. Pagtatalaga ng 30% ng netong kita sa UBI para ganap na maalis ang presyon sa buhay.',
+                    '5. Perpektong pagsasabay ng teknolohiya sa pamamagitan ng 165-palapag na control tower sa Gyeongju.'
                 ]
             },
             'עברית': {
-                title: 'תוכנית האב של העיר המיוחדת האוורי',
-                sub: 'מגה-עיר של 10 מיליון תושבים המשלבת את אולסן, ג\'יאונגג\'ו ופוהאנג עם כלכלת מטבע פאי',
-                secTitle: '🌐 מדריך חזון רב-לשוני',
+                mainTitle: 'תוכנית אב לעיר המיוחדת האו-ראום',
+                mainSub: 'מגה-עיר של 10 מיליון תושבים המשלבת את אולסן, ג\'יאונגג\'ו ופוחאנג עם כלכלת פאי',
+                secTitle: '🌐 מדריך חזון גלובלי',
                 lines: [
-                    '1. בניית המגה-עיר של העיר המיוחדת האוורי המאגדת את אולסן, ג\'יאונגג\'ו ופוהאנג עבור 10 מיליון איש.',
-                    '2. תמיכה במערכות רב-לשוניות בזמן אמת ובניהול איתן עבור משתמשים גלובליים ביותר מ-35 מדינות.',
-                    '3. יישום אזור כלכלי יחיד של 100% מטבע פאי למחזור שקוף מהשווקים ועד למשכורות התאגידיות.',
-                    '4. הקצאת 30% מהרווח הנקי כהכנסה בסיסית אוניברסלית כדי לחסל לחלוטין את לחץ ההישרדות.',
-                    '5. סנכרון מושלם של טכנולוגיות עתידיות מתקדמות באמצעות מגדל הבקרה בן 165 הקומות בג\'יאונגג\'ו.'
+                    '1. בניית מגה-עיר האו-ראום המשלבת את אולסן, ג\'יאונגג\'ו ופוחאנג עבור 10 מיליון איש.',
+                    '2. תמיכה במערכות רב-לשוניות בזמן אמת עבור משתמשים גלובליים בלמעלה מ-50 מדינות.',
+                    '3. הטמעת אזור כלכלי יחיד של 100% מטבע פאי לתנועה פיננסית שקופה.',
+                    '4. הפניית 30% מהרווח הנקי לטובת הכנסה בסיסית אוניברסלית (UBI) לחיסול לחץ הקיום.',
+                    '5. סנכרון מושלם של טכנולוגיות מתקדמות דרך מגדל הפיקוח בן 165 הקומות בג\'יאונגג\'ו.'
                 ]
             },
             'मराठी': {
-                title: 'हाओरेम स्पेशल सिटी मास्टरप्लॅन',
-                sub: 'उल्सान, ग्योंगजू आणि पोहांग यांना पाई अर्थव्यवस्थेशी जोडणारे १० दशलक्ष लोकांचे मेगासिटी',
-                secTitle: '🌐 बहुभाषिक दृष्टी मार्गदर्शक',
+                mainTitle: 'हैओरेउम विशेष शहर मास्टरप्लान',
+                mainSub: 'उल्सान, ग्योंगजू आणि पोहांगचे १० दशलक्ष मेगासिटी आणि पाई अर्थव्यवस्था',
+                secTitle: '🌐 जागतिक दृष्टी मार्गदर्शक',
                 lines: [
-                    '1. १० दशलक्ष लोकांसाठी उल्सान, ग्योंगजू आणि पोहांग एकत्र करून हाओरेम स्पेशल सिटी मेगासिटीची निर्मिती.',
-                    '2. ३५ पेक्षा जास्त देशांमधील जागतिक वापरकर्त्यांसाठी रिअल-टाइम बहुभाषिक प्रणाली आणि मजबूत शासनाला समर्थन.',
-                    '3. बाजारांपासून कॉर्पोरेट पगारापर्यंत पारदर्शक चलनأसाठी १००% पाई क्रिप्टोकरन्सी एकल आर्थिक क्षेत्र लागू करणे.',
-                    '4. अस्तित्त्वाचा ताण पूर्णपणे संपवण्यासाठी निव्वळ नफ्याचा ३०% हिस्सा युनिव्हर्सल बेसिक इन्कममध्ये देणे.',
-                    '5. ग्योंगजूमधील १६५ मजली नियंत्रण टॉवर आणि १० मेश नेटवर्कद्वारे प्रगत भविष्यातील तंत्रज्ञानाचे सिंक.'
+                    '1. १० दशलक्ष लोकांसाठी उल्सान, ग्योंगजू आणि पोहांग एकत्र करणारी हैओरेउम मेगासिटी.',
+                    '2. ५० हून अधिक देशांमधील जागतिक वापरकर्त्यांसाठी रिअल-टाइम बहुभाषिक प्रणाली.',
+                    '3. पारदर्शक वित्तासाठी १००% पाई क्रिप्टोकरन्सी एकमेव आर्थिक क्षेत्र.',
+                    '4. जगण्याचा ताण पूर्णपणे संपवण्यासाठी निव्वळ नफ्याच्या ३०% UBI साठी वाटप.',
+                    '5. ग्योंगजू मधील १६५ मजली नियंत्रण टॉवरद्वारे प्रगत तंत्रज्ञानाचे अचूक समन्वय.'
                 ]
             },
             'বাংলা': {
-                title: 'হাওরিম স্পেশাল সিটি মাস্টারপ্ল্যান',
-                sub: '울산, গিয়ংজু ও পোহাং সমন্বিত ১ কোটি মানুষের মেগাসিটি এবং পাই মুদ্রা অর্থনীতি',
-                secTitle: '🌐 বহুভাষিক দৃষ্টিভঙ্গি নির্দেশিকা',
+                mainTitle: 'হাইওরিউম স্পেশাল সিটি মাস্টারপ্লান',
+                mainSub: 'উলসান, গিয়ংজু ও পোহাং সমন্বিত ১ কোটি মানুষের মেগাসিটি এবং পাই ইকোনমি',
+                secTitle: '🌐 বৈশ্বিক ভিশন গাইড',
                 lines: [
-                    '1. ১ কোটি মানুষের জন্য 울산, গিয়ংজু ও পোহাং সমন্বিত হাওরিম স্পেশাল সিটি মেগাসিটি নির্মাণ করা হচ্ছে।',
-                    '2. বিশ্বের ৩৫টিরও বেশি দেশের বৈশ্বিক ব্যবহারকারীদের জন্য রিয়েল-টাইম বহুভাষিক ব্যবস্থা ও শাসন নিশ্চিত করা।',
-                    '3. বাজার থেকে কর্পোরেট বেতন পর্যন্ত স্বচ্ছ লেনদেনের জন্য ১০০% পাই ক্রিপ্টোকারেন্সি একক অর্থনৈতিক অঞ্চল চালু।',
-                    '4. মানুষের বেঁচে থাকার চাপ পুরোপুরি দূর করতে নিট লাভের ৩০% মৌলিক আয়ে (UBI) রূপান্তর করা।',
-                    '5. গিয়ংজুতে অবস্থিত ১৬৫ তলা কন্ট্রোল টাওয়ার এবং ১০টি মেস নেটওয়ার্কের মাধ্যমে ভবিষ্যৎ প্রযুক্তির সমন্বয়।'
+                    '1. ১ কোটি মানুষের জন্য উলসান, গিয়ংজু ও পোহাং নিয়ে হাইওরিউম মেগাসিটি নির্মাণ।',
+                    '2. ৫০টির বেশি দেশের বৈশ্বিক ব্যবহারকারীদের জন্য রিয়েল-টাইম বহুভাষিক সিস্টেম সমর্থন।',
+                    '3. স্বচ্ছ প্রচলনের জন্য ১০০% পাই ক্রিপ্টকারেন্সি একক অর্থনৈতিক অঞ্চল বাস্তবায়ন।',
+                    '4. বেঁচে থাকার চাপ সম্পূর্ণ দূর করতে নিট লাভের ৩০% ইউবিআই (UBI)-তে প্রদান।',
+                    '5. গিয়ংজুতে ১৬৫ তলা কন্ট্রোল টাওয়ারের মাধ্যমে ভবিষ্যতের উন্নত প্রযুক্তির নিখুঁত সমন্বয়।'
                 ]
             },
             'فارسی': {
-                title: 'طرح جامع شهر ویژه هائورئوم',
-                sub: 'مگاشهر ۱۰ میلیونی ادغام کننده اولسان، گیونگجو و پوهانگ با اقتصاد ارز پای',
-                secTitle: '🌐 راهنمای چشم انداز چندزبانه',
+                mainTitle: 'طرح جامع شهر ویژه هائوریوم',
+                mainSub: 'مگاشهر ۱۰ میلیون نفری یکپارچه اولسان، گیونگجو و پوهانگ با اقتصاد پای',
+                secTitle: '🌐 راهنمای چشم انداز جهانی',
                 lines: [
-                    '1. ساخت مگاشهر شهر ویژه هائورئوم با ادغام اولسان، گیونگجو و پوهانگ برای ۱۰ میلیون نفر جمعیت.',
-                    '2. پشتیبانی از سیستم های چندزبانه بی درنگ و حاکمیت قوی برای کاربران جهانی در بیش از ۳۵ کشور.',
-                    '3. اجرای منطقه اقتصادی واحد ۱۰۰٪ ارز پای برای گردش شفاف مالی از بازارها تا دستمزدهای شرکتی.',
-                    '4. تخصیص ۳۰٪ از سود خالص به درآمد پایه همگانی جهت رفع کامل فشار بقا و دستیابی به آرمان شهر.',
-                    '5. هماهنگی بی نقص فناوری های پیشرفته آینده از طریق برج کنترل ۱۶۵ طبقه در گیونگجو.'
+                    '1. ساخت مگاشهر هائوریوم با یکپارچه سازی اولسان، گیونگجو و پوهانگ برای ۱۰ میلیون نفر.',
+                    '2. پشتیبانی از سیستم های چندزبانه بلادرنگ برای کاربران جهانی در بیش از ۵۰ کشور.',
+                    '3. پیاده سازی منطقه اقتصادی انحصاری ۱۰۰٪ ارز دیجیتال پای برای گردش شفاف.',
+                    '4. اختصاص ۳۰٪ از سود خالص به UBI برای از بین بردن کامل فشار بقا.',
+                    '5. هماهنگی بی نقص فناوری های پیشرفته از طریق برج کنترل ۱۶۵ طبقه در گیونگجو.'
                 ]
             },
             'Kiswahili': {
-                title: 'Mpango Mkuu wa Jiji Maalum la Haeoreum',
-                sub: 'Megakiji ya watu milioni 10 inayounganisha Ulsan, Gyeongju, na Pohang na uchumi wa Pi',
-                secTitle: '🌐 Mwongozo wa Maono ya Lugha Nyingi',
+                mainTitle: 'Mpango Mkuu wa Jiji Maalum la Haeoreum',
+                mainSub: 'Megasijiti ya watu milioni 10 inayounganisha Ulsan, Gyeongju, na Pohang na Uchumi wa Pi',
+                secTitle: '🌐 Mwongozo wa Maono ya Kimataifa',
                 lines: [
-                    '1. Ujenzi wa megakiji ya Jiji Maalum la Haeoreum inayounganisha Ulsan, Gyeongju, na Pohang kwa watu milioni 10.',
-                    '2. Kusaidia mifumo ya lugha nyingi ya wakati halisi na utawala thabiti kwa watumiaji wa kimataifa katika nchi zaidi ya 35.',
-                    '3. Utekelezaji wa eneo la kiuchumi la sarafu ya Pi kwa asilimia 100 kwa mzunguko wazi wa kifedha.',
-                    '4. Kurejesha 30% ya faida halisi kama Mapato ya Msingi ya Wote ili kuondoa kabisa shinikizo la kuishi.',
-                    '5. Usawazishaji kamili wa teknolojia za juu kupitia mnara wa udhibiti wa ghorofa 165 huko Gyeongju.'
+                    '1. Kujenga megasijiti ya Haeoreum inayounganisha Ulsan, Gyeongju, na Pohang kwa watu milioni 10.',
+                    '2. Kusaidia mifumo ya lugha nyingi ya wakati halisi kwa watumiaji wa kimataifa.',
+                    '3. Utekelezaji wa eneo la kiuchumi la sarafu ya Pi 100% kwa mzunguko wa wazi.',
+                    '4. Kuelekeza 30% ya faida halisi kwa UBI ili kuondoa kabisa shinikizo la kuishi.',
+                    '5. Usawazishaji kamili wa teknolojia kupitia mnara wa udhibiti wa ghorofa 165 huko Gyeongju.'
                 ]
             },
             'اردو': {
-                title: 'ہایوریم اسپیشل سٹی ماسٹر پلان',
-                sub: 'اولسان، گیونگجو اور پوہانگ کو پائی معیشت کے ساتھ جوڑنے والا ایک کروڑ آبادی کا میگا سٹی',
-                secTitle: '🌐 کثیر لسانی وژن گائیڈ',
+                mainTitle: 'ہایوریوم سپیشل سٹی ماسٹر پلان',
+                mainSub: 'السان، گیونگجو اور پوہانگ کا 10 ملین میگاسٹی اور پائی اکانومی',
+                secTitle: '🌐 عالمی وژن گائیڈ',
                 lines: [
-                    '1. ایک کروڑ افراد کے لیے اولسان، گیونگجو اور پوہانگ کو یکجا کرتے ہوئے ہایوریم اسپیشل سٹی میگا سٹی کی تعمیر۔',
-                    '2. 35 سے زائد ممالک کے عالمی صارفین کے لیے ریئل ٹائم کثیر لسانی نظام اور مضبوط گورننس کی فراہمی۔',
-                    '3. بازاروں سے لے کر کارپوریٹ تنخواہوں تک شفاف گردش کے لیے 100% پائی کریپٹو کرنسی سنگل اکنامک زون کا نفاذ۔',
-                    '4. بقا کے دباؤ کو مکمل طور پر ختم کرنے کے لیے خالص منافع کا 30 فیصد بنیادی آمدنی (UBI) میں دینا۔',
-                    '5. گیونگجو میں 165 منزلہ کنٹرول ٹاور اور 10 میش نیٹ ورکس کے ذریعے جدید ترین مستقبل کی ٹیکنالوجیز کی مطابقت।'
+                    '1. 10 ملین افراد کے لیے السان، گیونگجو اور پوہانگ کو ملا کر ہایوریوم میگاسٹی کی تعمیر۔',
+                    '2. 50 سے زائد ممالک کے عالمی صارفین کے لیے ریئل ٹائم کثیر لسانی نظام کی حمایت۔',
+                    '3. شفاف گردش کے لیے 100% پائی کریپٹو کرنسی سنگل اکنامک زون کا نفاذ۔',
+                    '4. بقا کے دباؤ کو مکمل طور پر ختم کرنے کے لیے خالص منافع کا 30 فیصد UBI کو دینا۔',
+                    '5. گیونگجو میں 165 منزلہ کنٹرول ٹاور کے ذریعے جدید ٹیکنالوجی کی بہترین مطابقت۔'
+                ]
+            },
+            'தமிழ்': {
+                mainTitle: 'ஹையோரியும் சிறப்பு நகர மாஸ்டர் பிளான்',
+                mainSub: 'உல்சான், கியோங்ஜூ மற்றும் போஹாங் ஒருங்கிணைந்த 10 மில்லியன் மெகாசிட்டி மற்றும் பை பொருளாதாரம்',
+                secTitle: '🌐 உலகளாவிய பார்வை வழிகாட்டி',
+                lines: [
+                    '1. 10 மில்லியன் மக்களுக்காக உல்சான், கியோங்ஜூ மற்றும் போஹாங்கை இணைக்கும் ஹையோரியும் மெகாசிட்டி கட்டுமானம்.',
+                    '2. 50-க்கும் மேற்பட்ட நாடுகளின் உலகளாவிய பயனர்களுக்கான நிகழ்நேர பன்மொழி அமைப்பு ஆதரவு.',
+                    '3. வெளிப்படையான சுழற்திக்காக 100% பை கிரிப்டோகரன்சி ஒற்றை பொருளாதார மண்டலத்தை செயல்படுத்துதல்.',
+                    '4. உயிர்வாழும் அழுத்தத்தை முழுமையாக அகற்ற நிகர லாபத்தில் 30% UBI-க்கு ஒதுக்கீடு.',
+                    '5. கியோங்ஜூவில் உள்ள 165 மாடி கட்டுப்பாட்டு கோபுரம் மூலம் எதிர்கால தொழில்நுட்பங்களின் ஒத்திசைவு.'
+                ]
+            },
+            'తెలుగు': {
+                mainTitle: 'హెయోరెం ప్రత్యేక నగర మాస్టర్ ప్లాన్',
+                mainSub: 'ఉల్సాన్, గ్యోంగ్జు మరియుపోహాంగ్ లను కలుపుతూ 10 మిలియన్ల మెగాసిటీ మరియు పై ఎకానమీ',
+                secTitle: '🌐 గ్లోబల్ విజన్ గైడ్',
+                lines: [
+                    '1. 10 మిలియన్ల ప్రజల కోసం ఉల్సాన్, గ్యోంగ్జు మరియు పోహాంగ్ లను అనుసంధానించే హెయోరెం మెగాసిటీ నిర్మాణం.',
+                    '2. 50 దేశాల కంటే ఎక్కువ గ్లోబల్ వినియోగదారుల కోసం రియల్ టైమ్ బహుభాషా వ్యవస్థ మద్దతు.',
+                    '3. పారదర్శక చెలామణి కోసం 100% పై క్రిప్టోకరెన్సీ సింగిల్ ఎకనామిక్ జోన్ అమలు.',
+                    '4. మనుగడ ఒత్తిడిని పూర్తిగా తొలగించడానికి నికర లాభంలో 30% UBIకి కేటాయింపు.',
+                    '5. గ్యోంగ్జులోని 165 అంతస్తుల కంట్రోల్ టవర్ ద్వారా అత్యాధునిక సాంకేతికతల సమకాలీకరణ.'
+                ]
+            },
+            'ગુજરાતી': {
+                mainTitle: 'હેઓરેઉમ સ્પેશિયલ સિટી માસ્ટરપ્લાન',
+                mainSub: 'ઉલ્સાન, ગ્યોંગજુ અને પોહાંગને જોડતી ૧૦ મિલિયન મેગાસિટી અને પાઈ અર્થવ્યવસ્થા',
+                secTitle: '🌐 વૈશ્વિક વિઝન માર્ગદર્શિકા',
+                lines: [
+                    '1. ૧૦ મિલિયન લોકો માટે ઉલ્સાન, ગ્યોંગજુ અને પોહાંગને જોડતી હેઓરેઉમ મેગાસિટીનું નિર્માણ.',
+                    '2. ૫૦ થી વધુ દેશોના વૈશ્વિક વપરાશકર્તાઓ માટે રીઅલ-ટાઇમ બહુભાષી સિસ્ટમ સપોર્ટ.',
+                    '3. પારદર્શક પરિભ્રમણ માટે ૧૦૦% પાઈ ક્રિપ્ટોકરન્સી સિંગલ ઇકોનોમિક ઝોન.',
+                    '4. અસ્તિત્વના દબાણને સંપૂર્ણપણે દૂર કરવા માટે ચોખ્ખા નફાના ૩૦% UBI ને ફાળવણી.',
+                    '5. ગ્યોંગજુમાં ૧૬૫ માળના કંટ્રોલ ટાવર દ્વારા ભવિષ્યની અદ્યતન તકનીકોનું સંકલન.'
+                ]
+            },
+            'ਪੰਜਾਬੀ': {
+                mainTitle: 'ਹੈਓਰੇਉਮ ਸਪੈਸ਼ਲ ਸਿਟੀ ਮਾਸਟਰਪਲਾਨ',
+                mainSub: 'ਉਲਸਾਨ, ਗਿਓਂਗਜੂ ਅਤੇ ਪੋਹਾਂਗ ਨੂੰ ਜੋੜਦੀ 10 ਮਿਲੀਅਨ ਮੇਗਾਸਿਟੀ ਅਤੇ ਪਾਈ ਅਰਥਵਿ व्यवस्था',
+                secTitle: '🌐 ਗਲੋਬਲ ਵਿਜ਼ਨ ਗਾਈਡ',
+                lines: [
+                    '1. 10 ਮਿਲੀਅਨ ਲੋਕਾਂ ਲਈ ਉਲਸਾਨ, ਗਿਓਂਗਜੂ ਅਤੇ ਪੋਹਾਂਗ ਨੂੰ ਜੋੜ ਕੇ ਹੈਓਰੇਉਮ ਮੇਗਾਸਿਟੀ ਦੀ ਉਸਾਰੀ।',
+                    '2. 50 ਤੋਂ ਵੱਧ ਦੇਸ਼ਾਂ ਦੇ ਉਪਭੋਗਤਾਵਾਂ ਲਈ ਰੀਅਲ-ਟਾਈਮ ਬਹੁ-ਭاشਾਈ ਸਿਸਟਮ ਸਹਾਇਤਾ।',
+                    '3. ਪਾਰਦਰਸ਼ੀ ਸੰਚਾਰ ਲਈ 100% ਪਾਈ ਕ੍ਰਿਪਟോകਰੰਸੀ ਸਿੰਗਲ ਆਰਥਿਕ ਜ਼ोन।',
+                    '4. ਜਿਉਣ ਦੇ ਦਬਾਅ ਨੂੰ ਪੂਰੀ ਤਰ੍ਹਾਂ ਖਤਮ ਕਰਨ ਲਈ ਸ਼ੁੱਧ ਲਾਭ ਦਾ 30% UBI ਨੂੰ ਦੇਣਾ।',
+                    '5. ਗਿਓਂਗਜੂ ਵਿੱਚ 165 ਮੰ منزلہ ਕੰਟਰੋਲ ਟਾਵਰ ਰਾਹੀਂ ਤਕਨਾਲੋਜੀ ਦਾ ਸੰਕਲਨ।'
+                ]
+            },
+            'አማርኛ': {
+                mainTitle: 'የሀዮሬም ልዩ ከተማ ማስተርፕላን',
+                mainSub: 'ኡልሳን፣ ጊዮንግጁ እና ፖሃንግን የሚያስተሳስር የ10 ሚሊዮን ሜጋ ከተማ እና የፓይ ኢኮኖሚ',
+                secTitle: '🌐 ዓለም አቀፍ የእይታ መመሪያ',
+                lines: [
+                    '1. ለ10 ሚሊዮን ሕዝብ ኡልሳን፣ ጊዮንግጁ እና ፖሃንግን የሚያጠቃልል የሀዮሬም ሜጋ ከተማ መገንባት።',
+                    '2. ከ50 በላይ አገሮች ላሉ ዓለም አቀፍ ተጠቃሚዎች የብዙ ቋንቋ ስርዓት ድጋፍ ማድረግ።',
+                    '3. ግልጽ ዝውውር እንዲኖር 100% የፓይ ክሪፕቶ ከረንሲ ነጠላ የኢኮኖሚ ቀጠና መተግበር።',
+                    '4. የኑሮ ግፊትን ሙሉ በሙሉ ለማስወገድ የንጹህትርፍ 30% ለUBI (መሰረታዊ ገቢ) ማዋልል።',
+                    '5. በጊዮንግጁ ባለ 165 ፎቅ መቆጣጠሪያ ታወር አማካኝነት የወደፊት ቴክኖሎጂዎችን ማመሳሰል።'
+                ]
+            },
+            'Swahili (TZ)': {
+                mainTitle: 'Mpango Mkuu wa Jiji Maalum la Haeoreum (TZ)',
+                mainSub: 'Megasijiti ya watu milioni 10 ikijumuisha Ulsan, Gyeongju, na Pohang',
+                secTitle: '🌐 Mwongozo wa Maono ya Kitanzania na Kimataifa',
+                lines: [
+                    '1. Ujenzi wa megasijiti ya Haeoreum inayounganisha Ulsan, Gyeongju, na Pohang.',
+                    '2. Kusaidia mifumo ya lugha mbalimbali kwa watumiaji wa kimataifa.',
+                    '3. Utekelezaji wa eneo la kiuchumi la sarafu ya Pi kwa mzunguko wa wazi.',
+                    '4. Kuelekeza 30% ya faida halisi kwa UBI kuondoa shinikizo la kimaisha.',
+                    '5. Usawazishaji wa teknolojia kupitia mnara wa udhibiti wa ghorofa 165 huko Gyeongju.'
+                ]
+            },
+            'Tagalog': {
+                mainTitle: 'Haeoreum Special City Masterplan',
+                mainSub: '10M Megacity na nag-uugnay sa Ulsan, Gyeongju, at Pohang',
+                secTitle: '🌐 Global Vision Guide',
+                lines: [
+                    '1. Pagtatayo ng Haeoreum megacity para sa 10 milyong tao.',
+                    '2. Suporta sa real-time multilingual system para sa mga pandaigdigang gumagamit.',
+                    '3. Pagpapatupad ng 100% Pi cryptocurrency economic zone.',
+                    '4. Pagtatalaga ng 30% ng netong kita sa UBI para sa kapakanan ng lahat.',
+                    '5. Perpektong pagsasabay ng teknolohiya sa pamamagitan ng control tower sa Gyeongju.'
+                ]
+            },
+            'Jawa': {
+                mainTitle: 'Masterplan Kutha Khusus Haeoreum',
+                mainSub: 'Megakutha 10 Yuta Jiwa Ngintergrasikake Ulsan, Gyeongju, lan Pohang',
+                secTitle: '🌐 Pandhuan Visi Global',
+                lines: [
+                    '1. Mbangun megakutha Haeoreum sing nggabungake Ulsan, Gyeongju, lan Pohang.',
+                    '2. Ndhukung sistem multi-basa wektu nyata kanggo pangguna global.',
+                    '3. Penerapan zona ekonomi tunggal 100% Pi kanggo sirkulasi transparan.',
+                    '4. Alokasi 30% bathi net menyang UBI kanggo mbusak tekanan urip.',
+                    '5. Sinkronisasi sampurna teknologi liwat menara kontrol 165 lantai ing Gyeongju.'
+                ]
+            },
+            'Basa Sunda': {
+                mainTitle: 'Masterplan Kota Khusus Haeoreum',
+                mainSub: 'Megakota 10 Juta Jiwa Ngahijikeun Ulsan, Gyeongju, jeung Pohang',
+                secTitle: '🌐 Pituduh Visi Global',
+                lines: [
+                    '1. Ngawangun megakota Haeoreum anu ngahijikeun Ulsan, Gyeongju, jeung Pohang.',
+                    '2. Ngarojong sistem multi-basa sacara real-time pikeun pangguna global.',
+                    '3. Nerapkeun zona ékonomi tunggal 100% Pi pikeun sirkulasi transparan.',
+                    '4. Ngabagi 30% tina kauntungan bersih ka UBI pikeun ngaleungitkeun tekanan hirup.',
+                    '5. Sinkronisasi sampurna téknologi ngaliwatan menara kontrol 165 lantai di Gyeongju.'
+                ]
+            },
+            'Hausa': {
+                mainTitle: 'Babban Tsarin Birni na Musamman na Haeoreum',
+                mainSub: 'Babban Birni na Miliyan 10 mai haɗa Ulsan, Gyeongju, da Pohang',
+                secTitle: '🌐 Jagorar Hangen Nesa na Duniya',
+                lines: [
+                    '1. Gina babban birni na Haeoreum wanda ke haɗa Ulsan, Gyeongju, da Pohang.',
+                    '2. Taimakawa tsarin harsuna da yawa na lokaci-lokaci ga masu amfani a duniya.',
+                    '3. Aiwatar da yankin tattalin arziki na Pi 100% don yaɗawa a fili.',
+                    '4. Ware kashi 30% na ribar net zuwa UBI don kawar da matsin rayuwa.',
+                    '5. Daidaita fasahar zamani ta hanyar hasumiyar sarrafawa mai hawa 165 a Gyeongju.'
+                ]
+            },
+            'Yoruba': {
+                mainTitle: 'Eto Agbaye Ilu Pataki Haeoreum',
+                mainSub: 'Ilu Nla 10M ti n ṣọkan Ulsan, Gyeongju, ati Pohang pẹlu Ọrọ Aje Pi',
+                secTitle: '🌐 Itọsọna Iran Agbaye',
+                lines: [
+                    '1. Ikoleilu nla Haeoreum ti o n ṣọkan Ulsan, Gyeongju, ati Pohang fun eniyan miliọnu mẹwa.',
+                    '2. Atilẹyin fun eto ede pupọ ni akoko gidi fun awọn olumulo agbaye.',
+                    '3. Imuse agbegbe eto-aje 100% Pi kan fun kaakiri gbangba.',
+                    '4. Sikirin 30% ti ere net si UBI lati mu titẹ laaye kuro patapata.',
+                    '5. Ibaramu pipe ti awọn imọ-ẹrọ iwaju nipasẹ ile-itura iṣakoso 165 ni Gyeongju.'
+                ]
+            },
+            'Igbo': {
+                mainTitle: 'Atụmatụ Mgbakọ Obodo Pụrụ Iche Haeoreum',
+                mainSub: 'Obodo Ukwu nde 10 na-ejikọ Ulsan, Gyeongju, na Pohang',
+                secTitle: '🌐 Nduzi Ọhụụ Mba Uwa',
+                    'lines': [
+                    '1. Owuwu obodo ukwu Haeoreum jikọrọ Ulsan, Gyeongju, na Pohang maka mmadụ nde iri.',
+                    '2. Nkwado usoro asụsụ dị iche iche n’oge n’ezie maka ndị ọrụ zuru ụwa ọnụ.',
+                    '3. Mmezue mpaghara akụ na ụba otu 100% Pi maka mgbasa doro anyיה (doro anya).',
+                    '4. Inye 30% nke uru net na UBI iji kpochapụ nchegbu ndụ kpamkpam.',
+                    '5. Mmekọrịta ziri ezi nke teknụzụ site n’elu ụlọ njikwa nwere okpukpu 165 na Gyeongju.'
+                ]
+            },
+            'isiZulu': {
+                mainTitle: 'Uhlelo Lomuzi Okhethekile i-Haeoreum',
+                mainSub: 'I dolobha elikhulu lezigidi eziyi-10 lihlanganisa i-Ulsan, i-Gyeongju, ne-Pohang',
+                secTitle: '🌐 Umhlahlandlela Wombono Womhlaba Wonke',
+                lines: [
+                    '1. Ukwakha idolobha elikhulu i-Haeoreum ehlanganisa i-Ulsan, i-Gyeongju, ne-Pohang yabantu abayizigidi eziyi-10.',
+                    '2. Ukusekela izinhlelo zezilimi eziningi zesikhathi sangempela kubasebenzisi bomhlaba wonke.',
+                    '3. Ukusebenzisa indawo yezomnotho eyodwa ka-100% Pi yokusakaza okungafihli lutho.',
+                    '4. Ukudlulisa u-30% wenzuzo ehlanzekile ku-UBI ukuze kuqedwe ingcindezi yokuphila.',
+                    '5. Ukuvumelanisa okuphelele kobuchwepheshe besikhathi esizayo ngenqaba yokulawula enezitezi ezingu-165 e-Gyeongju.'
+                ]
+            },
+            'Afrikaans': {
+                mainTitle: 'Haeoreum Spesiale Stad Meesterplan',
+                mainSub: '10M Megastad wat Ulsan, Gyeongju en Pohang integreer met Pi-ekonomie',
+                secTitle: '🌐 Wêreldwye Visiogids',
+                lines: [
+                    '1. Die bou van die Haeoreum-megastad wat Ulsan, Gyeongju en Pohang vir 10 miljoen mense integreer.',
+                    '2. Ondersteuning vir meertalige intydse stelsels vir globale gebruikers oor meer as 50 lande.',
+                    '3. Implementering van \'n 100% Pi-kriptogeldeenheid enkel ekonomiese sone.',
+                    '4. Toewysing van 30% van netto wins aan UBI om oorlewingsdruk heeltemal uit te skakel.',
+                    '5. Perfekte sinchronisasie van tegnologie deur die 165-verdieping beheertoring in Gyeongju.'
+                ]
+            },
+            'Azərbaycanca': {
+                mainTitle: 'Haeoreum Xüsusi Şəhər Baş Planı',
+                mainSub: 'Ulsan, Gyeongju və Pohang-ı Pi İqtisadiyyatı ilə birləşdirən 10 Milyonluq Meqaşəhər',
+                secTitle: '🌐 Qlobal Baxış Bələdçisi',
+                lines: [
+                    '1. 10 milyon insan üçün Ulsan, Gyeongju və Pohangı birləşdirən Haeoreum meqaşəhərinin tikintisi.',
+                    '2. 50-dən çox ölkədən olan qlobal istifadəçilər üçün real vaxt rejimində çoxdilli sistem dəstəyi.',
+                    '3. Şəffaf dövriyyə üçün 100% Pi kriptovalyutası vahid iqtisadi zonasının tətbiqi.',
+                    '4. Sağ qalma təzyiqini tamamilə aradan qaldırmaq üçün xalis mənfəətin 30%-nin UBI-yə yönəldilməsi.',
+                    '5. Gyeongju-dakı 165 mərtəbəli idarəetmə qülləsi vasitəsilə qabaqcıl texnologiyaların mükəmməl sinxronizasiyası.'
                 ]
             }
         };
 
-        function toggleMenu() {
-            const menu = document.getElementById('dropdownMenu');
-            menu.classList.toggle('active');
-            document.getElementById('langMenu').classList.remove('active');
-        }
-
         function toggleLangMenu() {
             const menu = document.getElementById('langMenu');
             menu.classList.toggle('active');
-            document.getElementById('dropdownMenu').classList.remove('active');
         }
 
-        function setLang(langName) {
+        function changeLang(langName) {
             const btn = document.querySelector('.lang-btn');
             btn.innerHTML = `🌐 ${langName} ▼`;
             document.getElementById('langMenu').classList.remove('active');
 
-            const data = translations[langName];
-            if (data) {
-                document.getElementById('mainTitle').innerText = data.title;
-                document.getElementById('mainSub').innerText = data.sub;
-                document.getElementById('sectionTitle').innerText = data.secTitle;
-                for (let i = 0; i < 5; i++) {
-                    const lineEl = document.getElementById(`line${i+1}`);
-                    if (lineEl && data.lines[i]) {
-                        lineEl.innerText = data.lines[i];
-                    }
-                }
-            }
+            const data = i18n[langName] || i18n['English'];
+            document.getElementById('mainTitle').innerText = data.mainTitle;
+            document.getElementById('mainSub').innerText = data.mainSub;
+            document.getElementById('sectionTitle').innerText = data.secTitle;
+            document.getElementById('line1').innerText = data.lines[0];
+            document.getElementById('line2').innerText = data.lines[1];
+            document.getElementById('line3').innerText = data.lines[2];
+            document.getElementById('line4').innerText = data.lines[3];
+            document.getElementById('line5').innerText = data.lines[4];
         }
 
         window.addEventListener('click', function(e) {
-            if (!e.target.closest('.menu-container')) {
-                document.getElementById('dropdownMenu').classList.remove('active');
-            }
-            if (!e.target.closest('.lang-dropdown-container')) {
+            if (!e.target.closest('#langContainer')) {
                 document.getElementById('langMenu').classList.remove('active');
             }
         });
