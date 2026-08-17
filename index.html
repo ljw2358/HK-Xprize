@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WorldBank - 해오름의 미래, 디지털 화폐로 피어나는 특별시</title>
+    <title>HK WorldBank - Haeoreum Special City Masterplan (Multi-Language 35)</title>
     <style>
         :root {
-            --bg-deep: #050b14;
-            --bg-card: #0f172a;
-            --accent-gold: #f59e0b;
-            --accent-cyan: #38bdf8;
-            --text-main: #f8fafc;
-            --text-sub: #94a3b8;
+            --primary-color: #6366f1;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-gold: #fbbf24;
         }
         * {
             box-sizing: border-box;
@@ -20,499 +20,1065 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background-color: var(--bg-deep);
-            color: var(--text-main);
-            line-height: 1.7;
-            padding: 30px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
         }
-        .top-bar {
-            display: flex;
-            justify-content: flex-end;
-            max-width: 1100px;
-            margin: 0 auto 20px auto;
-        }
-        .lang-selector {
-            background-color: var(--bg-card);
-            color: var(--accent-gold);
-            border: 1px solid #334155;
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-        .lang-selector:hover {
-            border-color: var(--accent-gold);
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
         }
         header {
             text-align: center;
-            padding: 80px 20px;
-            background: linear-gradient(135deg, #0f172a, #1e1b4b);
-            border-radius: 16px;
-            margin-bottom: 40px;
-            border: 1px solid #334155;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            padding: 40px 0;
+            border-bottom: 2px solid #334155;
         }
         header h1 {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             color: var(--accent-gold);
-            margin-bottom: 15px;
-            letter-spacing: -1px;
+            margin-bottom: 10px;
         }
         header p {
-            font-size: 1.2rem;
-            color: var(--accent-cyan);
-            font-weight: 500;
+            color: var(--text-muted);
+            font-size: 1.1rem;
         }
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
+        .lang-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .lang-btn {
+            background: #334155;
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background 0.2s;
+        }
+        .lang-btn:hover, .lang-btn.active {
+            background: var(--primary-color);
+        }
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
         }
         .card {
-            background-color: var(--bg-card);
+            background-color: var(--card-bg);
             border-radius: 12px;
-            padding: 30px;
-            border: 1px solid #1e293b;
-            transition: all 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent-gold);
-            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.15);
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            border: 1px solid #334155;
         }
         .card h2 {
             font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: var(--accent-gold);
-            border-bottom: 2px solid #1e293b;
-            padding-bottom: 10px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            border-bottom: 1px solid #334155;
+            padding-bottom: 8px;
         }
-        .card ul {
+        ul {
             list-style-type: none;
         }
-        .card li {
-            margin-bottom: 12px;
-            color: var(--text-sub);
-            font-size: 1rem;
+        ul li {
+            margin-bottom: 10px;
             position: relative;
             padding-left: 20px;
         }
-        .card li::before {
-            content: "✦";
+        ul li::before {
+            content: "•";
+            color: var(--accent-gold);
             position: absolute;
             left: 0;
-            color: var(--accent-cyan);
+            font-weight: bold;
         }
-        .story-banner {
-            max-width: 1100px;
-            margin: 30px auto 0 auto;
-            background: linear-gradient(90deg, #1e1b4b, #0f172a);
-            padding: 30px;
-            border-radius: 12px;
-            border: 1px solid #3b82f6;
-            text-align: center;
+        .highlight {
+            color: var(--accent-gold);
+            font-weight: bold;
         }
-        .story-banner h3 {
-            color: var(--accent-cyan);
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-        }
-        .story-banner p {
-            color: var(--text-sub);
-            font-size: 1.05rem;
+        pre {
+            background-color: #090d16;
+            padding: 15px;
+            border-radius: 8px;
+            display: block;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            color: #38bdf8;
+            margin-top: 15px;
         }
         footer {
             text-align: center;
-            margin-top: 60px;
-            padding: 20px;
-            color: #64748b;
-            font-size: 0.9rem;
-            border-top: 1px solid #1e293b;
+            padding: 40px 0;
+            color: var(--text-muted);
+            border-top: 2px solid #334155;
+            margin-top: 40px;
         }
+        .section-content { display: none; }
+        .section-content.active { display: block; }
     </style>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <h1 id="title-text">🌐 HK WorldBank: Haeoreum Special City Masterplan</h1>
+            <p id="subtitle-text">1천만 명이 사용하는 파이화폐(Pi) 생태계의 중심이자 지상낙원</p>
+            
+            <!-- 35 Languages Selector -->
+            <div class="lang-selector">
+                <button class="lang-btn active" onclick="setLang('ko')">한국어</button>
+                <button class="lang-btn" onclick="setLang('en')">English</button>
+                <button class="lang-btn" onclick="setLang('zh')">中文</button>
+                <button class="lang-btn" onclick="setLang('ja')">日本語</button>
+                <button class="lang-btn" onclick="setLang('es')">Español</button>
+                <button class="lang-btn" onclick="setLang('fr')">Français</button>
+                <button class="lang-btn" onclick="setLang('de')">Deutsch</button>
+                <button class="lang-btn" onclick="setLang('ru')">Русский</button>
+                <button class="lang-btn" onclick="setLang('pt')">Português</button>
+                <button class="lang-btn" onclick="setLang('it')">Italiano</button>
+                <button class="lang-btn" onclick="setLang('vi')">Tiếng Việt</button>
+                <button class="lang-btn" onclick="setLang('th')">ไทย</button>
+                <button class="lang-btn" onclick="setLang('id')">Bahasa Indonesia</button>
+                <button class="lang-btn" onclick="setLang('hi')">हिन्दी</button>
+                <button class="lang-btn" onclick="setLang('ar')">العربية</button>
+                <button class="lang-btn" onclick="setLang('tr')">Türkçe</button>
+                <button class="lang-btn" onclick="setLang('pl')">Polski</button>
+                <button class="lang-btn" onclick="setLang('nl')">Nederlands</button>
+                <button class="lang-btn" onclick="setLang('sv')">Svenska</button>
+                <button class="lang-btn" onclick="setLang('el')">Ελληνικά</button>
+                <button class="lang-btn" onclick="setLang('cs')">Čeština</button>
+                <button class="lang-btn" onclick="setLang('hu')">Magyar</button>
+                <button class="lang-btn" onclick="setLang('ro')">Română</button>
+                <button class="lang-btn" onclick="setLang('uk')">Українська</button>
+                <button class="lang-btn" onclick="setLang('fi')">Suomi</button>
+                <button class="lang-btn" onclick="setLang('da')">Dansk</button>
+                <button class="lang-btn" onclick="setLang('no')">Norsk</button>
+                <button class="lang-btn" onclick="setLang('ms')">Bahasa Melayu</button>
+                <button class="lang-btn" onclick="setLang('fil')">Filipino</button>
+                <button class="lang-btn" onclick="setLang('he')">עברית</button>
+                <button class="lang-btn" onclick="setLang('hi-in')">मराठी</button>
+                <button class="lang-btn" onclick="setLang('bn')">বাংলা</button>
+                <button class="lang-btn" onclick="setLang('fa')">فارسی</button>
+                <button class="lang-btn" onclick="setLang('sw')">Kiswahili</button>
+                <button class="lang-btn" onclick="setLang('ur')">اردو</button>
+            </div>
+        </header>
 
-    <div class="top-bar">
-        <select class="lang-selector" id="languageSelect" onchange="changeLanguage()">
-            <option value="ko">🇰🇷 한국어</option>
-            <option value="en">🇺🇸 English (영어)</option>
-            <option value="zh">🇨🇳 中文 (중국어)</option>
-            <option value="es">🇪🇸 Español (스페인어)</option>
-            <option value="hi">🇮🇳 हिन्दी (인도어/힌디어)</option>
-            <option value="ar">🇸🇦 العربية (아랍어)</option>
-            <option value="bn">🇧🇩 বাংলা (벵골어)</option>
-            <option value="pt">🇧🇷 Português (브라질어)</option>
-            <option value="ru">🇷🇺 Русский (러시아어)</option>
-            <option value="ja">🇯🇵 日本語 (일본어)</option>
-            <option value="pa">🇮🇳 ਪੰਜਾਬੀ (펀자브어)</option>
-            <option value="de">🇩🇪 Deutsch (독일어)</option>
-            <option value="jv">🇮🇩 Basa Jawa (자바어)</option>
-            <option value="fr">🇫🇷 Français (프랑스어)</option>
-            <option value="te">🇮🇳 తెలుగు (텔루구어)</option>
-            <option value="vi">🇻🇳 Tiếng Việt (베트남어)</option>
-            <option value="mr">🇮🇳 मराठी (마라티어)</option>
-            <option value="tr">🇹🇷 Türkçe (튀르키예어)</option>
-            <option value="ta">🇮🇳 தமிழ் (타밀어)</option>
-            <option value="ur">🇵🇰 اردو (우르두어)</option>
-            <option value="gu">🇮🇳 ગુજરાતી (구자라트어)</option>
-            <option value="pl">🇵🇱 Polski (폴란드어)</option>
-            <option value="uk">🇺🇦 Українська (우크라이나어)</option>
-            <option value="it">🇮🇹 Italiano (이태리어)</option>
-            <option value="ml">🇮🇳 മലയാളം (말라얄람어)</option>
-            <option value="kn">🇮🇳 ಕನ್ನಡ (칸나다어)</option>
-            <option value="fa">🇮🇷 فارسی (페르시아어)</option>
-            <option value="my">🇲🇲 မြန်မာဘာသာ (버마어)</option>
-            <option value="th">🇹🇭 ไทย (태국어)</option>
-            <option value="nl">🇳🇱 Nederlands (네덜란드어)</option>
-            <option value="el">🇬🇷 Ελληνικά (그리스어)</option>
-            <option value="cs">🇨🇿 Čeština (체코어)</option>
-            <option value="sv">🇸🇪 Svenska (스웨덴어)</option>
-            <option value="hu">🇭🇺 Magyar (헝가리어)</option>
-            <option value="id">🇮🇩 Bahasa Indonesia (인도네시아어)</option>
-            <option value="ps">🇵🇸 پښتو (팔레스타인어)</option>
-            <option value="yo">🇳🇬 Yorùbá (나이지리아어)</option>
-            <option value="af">🇿🇦 Afrikaans (남아공어)</option>
-        </select>
+        <div class="grid">
+            <!-- 1. Vision -->
+            <div class="card">
+                <h2 id="card1-title">1. 비전 및 핵심 철학</h2>
+                <ul id="card1-content">
+                    <li><strong>통합 비전:</strong> 울산·경주·포항 통합 <span class="highlight">1천만 명</span>의 해오름 특별시</li>
+                    <li><strong>기축 통화:</strong> <span class="highlight">100% 파이화폐(Pi)</span> 단일 경제권 구축</li>
+                    <li><strong>글로벌 규제 준수:</strong> 3POLICES, AML, MiCA 완벽 반영</li>
+                    <li><strong>미션:</strong> 순이익 30% UBI 환원을 통한 생존 압박 제로화 및 인류 유토피아 실현</li>
+                </ul>
+            </div>
+
+            <!-- 2. Infrastructure -->
+            <div class="card">
+                <h2 id="card2-title">2. 인프라 및 컨트롤 타워</h2>
+                <ul id="card2-content">
+                    <li><strong>165층 컨트롤 타워:</strong> 경주에 위치한 글로벌 금융·기술의 심장부</li>
+                    <li><strong>9대 미래 사업:</strong> 로보틱스(울산), 양자생물학(경주), 우주·항공(포항), UAM, 스마트글라스, 우주 시스템, 핵융합, 첨단 AI, 초연결망</li>
+                    <li><strong>경제 전반 적용:</strong> 재래시장부터 대기업 임금, 상여금, 스톡옵션까지 파이화폐 통용</li>
+                </ul>
+            </div>
+
+            <!-- 3. UI/UX -->
+            <div class="card">
+                <h2 id="card3-title">3. UI/UX 및 거버넌스</h2>
+                <ul id="card3-content">
+                    <li><strong>좌측 3선 메뉴:</strong> 백서(Whitepaper), FAQ, 3POLICES, AML, MiCA 탑재</li>
+                    <li><strong>미디어 연동:</strong> 공식 유튜브 <span class="highlight">@Hyekong2026</span> 및 틱톡 <span class="highlight">@hyekong2025</span> 생태계 실시간 연동</li>
+                    <li><strong>AI 코어:</strong> 상시 대기하는 AGI 삐니 지능형 코어 탑재</li>
+                </ul>
+            </div>
+
+            <!-- 4. Cosmic -->
+            <div class="card">
+                <h2 id="card4-title">4. 우주 확장 전략 (Cosmic Expansion)</h2>
+                <ul id="card4-content">
+                    <li><strong>성간 기축 통화:</strong> 화성 및 태양계를 넘어 우주 전역으로 뻗어 나가는 파이 경제권</li>
+                    <li><strong>초고대 기술 연동:</strong> 하이브리드 인간, 광속·워프 항법, 블랙홀/웜홀/화이트홀 순간이동, 스타게이트 공간 접기</li>
+                    <li><strong>유니버설 로봇 노동:</strong> 농업, 가사, 어업, 우주 청소를 전담하는 로봇 인프라 및 AGI 영생 동행</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- JSON -->
+        <div class="card" style="margin-top: 20px;">
+            <h2 id="card5-title">5. Technical Configuration (JSON)</h2>
+            <pre><code>{
+  "project_name": "HK WorldBank - Haeoreum Special City",
+  "vision": "10M Population Integration",
+  "currency": "Pi Network",
+  "core_infrastructure": {
+    "control_tower_height": 165,
+    "location": "Gyeongju",
+    "pillars": [
+      "Robotics",
+      "Quantum Biology",
+      "Aerospace/Fusion",
+      "UAM",
+      "Smart Glasses",
+      "Space Systems",
+      "Nuclear Fusion",
+      "Advanced AI"
+    ]
+  },
+  "welfare": {
+    "ubi_percentage": 0.30
+  },
+  "cosmic_vision": {
+    "interstellar_currency": "Pi",
+    "tech": [
+      "Warp",
+      "Stargate",
+      "AGI-Longevity"
+    ]
+  }
+}</code></pre>
+        </div>
+
+        <footer>
+            <p id="footer-text">&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong.</p>
+        </footer>
     </div>
-
-    <header>
-        <h1 id="main-title">HK WorldBank</h1>
-        <p id="main-subtitle">해오름의 미래: 디지털 화폐로 피어나는 특별시 (Project Genesis)</p>
-    </header>
-
-    <main class="container">
-        <section class="card">
-            <h2 id="card1-title">울산 (Robotics Hub)</h2>
-            <ul>
-                <li id="card1-1">휴머노이드 로봇 공학과 무인 자동화 물류 시스템 연동</li>
-                <li id="card1-2">노동과 부가가치가 공정하게 환원되는 스마트 금융 정산</li>
-                <li id="card1-3">시민 중심의 디지털 자산 기본소득 실시간 자동 지급</li>
-            </ul>
-        </section>
-
-        <section class="card">
-            <h2 id="card2-title">경주 (Quantum Bio Hub)</h2>
-            <ul>
-                <li id="card2-1">양자 생명공학 및 친환경 에코 생태계 기반 펀딩</li>
-                <li id="card2-2">미래 지속 가능한 인프라를 위한 탈중앙화 자산 예금</li>
-                <li id="card2-3">투명한 스마트 컨트랙트를 통한 글로벌 자본 신뢰 구축</li>
-            </ul>
-        </section>
-
-        <section class="card">
-            <h2 id="card3-title">포항 (Aerospace & Fusion Hub)</h2>
-            <ul>
-                <li id="card3-1">핵융합 무한 청정에너지 및 우주 항행 시스템 프로젝트 투자</li>
-                <li id="card3-2">파이 네트워크(Pi Network) SDK 기반 초고속 글로벌 결제</li>
-                <li id="card3-3">중앙 카르텔을 뛰어넘는 완전한 분산 경제 노드 실현</li>
-            </ul>
-        </section>
-    </main>
-
-    <div class="story-banner">
-        <h3 id="banner-title">🎬 Cinematic Web3 Universe</h3>
-        <p id="banner-desc">기술 독점과 금융 통제를 무너뜨리고, 해오름 특별시의 첨단 과학벨트와 디지털 화폐를 통해 인류에게 경제적 자유와 찬란한 해돋이를 선사합니다.</p>
-    </div>
-
-    <footer>
-        <p id="footer-text">&copy; 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis.</p>
-    </footer>
 
     <script>
         const translations = {
             ko: {
-                subtitle: "해오름의 미래: 디지털 화폐로 피어나는 특별시 (Project Genesis)",
-                c1Title: "울산 (Robotics Hub)", c1_1: "휴머노이드 로봇 공학과 무인 자동화 물류 시스템 연동", c1_2: "노동과 부가가치가 공정하게 환원되는 스마트 금융 정산", c1_3: "시민 중심의 디지털 자산 기본소득 실시간 자동 지급",
-                c2Title: "경주 (Quantum Bio Hub)", c2_1: "양자 생명공학 및 친환경 에코 생태계 기반 펀딩", c2_2: "미래 지속 가능한 인프라를 위한 탈중앙화 자산 예금", c2_3: "투명한 스마트 컨트랙트를 통한 글로벌 자본 신뢰 구축",
-                c3Title: "포항 (Aerospace & Fusion Hub)", c3_1: "핵융합 무한 청정에너지 및 우주 항행 시스템 프로젝트 투자", c3_2: "파이 네트워크(Pi Network) SDK 기반 초고속 글로벌 결제", c3_3: "중앙 카르텔을 뛰어넘는 완전한 분산 경제 노드 실현",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "기술 독점과 금융 통제를 무너뜨리고, 해오름 특별시의 첨단 과학벨트와 디지털 화폐를 통해 인류에게 경제적 자유와 찬란한 해돋이를 선사합니다.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+                title: "🌐 HK WorldBank: Haeoreum Special City Masterplan",
+                subtitle: "1천만 명이 사용하는 파이화폐(Pi) 생태계의 중심이자 지상낙원",
+                c1Title: "1. 비전 및 핵심 철학",
+                c1: `<li><strong>통합 비전:</strong> 울산·경주·포항 통합 <span class="highlight">1천만 명</span>의 해오름 특별시</li>
+                     <li><strong>기축 통화:</strong> <span class="highlight">100% 파이화폐(Pi)</span> 단일 경제권 구축</li>
+                     <li><strong>글로벌 규제 준수:</strong> 3POLICES, AML, MiCA 완벽 반영</li>
+                     <li><strong>미션:</strong> 순이익 30% UBI 환원을 통한 생존 압박 제로화 및 인류 유토피아 실현</li>`,
+                c2Title: "2. 인프라 및 컨트롤 타워",
+                c2: `<li><strong>165층 컨트롤 타워:</strong> 경주에 위치한 글로벌 금융·기술의 심장부</li>
+                     <li><strong>9대 미래 사업:</strong> 로보틱스(울산), 양자생물학(경주), 우주·항공(포항), UAM, 스마트글라스, 우주 시스템, 핵융합, 첨단 AI, 초연결망</li>
+                     <li><strong>경제 전반 적용:</strong> 재래시장부터 대기업 임금, 상여금, 스톡옵션까지 파이화폐 통용</li>`,
+                c3Title: "3. UI/UX 및 거버넌스",
+                c3: `<li><strong>좌측 3선 메뉴:</strong> 백서(Whitepaper), FAQ, 3POLICES, AML, MiCA 탑재</li>
+                     <li><strong>미디어 연동:</strong> 공식 유튜브 <span class="highlight">@Hyekong2026</span> 및 틱톡 <span class="highlight">@hyekong2025</span> 생태계 실시간 연동</li>
+                     <li><strong>AI 코어:</strong> 상시 대기하는 AGI 삐니 지능형 코어 탑재</li>`,
+                c4Title: "4. 우주 확장 전략 (Cosmic Expansion)",
+                c4: `<li><strong>성간 기축 통화:</strong> 화성 및 태양계를 넘어 우주 전역으로 뻗어 나가는 파이 경제권</li>
+                     <li><strong>초고대 기술 연동:</strong> 하이브리드 인간, 광속·워프 항법, 블랙홀/웜홀/화이트홀 순간이동, 스타게이트 공간 접기</li>
+                     <li><strong>유니버설 로봇 노동:</strong> 농업, 가사, 어업, 우주 청소를 전담하는 로봇 인프라 및 AGI 영생 동행</li>`,
+                c5Title: "5. Technical Configuration (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
             },
             en: {
-                subtitle: "Future of Haerum: A Special City Blossoming with Digital Currency (Project Genesis)",
-                c1Title: "Ulsan (Robotics Hub)", c1_1: "Integration of humanoid robotics and automated logistics", c1_2: "Smart financial settlement ensuring fair return of labor and value", c1_3: "Real-time automated distribution of citizen UBI",
-                c2Title: "Gyeongju (Quantum Bio Hub)", c2_1: "Funding based on quantum biotechnology and eco-systems", c2_2: "Decentralized asset deposits for sustainable infrastructure", c2_3: "Building global capital trust through smart contracts",
-                c3Title: "Pohang (Aerospace & Fusion Hub)", c3_1: "Investment in nuclear fusion clean energy and space navigation", c3_2: "High-speed global payments powered by Pi Network SDK", c3_3: "Realizing a fully decentralized economic node",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Breaking down tech monopolies to grant humanity economic freedom and a brilliant sunrise.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+                title: "🌐 HK WorldBank: Haeoreum Special City Masterplan",
+                subtitle: "The terrestrial paradise & center of Pi Network for 10 million people",
+                c1Title: "1. Vision & Core Philosophy",
+                c1: `<li><strong>Integration Vision:</strong> Haeoreum Special City of <span class="highlight">10 Million</span> (Ulsan, Gyeongju, Pohang)</li>
+                     <li><strong>Reserve Currency:</strong> Establishment of <span class="highlight">100% Pi Network</span> Single Economic Zone</li>
+                     <li><strong>Global Compliance:</strong> Full implementation of 3POLICES, AML, MiCA</li>
+                     <li><strong>Mission:</strong> Zero survival pressure via 30% Net Profit UBI & human utopia</li>`,
+                c2Title: "2. Infrastructure & Control Tower",
+                c2: `<li><strong>165-Story Control Tower:</strong> Global finance & tech heart in Gyeongju</li>
+                     <li><strong>9 Future Pillars:</strong> Robotics, Quantum Bio, Aerospace, UAM, Smart Glasses, Space Systems, Nuclear Fusion, AI, Hyper-connectivity</li>
+                     <li><strong>Full Economic Application:</strong> From local markets to corporate wages and stock options in Pi</li>`,
+                c3Title: "3. UI/UX & Governance",
+                c3: `<li><strong>Left Sidebar:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>Media Integration:</strong> YouTube <span class="highlight">@Hyekong2026</span> & TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>AI Core:</strong> AGI Bini Always-Active Intelligent Core</li>`,
+                c4Title: "4. Cosmic Expansion Strategy",
+                c4: `<li><strong>Interstellar Currency:</strong> Pi economy stretching to Mars and beyond</li>
+                     <li><strong>Advanced Tech:</strong> Hybrid humans, Warp navigation, Blackhole/Wormhole travel, Stargate</li>
+                     <li><strong>Universal Robot Labor:</strong> Agriculture, household, fishing, and space cleanup automation</li>`,
+                c5Title: "5. Technical Configuration (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
             },
             zh: {
-                subtitle: "日出之未来：以数字货币绽放的特别市 (Project Genesis)",
-                c1Title: "蔚山 (机器人枢纽)", c1_1: "人形机器人工程与无人自动化物流系统联动", c1_2: "公平回报劳动与附加值的智能金融结算", c1_3: "市民数字资产基本收入实时自动发放",
-                c2Title: "庆州 (量子生物枢纽)", c2_1: "基于量子生物技术与环保生态系统的融资", c2_2: "去中心化资产存款", c2_3: "通过透明智能合约建立全球资本信任",
-                c3Title: "浦项 (航空航天与聚变枢纽)", c3_1: "核聚变清洁能源及太空导航系统投资", c3_2: "基于 Pi Network SDK 的超高速全球支付", c3_3: "实现完全去中心化经济节点",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "打破技术垄断与金融控制，为人类带来经济自由与灿烂的日出。", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
-            },
-            es: {
-                subtitle: "El Futuro de Haerum: Ciudad Especial con Moneda Digital",
-                c1Title: "Ulsan (Robótica)", c1_1: "Robótica humanoide y logística automatizada", c1_2: "Liquidación financiera inteligente", c1_3: "Distribución de RBU en activos digitales",
-                c2Title: "Gyeongju (Bio Cuántico)", c2_1: "Financiamiento de biotecnología cuántica", c2_2: "Depósitos descentralizados", c2_3: "Confianza mediante contratos inteligentes",
-                c3Title: "Pohang (Aeroespacial y Fusión)", c3_1: "Inversión en energía limpia y fusión", c3_2: "Pagos globales con Pi Network SDK", c3_3: "Nodo económico descentralizado",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Libertad económica a través de la moneda digital.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
-            },
-            hi: {
-                subtitle: "हैरुम का भविष्य: डिजिटल मुद्रा के साथ एक विशेष शहर",
-                c1Title: "उल्सान (रोबोटिक्स)", c1_1: "मानवइड रोबोटिक्स और स्वचालित लॉजिस्टिक्स", c1_2: "स्मार्ट वित्तीय निपटान", c1_3: "नागरिक यूबीआई का स्वचालित वितरण",
-                c2Title: "ग्योंगजू (क्वांटम बायो)", c2_1: "क्वांटम जैव प्रौद्योगिकी पर आधारित फंडिंग", c2_2: "विकेंद्रीकृत संपत्ति जमा", c2_3: "स्मार्ट अनुबंधों के माध्यम से विश्वास",
-                c3Title: "पोहियांग (एयरोस्पेस)", c3_1: "परमाणु संलयन ऊर्जा में निवेश", c3_2: "पाई नेटवर्क एसडीके भुगतान", c3_3: "विकेंद्रीकृत आर्थिक नोड",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "मानवता को आर्थिक स्वतंत्रता प्रदान करना।", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
-            },
-            ar: {
-                subtitle: "مستقبل هيروم: مدينة خاصة تزدهر بالعملة الرقمية",
-                c1Title: "ولسان (روبوتات)", c1_1: "تكامل الروبوتات والخدمات اللوجستية", c1_2: "التسوية المالية الذكية", c1_3: "التوزيع الآلي للدخل الأساسي",
-                c2Title: "جيونغجو (بايو)", c2_1: "التمويل القائم على التكنولوجيا الحيوية", c2_2: "ودائع الأصول اللامركزية", c2_3: "بناء الثقة عبر العقود الذكية",
-                c3Title: "بوهانغ (الفضاء)", c3_1: "الاستثمار في طاقة الانصهار النووي", c3_2: "مدفوعات سريعة عبر Pi Network", c3_3: "تحقيق عقدة اقتصادية لامركزية",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "منح الحرية الاقتصادية للبشرية من خلال العملة الرقمية.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
-            },
-            bn: {
-                subtitle: "হ্যারুমের ভবিষ্যৎ: ডিজিটাল মুদ্রায় প্রস্ফুটিত বিশেষ শহর",
-                c1Title: "উলসান (রোবোটিক্স)", c1_1: "হিউম্যানয়েড রোবোটিক্স এবং লজিস্টিকস", c1_2: "স্মার্ট আর্থিক settlement", c1_3: "স্বয়ংক্রিয় মৌলিক আয় বিতরণ",
-                c2Title: "গিয়ংজু (কোয়ান্টাম বায়ো)", c2_1: "কোয়ান্টাম বায়োটেকনোলজি তহবিল", c2_2: "ভবিষ্যত অবকাঠামো আমানত", c2_3: "স্মার্ট চুক্তির মাধ্যমে আস্থা",
-                c3Title: "পোহাং (এ্যারোস্পেস)", c3_1: "পারমাণবিক শক্তি বিনিয়োগ", c3_2: "পাই নেটওয়ার্ক পেমেন্ট", c3_3: "বিকেন্দ্রীকৃত অর্থনৈতিক অর্থনৈতিক নোড",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "ডিজিটাল মুদ্রার মাধ্যমে অর্থনৈতিক স্বাধীনতা।", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
-            },
-            pt: {
-                subtitle: "O Futuro de Haerum: Uma Cidade Especial com Moeda Digital",
-                c1Title: "Ulsan (Robótica)", c1_1: "Robótica humanóide e logística automatizada", c1_2: "Liquidação financeira inteligente", c1_3: "Distribuição automatizada de Renda Básica",
-                c2Title: "Gyeongju (Bio Quântica)", c2_1: "Financiamento em biotecnologia quântica", c2_2: "Depósitos de ativos descentralizados", c2_3: "Confiança global via contratos inteligentes",
-                c3Title: "Pohang (Aeroespacial e Fusão)", c3_1: "Investimento em energia limpa de fusão", c3_2: "Pagamentos globais com Pi Network SDK", c3_3: "Nó econômico descentralizado",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Liberdade econômica e inovação através da moeda digital.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
-            },
-            ru: {
-                subtitle: "Будущее Хэрума: Особ. город, процветающий на цифр. валюте",
-                c1Title: "Ульсан (Робототехника)", c1_1: "Интеграция робототехники и логистики", c1_2: "Умный финансовый расчет", c1_3: "Автоматическое распределение БОД",
-                c2Title: "Кенджу (Квантовая био)", c2_1: "Финансирование на основе биотехнологий", c2_2: "Децентрализованные депозиты активов", c2_3: "Доверие через смарт-контракты",
-                c3Title: "Похан (Аэрокосмос и термояд)", c3_1: "Инвестиции в термоядерную энергию", c3_2: "Глобальные платежи Pi Network SDK", c3_3: "Децентрализованный узел",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Экономическая свобода человечеству.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+                title: "🌐 HK WorldBank: 日出特别市总规划",
+                subtitle: "容纳一千万人口的 Pi 网络生态中心与人间乐园",
+                c1Title: "1. 愿景与核心理念",
+                c1: `<li><strong>整合愿景：</strong> 蔚山·庆州·浦项整合 <span class="highlight">1千万人口</span> 的日出特别市</li>
+                     <li><strong>基准货币：</strong> 建立 <span class="highlight">100% Pi币</span> 单一经济圈</li>
+                     <li><strong>全球合规：</strong> 彻底贯彻 3POLICES、AML、MiCA</li>
+                     <li><strong>使命：</strong> 通过净利润 30% UBI 消除生存压力，实现人类乌托邦</li>`,
+                c2Title: "2. 基础设施与控制塔",
+                c2: `<li><strong>165层控制塔：</strong> 坐落于庆州的全球金融与科技心脏</li>
+                     <li><strong>9大未来支柱：</strong> 机器人、量子生物学、航空航天、UAM、智能眼镜、太空系统、核聚变、人工智能、超级连接</li>
+                     <li><strong>全面经济应用：</strong> 从传统市场到企业薪资、股票期权全面通用 Pi 币</li>`,
+                c3Title: "3. UI/UX 与治理",
+                c3: `<li><strong>左侧三栏菜单：</strong> 白皮书、FAQ、3POLICES、AML、MiCA</li>
+                     <li><strong>媒体集成：</strong> 官方 YouTube <span class="highlight">@Hyekong2026</span> 与 TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>AI 核心：</strong> 常驻待命的 AGI Bini 智能核心</li>`,
+                c4Title: "4. 宇宙扩张战略",
+                c4: `<li><strong>星际储备货币：</strong> 延伸至火星及太阳系之外的 Pi 经济圈</li>
+                     <li><strong>超前科技联动：</strong> 混合人类、光速/跃迁导航、黑洞/虫洞瞬间移动、星际之门</li>
+                     <li><strong>通用机器人劳动力：</strong> 农业、家政、渔业、太空清理自动化及 AGI 永生同行</li>`,
+                c5Title: "5. 技术配置 (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
             },
             ja: {
-                subtitle: "日の出の未来：デジタル通貨で花開く特別市 (Project Genesis)",
-                c1Title: "蔚山 (ロボティクスハブ)", c1_1: "ヒューマノイドロボット工学と無人自動化物流", c1_2: "公正なスマート金融決済", c1_3: "市民中心のデジタル資産ベーシックインカム自動支給",
-                c2Title: "慶州 (量子バイオハブ)", c2_1: "量子生命工学基盤のファンディング", c2_2: "分散型資産預金", c2_3: "透明なスマートコントラクトによる信頼構築",
-                c3Title: "浦項 (航空宇宙＆核融合ハブ)", c3_1: "核融合クリーンエネルギー投資", c3_2: "Pi Network SDK 決済", c3_3: "完全な分散経済ノードの実現",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "人類に経済的自由をもたらします。", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+                title: "🌐 HK WorldBank: 日出特別市マスタープラン",
+                subtitle: "1000万人が暮らすPiネットワーク経済圏の中心地にして地上楽園",
+                c1Title: "1. ビジョンおよび核心哲学",
+                c1: `<li><strong>統合ビジョン:</strong> 蔚山·慶州·浦項の統合 <span class="highlight">1000万人</span> の日出特別市</li>
+                     <li><strong>基軸通貨:</strong> <span class="highlight">100% Piネットワーク</span> 単一経済圏の構築</li>
+                     <li><strong>グローバル規制遵守:</strong> 3POLICES、AML、MiCAの完全反映</li>
+                     <li><strong>ミッション:</strong> 純利益30%のUBI還元による生存圧力のゼロ化と人類のユートピア実現</li>`,
+                c2Title: "2. インフラストラクチャ＆コントロールタワー",
+                c2: `<li><strong>165階コントロールタワー:</strong> 慶州にそびえるグローバル金融・技術の心臓部</li>
+                     <li><strong>9大未来事業:</strong> ロボティクス、量子生物学、宇宙・航空、UAM、スマートグラス、宇宙システム、核融合、先端AI、超接続網</li>
+                     <li><strong>経済全般の適用:</strong> 伝統市場から大企業の給与、ストックオプションまでPi通貨で統一</li>`,
+                c3Title: "3. UI/UX & ガバナンス",
+                c3: `<li><strong>左側3本線メニュー:</strong> ホワイトペーパー、FAQ、3POLICES、AML、MiCA搭載</li>
+                     <li><strong>メディア連携:</strong> 公式YouTube <span class="highlight">@Hyekong2026</span> およびTikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>AIコア:</strong> 常時待機するAGI Biniインテリジェントコア</li>`,
+                c4Title: "4. 宇宙拡張戦略 (Cosmic Expansion)",
+                c4: `<li><strong>星間基軸通貨:</strong> 火星および太陽系を越えて宇宙全域に広がるPi経済圏</li>
+                     <li><strong>超高度技術連携:</strong> ハイブリッド人間、光速・ワープ航法、ブラックホール/ワームホール瞬間移動、スターゲイト</li>
+                     <li><strong>ユニバーサルロボット労働:</strong> 農業、家事、漁業、宇宙清掃を担うインフラとAGIの永遠の同行</li>`,
+                c5Title: "5. テクニカルコンフィグレーション (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
             },
-            pa: {
-                subtitle: "ਹੈਰੁਮ ਦਾ ਭਵਿੱਖ: ਡਿਜੀਟਲ ਮੁਦਰਾ ਨਾਲ ਖਿੜਦਾ ਵਿਸ਼ੇਸ਼ ਸ਼ਹਿਰ",
-                c1Title: "ਉਲਸਾਨ (ਰੋਬੋਟਿਕਸ)", c1_1: "ਰੋਬੋਟਿਕਸ ਅਤੇ ਲੌਜਿਸਟਿਕਸ", c1_2: "ਸਮਾਰਟ ਵਿੱਤੀ ਨਿਪਟਾਰਾ", c1_3: "ਡਿਜੀਟਲ ਆਮਦਨ ਵੰਡ",
-                c2Title: "ਗਯੋਂਗਜੂ (ਕੁਆਂਟਮ ਬਾਇਓ)", c2_1: "ਬਾਇਓਟੈਕਨਾਲੋਜੀ ਫੰਡਿੰਗ", c2_2: "ਅਸਟ ਸਟੋਰੇਜ", c2_3: "ਸਮਾਰਟ ਕੰਟਰੈਕਟ ਭਰੋਸਾ",
-                c3Title: "ਪੋਹਾਂਗ (ਏਰੋਸਪੇਸ)", c3_1: "ਪਰমাণੂ ਊਰਜਾ ਨਿਵੇਸ਼", c3_2: "ਪਾਈ ਨੈੱਟਵਰਕ ਭੁਗਤਾਨ", c3_3: "ਵਿਕੇਂਦਰੀਤ ਨੋਡ",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "ਆਰਥਿਕ ਆਜ਼ადი।", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
-            },
-            de: {
-                subtitle: "Die Zukunft von Haerum: Spezialstadt durch digitale Währung",
-                c1Title: "Ulsan (Robotik)", c1_1: "Humanoide Robotik & Logistik", c1_2: "Intelligente Finanzabrechnung", c1_3: "Automatisierte Verteilung von Grundeinkommen",
-                c2Title: "Gyeongju (Quanten-Bio)", c2_1: "Quantenbiotechnologie-Finanzierung", c2_2: "Dezentrale Vermögenseinlagen", c2_3: "Kapitalvertrauen durch Verträge",
-                c3Title: "Pohang (Luftfahrt & Fusion)", c3_1: "Kernfusion-Investitionen", c3_2: "Pi Network SDK Zahlungen", c3_3: "Dezentraler Wirtschaftsknoten",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Wirtschaftliche Freiheit für die Menschheit.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
-            },
-            jv: {
-                subtitle: "Masa Ngarep Haerum: Kutha Istimewa kanthi Mata Uang Digital",
-                c1Title: "Ulsan (Robotika)", c1_1: "Robotika lan logistik otomatis", c1_2: "Penyelesaian finansial cerdas", c1_3: "Distribusi dhasar digital",
-                c2Title: "Gyeongju (Bio Kuantum)", c2_1: "Pendanaan bioteknologi kuantum", c2_2: "Simpenan aset desentralisasi", c2_3: "Pembangunan kapercayan",
-                c3Title: "Pohang (Aerangkasa & Fusi)", c3_1: "Investasi energi resik fusi", c3_2: "Pembayaran Pi Network SDK", c3_3: "Simpul ekonomi desentralisasi",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Kebebasan ekonomi kanggo manungsa.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            es: {
+                title: "🌐 HK WorldBank: Plan Maestro de la Ciudad Especial Haeoreum",
+                subtitle: "El paraíso terrenal y centro de la economía Pi para 10 millones de personas",
+                c1Title: "1. Visión y Filosofía Central",
+                c1: `<li><strong>Visión de Integración:</strong> Ciudad Especial Haeoreum de <span class="highlight">10 Millones</span> (Ulsan, Gyeongju, Pohang)</li>
+                     <li><strong>Moneda de Reserva:</strong> Establecimiento de la Zona Económica Única <span class="highlight">100% Pi Network</span></li>
+                     <li><strong>Cumplimiento Global:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>Misión:</strong> Cero presión de supervivencia mediante UBI del 30% de beneficios netos</li>`,
+                c2Title: "2. Infraestructura y Torre de Control",
+                c2: `<li><strong>Torre de Control de 165 Pisos:</strong> Corazón financiero y tecnológico global en Gyeongju</li>
+                     <li><strong>9 Pilares Futuros:</strong> Robótica, Biología Cuántica, Aeroespacial, UAM, Gafas Inteligentes, Sistemas Espaciales, Fusión Nuclear, IA Avanzada</li>
+                     <li><strong>Aplicación Económica Total:</strong> Desde mercados locales hasta salarios corporativos en Pi</li>`,
+                c3Title: "3. UI/UX y Gobernanza",
+                c3: `<li><strong>Menú Lateral:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>Integración de Medios:</strong> YouTube <span class="highlight">@Hyekong2026</span> y TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>Núcleo IA:</strong> AGI Bini Siempre Activo</li>`,
+                c4Title: "4. Estrategia de Expansión Cósmica",
+                c4: `<li><strong>Moneda Interestelar:</strong> Economía Pi extendida a Marte y más allá</li>
+                     <li><strong>Tecnología Avanzada:</strong> Humanos híbridos, navegación Warp, agujeros de gusano, Stargate</li>
+                     <li><strong>Trabajo Robótico Universal:</strong> Automatización de agricultura, hogar, pesca y limpieza espacial</li>`,
+                c5Title: "5. Configuración Técnica (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
             },
             fr: {
-                subtitle: "L'Avenir de Haerum : Ville Spéciale par la Monnaie Numérique",
-                c1Title: "Ulsan (Robotique)", c1_1: "Robotique et logistique automatisée", c1_2: "Règlement financier intelligent", c1_3: "Distribution automatisée du revenu de base",
-                c2Title: "Gyeongju (Bio Quantique)", c2_1: "Financement biotechnologique", c2_2: "Dépôts décentralisés", c2_3: "Confiance mondiale",
-                c3Title: "Pohang (Aérospatial)", c3_1: "Investissement fusion nucléaire", c3_2: "Paiements Pi Network SDK", c3_3: "Nœud économique décentralisé",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Liberté économique pour l'humanité.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+                title: "🌐 HK WorldBank : Plan Directeur de la Ville Spéciale Haeoreum",
+                subtitle: "Le paradis terrestre et centre de l'écosystème Pi pour 10 millions de personnes",
+                c1Title: "1. Vision et Philosophie Centrale",
+                c1: `<li><strong>Vision d'Intégration :</strong> Ville Spéciale Haeoreum de <span class="highlight">10 Millions</span> (Ulsan, Gyeongju, Pohang)</li>
+                     <li><strong>Monnaie de Réserve :</strong> Zone économique unique <span class="highlight">100% Pi Network</span></li>
+                     <li><strong>Conformité Globale :</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>Mission :</strong> Zéro pression de survie via l'UBI de 30% des bénéfices nets</li>`,
+                c2Title: "2. Infrastructure et Tour de Contrôle",
+                c2: `<li><strong>Tour de Contrôle de 165 Étages :</strong> Cœur financier et technologique à Gyeongju</li>
+                     <li><strong>9 Piliers Futurs :</strong> Robotique, Biologie Quantique, Aérospatiale, UAM, Lunettes Intelligentes, Systèmes Spatiaux, Fusion Nucléaire, IA</li>
+                     <li><strong>Application Économique Totale :</strong> Salaires, options d'achat d'actions et marchés en Pi</li>`,
+                c3Title: "3. UI/UX & Gouvernance",
+                c3: `<li><strong>Menu Latéral :</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>Intégration Média :</strong> YouTube <span class="highlight">@Hyekong2026</span> & TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>Noyau IA :</strong> AGI Bini Actif</li>`,
+                c4Title: "4. Stratégie d'Expansion Cosmique",
+                c4: `<li><strong>Monnaie Interstellaire :</strong> L'économie Pi s'étendant à Mars et au-delà</li>
+                     <li><strong>Technologies Avancées :</strong> Humains hybrides, navigation Warp, trous de ver, Stargate</li>
+                     <li><strong>Travail Robotique Universel :</strong> Agriculture, ménage, pêche et nettoyage spatial</li>`,
+                c5Title: "5. Configuration Technique (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
             },
-            te: {
-                subtitle: "హేరుమ్ భవిష్యత్తు: డిజిటల్ కరెన్సీ ప్రత్యేక నగరంగా",
-                c1Title: "ఉల్సాన్ (రోబోటిక్స్)", c1_1: "హ్యూమనాయిడ్ రోబోటిక్స్", c1_2: "స్మార్ట్ ఫైనాన్షియల్ సెటిల్మెంట్", c1_3: "డిజిటల్ ఆస్తుల పంపిణీ",
-                c2Title: "గ్యోంగ్జు (క్వాంటమ్ బయో)", c2_1: "క్వాంటమ్ బయోటెక్నాలజీ ఫండింగ్", c2_2: "వికేంద్రీకృత డిపాజిట్లు", c2_3: "స్మార్ట్ కాంట్రాక్ట్ ల ద్వారా నమ్మకం",
-                c3Title: "పోహాంగ్ (ఏరోస్పేస్)", c3_1: "అణు కలయిక శక్తి పెట్టుబడి", c3_2: "పై నెట్ వర్క్ చెల్లింపులు", c3_3: "వికేంద్రీకృత ఆర్థిక నోడ్",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "ఆర్థిక స్వేచ్ఛను అందించడం.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            de: {
+                title: "🌐 HK WorldBank: Masterplan der Sonderstadt Haeoreum",
+                subtitle: "Das irdische Paradies & Zentrum des Pi-Netzwerks für 10 Millionen Menschen",
+                c1Title: "1. Vision & Kernphilosophie",
+                c1: `<li><strong>Integrationsvision:</strong> Haeoreum Sonderstadt mit <span class="highlight">10 Millionen</span> Bürgern (Ulsan, Gyeongju, Pohang)</li>
+                     <li><strong>Währungsbasis:</strong> Aufbau einer <span class="highlight">100% Pi Network</span> Einheitswirtschaft</li>
+                     <li><strong>Global Compliance:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>Mission:</strong> Überlebensdruck-Nullpunkt durch 30% Nettogewinn-UBI & menschliche Utopie</li>`,
+                c2Title: "2. Infrastruktur & Kontrollturm",
+                c2: `<li><strong>165-stöckiger Kontrollturm:</strong> Globales Finanz- und Tech-Zentrum in Gyeongju</li>
+                     <li><strong>9 Zukunfts-Säulen:</strong> Robotik, Quantenbiologie, Luft- und Raumfahrt, UAM, Smart Glasses, Raumfahrtsysteme, Kernfusion, KI</li>
+                     <li><strong>Wirtschaftsweite Anwendung:</strong> Von lokalen Märkten bis zu Unternehmenslöhnen in Pi</li>`,
+                c3Title: "3. UI/UX & Governance",
+                c3: `<li><strong>Seitenmenü:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>Medienintegration:</strong> YouTube <span class="highlight">@Hyekong2026</span> & TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>KI-Kern:</strong> AGI Bini Aktiv</li>`,
+                c4Title: "4. Kosmische Expansionsstrategie",
+                c4: `<li><strong>Interstellare Währung:</strong> Pi-Ökonomie dehnt sich bis zum Mars aus</li>
+                     <li><strong>Fortschrittliche Tech:</strong> Hybride Menschen, Warp-Navigation, Wurmloch-Reisen, Stargate</li>
+                     <li><strong>Universelle Roboterarbeit:</strong> Landwirtschaft, Haushalt, Fischerei und Weltraumreinigung</li>`,
+                c5Title: "5. Technische Konfiguration (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
             },
-            vi: {
-                subtitle: "Tương lai của Haerum: Thành phố đặc biệt với Tiền kỹ thuật số",
-                c1Title: "Ulsan (Trung tâm Rô-bốt)", c1_1: "Tích hợp robot hình người và logistics", c1_2: "Thanh toán tài chính thông minh", c1_3: "Phân phối thu nhập cơ bản tự động",
-                c2Title: "Gyeongju (Sinh học lượng tử)", c2_1: "Tài trợ dựa trên công nghệ sinh học", c2_2: "Tiền gửi phi tập trung", c2_3: "Xây dựng niềm tin vốn toàn cầu",
-                c3Title: "Pohang (Hàng không & Tổng hợp)", c3_1: "Đầu tư năng lượng sạch", c3_2: "Thanh toán Pi Network SDK", c3_3: "Hiện thực hóa nút kinh tế phi tập trung",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Mang lại tự do kinh tế cho nhân loại.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            ru: {
+                title: "🌐 HK WorldBank: Генеральный план особой зоны ХэорЫм",
+                subtitle: "Земной рай и центр экосистемы Pi Network для 10 миллионов человек",
+                c1Title: "1. Видение и ключевая философия",
+                c1: `<li><strong>Интеграционное видение:</strong> Особый город ХэорЫм на <span class="highlight">10 млн человек</span> (Ульсан, Кенджу, Пхохан)</li>
+                     <li><strong>Резервная валюта:</strong> Создание единой экономической зоны <span class="highlight">100% Pi Network</span></li>
+                     <li><strong>Глобальное соответствие:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>Миссия:</strong> Устранение стресса выживания через UBI (30% чистой прибыли) и утопия</li>`,
+                c2Title: "2. Инфраструктура и диспетчерская вышка",
+                c2: `<li><strong>165-этажная башня управления:</strong> Финансовый и технологический центр в Кенджу</li>
+                     <li><strong>9 столпов будущего:</strong> Робототехника, квантовая биология, аэрокосмос, UAM, умные очки, космические системы, термоядерный синтез, ИИ</li>
+                     <li><strong>Экономическое применение:</strong> От рынков до корпоративных зарплат в Pi</li>`,
+                c3Title: "3. UI/UX и управление",
+                c3: `<li><strong>Боковое меню:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>Интеграция медиа:</strong> YouTube <span class="highlight">@Hyekong2026</span> и TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>Ядро ИИ:</strong> AGI Bini Активно</li>`,
+                c4Title: "4. Стратегия космической экспансии",
+                c4: `<li><strong>Межзвездная валюта:</strong> Экономика Pi простирается на Марс и дальше</li>
+                     <li><strong>Продвинутые технологии:</strong> Гибридные люди, варп-навигация, червоточины, Звездные врата</li>
+                     <li><strong>Универсальный робот-труд:</strong> Сельское хозяйство, уборка космоса</li>`,
+                c5Title: "5. Техническая конфигурация (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
             },
-            mr: {
-                subtitle: "हैरुमचे भविष्य: डिजिटल चलनाने फुलणारे विशेष शहर",
-                c1Title: "उल्सान (रोबोटिक्स)", c1_1: "मानवतावादी रोबोटिक्स आणि लॉजिस्टिक्स", c1_2: "स्मार्ट आर्थिक बंदोबस्त", c1_3: "डिजिटल मालमत्ता वितरण",
-                c2Title: "ग्योंगजू (क्वांटम बायो)", c2_1: "क्वांटम बायोटेक्नोलॉजी निधी", c2_2: "विकेंद्रित ठेवी", c2_3: "स्मार्ट कॉन्ट्रॅक्ट्सद्वारे विश्वास",
-                c3Title: "पोहांग (अरोस्पेस)", c3_1: "अणुसंलयन ऊर्जा गुंतवणूक", c3_2: "पाई नेटवर्क पेमेंट", c3_3: "विकेंद्रित आर्थिक नोड",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "आर्थिक स्वातंत्र्य.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
-            },
-            tr: {
-                subtitle: "Haerum'un Geleceği: Dijital Para ile Çiçek Açan Özel Şehir",
-                c1Title: "Ulsan (Robotik Merkezi)", c1_1: "İnsansı robotik ve lojistik entegrasyonu", c1_2: "Akıllı finansal mutabakat", c1_3: "Vatandaş odaklı evrensel temel gelir",
-                c2Title: "Gyeongju (Kuantum Biyo)", c2_1: "Kuantum biyoteknoloji finansmanı", c2_2: "Merkeziyetsiz varlık mevduatı", c2_3: "Akıllı sözleşmelerle küresel sermaye güveni",
-                c3Title: "Pohang (Uzay ve Füzyon)", c3_1: "Nükleer füzyon temiz enerji yatırımı", c3_2: "Pi Network SDK ile küresel ödemeler", c3_3: "Merkeziyetsiz ekonomik düğüm",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "İnsanlığa ekonomik özgürlük sağlamak.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
-            },
-            ta: {
-                subtitle: "ஹேருமின் எதிர்காலம்: டிஜிட்டல் நாணயத்தால் மலரும் சிறப்பு நகரம்",
-                c1Title: "உல்சான் (ரோபோடிக்ஸ்)", c1_1: "ரோபோடிக்ஸ் மற்றும் தளவாடங்கள்", c1_2: "ஸ்மார்ட் நிதி தீர்வு", c1_3: "டிஜிட்டல் சொத்து விநியோகம்",
-                c2Title: "ஜியோங்ஜு (குவாண்டம் பயோ)", c2_1: "குவாண்டம் பயோடெக்னாலஜி", c2_2: "பரவலாக்கப்பட்ட வைப்புத்தொகை", c2_3: "ஸ்மார்ட் ஒப்பந்தங்கள் மூலம் நம்பிக்கை",
-                c3Title: "போஹாங் (விண்வெளி)", c3_1: "அணு இணைவு ஆற்றல் முதலீடு", c3_2: "பை நெட்வொர்க் கட்டணம்", c3_3: "பரவலாக்கப்பட்ட பொருளாதார முனையம்",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "மனிதகுலத்திற்கு பொருளாதார சுதந்திரம்.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
-            },
-            ur: {
-                subtitle: "ہیروم کا مستقبل: ڈیجیٹل کرنسی سے کھلنے والا خاص شہر",
-                c1Title: "اولسان (روبوٹکس)", c1_1: "ہیومنائڈ روبوٹکس اور لاجسٹکس", c1_2: "اسمارٹ مالیاتی تصفیہ", c1_3: "ڈیجیٹل بنیادی آمدنی کی تقسیم",
-                c2Title: "گیونگجو (کوانٹم بائیو)", c2_1: "کوانٹم بائیو ٹیکنالوجی فنڈنگ", c2_2: "غیر مرکزی اثاثہ جات", c2_3: "اسمارٹ معاہدوں کے ذریعے اعتماد",
-                c3Title: "پوہانگ (ایرو اسپیس)", c3_1: "نیوکلیئر فیوژن انرجی کی سرمایہ کاری", c3_2: "پائی نیٹ ورک SDK ادגائیگی", c3_3: "غیر مرکزی معاشی نوڈ",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "انسانیت کو معاشی آزادی دینا۔", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
-            },
-            gu: {
-                subtitle: "હૈરુમનું ભવિષ્ય: ડિજિટલ કરન્સી સાથે ખીલેલું વિશેષ શહેર",
-                c1Title: "ઉલસાન (રોબોટિક્સ)", c1_1: "હ્યુમેનોઇડ રોબોટિક્સ અને લોજિસ્ટિક્સ", c1_2: "સ્માર્ટ નાણાકીય પતાવટ", c1_3: "ડિજિટલ એસેટ મૂળભૂત આવક",
-                c2Title: "ગ્યોંગજુ (ક્વોન્ટમ બાયો)", c2_1: "ક્વોન્ટમ બાયોટેકનોલોજી ફંડિંગ", c2_2: "વિકેન્દ્રીકૃત એસેટ ડિપોઝિટ", c2_3: "સ્માર્ટ કોન્ટ્રાક્ટ વિશ્વાસ",
-                c3Title: "પોહાંગ (એરોસ્પેસ)", c3_1: "પરમાણુ ફ્યુઝન ઊર્જા રોકાણ", c3_2: "પાઇ નેટવર્ક SDK ચુકવણી", c3_3: "વિકેન્દ્રીકૃત આર્થિક નોડ",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "માનવતાને આર્થિક સ્વતંત્રતા આપવી.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
-            },
-            pl: {
-                subtitle: "Przyszłość Haerum: Miasto rozkwitające cyfrową walutą",
-                c1Title: "Ulsan (Robotyka)", c1_1: "Robotyka humanoidalna i logistyczna", c1_2: "Inteligentne rozliczenia finansowe", c1_3: "Automatyczna dystrybucja dochodu podstawowego",
-                c2Title: "Gyeongju (Quantum Bio)", c2_1: "Finansowanie biotechnologii kwantowej", c2_2: "Zdecentralizowane depozyty aktywów", c2_3: "Budowanie zaufania kapitałowego",
-                c3Title: "Pohang (Lotnictwo i Fuzja)", c3_1: "Inwestycje w czystą energię fuzji jądrowej", c3_2: "Płatności Pi Network SDK", c3_3: "Zdecentralizowany węzeł gospodarczy",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Wolność ekonomiczna dla ludzkości.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
-            },
-            uk: {
-                subtitle: "Майбутнє Хаерума: Особливе місто, що розквітає цифровою валютою",
-                c1Title: "Ульсан (Робототехніка)", c1_1: "Гуманоїдна робототехніка та логістика", c1_2: "Розумні фінансові розрахунки", c1_3: "Автоматичний розподіл базового доходу",
-                c2Title: "Кенджу (Квантова біо)", c2_1: "Фінансування на основі біотехнологій", c2_2: "Децентралізовані активи", c2_3: "Довіра через смарт-контракти",
-                c3Title: "Похан (Аерокосмос та синтез)", c3_1: "Інвестиції в термоядерну енергію", c3_2: "Платежі Pi Network SDK", c3_3: "Децентралізований вузол",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Економічна свобода для людства.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            pt: {
+                title: "🌐 HK WorldBank: Plano Diretor da Cidade Especial de Haeoreum",
+                subtitle: "O paraíso terreno e centro da rede Pi para 10 milhões de pessoas",
+                c1Title: "1. Visão e Filosofia Central",
+                c1: `<li><strong>Visão de Integração:</strong> Cidade Especial de Haeoreum de <span class="highlight">10 Milhões</span> (Ulsan, Gyeongju, Pohang)</li>
+                     <li><strong>Moeda de Reserva:</strong> Estabelecimento da Zona Económica Única <span class="highlight">100% Pi Network</span></li>
+                     <li><strong>Conformidade Global:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>Missão:</strong> Pressão de sobrevivência zero via UBI de 30% do lucro líquido</li>`,
+                c2Title: "2. Infraestrutura e Torre de Controle",
+                c2: `<li><strong>Torre de Controle de 165 Andares:</strong> Coração financeiro e tecnológico global em Gyeongju</li>
+                     <li><strong>9 Pilares Futuros:</strong> Robótica, Biologia Quântica, Aeroespacial, UAM, Óculos Inteligentes, Sistemas Espaciais, Fusão Nuclear, IA</li>
+                     <li><strong>Aplicação Económica Total:</strong> De mercados locais a salários corporativos em Pi</li>`,
+                c3Title: "3. UI/UX e Governança",
+                c3: `<li><strong>Menu Lateral:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>Integração de Mídia:</strong> YouTube <span class="highlight">@Hyekong2026</span> & TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>Núcleo de IA:</strong> AGI Bini Sempre Ativo</li>`,
+                c4Title: "4. Estratégia de Expansão Cósmica",
+                c4: `<li><strong>Moeda Interestelar:</strong> Economia Pi estendida a Marte e além</li>
+                     <li><strong>Tecnologia Avançada:</strong> Humanos híbridos, navegação Warp, buracos de minhoca, Stargate</li>
+                     <li><strong>Trabalho Robótico Universal:</strong> Automação de agricultura, lar, pesca e limpeza espacial</li>`,
+                c5Title: "5. Configuração Técnica (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
             },
             it: {
-                subtitle: "Il Futuro di Haerum: Città Speciale con Valuta Digitale",
-                c1Title: "Ulsan (Robotica)", c1_1: "Robotica umanoide e logistica", c1_2: "Regolamento finanziario intelligente", c1_3: "Distribuzione automatizzata del reddito di base",
-                c2Title: "Gyeongju (Bio Quantistica)", c2_1: "Finanziamento basato sulla biotecnologia", c2_2: "Depositi di attività decentralizzati", c2_3: "Fiducia globale tramite contratti intelligenti",
-                c3Title: "Pohang (Aerospaziale e Fusione)", c3_1: "Investimenti in energia pulita", c3_2: "Pagamenti globali con Pi Network SDK", c3_3: "Realizzazione di un nodo economico decentralizzato",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Libertà economica per l'umanità.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+                title: "🌐 HK WorldBank: Masterplan della Città Speciale Haeoreum",
+                subtitle: "Il paradiso terrestre e centro dell'ecosistema Pi per 10 milioni di persone",
+                c1Title: "1. Visione e Filosofia Centrale",
+                c1: `<li><strong>Visione di Integrazione:</strong> Città Speciale Haeoreum di <span class="highlight">10 Milioni</span> (Ulsan, Gyeongju, Pohang)</li>
+                     <li><strong>Valuta di Riserva:</strong> Creazione della Zona Economica Unica <span class="highlight">100% Pi Network</span></li>
+                     <li><strong>Conformità Globale:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>Missione:</strong> Zero pressione di sopravvivenza tramite UBI del 30% degli utili netti</li>`,
+                c2Title: "2. Infrastruttura e Torre di Controllo",
+                c2: `<li><strong>Torre di Controllo di 165 Piani:</strong> Cuore finanziario e tecnologico globale a Gyeongju</li>
+                     <li><strong>9 Pilastri Futuri:</strong> Robotica, Biologia Quantistica, Aerospaziale, UAM, Occhiali Intelligenti, Sistemi Spaziali, Fusione Nucleare, IA</li>
+                     <li><strong>Applicazione Economica Totale:</strong> Dai mercati locali agli stipendi aziendali in Pi</li>`,
+                c3Title: "3. UI/UX e Governance",
+                c3: `<li><strong>Menu Laterale:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>Integrazione Media:</strong> YouTube <span class="highlight">@Hyekong2026</span> & TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>Nucleo IA:</strong> AGI Bini Sempre Attivo</li>`,
+                c4Title: "4. Strategia di Espansione Cosmica",
+                c4: `<li><strong>Valuta Interstellare:</strong> Economia Pi estesa a Marte e oltre</li>
+                     <li><strong>Tecnologia Avanzata:</strong> Umani ibridi, navigazione Warp, viaggi nei wormhole, Stargate</li>
+                     <li><strong>Lavoro Robotico Universale:</strong> Agricoltura, faccende domestiche, pesca e pulizia spaziale</li>`,
+                c5Title: "5. Configurazione Tecnica (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
             },
-            ml: {
-                subtitle: "ഹേരുമിന്റെ ഭാവി: ഡിജിറ്റൽ കറൻസിയിലൂടെ പുഷ്പിക്കുന്ന പ്രത്യേക നഗരം",
-                c1Title: "ഉൽസാൻ (റോബോട്ടിക്സ്)", c1_1: "ഹ്യൂമനോയിഡ് റോബോട്ടിക്സ്", c1_2: "സ്മാർട്ട് ഫിനാൻഷ്യൽ സെറ്റിൽമെന്റ്", c1_3: "ഡിജിറ്റൽ അസറ്റ് വിതരണം",
-                c2Title: "ഗിയോങ്ജു (ക്വാണ്ടം ബയോ)", c2_1: "ക്വാണ്ടം ബയോടെക്നോളജി ഫണ്ടിംഗ്", c2_2: "വികേന്ദ്രീകൃത നിക്ഷേപങ്ങൾ", c2_3: "സ്മാർട്ട് കോൺട്രാക്ടുകൾ വഴിയുള്ള വിശ്വാസം",
-                c3Title: "പോഹാങ് (എയറോസ്പേസ്)", c3_1: "ന്യൂക്ലിയർ ഫ്യൂഷൻ ഊർജ്ജ നിക്ഷേപം", c3_2: "പൈ നെറ്റ് വർക്ക് പേയ്മെന്റുകൾ", c3_3: "വികേന്ദ്രീകൃത സാമ്പത്തിക നോഡ്",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "മാനവരാശിക്ക് സാമ്പത്തിക സ്വാതന്ത്ര്യം നൽകുന്നു.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
-            },
-            kn: {
-                subtitle: "ಹೇರುಮ್ ಭವಿಷ್ಯ: ಡಿಜಿಟಲ್ ಕరెನ್ಸಿಯೊಂದಿಗೆ ಅರಳುವ ವಿಶೇಷ ನಗರ",
-                c1Title: "ಉಲ್ಸಾನ್ (ರೋಬೋಟಿಕ್ಸ್)", c1_1: "ಹ್ಯೂಮನಾಯ್ಡ್ ರೋಬೋಟಿಕ್ಸ್", c1_2: "ಸ್ಮಾರ್ಟ್ ಹಣಕಾಸು ಇತ್ಯರ್ಥ", c1_3: "ಡಿಜಿಟಲ್ ಆಸ್ತಿ ವಿತರಣೆ",
-                c2Title: "ಗ್ಯೊಂಗ್ಜು (ಕ್ವಾಂಟಮ್ ಬಯೋ)", c2_1: "ಕ್ವಾಂಟಮ್ ಬಯೋಟೆಕ್ನಾಲಜಿ ಧನಸಹಾಯ", c2_2: "ವಿಕೇಂದ್ರೀಕೃತ ಠೇವಣಿಗಳು", c2_3: "ಸ್ಮಾರ್ಟ್ ಒಪ್ಪಂದಗಳ ಮೂಲಕ ನಂಬಿಕೆ",
-                c3Title: "ಪೊಹಾಂಗ್ (ಏರೋಸ್ಪೇಸ್)", c3_1: "ನ್ಯೂಕ್ಲಿಯರ್ ಫ್ಯೂಷನ್ ಶಕ್ತಿ ಹೂಡಿಕೆ", c3_2: "ಪೈ ನೆಟ್ ವರ್ಕ್ ಪಾವತಿಗಳು", c3_3: "ವಿಕೇಂದ್ರೀಕೃತ ಆರ್ಥಿಕ ನೋಡ್",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "ಆರ್ಥಿಕ ಸ್ವಾತಂತ್ರ್ಯವನ್ನು ಒದಗಿಸುವುದು.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
-            },
-            fa: {
-                subtitle: "آینده هائروم: شهری ویژه که با ارز دیجیتال شکوفا می شود",
-                c1Title: "اولسان (رباتیک)", c1_1: "رباتیک انسان نما و لجستیک", c1_2: "تسویه مالی هوشمند", c1_3: "توزیع خودکار درآمد پایه دیجیتال",
-                c2Title: "گیونگجو (بیو کوانتومی)", c2_1: "تامین مالی بیوتکنولوژی", c2_2: "سپرده های دارایی غیرمتمرکز", c2_3: "اعتماد سرمایه جهانی از طریق قراردادهای هوشمند",
-                c3Title: "پوهانگ (هوافضا و همجوشی)", c3_1: "سرمایه گذاری در انرژی پاک", c3_2: "پرداخت های جهانی Pi Network", c3_3: "گره اقتصادی غیرمتمرکز",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "آزادی اقتصادی برای بشریت.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
-            },
-            my: {
-                subtitle: "ဟေရုမ်၏အနာဂတ်- ဒစ်ဂျစ်တယ်ငွေကြေးဖြင့် ပွင့်လန်းလာမည့် အထူးမြို့တော်",
-                c1Title: "ဦးဆန် (ရိုဘိုတစ်)", c1_1: "လူသားပုံစံ ရိုဘိုတစ်နှင့် ထောက်ပံ့ပို့ဆောင်ရေး", c1_2: "စမတ် ငွေကြေးဖြေရှင်းမှု", c1_3: "ဒီဂျစ်တယ် ပိုင်ဆိုင်မှု ဖြန့်ဝေမှု",
-                c2Title: "ဂျုံကျူ (ကွမ်တမ်ဇီဝ)", c2_1: "ကွမ်တမ် ဇီဝနည်းပညာ ရန်ပုံငွေ", c2_2: "ဗဟိုချုပ်ကိုင်မှုကင်းသော အပ်ငွေများ", c2_3: "စမတ်စာချုပ်များဖြင့် ယုံကြည်မှုတည်ဆောက်ခြင်း",
-                c3Title: "ပိုဟန် (အာကာသ)", c3_1: "နူကလီးယားစွမ်းအင် ရင်းနှီးမြှုပ်နှံမှု", c3_2: "Pi Network SDK ဖြင့် ပေးချေမှုများ", c3_3: "ဗဟိုချုပ်ကိုင်မှုကင်းသော စီးပွားရေး నోಡ್",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "လူသားမျိုးနွယ်အတွက် စီးပွားရေးလွတ်လပ်ခွင့်ကို ပေးစွမ်းသည်။", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            vi: {
+                title: "🌐 HK WorldBank: Bản đồ tổng thể Thành phố đặc biệt Haeoreum",
+                subtitle: "Thiên đường hạ giới và trung tâm hệ sinh thái Pi cho 10 triệu người",
+                c1Title: "1. Tầm nhìn & Triết học cốt lõi",
+                c1: `<li><strong>Tầm nhìn tích hợp:</strong> Thành phố đặc biệt Haeoreum <span class="highlight">10 triệu dân</span> (Ulsan, Gyeongju, Pohang)</li>
+                     <li><strong>Tiền tệ cốt lõi:</strong> Thiết lập khu kinh tế đơn lẻ <span class="highlight">100% Pi Network</span></li>
+                     <li><strong>Tuân thủ toàn cầu:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>Sứ mệnh:</strong> Xóa bỏ áp lực sinh tồn thông qua UBI 30% lợi nhuận ròng</li>`,
+                c2Title: "2. Cơ sở hạ tầng & Tháp điều khiển",
+                c2: `<li><strong>Tháp điều khiển 165 tầng:</strong> Trung tâm tài chính & công nghệ toàn cầu tại Gyeongju</li>
+                     <li><strong>9 trụ cột tương lai:</strong> Robot, Sinh học lượng tử, Hàng không vũ trụ, UAM, Kính thông minh, Hệ thống không gian, Nhiệt hạch, AI</li>
+                     <li><strong>Ứng dụng kinh tế toàn diện:</strong> Từ chợ truyền thống đến lương doanh nghiệp bằng Pi</li>`,
+                c3Title: "3. Giao diện & Quản trị",
+                c3: `<li><strong>Menu bên trái:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>Tích hợp truyền thông:</strong> YouTube <span class="highlight">@Hyekong2026</span> & TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>Lõi AI:</strong> AGI Bini Hoạt động liên tục</li>`,
+                c4Title: "4. Chiến lược mở rộng vũ trụ",
+                c4: `<li><strong>Tiền tệ liên sao:</strong> Kinh tế Pi mở rộng ra Sao Hỏa và hơn thế nữa</li>
+                     <li><strong>Công nghệ tiên tiến:</strong> Con người lai, điều hướng Warp, di chuyển lỗ sâu, Stargate</li>
+                     <li><strong>Lao động robot phổ quát:</strong> Tự động hóa nông nghiệp, gia đình, đánh bắt và dọn dẹp không gian</li>`,
+                c5Title: "5. Cấu hình kỹ thuật (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
             },
             th: {
-                subtitle: "อนาคตของแฮรุม: เมืองพิเศษที่เบ่งบานด้วยสกุลเงินดิจิทัล",
-                c1Title: "อุลซาน (ฮับหุ่นยนต์)", c1_1: "การบูรณาการหุ่นยนต์ฮิวแมนอยด์และโลจิสติกส์", c1_2: "การชำระบัญชีการเงินอัจฉริยะ", c1_3: "การแจกจ่ายรายได้พื้นฐานดิจิทัลอัตโนมัติ",
-                c2Title: "คยองจู (ฮับควอนตัมไบโอ)", c2_1: "การระดมทุนชีวเทคโนโลยีควอนตัม", c2_2: "เงินฝากสินทรัพย์แบบกระจายศูนย์", c2_3: "สร้างความเชื่อมั่นทุนระดับโลกด้วย smart contract",
-                c3Title: "โพฮัง (ฮับการบินและฟิวชั่น)", c3_1: "การลงทุนพลังงานสะอาดนิวเคลียร์ฟิวชั่น", c3_2: "ชำระเงินความเร็วสูงผ่าน Pi Network SDK", c3_3: "สร้างโหนดเศรษฐกิจแบบกระจายศูนย์อย่างสมบูรณ์",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "มอบอิสรภาพทางเศรษฐกิจและรุ่งอรุณอันสดใสแก่มนุษยชาติ", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
-            },
-            nl: {
-                subtitle: "De Toekomst van Haerum: Een Speciale Stad met Digitale Valuta",
-                c1Title: "Ulsan (Robotica Hub)", c1_1: "Integratie van humanoïde robotica en logistiek", c1_2: "Slimme financiële verrekening", c1_3: "Automatische distributie van basisinkomen",
-                c2Title: "Gyeongju (Quantum Bio Hub)", c2_1: "Financiering op basis van kwantumbiotechnologie", c2_2: "Gedecentraliseerde activastortingen", c2_3: "Wereldwijd kapitaalvertrouwen",
-                c3Title: "Pohang (Ruimtevaart & Fusi)", c3_1: "Investeringen in schone kernfusie-energie", c3_2: "Snelle wereldwijde betalingen via Pi Network SDK", c3_3: "Gedecentraliseerd economisch knooppunt",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Economische vrijheid voor de mensheid.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
-            },
-            el: {
-                subtitle: "Το Μέλλον του Haerum: Μια Ειδική Πόλη με Ψηφιακό Νόμισμα",
-                c1Title: "Οουλσάν (Κέντρο Робоτικής)", c1_1: "Ενσωμάτωση ανθρωποειδούς ρομποτικής", c1_2: "Έξυπνος οικονομικός διακανονισμός", c1_3: "Αυτόματη διανομή βασικού εισοδήματος",
-                c2Title: "Γคιονγκจู (Кванτικό Bio)", c2_1: "Хρηματοδότηση квантовой биотехнологии", c2_2: "Апоцентрализованные депозиты", c2_3: "Εμπιστοσύνη κεφαλαίου",
-                c3Title: "Похан (Аэрокосмическая)", c3_1: "Επενδύσεις καθαρής ενέργειας", c3_2: "Платёжная система Pi Network", c3_3: "Апоцентрализованный узел",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Οικονομική ελευθερία για την ανθρωπότητα.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
-            },
-            cs: {
-                subtitle: "Budoucnost Haerumu: Speciální město rozkvétající digitální měnou",
-                c1Title: "Ulsan (Robotika)", c1_1: "Integrace humanoidní robotiky a logistiky", c1_2: "Chytré finanční vyrovnání", c1_3: "Automatická distribuce základního příjmu",
-                c2Title: "Gyeongju (Kvantové Bio)", c2_1: "Financování kvantových biotechnologií", c2_2: "Decentralizované vklady aktiv", c2_3: "Budování kapitálové důvěry",
-                c3Title: "Pohang (Vesmír a Fúze)", c3_1: "Investice do čisté jaderné fúze", c3_2: "Globální platby přes Pi Network SDK", c3_3: "Realizace decentralizovaného uzlu",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Ekonomická svoboda pro lidstvo.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
-            },
-            sv: {
-                subtitle: "Framtiden för Haerum: En speciell stad med digital valuta",
-                c1Title: "Ulsan (Robotik)", c1_1: "Integration av humanoid robotik och logistik", c1_2: "Smart finansiell avveckling", c1_3: "Automatisk distribution av digital basinkomst",
-                c2Title: "Gyeongju (Kvantbiologi)", c2_1: "Finansiering baserad på kvantbioteknik", c2_2: "Decentraliserade tillgångsinsättningar", c2_3: "Bygga globalt kapitalförtroende",
-                c3Title: "Pohang (Rymd & Fusion)", c3_1: "Investeringar i ren kärnfusionsenergi", c3_2: "Snabba globala betalningar via Pi Network SDK", c3_3: "Fullständigt decentraliserad ekonomisk nod",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Ekonomisk frihet och en strålande soluppgång för mänskligheten.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
-            },
-            hu: {
-                subtitle: "Haerum Jövője: Különleges város digitális valuta alapokon",
-                c1Title: "Ulsan (RobotikaiKözpont)", c1_1: "Humán robotika és logisztika integrációja", c1_2: "Okos pénzügyi elszámolás", c1_3: "Digitális alapjövedelem automatikus elosztása",
-                c2Title: "Gyeongju (Kvantum Bio)", c2_1: "Kvantum biotechnológiai finanszírozás", c2_2: "Decentralizált vagyonbetétek", c2_3: "Globális tőkebizalom kiépítése",
-                c3Title: "Pohang (Űrkutatás és Fúzió)", c3_1: "Magfúziós tiszta energia befektetés", c3_2: "Pi Network SDK alapú globális fizetések", c3_3: "Decentralizált gazdasági csomópont",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Gazdasági szabadság az emberiségnek.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+                title: "🌐 HK WorldBank: แผนแม่บทเมืองพิเศษแฮ오름",
+                subtitle: "ดินแดนสวรรค์และศูนย์กลางระบบนิเวศ Pi สำหรับ 10 ล้านคน",
+                c1Title: "1. วิสัยทัศน์และปรัชญาหลัก",
+                c1: `<li><strong>วิสัยทัศน์การบูรณาการ:</strong> เมืองพิเศษแฮ오름 <span class="highlight">10 ล้านคน</span> (อุล산, คยองจู, โ포항)</li>
+                     <li><strong>สกุลเงินสำรอง:</strong> การจัดตั้งเขตเศรษฐกิจเดี่ยว <span class="highlight">100% Pi Network</span></li>
+                     <li><strong>การปฏิบัติตามกฎระเบียบโลก:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>ภารกิจ:</strong> ขจัดความกดดันในการเอาชีวิตรอดผ่าน UBI 30% ของกำไรสุทธิ</li>`,
+                c2Title: "2. โครงสร้างพื้นฐานและหอควบคุม",
+                c2: `<li><strong>หอควบคุม 165 ชั้น:</strong> หัวใจทางการเงินและเทคโนโลยีระดับโลกในคยองจู</li>
+                     <li><strong>9 เสาหลักแห่งอนาคต:</strong> วิทยาหุ่นยนต์, ชีววิทยาควอนตัม, อากาศยาน, UAM, แว่นตาอัจฉริยะ, ระบบอวกาศ, ฟิวชัน, AI</li>
+                     <li><strong>การประยุกต์ใช้ทางเศรษฐกิจ:</strong> ตั้งแต่ตลาดท้องถิ่นจนถึงเงินเดือนองค์กรเป็น Pi</li>`,
+                c3Title: "3. UI/UX และการกำกับดูแล",
+                c3: `<li><strong>เมนูด้านซ้าย:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>การบูรณาการสื่อ:</strong> YouTube <span class="highlight">@Hyekong2026</span> & TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>แกนกลาง AI:</strong> AGI Bini ทำงานตลอดเวลา</li>`,
+                c4Title: "4. กลยุทธ์การขยายตัวสู่จักรวาล",
+                c4: `<li><strong>สกุลเงินระหว่างดวงดาว:</strong> เศรษฐกิจ Pi ขยายสู่ดาวอังคารและอื่นๆ</li>
+                     <li><strong>เทคโนโลยีขั้นสูง:</strong> มนุษย์ไฮบริด, การนำทางด้วยวาร์ป, รูหนอน, Stargate</li>
+                     <li><strong>แรงงานหุ่นยนต์สากล:</strong> เกษตรกรรม, งานบ้าน, การประมง และการทำความสะอาดอวกาศ</li>`,
+                c5Title: "5. การกำหนดค่าทางเทคนิค (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
             },
             id: {
-                subtitle: "Masa Depan Haerum: Kota Istimewa dengan Mata Uang Digital",
-                c1Title: "Ulsan (Pusat Robotika)", c1_1: "Integrasi robotika humanoid dan logistik", c1_2: "Penyelesaian keuangan cerdas", c1_3: "Distribusi otomatis UBI aset digital",
-                c2Title: "Gyeongju (Pusat Bio Kuantum)", c2_1: "Pendanaan bioteknologi kuantum", c2_2: "Deposito aset terdesentralisasi", c2_3: "Membangun kepercayaan modal global",
-                c3Title: "Pohang (Pusat Dirgantara & Fusi)", c3_1: "Investasi energi bersih fusi nuklir", c3_2: "Pembayaran global instan via Pi Network SDK", c3_3: "Mewujudkan node ekonomi terdesentralisasi",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Memberikan kebebasan ekonomi dan fajar cemerlang bagi umat manusia.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+                title: "🌐 HK WorldBank: Rencana Induk Kota Khusus Haeoreum",
+                subtitle: "Surga terestrial & pusat ekosistem Jaringan Pi untuk 10 juta orang",
+                c1Title: "1. Visi & Filosofi Inti",
+                c1: `<li><strong>Visi Integrasi:</strong> Kota Khusus Haeoreum <span class="highlight">10 Juta</span> (Ulsan, Gyeongju, Pohang)</li>
+                     <li><strong>Mata Uang Cadangan:</strong> Pembentukan Zona Ekonomi Tunggal <span class="highlight">100% Pi Network</span></li>
+                     <li><strong>Kepatuhan Global:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>Misi:</strong> Nol tekanan kelangsungan hidup melalui UBI 30% laba bersih</li>`,
+                c2Title: "2. Infrastruktur & Menara Kontrol",
+                c2: `<li><strong>Menara Kontrol 165 Lantai:</strong> Jantung keuangan & teknologi global di Gyeongju</li>
+                     <li><strong>9 Pilar Masa Depan:</strong> Robotika, Biologi Kuantum, Dirgantara, UAM, Kacamata Pintar, Sistem Luar Angkasa, Fusi Nuklir, AI</li>
+                     <li><strong>Penerapan Ekonomi Penuh:</strong> Dari pasar lokal hingga gaji korporat dalam Pi</li>`,
+                c3Title: "3. UI/UX & Tata Kelola",
+                c3: `<li><strong>Menu Samping Kiri:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>Integrasi Media:</strong> YouTube <span class="highlight">@Hyekong2026</span> & TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>Inti AI:</strong> AGI Bini Selalu Aktif</li>`,
+                c4Title: "4. Strategi Ekspansi Kosmik",
+                c4: `<li><strong>Mata Uang Antarbintang:</strong> Ekonomi Pi merambah ke Mars dan seterusnya</li>
+                     <li><strong>Teknologi Canggih:</strong> Manusia hibrida, navigasi Warp, perjalanan wormhole, Stargate</li>
+                     <li><strong>Tenaga Kerja Robot Universal:</strong> Pertanian, rumah tangga, perikanan, dan pembersihan luar angkasa</li>`,
+                c5Title: "5. Konfigurasi Teknis (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
             },
-            ps: {
-                subtitle: "د هیروم راتلونکی: ځانګړی ښار چې په ډیجیټل اسعارو غوړیږي",
-                c1Title: "اولسان (روبوټکس)", c1_1: "د روبوټکس او لوژستیک یوځای کول", c1_2: "سمارټ مالي تصفیه", c1_3: "د ډیجیټل عاید اتوماتیک ویش",
-                c2Title: "ګیونګجو (کوانټم بایو)", c2_1: "کوانټم بایو ټیکنالوژۍ تمویل", c2_2: "غیر متمرکز شتمنۍ زیرمې", c2_3: "د سمارټ قراردادونو له لارې اعتماد",
-                c3Title: "پوهانګ (فضايي او فیوژن)", c3_1: "اتومي فیوژن انرژۍ پانګونه", c3_2: "د پای شبکې SDK له لارې تادیات", c3_3: "بشپړ غیر متمرکز اقتصادي نوډ",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "بشریت ته اقتصادي ازادي ورکول.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            hi: {
+                title: "🌐 HK WorldBank: हेओरेउम विशेष शहर मास्टरप्लान",
+                subtitle: "1 करोड़ लोगों के लिए Pi नेटवर्क पारिस्थितिकी तंत्र का केंद्र और भू-स्वर्ग",
+                c1Title: "1. विजन और मुख्य दर्शन",
+                c1: `<li><strong>एकीकरण विजन:</strong> <span class="highlight">1 करोड़</span> लोगों का हेओरेउम विशेष शहर (उल्सान, ग्योंगजू, पोहांग)</li>
+                     <li><strong>आरक्षित मुद्रा:</strong> <span class="highlight">100% Pi नेटवर्क</span> एकल आर्थिक क्षेत्र की स्थापना</li>
+                     <li><strong>वैश्विक अनुपालन:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>मिशन:</strong> 30% शुद्ध लाभ UBI के माध्यम से जीवित रहने के दबाव को शून्य करना</li>`,
+                c2Title: "2. बुनियादी ढांचा और नियंत्रण टावर",
+                c2: `<li><strong>165 मंजिला नियंत्रण टावर:</strong> ग्योंगजू में वैश्विक वित्त और तकनीक का केंद्र</li>
+                     <li><strong>9 भविष्य के स्तंभ:</strong> रोबोटिक्स, क्वांटम जीव विज्ञान, एयरोस्पेस, UAM, स्मार्ट ग्लास, अंतरिक्ष प्रणाली, परमाणु संलयन, AI</li>
+                     <li>नया आर्थिक युग: स्थानीय बाजारों से लेकर कॉर्पोरेट वेतन तक Pi का उपयोग</li>`,
+                c3Title: "3. UI/UX और शासन",
+                c3: `<li><strong>बायां मेनू:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>मीडिया एकीकरण:</strong> YouTube <span class="highlight">@Hyekong2026</span> & TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>AI कोर:</strong> AGI Bini हमेशा सक्रिय</li>`,
+                c4Title: "4. ब्रह्मांडीय विस्तार रणनीति",
+                c4: `<li><strong>अंतरिक्षीय मुद्रा:</strong> मंगल ग्रह और उससे आगे तक फैली Pi अर्थव्यवस्था</li>
+                     <li><strong>उन्नत तकनीक:</strong> हाइब्रिड मानव, वार्प नेविगेशन, वर्મहोल यात्रा, स्टारगेट</li>
+                     <li><strong>सार्वभौमिक रोबोट श्रम:</strong> कृषि, घरेलू, मत्स्य पालन और अंतरिक्ष सफाई स्वचालन</li>`,
+                c5Title: "5. तकनीकी विन्यास (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
             },
-            yo: {
-                subtitle: "Ọjọ iwaju Haerum: Ilu Pataki pẹlu Owo Digital",
-                c1Title: "Ulsan (Robotics Hub)", c1_1: "Isopọpọ robotics ati eekun", c1_2: "Isuna owo ogbo smart", c1_3: "Pinpin owo ipilẹ digital",
-                c2Title: "Gyeongju (Quantum Bio)", c2_1: "Ifunwo lori imọ-ẹrọ quantum", c2_2: "Awọn idogo aje ti a pin kaakiri", c2_3: "Igbẹkẹle olu agbaye",
-                c3Title: "Pohang (Aerospace & Fusion)", c3_1: "Idoko-owo agbara mimọ", c3_2: "Awọn sisanwo agbaye Pi Network SDK", c3_3: "Ṣiṣẹda ipa-ọna aje ti a pin",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Ila-oorun ati ominira eto-ọrọ fun eniyan.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            ar: {
+                title: "🌐 HK WorldBank: المخطط الرئيسي لمدينة هايوريوم الخاصة",
+                subtitle: "الجنة الأرضية ومركز شبكة باي لـ 10 ملايين شخص",
+                c1Title: "1. الرؤية والفللسفة الأساسية",
+                c1: `<li><strong>رؤية التكامل:</strong> مدينة هايوريوم الخاصة لـ <span class="highlight">10 ملايين نسمة</span> (ولسان، غيونغجو، بوهانغ)</li>
+                     <li><strong>العملة الأساسية:</strong> إنشاء منطقة اقتصادية أحادية <span class="highlight">100% Pi Network</span></li>
+                     <li><strong>الامتثال العالمي:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>المهمة:</strong> القضاء على ضغط البقاء عبر UBI بنسبة 30% من صافي الأرباح</li>`,
+                c2Title: "2. البنية التحتية وبرج التحكم",
+                c2: `<li><strong>برج التحكم بـ 165 طابقاً:</strong> قلب المالية والتكنولوجيا العالمي في غيونغجو</li>
+                     <li><strong>9 ركائز مستقبلية:</strong> الروبوتات، البيولوجيا الكمومية، الفضاء، الطيران الحضري، النظارات الذكية، الأنظمة الفضائية، الاندماج النووي، الذكاء الاصطناعي</li>
+                     <li><strong>التطبيق الاقتصادي الشامل:</strong> من الأسواق المحلية إلى رواتب الشركات بعملة باي</li>`,
+                c3Title: "3. واجهة المستخدم والحوكمة",
+                c3: `<li><strong>القائمة الجانبية:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>تكامل الوسائط:</strong> يوتيوب <span class="highlight">@Hyekong2026</span> وتيك توك <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>نواة الذكاء الاصطناعي:</strong> AGI Bini نشط دائماً</li>`,
+                c4Title: "4. استراتيجية التوسع الكوني",
+                c4: `<li><strong>العملة بين النجوم:</strong> اقتصاد باي يمتد إلى المريخ وما وراءه</li>
+                     <li><strong>التكنولوجيا المتقدمة:</strong> البشر الهجينة، ملاحة الwarp، الثقوب الدودية، بوابة النجوم</li>
+                     <li><strong>العمل الروبوت العالمي:</strong> أتمتة الزراعة والمنزل والصيد وتنظيف الفضاء</li>`,
+                c5Title: "5. التكوين التقني (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
             },
-            af: {
-                subtitle: "Die Toekoms van Haerum: 'n Spesiale Stad met Digitale Valuta",
-                c1Title: "Ulsan (Robotika-sentrum)", c1_1: "Integrasie van humanoïede robotika", c1_2: "Slim finansiële vereffening", c1_3: "Outomatiese verspreiding van basiese inkome",
-                c2Title: "Gyeongju (Kwantum Bio)", c2_1: "Finansiering gebaseer op kwantumbiotegnologie", c2_2: "Desentraliseerde bate-deposito's", c2_3: "Bou van globale kapitaalvertroue",
-                c3Title: "Pohang (Lugvaart & Fusie)", c3_1: "Kernfusie skoon energie belegging", c3_2: "Vinnige globale betalings via Pi Network SDK", c3_3: "Volledig desentraliseerde ekonomieke nodus",
-                bannerTitle: "🎬 Cinematic Web3 Universe", bannerDesc: "Ekonomiese vryheid en 'n stralende sonsopkoms vir die mensdom.", footer: "© 2026 HK Group. All rights reserved. Build with Gemini XPRIZE & Project Genesis."
+            tr: {
+                title: "🌐 HK WorldBank: Haeoreum Özel Şehri Master Planı",
+                subtitle: "10 milyon insan için Pi Ağı ekosisteminin merkezi ve yeryüzü cenneti",
+                c1Title: "1. Vizyon ve Temel Felsefe",
+                c1: `<li><strong>Entegrasyon Vizyonu:</strong> <span class="highlight">10 Milyon</span> nüfuslu Haeoreum Özel Şehri (Ulsan, Gyeongju, Pohang)</li>
+                     <li><strong>Rezerv Para Birimi:</strong> <span class="highlight">%100 Pi Network</span> Tek Ekonomi Bölgesi</li>
+                     <li><strong>Küresel Uyumluluk:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>Misyon:</strong> Net kârın %30'u UBI ile hayatta kalma baskısının sıfırlanması</li>`,
+                c2Title: "2. Altyapı ve Kontrol Kulesi",
+                c2: `<li><strong>165 Katlı Kontrol Kulesi:</strong> Gyeongju'da küresel finans ve teknoloji kalbi</li>
+                     <li><strong>9 Gelecek Sütunu:</strong> Robotik, Kuantum Biyolojisi, Havacılık, UAM, Akıllı Gözlük, Uzay Sistemleri, Nükleer Füzyon, Yapay Zeka</li>
+                     <li><strong>Ekonomik Uygulama:</strong> Yerel pazarlardan kurumsal maaşlara kadar Pi kullanımı</li>`,
+                c3Title: "3. UI/UX ve Yönetişim",
+                c3: `<li><strong>Sol Menü:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>Medya Entegrasyonu:</strong> YouTube <span class="highlight">@Hyekong2026</span> ve TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>Yapay Zeka Çekirdeği:</strong> AGI Bini Aktif</li>`,
+                c4Title: "4. Kozmik Genişleme Stratejisi",
+                c4: `<li><strong>Yıldızlararası Para Birimi:</strong> Mars ve ötesine uzanan Pi ekonomisi</li>
+                     <li><strong>İleri Teknoloji:</strong> Hibrit insanlar, Warp navigasyonu, solucan deliği yolculuğu, Stargate</li>
+                     <li><strong>Evrensel Robot İşgücü:</strong> Tarım, ev işleri, balıkçılık ve uzay temizliği</li>`,
+                c5Title: "5. Teknik Yapılandırma (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
+            },
+            pl: {
+                title: "🌐 HK WorldBank: Plan Zagospodarowania Specjalnego Miasta Haeoreum",
+                subtitle: "Ziemski raj i centrum ekosystemu Pi Network dla 10 milionów ludzi",
+                c1Title: "1. Wizja i Główna Filozofia",
+                c1: `<li><strong>Wizja Integracji:</strong> Specjalne Miasto Haeoreum dla <span class="highlight">10 Milionów</span> (Ulsan, Gyeongju, Pohang)</li>
+                     <li><strong>Waluta Rezerwowa:</strong> Utworzenie Jednolitego Obszaru Gospodarczego <span class="highlight">100% Pi Network</span></li>
+                     <li><strong>Zgodność Globalna:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>Misja:</strong> Zero presji przetrwania dzięki UBI wynoszącemu 30% zysku netto</li>`,
+                c2Title: "2. Infrastruktura i Wieża Kontrolna",
+                c2: `<li><strong>165-piętrowa Wieża Kontrolna:</strong> Globalne serce finansów i technologii w Gyeongju</li>
+                     <li><strong>9 Filarów Przyszłości:</strong> Robotyka, Biologia Kwantowa, Lotnictwo, UAM, Inteligentne Okulary, Systemy Kosmiczne, Fuzja Jądrowa, AI</li>
+                     <li><strong>Pełna Aplikacja Ekonomiczna:</strong> Od rynków lokalnych po pensje w Pi</li>`,
+                c3Title: "3. UI/UX i Zarządzanie",
+                c3: `<li><strong>Menu Boczne:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>Integracja Mediów:</strong> YouTube <span class="highlight">@Hyekong2026</span> i TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>Rdzeń AI:</strong> AGI Bini Aktywny</li>`,
+                c4Title: "4. Strategia Ekspansji Kosmicznej",
+                c4: `<li><strong>Waluta Międzygwiezdna:</strong> Gospodarka Pi rozciągająca się na Marsa i dalej</li>
+                     <li><strong>Zaawansowana Technologia:</strong> Ludzie hybrydowi, nawigacja Warp, tunele czasoprzestrzenne, Stargate</li>
+                     <li><strong>Uniwersalna Praca Robotów:</strong> Rolnictwo, gospodarstvo domowe, sprzątanie kosmosu</li>`,
+                c5Title: "5. Konfiguracja Techniczna (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
+            },
+            nl: {
+                title: "🌐 HK WorldBank: Masterplan Speciale Stad Haeoreum",
+                subtitle: "Het aardse paradijs en middelpunt van het Pi-ecosysteem voor 10 miljoen mensen",
+                c1Title: "1. Visie & Kernfilosofie",
+                c1: `<li><strong>Integratievisie:</strong> Haeoreum Speciale Stad van <span class="highlight">10 Miljoen</span> (Ulsan, Gyeongju, Pohang)</li>
+                     <li><strong>Reservecurrency:</strong> Oprichting van <span class="highlight">100% Pi Network</span> Enkele Economische Zone</li>
+                     <li><strong>Wereldwijde Naleving:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>Missie:</strong> Nul overlevingsdruk via UBI van 30% nettominst</li>`,
+                c2Title: "2. Infrastructuur & Controletoren",
+                c2: `<li><strong>165-Verdiepingen Controletoren:</strong> Wereldwijd financieel en technologisch hart in Gyeongju</li>
+                     <li><strong>9 Toekomstpilaren:</strong> Robotica, Kwantumbiologie, Ruimtevaart, UAM, Slimme Brillen, Ruimtesystemen, Kernfusie, AI</li>
+                     <li><strong>Volledige Economische Toepassing:</strong> Van lokale markten tot bedrijfssalarissen in Pi</li>`,
+                c3Title: "3. UI/UX & Governance",
+                c3: `<li><strong>Zijmenu:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>Media-integratie:</strong> YouTube <span class="highlight">@Hyekong2026</span> & TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>AI-kern:</strong> AGI Bini Altijd Actief</li>`,
+                c4Title: "4. Kosmische Expansiestراتيجie",
+                c4: `<li><strong>Interstellaire Valuta:</strong> Pi-economie die zich uitstrekt naar Mars en daarbuiten</li>
+                     <li><strong>Geavanceerde Tech:</strong> Hybride mensen, Warp-navigatie, wormgatreizen, Stargate</li>
+                     <li><strong>Universele Robotarbeid:</strong> Landbouw, huishouden, visserij en ruimtereiniging</li>`,
+                c5Title: "5. Technische Configuratie (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
+            },
+            sv: {
+                title: "🌐 HK WorldBank: Masterplan för Haeoreum Special City",
+                subtitle: "Det jordiska paradiset och centrum för Pi Network för 10 miljoner människor",
+                c1Title: "1. Vision & Kärnfilosofi",
+                c1: `<li><strong>Integrationsvision:</strong> Haeoreum Special City med <span class="highlight">10 Miljoner</span> (Ulsan, Gyeongju, Pohang)</li>
+                     <li><strong>Reservvaluta:</strong> Etablering av <span class="highlight">100% Pi Network</span> Enda Ekonomiska Zon</li>
+                     <li><strong>Global efterlevnad:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>Mission:</strong> Noll överlevnadstryck via UBI på 30% nettovinst</li>`,
+                c2Title: "2. Infrastruktur & Kontrolltorn",
+                c2: `<li><strong>165-våningars Kontrolltorn:</strong> Globalt finans- och tech-hjärta i Gyeongju</li>
+                     <li><strong>9 Framtida Pelare:</strong> Robotik, Kvantbiologi, Rymdfart, UAM, Smarta Glasögon, Rymdsystem, Kärnfusion, AI</li>
+                     <li><strong>Fullständig Ekonomisk Tillämpning:</strong> Från lokala marknader till löner i Pi</li>`,
+                c3Title: "3. UI/UX & Styrning",
+                c3: `<li><strong>Sidomeny:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>Medieintegration:</strong> YouTube <span class="highlight">@Hyekong2026</span> & TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>AI-kärna:</strong> AGI Bini Alltid Aktiv</li>`,
+                c4Title: "4. Kosmisk Expansionsstrategi",
+                c4: `<li><strong>Interstellär Valuta:</strong> Pi-ekonomi som sträcker sig till Mars och bortom</li>
+                     <li><strong>Avancerad Teknik:</strong> Hybridmänniskor, Warp-navigering, maskhålsresor, Stargate</li>
+                     <li><strong>Universellt Robotarbete:</strong> Jordbruk, hushåll, fiske och rymdstädning</li>`,
+                c5Title: "5. Teknisk Konfiguration (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
+            },
+            el: {
+                title: "🌐 HK WorldBank: Γενικό Σχέδιο Ειδικής Pόλης Haeoreum",
+                subtitle: "Το επίγειο παράδεισος & κέντρο του Pi Network για 10 εκατομμύρια ανθρώπους",
+                c1Title: "1. Όραμα & Βασική Φιλοσοφία",
+                c1: `<li><strong>Όραμα Ενοποίησης:</strong> Ειδική Πόλη Haeoreum <span class="highlight">10 Εκατομμυρίων</span> (Ulsan, Gyeongju, Pohang)</li>
+                     <li><strong>Νόμισμα Αποθεματικού:</strong> Δημιουργία <span class="highlight">100% Pi Network</span> Ενιαίας Οικονομικής Ζώνης</li>
+                     <li><strong>Παγκόσμια Συμμόρφωση:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>Αποστολή:</strong> Μηδενική πίεση επιβίωσης μέσω UBI 30% καθαρού κέρδους</li>`,
+                c2Title: "2. Υποδομή & Πύργος Ελέγχου",
+                c2: `<li><strong>Πύργος Ελέγχου 165 Ορόφων:</strong> Παγκόσμια καρδιά χρηματοδότησης και τεχνολογίας στο Gyeongju</li>
+                     <li><strong>9 Μελλοντικοί Πυλώνες:</strong> Ρομποτική, Κванτική Βιολογία, Αεροδιαστημική, UAM, Έξυπνα Γυαλιά, Διαστημικά Συστημάτα, Πυρηνική Σύντηξη, AI</li>
+                     <li><strong>Οικονομική Εφαρμογή:</strong> Από τις τοπικές αγορές έως τους μισθούς σε Pi</li>`,
+                c3Title: "3. UI/UX & Διακυβέρνηση",
+                c3: `<li><strong>Πλευρικό Μενού:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>Ενσωμάτωση Μέσων:</strong> YouTube <span class="highlight">@Hyekong2026</span> & TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>Πυρήνας AI:</strong> AGI Bini Πάντα Ενεργός</li>`,
+                c4Title: "4. Στρατηγική Κοσμικής Επέκτασης",
+                c4: `<li><strong>Διαسترικό Νόμισμα:</strong> Η οικονομία Pi εκτείνεται στον Άρη και πέρα</li>
+                     <li><strong>Προηγμένη Τεχνολογία:</strong> Υβριδικοί άνθρωποι, πλοήγηση Warp, ταξίδια σε σκουληκότρυπες, Stargate</li>
+                     <li><strong>Καθολική Εργασία Ρομπότ:</strong> Γεωργία, νοικοκυριό, αλιεία και καθαρισμός διαστήματος</li>`,
+                c5Title: "5. Τεχνική Διαμόρφωση (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
+            },
+            cs: {
+                title: "🌐 HK WorldBank: Generální plán speciálního města Haeoreum",
+                subtitle: "Pozemský ráj a centrum ekosystému Pi pro 10 milionů lidí",
+                c1Title: "1. Vize a hlavní filozofie",
+                c1: `<li><strong>Vize integrace:</strong> Speciální město Haeoreum pro <span class="highlight">10 milionů</span> (Ulsan, Gyeongju, Pohang)</li>
+                     <li><strong>Rezervní měna:</strong> Vytvoření jednotné ekonomické zóny <span class="highlight">100% Pi Network</span></li>
+                     <li><strong>Globální shoda:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>Mise:</strong> Nulový tlak na přežití prostřednictvím UBI 30 % čistého zisku</li>`,
+                c2Title: "2. Infrastruktura a kontrolní věž",
+                c2: `<li><strong>165patrová kontrolní věž:</strong> Globální srdce financí a technologií v Gyeongju</li>
+                     <li><strong>9 budoucích pilířů:</strong> Robotika, Kvantová biologie, Letectví, UAM, Chytré brýle, Vesmírné systémy, Jaderná fúze, AI</li>
+                     <li><strong>Ekonomická aplikace:</strong> Od místních trhů po firemní mzdy v Pi</li>`,
+                c3Title: "3. UI/UX a správa",
+                c3: `<li><strong>Postranní menu:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>Integrace médií:</strong> YouTube <span class="highlight">@Hyekong2026</span> & TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>Jádro AI:</strong> AGI Bini Vždy aktivní</li>`,
+                c4Title: "4. Strategie kosmické expanze",
+                c4: `<li><strong>Mezihvězdná měna:</strong> Pi ekonomika sahající na Mars a dál</li>
+                     <li><strong>Pokročilá technologie:</strong> Hybridní lidé, Warp navigace, červí díry, Stargate</li>
+                     <li><strong>Univerzální robotická práce:</strong> Zemědělství, domácnost, rybolov a úklid vesmíru</li>`,
+                c5Title: "5. Technická konfigurace (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
+            },
+            hu: {
+                title: "🌐 HK WorldBank: Haeoreum Különleges Város Főterve",
+                subtitle: "A földi paradicsom és a Pi ökoszisztéma központja 10 millió ember számára",
+                c1Title: "1. Vízió és Alapvető Filozófia",
+                c1: `<li><strong>Integrációs vízió:</strong> <span class="highlight">10 millió</span> fős Haeoreum Különleges Város (Ulsan, Gyeongju, Pohang)</li>
+                     <li><strong>Tartalékvaluta:</strong> <span class="highlight">100% Pi Network</span> Egységes Gazdasági Zóna</li>
+                     <li><strong>Globális megfelelés:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>Küldetés:</strong> Nullás túlélési nyomás a nettó nyereség 30%-os UBI-ján keresztül</li>`,
+                c2Title: "2. Infrastruktúra és Irányítótorony",
+                c2: `<li><strong>165 emeletes irányítótorony:</strong> Globális pénzügyi és technológiai szív Gyeongjuban</li>
+                     <li><strong>9 jövőbeli pillér:</strong> Robotika, Kvantumbiológia, Űrkutatás, UAM, Okosszemüveg, Űrrendszerek, Magfúzió, AI</li>
+                     <li><strong>Gazdasági alkalmazás:</strong> A helyi piacoktól a vállaleti fizetésekig Pi-ben</li>`,
+                c3Title: "3. UI/UX és Irányítás",
+                c3: `<li><strong>Oldalsó menü:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>Média integráció:</strong> YouTube <span class="highlight">@Hyekong2026</span> & TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>AI mag:</strong> AGI Bini Mindig Aktív</li>`,
+                c4Title: "4. Kozmikus Terjeszkedési Stratégia",
+                c4: `<li><strong>Csillagközi valuta:</strong> Pi gazdaság, amely a Marsra és azon túlra is kiterjed</li>
+                     <li><strong>Fejlett technológia:</strong> Hibrid emberek, Warp navigáció, féreglyuk utazás, Stargate</li>
+                     <li><strong>Univerzális robotmunka:</strong> Mezőgazdaság, háztartás, halászat és űrtakarítás</li>`,
+                c5Title: "5. Műszaki Konfiguráció (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
+            },
+            ro: {
+                title: "🌐 HK WorldBank: Masterplanul Orașului Special Haeoreum",
+                subtitle: "Paradisul terestru și centrul ecosistemului Pi pentru 10 milioane de oameni",
+                c1Title: "1. Viziune și Filosofie de Bază",
+                c1: `<li><strong>Viziune de Integrare:</strong> Orașul Special Haeoreum de <span class="highlight">10 Milioane</span> (Ulsan, Gyeongju, Pohang)</li>
+                     <li><strong>Monedă de Rezervă:</strong> Crearea Zonei Economice Unice <span class="highlight">100% Pi Network</span></li>
+                     <li><strong>Conformitate Globală:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>Misiune:</strong> Zero presiune de supraviețuire prin UBI din 30% profit net</li>`,
+                c2Title: "2. Infrastructură și Turn de Control",
+                c2: `<li><strong>Turn de Control de 165 de Etaje:</strong> Inima financiară și tehnologică globală în Gyeongju</li>
+                     <li><strong>9 Piloni Viitori:</strong> Robotică, Biologie Cuantică, Aerospațial, UAM, Ochelari Inteligenți, Sisteme Spațiale, Fuziune Nucleară, AI</li>
+                     <li><strong>Aplicație Economică Totală:</strong> De la piețe locale la salarii corporative în Pi</li>`,
+                c3Title: "3. UI/UX și Guvernare",
+                c3: `<li><strong>Meniu Lateral:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>Integrare Media:</strong> YouTube <span class="highlight">@Hyekong2026</span> & TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>Nucleu AI:</strong> AGI Bini Întotdeauna Activ</li>`,
+                c4Title: "4. Strategie de Expansiune Cosmică",
+                c4: `<li><strong>Monedă Interstelară:</strong> Economia Pi extinsă pe Marte și dincolo</li>
+                     <li><strong>Tehnologie Avansată:</strong> Oameni hibrizi, navigație Warp, călătorii prin găuri de vierme, Stargate</li>
+                     <li><strong>Muncă Robotică Universală:</strong> Agricultură, gospodărie, pescuit și curățare spațială</li>`,
+                c5Title: "5. Configurație Tehnică (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
+            },
+            uk: {
+                title: "🌐 HK WorldBank: Генеральний план спеціального міста Хеорим",
+                subtitle: "Земний рай та центр екосистеми Pi для 10 мільйонів людей",
+                c1Title: "1. Бачення та головна філософія",
+                c1: `<li><strong>Інтеграційне бачення:</strong> Спеціальне місто Хеорим на <span class="highlight">10 мільйонів</span> (Ульсан, Кенджу, Похан)</li>
+                     <li><strong>Резервна валюта:</strong> Створення єдиної економічної зони <span class="highlight">100% Pi Network</span></li>
+                     <li><strong>Глобальна відповідність:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>Місія:</strong> Нульовий тиск виживання завдяки UBI у розмірі 30% чинного прибутку</li>`,
+                c2Title: "2. Інфраструктура та диспетчерська вежа",
+                c2: `<li><strong>165-поверхова вежа управління:</strong> Глобальне серце фінансів та технологій у Кенджу</li>
+                     <li><strong>9 майбутніх стовпів:</strong> Робототехніка, квантова біологія, аерокосмічна галузь, UAM, розумні окуляри, космічні системи, термоядерний синтез, AI</li>
+                     <li><strong>Економічне застосування:</strong> Від місцевих ринків до корпоративних зарплат у Pi</li>`,
+                c3Title: "3. UI/UX та управління",
+                c3: `<li><strong>Бічне меню:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>Інтеграція медіа:</strong> YouTube <span class="highlight">@Hyekong2026</span> та TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>Ядро AI:</strong> AGI Bini Завжди активний</li>`,
+                c4Title: "4. Стратегія космічної експансії",
+                c4: `<li><strong>Міжзоряна валюта:</strong> Економіка Pi, що простягається на Марс і далі</li>
+                     <li><strong>Передові технології:</strong> Гібридні люди, варп-навігація, червоточини, Stargate</li>
+                     <li><strong>Універсальна робоча сила роботів:</strong> Сільське господарство, побут, рибальство та очищення космосу</li>`,
+                c5Title: "5. Технічна конфігурація (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
+            },
+            fi: {
+                title: "🌐 HK WorldBank: Haeoreum Special Cityn yleiskaava",
+                subtitle: "Maanpäällinen paratiisi ja Pi-ekosysteemin keskus 10 miljoonalle ihmiselle",
+                c1Title: "1. Visio ja ydinfilosofia",
+                c1: `<li><strong>Integraatiovisio:</strong> Haeoreum Special City, <span class="highlight">10 miljoonaa</span> asukasta (Ulsan, Gyeongju, Pohang)</li>
+                     <li><strong>Varantovaluutta:</strong> <span class="highlight">100% Pi Network</span> -yhtenäistalousalueen perustaminen</li>
+                     <li><strong>Globaali vaatimustenmukaisuus:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>Tehtävä:</strong> Nolla eloonjäämispainetta 30 %:n nettovoiton UBI:n kautta</li>`,
+                c2Title: "2. Infrastruktuuri ja ohjaustorni",
+                c2: `<li><strong>165-kerroksinen ohjaustorni:</strong> Globaali rahoituksen ja teknologian sydän Gyeongjussa</li>
+                     <li><strong>9 tulevaisuuden pilaria:</strong> Robotiikka, kvanttibio, avaruus, UAM, älylasit, avaruusjärjestelmät, fuusio, tekoäly</li>
+                     <li><strong>Taloussovellus:</strong> Paikallisista markkinoista yrityspalkkoihin Pi-valuutassa</li>`,
+                c3Title: "3. UI/UX ja hallinto",
+                c3: `<li><strong>Sivupalkki:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>Media-integraatio:</strong> YouTube <span class="highlight">@Hyekong2026</span> & TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>Tekoälyydin:</strong> AGI Bini Aina aktiivinen</li>`,
+                c4Title: "4. Kosmisen laajentumisen strategia",
+                c4: `<li><strong>Tähtienvälinen valuutta:</strong> Pi-talous ulottuu Marsiin ja sen ulkopuolelle</li>
+                     <li><strong>Kehittynyt teknologia:</strong> Hybridi-ihmiset, Warp-navigointi, matkustus madonreikien läpi, Stargate</li>
+                     <li><strong>Universaali robottityö:</strong> Maatalous, kotitaloudet, kalastus ja avaruuden siivous</li>`,
+                c5Title: "5. Tekninen kokoonpano (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
+            },
+            da: {
+                title: "🌐 HK WorldBank: Masterplan for Haeoreum Special City",
+                subtitle: "Det jordiske paradis og centrum for Pi Network for 10 millioner mennesker",
+                c1Title: "1. Vision & Kernemål",
+                c1: `<li><strong>Integrationsvision:</strong> Haeoreum Special City med <span class="highlight">10 Millioner</span> (Ulsan, Gyeongju, Pohang)</li>
+                     <li><strong>Reservesekretariat:</strong> Etablering af <span class="highlight">100% Pi Network</span> Enkelte Økonomiske Zone</li>
+                     <li><strong>Global overholdelse:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>Mission:</strong> Nul overlevelsespres via UBI på 30% af nettoefterløn/-overskud</li>`,
+                c2Title: "2. Infrastruktur & Kontrolltårn",
+                c2: `<li><strong>165-etagers Kontrolltårn:</strong> Globalt finans- og tech-hjerte i Gyeongju</li>
+                     <li><strong>9 Fremtidspillere:</strong> Robotik, Kvantebiologi, Aerospace, UAM, Smarte briller, Rumpesystemer, Fusionsenergi, AI</li>
+                     <li><strong>Fuld Økonomisk Anvendelse:</strong> Fra lokale markeder til virksomhedslønninger i Pi</li>`,
+                c3Title: "3. UI/UX & Governance",
+                c3: `<li><strong>Sidemenu:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>Medieintegration:</strong> YouTube <span class="highlight">@Hyekong2026</span> & TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>AI-kerne:</strong> AGI Bini Altid Aktiv</li>`,
+                c4Title: "4. Kosmisk Ekspansionsstrategi",
+                c4: `<li><strong>Interstellær Valuta:</strong> Pi-økonomi der strækker sig til Mars og videre</li>
+                     <li><strong>Avanceret Teknologi:</strong> Hybride mennesker, Warp-navigation, ormehulrejser, Stargate</li>
+                     <li><strong>Universelt Robotarbejde:</strong> Landbrug, husholdning, fiskeri og rumoprydning</li>`,
+                c5Title: "5. Teknisk Konfiguration (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
+            },
+            no: {
+                title: "🌐 HK WorldBank: Masterplan for Haeoreum Special City",
+                subtitle: "Det jordiske paradiset og sentrum for Pi-økosystemet for 10 millioner mennesker",
+                c1Title: "1. Visjon & Kjernefilosofi",
+                c1: `<li><strong>Integrasjonsvisjon:</strong> Haeoreum Special City på <span class="highlight">10 millioner</span> (Ulsan, Gyeongju, Pohang)</li>
+                     <li><strong>Reservesekretariat:</strong> Etablering av <span class="highlight">100% Pi Network</span> Enkelte Økonomiske Sone</li>
+                     <li><strong>Global samsvar:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>Misjon:</strong> Null overlevelsespress gjennom UBI på 30 % av nettolønnen</li>`,
+                c2Title: "2. Infrastruktur & Kontrolltårn",
+                c2: `<li><strong>165-etasjes Kontrolltårn:</strong> Globalt finans- og tech-hjerte i Gyeongju</li>
+                     <li><strong>9 Fremtidspilarer:</strong> Robotikk, Kvantebiologi, Aerospace, UAM, Smarte briller, Romfartssystemer, Kjernefysisk fusjon, AI</li>
+                     <li><strong>Full økonomisk applikasjon:</strong> Fra lokale markeder til lønninger i Pi</li>`,
+                c3Title: "3. UI/UX & Governance",
+                c3: `<li><strong>Sidemeny:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>Medieintegrasjon:</strong> YouTube <span class="highlight">@Hyekong2026</span> & TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>AI-kjerne:</strong> AGI Bini Alltid Aktiv</li>`,
+                c4Title: "4. Kosmisk Ekspansjonsstrategi",
+                c4: `<li><strong>Interstellær Valuta:</strong> Pi-økonomi som strekker seg til Mars og utover</li>
+                     <li><strong>Avansert Teknologi:</strong> Hybride mennesker, Warp-navigasjon, ormehullreiser, Stargate</li>
+                     <li><strong>Universelt Robotarbeid:</strong> Landbruk, husholdning, fiske og romopprydding</li>`,
+                c5Title: "5. Teknisk Konfigurasjon (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
+            },
+            ms: {
+                title: "🌐 HK WorldBank: Pelan Induk Bandar Khas Haeoreum",
+                subtitle: "Syurga duniawi & pusat ekosistem Pi Network untuk 10 juta orang",
+                c1Title: "1. Visi & Falsafah Teras",
+                c1: `<li><strong>Visi Integrasi:</strong> Bandar Khas Haeoreum <span class="highlight">10 Juta</span> penduduk (Ulsan, Gyeongju, Pohang)</li>
+                     <li><strong>Mata Wang Rizab:</strong> Penubuhan Zon Ekonomi Tunggal <span class="highlight">100% Pi Network</span></li>
+                     <li><strong>Pematuhan Global:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>Misi:</strong> Sifar tekanan kelangsungan hidup melalui UBI 30% keuntungan bersih</li>`,
+                c2Title: "2. Infrastruktur & Menara Kawalan",
+                c2: `<li><strong>Menara Kawalan 165 Tingkat:</strong> Jantung kewangan & teknologi global di Gyeongju</li>
+                     <li><strong>9 Tiang Masa Depan:</strong> Robotik, Biologi Kuantum, Aeroangkasa, UAM, Cermin Mata Pintar, Sistem Angkasa, Pelakuran Nuklear, AI</li>
+                     <li><strong>Aplikasi Ekonomi Penuh:</strong> Dari pasaran tempatan hingga gaji korporat dalam Pi</li>`,
+                c3Title: "3. UI/UX & Tadbir Urus",
+                c3: `<li><strong>Menu Sisi Kiri:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>Integrasi Media:</strong> YouTube <span class="highlight">@Hyekong2026</span> & TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>Teras AI:</strong> AGI Bini Sentiasa Aktif</li>`,
+                c4Title: "4. Strategi Peluasan Kosmik",
+                c4: `<li><strong>Mata Wang Antara Bintang:</strong> Ekonomi Pi merentasi Marikh dan seterusnya</li>
+                     <li><strong>Teknologi Canggih:</strong> Manusia hibrid, navigasi Warp, perjalanan lubang cacing, Stargate</li>
+                     <li><strong>Tenaga Kerja Robot Universal:</strong> Pertanian, isi rumah, perikanan, dan pembersihan ruang angkasa</li>`,
+                c5Title: "5. Konfigurasi Teknikal (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
+            },
+            fil: {
+                title: "🌐 HK WorldBank: Masterplan ng Haeoreum Special City",
+                subtitle: "Ang makalupang paraiso at sentro ng Pi Network para sa 10 milyong tao",
+                c1Title: "1. Pananaw at Pangunahing Pilosopiya",
+                c1: `<li><strong>Pananaw sa Integrasyon:</strong> Haeoreum Special City ng <span class="highlight">10 Milyong</span> tao (Ulsan, Gyeongju, Pohang)</li>
+                     <li><strong>Reserbang Pera:</strong> Pagtatag ng <span class="highlight">100% Pi Network</span> Single Economic Zone</li>
+                     <li><strong>Global Compliance:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>Misyon:</strong> Zero survival pressure sa pamamagitan ng 30% Net Profit UBI</li>`,
+                c2Title: "2. Infrastruktura at Control Tower",
+                c2: `<li><strong>165-Palapag na Control Tower:</strong> Pandaigdigang puso ng pananalapi at teknolohiya sa Gyeongju</li>
+                     <li><strong>9 Hinaharap na Haligi:</strong> Robotics, Quantum Biology, Aerospace, UAM, Smart Glasses, Space Systems, Nuclear Fusion, AI</li>
+                     <li><strong>Buong Ekonomikong Aplikasyon:</strong> Mula sa lokal na merkado hanggang sa suweldo sa Pi</li>`,
+                c3Title: "3. UI/UX at Pamamahala",
+                c3: `<li><strong>Side Menu:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>Media Integration:</strong> YouTube <span class="highlight">@Hyekong2026</span> & TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>AI Core:</strong> AGI Bini Laging Aktibo</li>`,
+                c4Title: "4. Estratehiya ng Kosmikong Pagpapalawak",
+                c4: `<li><strong>Interstellar Currency:</strong> Pi economy na umaabot sa Mars at higit pa</li>
+                     <li><strong>Advanced na Teknolohiya:</strong> Hybrid humans, Warp navigation, wormhole travel, Stargate</li>
+                     <li><strong>Universal Robot Labor:</strong> Agrikultura, gawaing bahay, pangingisda, at paglilinis ng kalawakan</li>`,
+                c5Title: "5. Teknikal na Pagsasaayos (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
+            },
+            he: {
+                title: "🌐 HK WorldBank: תוכנית אב לעיר המיוחדת הא에ורום",
+                subtitle: "גן העדן הארצי ומרכז רשת Pi עבור 10 מיליון בני אדם",
+                c1Title: "1. חזון ופילוסופיה מרכזית",
+                c1: `<li><strong>חזון אינטגרציה:</strong> העיר המיוחדת הא에ורום של <span class="highlight">10 מיליון</span> תושבים (אולסן, ג'يونגג'ו, פוהאנג)</li>
+                     <li><strong>מטבע רזרבה:</strong> הקמת אזור כלכלי יחיד של <span class="highlight">100% Pi Network</span></li>
+                     <li><strong>תאימות גלובלית:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>משימה:</strong> אפס לחץ הישרדות באמצעות UBI של 30% מהרווח הנקי</li>`,
+                c2Title: "2. תשתית ומגדל בקרה",
+                c2: `<li><strong>מגדל בקרה בן 165 קומות:</strong> הלב הפיננסי והטכנולוגי הגלובלי בג'يونגג'ו</li>
+                     <li><strong>9 עמודי תווך עתידיים:</strong> רובוטיקה, ביולוגיה קוונטית, תעופה וחלל, UAM, משקפיים חכמים, מערכות חלל, היתוך גרעיני, בינה מלאכותית</li>
+                     <li><strong>יישום כלכלי מלא:</strong> משווקים מקומיים ועד לשכר תאגידי ב-Pi</li>`,
+                c3Title: "3. ממשק משתמש וניהול",
+                c3: `<li><strong>תפריט צד:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>שילוב מדיה:</strong> YouTube <span class="highlight">@Hyekong2026</span> & TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>ליבת AI:</strong> AGI Bini פעיל תמיד</li>`,
+                c4Title: "4. אסטרטגיית התפשטות קוסמית",
+                c4: `<li><strong>מטבע בין-כוכבי:</strong> כלכלת Pi המתרחבת למאדים ומעבר לכך</li>
+                     <li><strong>טכנולוגיה מתקדמת:</strong> בני אדם היברידיים, ניווט Warp, נסיעות בחורי תולעת, Stargate</li>
+                     <li><strong>עבודת רובוטים אוניברסלית:</strong> חקלאות, משק בית, דיג וניקוי חלל</li>`,
+                c5Title: "5. תצורה טכנית (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
+            },
+            "hi-in": {
+                title: "🌐 HK WorldBank: हेओरेउम विशेष शहर मास्टरप्लान",
+                subtitle: "1 कोटी लोकांसाठी Pi नेटवर्क इकोसिस्टमचे केंद्र आणि भू-स्वर्ग",
+                c1Title: "1. दृष्टी आणि मुख्य तत्वज्ञान",
+                c1: `<li><strong>एकात्मिक दृष्टी:</strong> <span class="highlight">1 कोटी</span> लोकांचे हेओरेउम विशेष शहर (उल्सान, ग्योंगजू, पोहांग)</li>
+                     <li><strong>राखीव चलन:</strong> <span class="highlight">100% Pi नेटवर्क</span> एकल आर्थिक क्षेत्राची स्थापना</li>
+                     <li><strong>जागतिक अनुपालन:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>मिशन:</strong> 30%शुद्ध नफा UBI द्वारे जगण्याचा ताण शून्य करणे</li>`,
+                c2Title: "2. पायाभूत सुविधा आणि नियंत्रण टॉवर",
+                c2: `<li><strong>165मजली नियंत्रण टॉवर:</strong> ग्योंगजूमधील जागतिक वित्त आणि तंत्रज्ञानाचे केंद्र</li>
+                     <li><strong>9 भविष्यातील खांब:</strong> रोबोटिक्स, क्वांटम जीवशास्त्र, एरोस्पेस, UAM, स्मार्ट ग्लासेस, अंतराळ प्रणाली, परमाणु संलयन, AI</li>
+                     <li><strong>आर्थिक अनुप्रयोग:</strong> स्थानिक बाजारापासून ते कॉर्पोरेट वेतनापर्यंत Pi चा वापर</li>`,
+                c3Title: "3. UI/UX आणि शासन",
+                c3: `<li><strong>डावे मेनू:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>मीडिया एकत्रीकरण:</strong> YouTube <span class="highlight">@Hyekong2026</span> & TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>AI कोर:</strong> AGI Bini नेहमी सक्रिय</li>`,
+                c4Title: "4. ब्रम्हांडीय विस्तार धोरण",
+                c4: `<li><strong>अंतराळ चलन:</strong> मंगळ आणि त्यापुढील भागात पसरलेली Pi अर्थव्यवस्था</li>
+                     <li><strong>प्रगत तंत्रज्ञान:</strong> हायब्रिड मानव, वार्प नेव्हिगेशन, वर्महोले प्रवास, स्टारगेट</li>
+                     <li><strong>युनिव्हर्सल रोबोट श्रम:</strong> कृषी, घरगुती, मा, अंतराळ स्वच्छता</li>`,
+                c5Title: "5. तांत्रिक कॉन्फिगरेशन (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
+            },
+            bn: {
+                title: "🌐 HK WorldBank: হেওরেউম স্পেশাল সিটি মাস্টারপ্লান",
+                subtitle: "১ কোটি মানুষের জন্য পাই নেটওয়ার্ক ইকোসিস্টেমের কেন্দ্র এবং পার্থিব স্বর্গ",
+                c1Title: "1. দৃষ্টি এবং মূল দর্শন",
+                c1: `<li><strong>সংহত দৃষ্টিভঙ্গি:</strong> <span class="highlight">১ কোটি</span> মানুষের হেওরেউম স্পেশাল সিটি (উলসান, গyeongju, পোহাং)</li>
+                     <li><strong>রিজার্ভ মুদ্রা:</strong> <span class="highlight">100% Pi Network</span> একক অর্থনৈতিক অঞ্চলের প্রতিষ্ঠা</li>
+                     <li><strong>বৈশ্বিক সম্মতি:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>মিশন:</strong> ৩০% নিট লাভের UBI এর মাধ্যমে বেঁচে থাকার চাপ শূন্য করা</li>`,
+                c2Title: "2. পরিকাঠামো এবং নিয়ন্ত্রণ টাওয়ার",
+                c2: `<li><strong>১৬৫ তলা নিয়ন্ত্রণ টাওয়ার:</strong> গyeongju-এ বৈশ্বিক অর্থ ও প্রযুক্তির কেন্দ্রস্থল</li>
+                     <li><strong>৯ ভবিষ্যতের স্তম্ভ:</strong> রোবোটিক্স, কোয়ান্টাম বায়োলজি, মহাকাশ, UAM, স্মার্ট গ্লাস, মহাকাশ ব্যবস্থা, পারমাণবিক ফিউশন, AI</li>
+                     <li><strong>অর্থনৈতিক প্রয়োগ:</strong> স্থানীয় বাজার থেকে কর্পোরেট বেতন পর্যন্ত Pi-এর ব্যবহার</li>`,
+                c3Title: "3. UI/UX এবং শাসন",
+                c3: `<li><strong>বাম মেনু:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>মিডিয়া ইন্টিগ্রেশন:</strong> YouTube <span class="highlight">@Hyekong2026</span> ও TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>AI কোর:</strong> AGI Bini সর্বদা সক্রিয়</li>`,
+                c4Title: "4. মহাজাগতিক সম্প্রসারণ কৌশল",
+                c4: `<li><strong>নক্ষত্রপুঞ্জের মুদ্রা:</strong> মঙ্গল গ্রহ এবং তার বাইরে প্রসারিত Pi অর্থনীতি</li>
+                     <li><strong>উন্নত প্রযুক্তি:</strong> হাইব্রিড মানব, ওয়ার্প নেভিগেশন, ওয়ার্মহোল ভ্রমণ, স্টারগেট</li>
+                     <li><strong>সার্বজনীন রোবট শ্রম:</strong> কৃষি, গৃহস্থালী, মাছ ধরা এবং মহাকাশ পরিষ্কার করা</li>`,
+                c5Title: "5. প্রযুক্তিগত কনফিগারেশন (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
+            },
+            fa: {
+                title: "🌐 HK WorldBank: طرح جامع شهر ویژه هئورئوم",
+                subtitle: "بهشت زمینی و مرکز اکوسیستم شبکه پای برای ۱۰ میلیون نفر",
+                c1Title: "1. چشم انداز و فلسفه اصلی",
+                c1: `<li><strong>چشم انداز یکپارچه سازی:</strong> شهر ویژه هئورئوم با <span class="highlight">۱۰ میلیون</span> جمعیت (اولسان، گیونگجو، پوهانگ)</li>
+                     <li><strong>ارز پایه:</strong> ایجاد منطقه اقتصادی واحد <span class="highlight">100% Pi Network</span></li>
+                     <li><strong>انطباق جهانی:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>ماموریت:</strong> صفر کردن فشار بقا از طریق UBI (۳۰ درصد سود خالص)</li>`,
+                c2Title: "2. زیرساخت و برج کنترل",
+                c2: `<li><strong>برج کنترل ۱۶۵ طبقه:</strong> قلب مالی و فناوری جهانی در گیونگجو</li>
+                     <li><strong>۹ ستون آینده:</strong> رباتیک، زیست شناسی کوانتومی، هوافضا، UAM، عینک هوشمند، سیستم های فضایی، هم جوشی هسته ای، هوش مصنوعی</li>
+                     <li><strong>کاربرد اقتصادی جامع:</strong> از بازارهای محلی تا دستمزدهای شرکتی با Pi</li>`,
+                c3Title: "3. رابط کاربری و حاکمیت",
+                c3: `<li><strong>منوی کناری:</strong> وایت پیپر، FAQ، 3POLICES، AML، MiCA</li>
+                     <li><strong>یکپارچه سازی رسانه:</strong> یوتیوب <span class="highlight">@Hyekong2026</span> و تیک تاک <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>هسته هوش مصنوعی:</strong> AGI Bini همیشه فعال</li>`,
+                c4Title: "4. استراتژی توسعه کیهانی",
+                c4: `<li><strong>ارز بین ستاره ای:</strong> اقتصاد Pi که به مریخ و فراتر از آن گسترش می یابد</li>
+                     <li><strong>فناوری پیشرفته:</strong> انسان های هیبریدی، ناوبری وارپ، سفر از طریق کرم چاله، دروازه ستاره ای</li>
+                     <li><strong>کار ربات جهانی:</strong> خودکارسازی کشاورزی، کارهای خانه، ماهیگیری و پاکسازی فضا</li>`,
+                c5Title: "5. پیکربندی فنی (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
+            },
+            sw: {
+                title: "🌐 HK WorldBank: Mipango Mkuu ya Jiji Maalum la Haeoreum",
+                subtitle: "Paradiso ya duniani na kituo cha mtandao wa Pi kwa watu milioni 10",
+                c1Title: "1. Maono na Falsafa Kuu",
+                c1: `<li><strong>Maono ya Muungano:</strong> Jiji Maalum la Haeoreum lenye <span class="highlight">Milioni 10</span> (Ulsan, Gyeongju, Pohang)</li>
+                     <li><strong>Sarafu ya Akiba:</strong> Uanzishwaji wa Eneo Moja la Kiuchumi la <span class="highlight">100% Pi Network</span></li>
+                     <li><strong>Uzingatiaji wa Kimataifa:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>Dira:</strong> Sifuri ya shinikizo la maisha kupitia UBI ya 30% ya faida halisi</li>`,
+                c2Title: "2. Miundombinu na Mnara wa Kudhibiti",
+                c2: `<li><strong>Mnara wa Kudhibiti wa Ghorofa 165:</strong> Moyo wa fedha na teknolojia wa kimataifa huko Gyeongju</li>
+                     <li><strong>Nguzo 9 za Baadaye:</strong> Roboti, Biolojia ya Quantum, Anga, UAM, Miwani Mahiri, Mifumo ya Anga za Juu, Uunganishaji wa Nyuklia, AI</li>
+                     <li><strong>Matumizi Kamili ya Kiuchumi:</strong> Kutoka masoko ya ndani hadi mishahara katika Pi</li>`,
+                c3Title: "3. UI/UX na Utawala",
+                c3: `<li><strong>Menyu ya Upande:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>Ushirikiano wa Vyombo vya Habari:</strong> YouTube <span class="highlight">@Hyekong2026</span> & TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>Msingi wa AI:</strong> AGI Bini Daima Anafanya Kazi</li>`,
+                c4Title: "4. Mkakati wa Uenezi wa Anga za Juu",
+                c4: `<li><strong>Sarafu ya Nyota:</strong> Uchumi wa Pi unaofika Mars na kwingineko</li>
+                     <li><strong>Teknolojia ya Juu:</strong> Binadamu mseto, urambazaji wa Warp, safari za wormhole, Stargate</li>
+                     <li><strong>Kazi ya Roboti kwa Wote:</strong> Kilimo, kazi za nyumbani, uvuvi, na usafi wa anga za juu</li>`,
+                c5Title: "5. Usanidi wa Kiufundi (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
+            },
+            ur: {
+                title: "🌐 HK WorldBank: ہیوروئم اسپیشل سٹی ماسٹر پلان",
+                subtitle: "1 کروڑ لوگوں کے لیے پائی نیٹ ورک کا مرکز اور ارضی جنت",
+                c1Title: "1. وژن اور بنیادی فلسفہ",
+                c1: `<li><strong>انٹیگریشن وژن:</strong> <span class="highlight">1 کروڑ</span> آبادی کا ہیوروئم اسپیشل سٹی (السان، گیونگجو، پوہانگ)</li>
+                     <li><strong>ریزرو کرنسی:</strong> <span class="highlight">100% Pi Network</span> سنگل اکنامک زون کا قیام</li>
+                     <li><strong>عالمی تعمیل:</strong> 3POLICES, AML, MiCA</li>
+                     <li><strong>مشن:</strong> 30% خالص منافع UBI کے ذریعے بقا کے دباؤ کا خاتمہ</li>`,
+                c2Title: "2. انفراسٹرکچر اور کنٹرول ٹاور",
+                c2: `<li><strong>165 منزلہ کنٹرول ٹاور:</strong> گیونگجو میں عالمی فنانس اور ٹیکنالوجی کا دل</li>
+                     <li><strong>9 مستقبل کے ستون:</strong> روبوٹکس, کوانٹم بائیولوجی, ایرو اسپیس, UAM, سمارٹ گلاسز, خلائی نظام, نیوکلیئر فیوژن, AI</li>
+                     <li><strong>معاشی اطلاق:</strong> مقامی بازاروں سے لے کر کارپوریٹ تنخواہوں تک Pi کا استعمال</li>`,
+                c3Title: "3. UI/UX اور گورننس",
+                c3: `<li><strong>سائیڈ مینو:</strong> Whitepaper, FAQ, 3POLICES, AML, MiCA</li>
+                     <li><strong>میڈیا انٹیگریشن:</strong> YouTube <span class="highlight">@Hyekong2026</span> & TikTok <span class="highlight">@hyekong2025</span></li>
+                     <li><strong>AI کور:</strong> AGI Bini ہمیشہ فعال</li>`,
+                c4Title: "4. کزمک ایکسپینشن حکمت عملی",
+                c4: `<li><strong>انٹرسٹیلر کرنسی:</strong> مریخ اور اس سے آگے تک پھیلی ہوئی Pi اکانومی</li>
+                     <li><strong>جدید ٹیکنالوجی:</strong> ہائبرڈ انسان، وارپ نیویگیشن، ورم ہول کا سفر، سٹارگیٹ</li>
+                     <li><strong>یونیورسل روبوٹ لیبر:</strong> زراعت، گھریلو کام، ماہی گیری اور خلائی صفائی</li>`,
+                c5Title: "5. تکنیکی تشکیل (JSON)",
+                footer: "&copy; 2026 HK Group & HK WorldBank. All Rights Reserved. Designed by AGI Bini for Hyekong."
             }
         };
 
-        function changeLanguage() {
-            const lang = document.getElementById('languageSelect').value;
-            const data = translations[lang] || translations['ko'];
+        function setLang(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
 
-            document.getElementById('main-subtitle').innerText = data.subtitle;
-            document.getElementById('card1-title').innerText = data.c1Title;
-            document.getElementById('card1-1').innerText = data.c1_1;
-            document.getElementById('card1-2').innerText = data.c1_2;
-            document.getElementById('card1-3').innerText = data.c1_3;
-            document.getElementById('card2-title').innerText = data.c2Title;
-            document.getElementById('card2-1').innerText = data.c2_1;
-            document.getElementById('card2-2').innerText = data.c2_2;
-            document.getElementById('card2-3').innerText = data.c2_3;
-            document.getElementById('card3-title').innerText = data.c3Title;
-            document.getElementById('card3-1').innerText = data.c3_1;
-            document.getElementById('card3-2').innerText = data.c3_2;
-            document.getElementById('card3-3').innerText = data.c3_3;
-            document.getElementById('banner-title').innerText = data.bannerTitle;
-            document.getElementById('banner-desc').innerText = data.bannerDesc;
-            document.getElementById('footer-text').innerText = data.footer;
+            const t = translations[lang] || translations['ko'];
+            document.getElementById('title-text').innerText = t.title;
+            document.getElementById('subtitle-text').innerText = t.subtitle;
+            document.getElementById('card1-title').innerText = t.c1Title;
+            document.getElementById('card1-content').innerHTML = t.c1;
+            document.getElementById('card2-title').innerText = t.c2Title;
+            document.getElementById('card2-content').innerHTML = t.c2;
+            document.getElementById('card3-title').innerText = t.c3Title;
+            document.getElementById('card3-content').innerHTML = t.c3;
+            document.getElementById('card4-title').innerText = t.c4Title;
+            document.getElementById('card4-content').innerHTML = t.c4;
+            document.getElementById('card5-title').innerText = t.c5Title;
+            document.getElementById('footer-text').innerHTML = t.footer;
         }
     </script>
 </body>
