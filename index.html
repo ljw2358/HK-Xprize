@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HK WorldBank - Web3 Digital Banking Platform</title>
+    <style>
+        :root {
+            --primary-color: #0f172a;
+            --accent-color: #f59e0b;
+            --bg-color: #0b0f19;
+            --text-color: #f8fafc;
+            --card-bg: #1e293b;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 1px solid #334155;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+        header p {
+            font-size: 1.1rem;
+            color: #94a3b8;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 25px;
+            border: 1px solid #334155;
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+        .card h2 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+        .card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .card li {
+            margin-bottom: 10px;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+        .card li::before {
+            content: "✔ ";
+            color: var(--accent-color);
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #64748b;
+            font-size: 0.85rem;
+            border-top: 1px solid #1e293b;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>HK WorldBank</h1>
+        <p>Build with Gemini XPRIZE Submission - Next-Gen Web3 Digital Banking Platform</p>
+    </header>
+
+    <main class="container">
+        <section class="card">
+            <h2>핵심 비전 및 개요</h2>
+            <ul>
+                <li>탈중앙화 금융과 전통 은행 시스템의 완벽한 융합</li>
+                <li>글로벌 금융 포용성을 위한 디지털 기본소득 모델 설계</li>
+                <li>AI 기반 맞춤형 자산 관리 및 스마트 컨트랙트 최적화</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>파이 네트워크(Pi Network) 연동</h2>
+            <ul>
+                <li>Pi SDK 통합을 통한 원활한 월렛 인증 및 자산 관리</li>
+                <li>Pi 코인 에코시스템 내 안전한 스테이킹 및 예금 상품 구조화</li>
+                <li>실시간 환율 및 유동성 연동 알고리즘 적용</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>인프라 및 기술 스택</h2>
+            <ul>
+                <li>Gemini API 기반의 지능형 고객 응대 및 데이터 분석 시스템</li>
+                <li>보안성이 강화된 Web3 디지털 뱅킹 인프라 구축</li>
+                <li>확장 가능한 클라우드 및 분산형 노드 아키텍처</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2026 HK Group. All rights reserved. Prepared for Build with Gemini XPRIZE.
+    </footer>
+
+</body>
+</html>
